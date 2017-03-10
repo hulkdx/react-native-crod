@@ -2,42 +2,41 @@ import React, { Component } from 'react';
 import {StyleSheet,Text,View,TouchableOpacity, TextInput, Image} from 'react-native';
 import ViewContainer from '../components/ViewContainer.js'
 import Icon from 'react-native-vector-icons/FontAwesome'
+import CircleSwipe from '../components/CircleSwipe.js'
 
 
 class LauncherScreen extends Component {
   constructor(props) {
     super(props)
-    // const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-    // this.state = {
-    //   dataSource: ds.cloneWithRows(people),
-    // };
   }
 
   render() {
     return (
       <ViewContainer style={styles.container}>
+      <View style={{flex: 1, justifyContent: 'center'}}>
 
-      <TextInput
-        placeholder="username"
-        placeholderTextColor="rgba(255,255,255,0.7)"
-        underlineColorAndroid="transparent"
-        style={styles.input}/>
-      <TextInput
-        placeholder="password"
-        placeholderTextColor="rgba(255,255,255,0.7)"
-        underlineColorAndroid="transparent"
-        style={styles.password}/>
+        <TextInput
+          placeholder="username"
+          placeholderTextColor="rgba(255,255,255,0.7)"
+          underlineColorAndroid="transparent"
+          style={styles.input}/>
+        <TextInput
+          placeholder="password"
+          placeholderTextColor="rgba(255,255,255,0.7)"
+          underlineColorAndroid="transparent"
+          style={styles.password}/>
 
-      <View style={styles.viewContainer}>
         <TouchableOpacity style={styles.buttonContainer}>
           <Text style={styles.buttonText}>Login</Text>
         </TouchableOpacity>
-        <Text style={styles.loginText}>Already a member</Text>
+        <TouchableOpacity>
+          <Text style={styles.loginText}>Already a member</Text>
+        </TouchableOpacity>
+
       </View>
-      <View style={styles.circlesContent}>
-      <Icon name="circle" style={styles.circles}>
-      </Icon>
-      </View>
+
+      <CircleSwipe />
+
 
       </ViewContainer>
     )
@@ -49,10 +48,6 @@ const styles = StyleSheet.create({
   container: {
     padding: 20,
     backgroundColor: '#024287',
-    justifyContent: 'center'
-  },
-  viewContainer: {
-    alignItems: 'center'
   },
   input: {
     height: 45,
@@ -80,7 +75,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: 100,
     height: 40,
-    marginBottom: 10
+    marginBottom: 10,
+    alignSelf: "center"
   },
   buttonText: {
     fontSize: 20,
@@ -88,16 +84,13 @@ const styles = StyleSheet.create({
     color: '#024287'
   },
   loginText: {
-    color: 'white'
+    color: 'white',
+    alignSelf: "center"
   },
   circles: {
     color: "white",
-
+    marginLeft: 5
   },
-  circlesContent: {
-    flex: 1,
-      justifyContent: "flex-end"
-  }
 });
 
 module.exports = LauncherScreen
