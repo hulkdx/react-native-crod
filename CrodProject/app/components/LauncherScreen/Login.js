@@ -3,12 +3,18 @@ import {StyleSheet,Text,View,TouchableOpacity, TextInput, Image} from 'react-nat
 import ViewContainer from '../ViewContainer.js'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import CircleSwipe from '../CircleSwipe.js'
+import api from '../../services/api'
 
 
 class Login extends Component {
   constructor(props) {
     super(props)
+    this.state = {
+      username: '',
+      password: '',
+     };
   }
+
 
   render() {
     return (
@@ -20,14 +26,17 @@ class Login extends Component {
           placeholder="username"
           placeholderTextColor="rgba(255,255,255,0.7)"
           underlineColorAndroid="transparent"
+          onChangeText={(username) => this.setState({username})}
           style={styles.input}/>
         <TextInput
           placeholder="password"
           placeholderTextColor="rgba(255,255,255,0.7)"
           underlineColorAndroid="transparent"
+          secureTextEntry={true}
+          onChangeText={(password) => this.setState({password})}
           style={styles.password}/>
 
-        <TouchableOpacity style={styles.buttonContainer}>
+        <TouchableOpacity style={styles.buttonContainer} onPress={(event)=>api.postLogin(this.state.username,this.state.password)}>
           <Text style={styles.buttonText}>Login</Text>
         </TouchableOpacity>
         <TouchableOpacity>
