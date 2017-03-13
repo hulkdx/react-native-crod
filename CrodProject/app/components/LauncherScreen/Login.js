@@ -1,27 +1,44 @@
 import React, { Component } from 'react';
 import {StyleSheet,Text,View,TouchableOpacity, TextInput, Image} from 'react-native';
-import ViewContainer from '../components/ViewContainer.js'
+import ViewContainer from '../ViewContainer.js'
 import Icon from 'react-native-vector-icons/FontAwesome'
-import CircleSwipe from '../components/CircleSwipe.js'
-import Swiper from 'react-native-swiper'
-import Initial from '../components/LauncherScreen/Initial'
-import Information from '../components/LauncherScreen/Information'
-import Login from '../components/LauncherScreen/Login'
+import CircleSwipe from '../CircleSwipe.js'
 
 
-class LauncherScreenLogin extends Component {
+class Login extends Component {
   constructor(props) {
     super(props)
   }
 
   render() {
     return (
-      <Swiper loop={false} autoplay={true} showsPagination={false} autoplayTimeout={5} >
-        <Initial />
-        <Information />
-        <Login />
-      </Swiper>
+      <ViewContainer style={styles.container}>
 
+      <View style={{flex: 1, justifyContent: 'center'}}>
+
+        <TextInput
+          placeholder="username"
+          placeholderTextColor="rgba(255,255,255,0.7)"
+          underlineColorAndroid="transparent"
+          style={styles.input}/>
+        <TextInput
+          placeholder="password"
+          placeholderTextColor="rgba(255,255,255,0.7)"
+          underlineColorAndroid="transparent"
+          style={styles.password}/>
+
+        <TouchableOpacity style={styles.buttonContainer}>
+          <Text style={styles.buttonText}>Login</Text>
+        </TouchableOpacity>
+        <TouchableOpacity>
+          <Text style={styles.loginText}>Already a member</Text>
+        </TouchableOpacity>
+
+      </View>
+
+      <CircleSwipe pageNumber={3} />
+
+      </ViewContainer>
     )
   }
 
@@ -72,4 +89,4 @@ const styles = StyleSheet.create({
   },
 });
 
-module.exports = LauncherScreenLogin
+module.exports = Login
