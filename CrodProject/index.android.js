@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
 import {AppRegistry} from 'react-native';
-import AppNavigator from './app/navigation/AppNavigator';
+import LauncherScreen from './app/screens/LauncherScreen'
+import {Router, Scene} from 'react-native-router-flux';
 
 class CrodProject extends Component {
 
   render() {
     return (
-      <AppNavigator
-        initialRoute={{ident: "LauncherScreen"}}/>
+      <Router>
+        <Scene key='root'>
+          <Scene key='home' component={LauncherScreen} hideNavBar hideTabBar/>
+        </Scene>
+      </Router>
     )
   }
 

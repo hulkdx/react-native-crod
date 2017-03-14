@@ -16,7 +16,7 @@ class LauncherScreenLogin extends Component {
       <Swiper loop={false} autoplay={true} showsPagination={false} autoplayTimeout={5} >
         <Initial />
         <Information />
-        <Login navigator={this.props.navigator} />
+        <Login />
       </Swiper>
 
     )
