@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {StyleSheet,Text,View,TouchableOpacity, TextInput, Image} from 'react-native';
+import {StyleSheet,Text,View,TouchableOpacity, TextInput} from 'react-native';
 import ViewContainer from '../ViewContainer.js'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import CircleSwipe from '../CircleSwipe.js'
@@ -17,6 +17,7 @@ class Login extends Component {
 
 
   render() {
+    console.log(this.props.navigator);
     return (
       <ViewContainer style={styles.container}>
 

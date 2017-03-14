@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
-import {StyleSheet,Text,View,TouchableOpacity, TextInput, Image} from 'react-native';
-import ViewContainer from '../components/ViewContainer.js'
-import Icon from 'react-native-vector-icons/FontAwesome'
-import CircleSwipe from '../components/CircleSwipe.js'
+import {StyleSheet} from 'react-native';
 import Swiper from 'react-native-swiper'
 import Initial from '../components/LauncherScreen/Initial'
 import Information from '../components/LauncherScreen/Information'
@@ -19,7 +16,7 @@ class LauncherScreenLogin extends Component {
       <Swiper loop={false} autoplay={true} showsPagination={false} autoplayTimeout={5} >
         <Initial />
         <Information />
-        <Login />
+        <Login navigator={this.props.navigator} />
       </Swiper>
 
     )

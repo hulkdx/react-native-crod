@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import {StyleSheet,Text,View,TouchableOpacity, TextInput, Image} from 'react-native';
+import {StyleSheet,Text,View} from 'react-native';
 import ViewContainer from '../ViewContainer.js'
-import Icon from 'react-native-vector-icons/FontAwesome'
 import CircleSwipe from '../CircleSwipe.js'
 
 
