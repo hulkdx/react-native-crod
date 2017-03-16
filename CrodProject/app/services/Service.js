@@ -1,7 +1,7 @@
 'use strict'
 import _ from 'underscore'
 
-export default class API {
+export default class Service {
 
   setToken (token) {
     if (!_.isNull(token)) {
@@ -42,4 +42,4 @@ export default class API {
   }
 }
 // The singleton variable
-export let api = new API()
+export let api = new Service()

@@ -3,7 +3,7 @@ import {StyleSheet,Text,View,TouchableOpacity, TextInput} from 'react-native';
 import ViewContainer from '../ViewContainer.js'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import CircleSwipe from '../CircleSwipe.js'
-import {api} from '../../services/API'
+import {api} from '../../services/Service'
 
 
 class Login extends Component {
