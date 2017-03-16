@@ -9,3 +9,6 @@ npm i react-native-swiper --save
 
 https://github.com/aksonov/react-native-router-flux
 npm i react-native-router-flux --save
+
+http://underscorejs.org/
+npm i underscore --save

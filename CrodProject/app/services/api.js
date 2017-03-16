@@ -1,12 +1,19 @@
+'use strict'
+import _ from 'underscore'
 
-var api = {
+export default class API {
+
+  setToken (token) {
+    if (!_.isNull(token)) {
+      throw new Error('TokenMissing')
+    }
+  }
+
   // Oview API login
   async postLogin(email, password) {
-    // TODO REMOVE THIS
     email="test11@test.com"
     password="123456"
-    try {
-      let response = await fetch('https://api.oviewapp.com/v1/login', {
+    return await fetch('https://api.oviewapp.com/v1/login', {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
@@ -16,28 +23,23 @@ var api = {
           email: email,
           password: password,
         })
-      });
+      })
+      .then((res) => {
+        return res.json()
+      .then(function (json) {
+          if (res.status === 200 || res.status === 201) {
+            console.log(json.data.accessToken);
+            return json
+          } else {
+            throw (json)
+          }
+        })
+      })
+      .catch((error) => {
+        throw (error)
+      })
 
-      if (response.status === 200){
-        let responseJson = await response.json();
-        console.log(responseJson.data.accessToken);
-        // TODO: redirect to Home page
-      }
-      else {
-        let res = await response.text();
-        console.log(res);
-        this.errorHandling(res)
-      }
-    } catch (error) {
-      console.error(error);
-      this.errorHandling(text)
-    }
-
-  },
-  // TODO: DO IT LATER
-  errorHandling(text){
-    alert(text);
   }
 }
-
-module.exports = api
+// The singleton variable
+export let api = new API()
