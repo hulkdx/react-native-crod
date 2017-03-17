@@ -13,11 +13,8 @@ class Header extends Component {
   render() {
     return (
       <View>
-        <TouchableOpacity disabled={this.state.isTabClosed} onPress={(event)=>this._dropdownOpen()} style={[styles.proposal, {flexDirection: 'row'}]}>
-          <TextInput
-          editable={this.state.isTabClosed}
-          style={[styles.createProposal, {flex: 1,}]}
-          placeholder="create a proposal"/>
+        <TouchableOpacity disabled={this.state.isTabClosed} onPress={()=>this._dropdownOpen()} style={[styles.proposal, {flexDirection: 'row'}]}>
+          <Text style={[styles.createProposal, {flex: 1,}]}>Choose your proposal</Text>
           <Text style={styles.publish}> Publish </Text>
         </TouchableOpacity>
 
@@ -33,9 +30,17 @@ class Header extends Component {
     this.setState({
       viewsTab:
       <View style={[styles.proposal]}>
+        <Text>catagory</Text>
         <TextInput
           style={styles.createProposal}
           placeholder="create a title"/>
+        <TextInput
+          style={styles.createProposal}
+          placeholder="create a description"/>
+        <Text>attachment</Text>
+        <TouchableOpacity onPress={()=>this._dropdownClose()}>
+          <Text>done</Text>
+        </TouchableOpacity>
       </View>
       ,
       isTabClosed: true
