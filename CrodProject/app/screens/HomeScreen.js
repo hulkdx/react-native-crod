@@ -14,7 +14,7 @@ class HomeScreen extends Component {
       <ViewContainer>
         <Header />
         <Body />
-        <FooterBar />
+        <FooterBar homeScreen={true}/>
       </ViewContainer>
 
     )
@@ -23,9 +23,7 @@ class HomeScreen extends Component {
 }
 
 const styles = StyleSheet.create({
-  body: {
-    flex:1,
-  }
+
 });
 
 module.exports = HomeScreen

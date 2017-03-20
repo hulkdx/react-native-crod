@@ -1,21 +1,38 @@
 import React, { Component } from 'react';
 import {StyleSheet,TextInput,TouchableOpacity,Image,Text,View} from 'react-native';
+import {Actions} from 'react-native-router-flux';
 
 
 
 
 class Footer extends Component {
-  state = {
-    viewsTab: [],
-    isTabClosed: false,
-  };
 
   render() {
     return (
-      <View>
-        <Text>
-          FOOTER
-        </Text>
+      <View style={styles.customizeFooter}>
+
+        <TouchableOpacity style={styles.positioningFooterIcons}>
+        <Image source={require('../../img/back-icon.png')}/>
+        </TouchableOpacity>
+
+        <Image source={require('../../img/verticalBar-icon.png')}/>
+
+        <TouchableOpacity style={styles.positioningFooterIcons} onPress={()=>Actions.home()}>
+        <Image style={styles.icon, this.props.homeScreen ? {tintColor:'#1fbff1'} : {}}
+        source={require('../../img/home-icon.png')}/>
+        </TouchableOpacity>
+
+        <Image source={require('../../img/verticalBar-icon.png')}/>
+
+        <TouchableOpacity style={styles.positioningFooterIcons}>
+        <Image source={require('../../img/profile-icon.png')}/>
+        </TouchableOpacity>
+
+        <Image source={require('../../img/verticalBar-icon.png')}/>
+
+        <TouchableOpacity style={styles.positioningFooterIcons}>
+        <Image source={require('../../img/notification-icon.png')}/>
+        </TouchableOpacity>
 
       </View>
 
@@ -26,6 +43,22 @@ class Footer extends Component {
 }
 
 const styles = StyleSheet.create({
-});
+
+  customizeFooter: {
+
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#c4c5c4',
+    height: 70
+  },
+  positioningFooterIcons: {
+    flex:1,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  icon:{
+  }
+  });
 
 module.exports = Footer
