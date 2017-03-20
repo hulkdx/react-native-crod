@@ -12,26 +12,26 @@ class Footer extends Component {
       <View style={styles.customizeFooter}>
 
         <TouchableOpacity style={styles.positioningFooterIcons}>
-        <Image source={require('../../img/back-icon.png')}/>
+        <Image style={styles.icon} source={require('../../img/back-icon.png')}/>
         </TouchableOpacity>
 
-        <Image source={require('../../img/verticalBar-icon.png')}/>
+        <Image style={styles.icon} source={require('../../img/verticalBar-icon.png')}/>
 
         <TouchableOpacity style={styles.positioningFooterIcons} onPress={()=>Actions.home()}>
-        <Image style={styles.icon, this.props.homeScreen ? {tintColor:'#1fbff1'} : {}}
+        <Image style={[styles.icon, this.props.homeScreen ? {tintColor:'#1fbff1'} : {}]}
         source={require('../../img/home-icon.png')}/>
         </TouchableOpacity>
 
-        <Image source={require('../../img/verticalBar-icon.png')}/>
+        <Image style={styles.icon} source={require('../../img/verticalBar-icon.png')}/>
 
         <TouchableOpacity style={styles.positioningFooterIcons}>
-        <Image source={require('../../img/profile-icon.png')}/>
+        <Image style={styles.icon} source={require('../../img/profile-icon.png')}/>
         </TouchableOpacity>
 
-        <Image source={require('../../img/verticalBar-icon.png')}/>
+        <Image style={styles.icon} source={require('../../img/verticalBar-icon.png')}/>
 
         <TouchableOpacity style={styles.positioningFooterIcons}>
-        <Image source={require('../../img/notification-icon.png')}/>
+        <Image style={styles.icon} source={require('../../img/notification-icon.png')}/>
         </TouchableOpacity>
 
       </View>
@@ -50,14 +50,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#c4c5c4',
-    height: 70
   },
   positioningFooterIcons: {
     flex:1,
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   icon:{
+    resizeMode: 'center'
   }
   });
 
