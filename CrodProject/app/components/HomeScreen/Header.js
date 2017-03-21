@@ -22,42 +22,16 @@ class Header extends Component {
 
   render() {
     return (
-      <View style={this.props.style}>
+      <View>
         <TouchableOpacity disabled={this.state.isTabClosed} onPress={()=>this._dropdownOpen()}
           style={styles.topBarRoot}>
           <View style={styles.titleProposalRoot}>
-            <Text style={styles.textProposal}>choose your proposal</Text>
+            <Text style={this.state.isTabClosed ? styles.textProposalOpen : styles.textProposalClosed}>choose your proposal</Text>
           </View>
           <Image style={styles.publishImage} source={test}/>
         </TouchableOpacity>
 
-        {/* this.state.viewsTab */}
-        <View style={[styles.expandTab]}>
-          <View  style={[styles.stepOneRoot]}>
-            <Text> step 1:</Text>
-            <Text style={{flex:1, alignItems:'center'}}>catagory</Text>
-          </View>
-          {/* Category Images */}
-          {this._renderCategoryImages()}
-
-          <View  style={[styles.stepOneRoot]}>
-
-          </View>
-
-          <TextInput
-            style={styles.textInput}
-            placeholder="create a title"/>
-          <TextInput
-            style={styles.textInput}
-            multiline={true}
-            numberOfLines={5}
-            placeholder="create a description"/>
-          <Text>attachment</Text>
-          <TouchableOpacity
-          onPress={()=>this._dropdownClose()}>
-            <Text>done</Text>
-          </TouchableOpacity>
-        </View>
+        { this.state.viewsTab }
 
       </View>
     )
@@ -67,33 +41,37 @@ class Header extends Component {
     this.setState({
       viewsTab:
       <View style={[styles.expandTab]}>
-        <View  style={[styles.stepOneRoot]}>
-          <Text> step 1:</Text>
-          <Text style={{flex:1, alignItems:'center'}}>catagory</Text>
-        </View>
-        {/* Category Images */}
+
+        {this._renderSteps(1,'category')}
         {this._renderCategoryImages()}
+        <View style={styles.divider} />
 
-        <View  style={[styles.stepOneRoot]}>
-
-        </View>
-
+        {this._renderSteps(2,'')}
         <TextInput
           style={styles.textInput}
           placeholder="create a title"/>
+        <View style={styles.divider} />
+
+        {this._renderSteps(3,'')}
         <TextInput
           style={styles.textInput}
           multiline={true}
           numberOfLines={5}
           placeholder="create a description"/>
-        <Text>attachment</Text>
-        <TouchableOpacity
+        <View style={styles.divider} />
+
+        {this._renderSteps(4,'')}
+        <Text style={{alignSelf:'center'}}>attachment</Text>
+        <View style={styles.divider} />
+
+        <TouchableOpacity style={{alignItems:'center'}}
         onPress={()=>this._dropdownClose()}>
           <Text>done</Text>
         </TouchableOpacity>
+        <View style={styles.divider} />
       </View>
       ,
-      isTabClosed: false
+      isTabClosed: true
     });
   }
 
@@ -120,6 +98,19 @@ class Header extends Component {
   _onClickCategoryImage(id){
     console.log("test");
   }
+
+  _renderSteps(id, text){
+    return(
+      <View style={[styles.stepsRoot]}>
+        <Text style={(text!='') ? {position:'absolute',marginLeft:20} : {marginLeft:20}}>step {id}:</Text>
+        {(text!='') &&
+        <View style={{flex:1, alignItems:'center'}}>
+          <Text >{text}</Text>
+        </View>
+        }
+      </View>
+    )
+  }
 }
 
 const styles = StyleSheet.create({
@@ -134,7 +125,7 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
   },
   expandTab: {
-    backgroundColor: '#b6b6b6',
+    backgroundColor: 'white',
   },
   topBarRoot:{
     flexDirection: 'row',
@@ -147,10 +138,13 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
     marginRight: 5,
   },
-  textInput: {
+  textProposalClosed: {
 
   },
-  stepOneRoot: {
+  textProposalOpen: {
+     fontSize: 25,
+  },
+  stepsRoot: {
     flexDirection: 'row',
   },
   categoryDropDown:{
@@ -160,6 +154,10 @@ const styles = StyleSheet.create({
   },
   categoryDropDownImage:{
     resizeMode: 'center',
+  },
+  divider: {
+    height: 10,
+    backgroundColor: '#b6b6b6'
   }
 });
 
