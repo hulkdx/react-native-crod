@@ -15,23 +15,25 @@ class Footer extends Component {
         <Image style={styles.icon} source={require('../../img/back-icon.png')}/>
         </TouchableOpacity>
 
-        <Image style={styles.icon} source={require('../../img/verticalBar-icon.png')}/>
+        <Image style={[styles.icon, styles.verticalBar]} source={require('../../img/verticalBar-icon.png')}/>
 
         <TouchableOpacity style={styles.positioningFooterIcons} onPress={()=>Actions.home()}>
         <Image style={[styles.icon, this.props.homeScreen ? {tintColor:'#1fbff1'} : {}]}
         source={require('../../img/home-icon.png')}/>
         </TouchableOpacity>
 
-        <Image style={styles.icon} source={require('../../img/verticalBar-icon.png')}/>
+        <Image style={[styles.icon, styles.verticalBar]} source={require('../../img/verticalBar-icon.png')}/>
 
-        <TouchableOpacity style={styles.positioningFooterIcons}>
-        <Image style={styles.icon} source={require('../../img/profile-icon.png')}/>
+        <TouchableOpacity style={styles.positioningFooterIcons} onPress={()=>Actions.profile()}>
+        <Image style={[styles.icon, this.props.profileScreen ? {tintColor:'#1fbff1'} : {}]}
+        source={require('../../img/profile-icon.png')}/>
         </TouchableOpacity>
 
-        <Image style={styles.icon} source={require('../../img/verticalBar-icon.png')}/>
+        <Image style={[styles.icon, styles.verticalBar]} source={require('../../img/verticalBar-icon.png')}/>
 
-        <TouchableOpacity style={styles.positioningFooterIcons}>
-        <Image style={styles.icon} source={require('../../img/notification-icon.png')}/>
+        <TouchableOpacity style={styles.positioningFooterIcons} onPress={()=>Actions.notification()}>
+        <Image style={[styles.icon, this.props.notificationScreen ? {tintColor:'#1fbff1'} : {}]}
+        source={require('../../img/notification-icon.png')}/>
         </TouchableOpacity>
 
       </View>
@@ -58,6 +60,9 @@ const styles = StyleSheet.create({
   },
   icon:{
     resizeMode: 'center'
+  },
+  verticalBar:{
+    alignSelf: 'center'
   }
   });
 
