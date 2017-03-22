@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import {StyleSheet,TextInput,TouchableOpacity,Image,Text,View,Dimensions} from 'react-native';
 
 // Lists of Categories {name, image}
+const publishButtonLocation = require("../../../img/publish-button.png")
+
 const categories = [
   {name: "environment", image: require("../../../img/categories/environment.png")},
   {name: "financial", image: require("../../../img/categories/financial.png")},
@@ -27,7 +29,7 @@ class Header extends Component {
           <View style={styles.titleProposalRoot}>
             <Text style={this.state.isTabClosed ? styles.textProposalOpen : styles.textProposalClosed}>choose your proposal</Text>
           </View>
-          <Image style={styles.publishImage} source={test}/>
+          <Image style={styles.publishImage} source={publishButtonLocation}/>
         </TouchableOpacity>
 
         { this.state.viewsTab }
