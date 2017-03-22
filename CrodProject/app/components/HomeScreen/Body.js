@@ -3,7 +3,7 @@ import {Dimensions, ScrollView, PropTypes, StyleSheet,TextInput,TouchableOpacity
 import CategoryMenu from "./CategoryMenu.js"
 import ProposalFeed from "./ProposalFeed.js"
 
-const LeftSideMenu = require('react-native-side-menu');
+import LeftSideMenu from "./SideMenu.js";
 
 class Body extends Component {
   render() {
@@ -11,7 +11,7 @@ class Body extends Component {
 
     return (
       <View style={{flex:8}}>
-      <LeftSideMenu menu={menu} openMenuOffset = {80} >
+      <LeftSideMenu menu={menu} openMenuOffset = {80} edgeHitWidth={100} >
       <ProposalFeed />
       </LeftSideMenu>
       </View>
