@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import {StyleSheet,TextInput,TouchableOpacity,Image,Text,View,Dimensions} from 'react-native';
 
 // Lists of Categories {name, image}
-var test = require("../../../img/publish-button.png")
 const categories = [
   {name: "environment", image: require("../../../img/categories/environment.png")},
   {name: "financial", image: require("../../../img/categories/financial.png")},
