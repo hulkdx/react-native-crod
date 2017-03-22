@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { ScrollView, StyleSheet,TextInput,TouchableOpacity,Image,Text,View,ListView} from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 const proposals = [
-  {proposalName: "firstOne", proposalIcon: "firstOne"},
-  {proposalName: "two", proposalIcon: "firstOne"},
-  {proposalName: "firstOne", proposalIcon: "firstOne"},
-  {proposalName: "three", proposalIcon: "firstOne"},
+  {title: "Reduce parking lot in 20% in favor of bicycle paking", deadline: "1.5.2017"},
+  {title: "increase spending on CSR", deadline: "2.5.2017"},
+  {title: "firstOne", deadline: "3.5.2017"},
+  {title: "three"   , deadline: "4.5.2017"},
+  {title: "three"   , deadline: "5.5.2017"},
 ]
 
 class ProposalFeed extends Component {
@@ -22,6 +24,7 @@ class ProposalFeed extends Component {
   render() {
     return (
       <View style={styles.proposalFeed}>
+        <Icon name='angle-right' />
         <ListView
         dataSource={this.state.dataSource}
         renderRow={(proposal) => {return this._renderProposalRow(proposal)} }
@@ -34,25 +37,50 @@ class ProposalFeed extends Component {
 
   _renderProposalRow(proposal){
     return(
-      <View style={styles.rowProposalRoot}>
-        <Text>
-          {proposal.proposalIcon}
-        </Text>
-        <Text style={{marginRight: 40,}}>
-          {proposal.proposalName}
+      <TouchableOpacity style={styles.rowProposalRoot} onPress={()=>this.proposalClicked(proposal)}>
+      <View style={styles.titleRoot}>
+        <Text style={styles.title}>
+          {proposal.title}
         </Text>
       </View>
+
+        <Text style={styles.deadline}>
+          {proposal.deadline}
+        </Text>
+      </TouchableOpacity>
+
     )
+  }
+
+  proposalClicked(proposal){
+
   }
 }
 
 const styles = StyleSheet.create({
-  rowProposalRoot:{
-    flexDirection: 'row',
-  },
   proposalFeed:{
+        flexDirection: 'row',
     flex:8,
-    backgroundColor: '#9370DB'
+    backgroundColor: '#ACAEAE'
+  },
+  rowProposalRoot:{
+    backgroundColor: '#EAEBE9',
+    flexDirection: 'row',
+    marginLeft: 15,
+    marginRight: 15,
+    marginTop: 5,
+    marginBottom: 5,
+    padding: 20,
+    alignItems: 'center'
+  },
+  title: {
+    fontSize: 20,
+  },
+  titleRoot: {
+flex: 1,
+alignItems:'center'
+  },
+  deadline: {
   }
 });
 

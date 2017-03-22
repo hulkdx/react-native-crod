@@ -1,17 +1,11 @@
 // TODO: TWO ANDROID ELEMENTS
 import React, { Component } from 'react';
 import {StyleSheet,TextInput,TouchableOpacity,Image,Text,View,Dimensions} from 'react-native';
+import categories from '../../data-manager/categories.js'
 
 // Lists of Categories {name, image}
 const publishButtonLocation = require("../../../img/publish-button.png")
 
-const categories = [
-  {name: "environment", image: require("../../../img/categories/environment.png")},
-  {name: "financial", image: require("../../../img/categories/financial.png")},
-  {name: "politics", image: require("../../../img/categories/politics.png")},
-  {name: "science", image: require("../../../img/categories/science.png")},
-  {name: "social", image: require("../../../img/categories/social.png")},
-]
 var width = Dimensions.get('window').width; //full width
 var height = Dimensions.get('window').height; //full height
 
