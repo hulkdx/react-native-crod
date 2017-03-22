@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { ScrollView, StyleSheet,TextInput,TouchableOpacity,Image,Text,View,ListView} from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 const proposals = [
   {title: "Reduce parking lot in 20% in favor of bicycle paking", deadline: "1.5.2017"},
@@ -23,6 +24,7 @@ class ProposalFeed extends Component {
   render() {
     return (
       <View style={styles.proposalFeed}>
+        <Icon name='angle-right' />
         <ListView
         dataSource={this.state.dataSource}
         renderRow={(proposal) => {return this._renderProposalRow(proposal)} }
@@ -57,6 +59,7 @@ class ProposalFeed extends Component {
 
 const styles = StyleSheet.create({
   proposalFeed:{
+        flexDirection: 'row',
     flex:8,
     backgroundColor: '#ACAEAE'
   },
