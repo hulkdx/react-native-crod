@@ -122,7 +122,6 @@ class SideMenu extends React.Component {
    * @return {Void}
    */
   handlePanResponderMove(e: Object, gestureState: Object) {
-    console.log(this.state.left.__getValue());
     if (this.state.left.__getValue() > this.state.openMenuOffset)
       return
     if (this.state.left.__getValue() * this.menuPositionMultiplier() >= 0) {

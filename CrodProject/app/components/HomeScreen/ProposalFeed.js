@@ -26,7 +26,7 @@ class ProposalFeed extends Component {
     return (
       <View style={styles.proposalFeed}>
         <View style={styles.angleRightRoot}>
-          <Icon name='angle-right' style={styles.angleRight} size={40} />
+          <Icon name={!this.props.changeArrow ? 'angle-right' : 'angle-left'} style={styles.angleRight} size={40} />
         </View>
 
         <ListView

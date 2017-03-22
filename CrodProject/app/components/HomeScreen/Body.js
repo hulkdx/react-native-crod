@@ -6,13 +6,23 @@ import ProposalFeed from "./ProposalFeed.js"
 import LeftSideMenu from "./SideMenu.js";
 
 class Body extends Component {
+  state = {
+      isOpen: false,
+    };
+
+  updateMenuState(isOpen) {
+    this.setState({ isOpen, });
+  }
+
   render() {
     const menu = <CategoryMenu />;
 
     return (
       <View style={{flex:8}}>
-      <LeftSideMenu menu={menu} openMenuOffset = {80} edgeHitWidth={100} >
-      <ProposalFeed />
+      <LeftSideMenu menu={menu} openMenuOffset = {80}
+      isOpen={this.state.isOpen}
+      onChange={(isOpen) => this.updateMenuState(isOpen)} >
+      <ProposalFeed changeArrow={this.state.isOpen}/>
       </LeftSideMenu>
       </View>
 
