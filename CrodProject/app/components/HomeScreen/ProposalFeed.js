@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { ScrollView, StyleSheet,TextInput,TouchableOpacity,Image,Text,View,ListView} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
+// TODO: put this into data-manager
 const proposals = [
   {title: "Reduce parking lot in 20% in favor of bicycle paking", deadline: "1.5.2017"},
   {title: "increase spending on CSR", deadline: "2.5.2017"},
@@ -24,7 +25,10 @@ class ProposalFeed extends Component {
   render() {
     return (
       <View style={styles.proposalFeed}>
-        <Icon name='angle-right' />
+        <View style={styles.angleRightRoot}>
+          <Icon name='angle-right' style={styles.angleRight} size={40} />
+        </View>
+
         <ListView
         dataSource={this.state.dataSource}
         renderRow={(proposal) => {return this._renderProposalRow(proposal)} }
@@ -77,11 +81,20 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   titleRoot: {
-flex: 1,
-alignItems:'center'
+    flex: 1,
+    alignItems:'center'
   },
   deadline: {
-  }
+  },
+  angleRightRoot: {
+    paddingLeft: 5,
+    paddingRight: 5,
+    backgroundColor: '#1fbff1',
+    justifyContent: 'center'
+  },
+  angleRight: {
+    color: 'white',
+  },
 });
 
 
