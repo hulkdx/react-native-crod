@@ -11,7 +11,7 @@ class Body extends Component {
 
     return (
       <View style={{flex:8}}>
-      <LeftSideMenu menu={menu}>
+      <LeftSideMenu menu={menu} openMenuOffset = {80} >
       <ProposalFeed />
       </LeftSideMenu>
       </View>
