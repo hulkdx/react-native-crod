@@ -9,12 +9,7 @@ class CategoryMenu extends Component {
   render() {
 
     return (
-
-
-
-      <ScrollView scrollsToTop={false}>
-
-
+      <ScrollView scrollsToTop={false} style={styles.categories}>
       {this._renderCategoryImages()}
       </ScrollView>
     );
@@ -24,13 +19,16 @@ class CategoryMenu extends Component {
     for (let i=0; i<categories.length; i++){
       rows.push(
         <TouchableOpacity key = {i} onPress={()=>this._onClickCategoryImage(i)} style={styles.categoryDropDown}>
-            <Image source={categories[i].image} style={styles.categoryDropDownImage}/>
+            <Image source={categories[i].image} style={styles.categoriesLeftSide}/>
+              <View style={{backgroundColor:"white", height:10}} />
         </TouchableOpacity>
+
       )
     }
     return (
-      <View style={styles.categories}>
+      <View>
         {rows}
+
       </View>
     )
   }
@@ -46,8 +44,17 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   categories:{
+
     flexDirection: 'column',
-    backgroundColor: '#1fbff1'
+  },
+  categoryDropDown:{
+    alignItems:'center'
+
+  },
+  categoriesLeftSide:{
+
+    resizeMode: 'center',
+
   }
 });
 

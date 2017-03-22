@@ -18,8 +18,8 @@ class Body extends Component {
     const menu = <CategoryMenu />;
 
     return (
-      <View style={{flex:8}}>
-      <LeftSideMenu menu={menu} openMenuOffset = {80}
+      <View style={styles.leftMenu}>
+      <LeftSideMenu menu={menu}  openMenuOffset = {80}
       isOpen={this.state.isOpen}
       onChange={(isOpen) => this.updateMenuState(isOpen)} >
       <ProposalFeed changeArrow={this.state.isOpen}/>
@@ -31,6 +31,10 @@ class Body extends Component {
 }
 
 const styles = StyleSheet.create({
+  leftMenu:{
+    flex:8,
+    backgroundColor: "#1fbff1"
+  }
 });
 
 
