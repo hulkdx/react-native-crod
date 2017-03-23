@@ -15,3 +15,6 @@ npm i underscore --save
 
 https://github.com/react-native-community/react-native-side-menu
 npm install react-native-side-menu --save
+
+https://github.com/aksonov/react-native-tabs
+npm i react-native-tabs  --save
