@@ -12,6 +12,8 @@ class CrodProject extends Component {
     return (
       <Router>
         <Scene key='root'>
+        <Scene key='profile' component={ProfileScreen} hideNavBar hideTabBar/>
+        
           <Scene key='home' component={HomeScreen} hideNavBar hideTabBar/>
           <Scene key='profile' component={ProfileScreen} hideNavBar hideTabBar/>
           <Scene key='notification' component={NotificationScreen} hideNavBar hideTabBar/>
