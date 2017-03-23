@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {StyleSheet,TextInput,TouchableOpacity,Image,Text,View,ListView} from 'react-native';
 import Tabs from 'react-native-tabs';
 import ProposalFeed from '../HomeScreen/ProposalFeed.js'
+const backgroundImage = require("../../../img/backgroundblu.jpg")
 
 class ProfileBody extends Component {
 
@@ -12,18 +13,18 @@ class ProfileBody extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <Image style={styles.container} source={backgroundImage}>
         <Tabs selected={this.state.page}
             onSelect={el=>this.setState({page:el.props.name})}
             style={styles.tabs}>
             <Text name="proposal"
-                  selectedIconStyle={styles.tabsSelected}>Your Proposals</Text>
+                  selectedStyle={styles.tabsSelected}>Your Proposals</Text>
             <Text name="history"
-                  selectedIconStyle={styles.tabsSelected}>History votes </Text>
+                  selectedStyle={styles.tabsSelected}>History votes </Text>
         </Tabs>
         <ProposalFeed isProfile={true}/>
 
-      </View>
+      </Image>
 
 
     )
@@ -35,12 +36,13 @@ const styles = StyleSheet.create({
   container: {
     flex:8,
     backgroundColor: '#ADDBE5',
+    width: null, height: null
   },
   tabs: {
     position:'relative',
   },
   tabsSelected: {
-    backgroundColor: 'white',
+    color: 'blue'
   },
 });
 

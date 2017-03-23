@@ -1,16 +1,28 @@
 import React, { Component } from 'react';
 import {StyleSheet,TextInput,TouchableOpacity,Image,Text,View} from 'react-native';
-
+const backgroundImage = require("../../../img/topprofileblu.jpg")
+const profileImage = require("../../../img/brigel.png")
 
 class ProfileHeader extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.profileText}>Name </Text>
-        <View style={styles.profileImage}/>
-        <Text style={styles.profileText}> Personal Info </Text>
-      </View>
+      <Image style={styles.container} source={backgroundImage}>
+        <View style={styles.nameCityContainer}>
+          <Text style={styles.profileText}>Name </Text>
+          <View style={{flex:1}}/>
+          <Text style={styles.profileText}>City </Text>
+        </View>
+
+        <Image style={styles.profileImage} source={profileImage}/>
+
+        <View style={styles.nameCityContainer}>
+          <Text style={styles.profileText}>Surname </Text>
+          <View style={{flex:1}}/>
+
+          <Text style={styles.profileText}>Age </Text>
+        </View>
+      </Image>
 
 
     )
@@ -19,20 +31,26 @@ class ProfileHeader extends Component {
 
 const styles = StyleSheet.create({
   container:{
+    flex:1,
     flexDirection: 'row',
-    paddingTop: 10,
-    paddingBottom: 10,
-    paddingLeft: 10,
+    padding: 10,
+    width: null, height: null,
+    paddingBottom: 20,
+    paddingTop: 20,
   },
   profileImage:{
-    backgroundColor: 'blue',
-    width: 20,
-    height: 20,
-    alignSelf: 'center'
+    flex:5,
+    resizeMode: 'center',
+    alignSelf:'center',
+    marginTop: 70,
   },
   profileText:{
-    fontSize: 10,
+    fontSize: 13,
+    alignSelf: 'center',
+    color: 'white',
   },
+  nameCityContainer: {
+  }
 });
 
 module.exports = ProfileHeader

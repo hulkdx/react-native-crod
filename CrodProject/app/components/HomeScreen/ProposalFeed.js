@@ -3,8 +3,9 @@ import { ScrollView, StyleSheet,TextInput,TouchableOpacity,Image,Text,View,ListV
 import Icon from 'react-native-vector-icons/FontAwesome';
 import proposals from '../../data-manager/proposals'
 
-const voteNoSource = require("../../../img/like.png")
-const voteYesSource = require("../../../img/dislike.png")
+const voteNoSource = require("../../../img/dislike.png")
+const voteYesSource = require("../../../img/like.png")
+const dividerImage = require("../../../img/dividerblue.jpg")
 
 
 class ProposalFeed extends Component {
@@ -24,10 +25,11 @@ class ProposalFeed extends Component {
           <Icon name={!this.props.changeArrow ? 'angle-right' : 'angle-left'} style={styles.angleRight} size={40} />
         </View>
       }
-        <ListView
-        dataSource={this.state.dataSource}
-        renderRow={(proposal) => {return this._renderProposalRow(proposal, this.props.isProfile)} }
-        />
+      <ListView
+      dataSource={this.state.dataSource}
+      renderRow={(proposal) => {return this._renderProposalRow(proposal, this.props.isProfile)} }
+      />
+
       </View>
     )
   }
@@ -41,6 +43,8 @@ class ProposalFeed extends Component {
   _renderProposalRow(proposal, isProfileScreen){
 
     return(
+      <View>
+
       <TouchableOpacity style={styles.rowProposalRoot} onPress={()=>this.proposalClicked(proposal)}>
       <View style={styles.titleRoot}>
         <Text style={styles.title}>
@@ -61,7 +65,8 @@ class ProposalFeed extends Component {
         </View>
       }
       </TouchableOpacity>
-
+      <Image style={{height: 2}} source={dividerImage}/>
+      </View>
     )
   }
 
@@ -75,10 +80,8 @@ const styles = StyleSheet.create({
   proposalFeed:{
     flexDirection: 'row',
     flex:8,
-    backgroundColor: '#ACAEAE'
   },
   rowProposalRoot:{
-    backgroundColor: '#EAEBE9',
     flexDirection: 'row',
     marginTop: 5,
     marginBottom: 5,
@@ -86,7 +89,7 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   title: {
-    fontSize: 20,
+    fontSize: 15,
   },
   titleRoot: {
     flex: 4,
@@ -105,13 +108,13 @@ const styles = StyleSheet.create({
   },
   votesContainer: {
     flex: 1,
-    flexDirection: 'column',
+    flexDirection: 'row',
     alignItems: 'center'
   },
   votes:{
-    width:14,
-    height:12,
-  }
+    resizeMode: 'contain',
+    marginRight: 10,
+  },
 });
 
 
