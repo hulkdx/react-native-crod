@@ -22,7 +22,7 @@ class Body extends Component {
       <LeftSideMenu menu={menu}  openMenuOffset = {80}
       isOpen={this.state.isOpen}
       onChange={(isOpen) => this.updateMenuState(isOpen)} >
-      <ProposalFeed changeArrow={this.state.isOpen} isProfile={this.props.isProfile}/>
+      <ProposalFeed changeArrow={this.state.isOpen}/>
       </LeftSideMenu>
       </View>
 

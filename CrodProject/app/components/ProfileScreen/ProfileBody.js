@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {StyleSheet,TextInput,TouchableOpacity,Image,Text,View,ListView} from 'react-native';
 import Tabs from 'react-native-tabs';
-import Body from '../HomeScreen/Body.js'
+import ProposalFeed from '../HomeScreen/ProposalFeed.js'
 
 class ProfileBody extends Component {
 
@@ -21,7 +21,7 @@ class ProfileBody extends Component {
             <Text name="history"
                   selectedIconStyle={styles.tabsSelected}>History votes </Text>
         </Tabs>
-        <Body isProfile={true}/>
+        <ProposalFeed isProfile={true}/>
 
       </View>
 

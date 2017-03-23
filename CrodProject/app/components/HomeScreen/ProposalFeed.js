@@ -19,10 +19,11 @@ class ProposalFeed extends Component {
   render() {
     return (
       <View style={styles.proposalFeed}>
+      {!this.props.isProfile &&
         <View style={styles.angleRightRoot}>
           <Icon name={!this.props.changeArrow ? 'angle-right' : 'angle-left'} style={styles.angleRight} size={40} />
         </View>
-
+      }
         <ListView
         dataSource={this.state.dataSource}
         renderRow={(proposal) => {return this._renderProposalRow(proposal, this.props.isProfile)} }
