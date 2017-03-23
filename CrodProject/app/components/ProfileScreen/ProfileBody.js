@@ -21,7 +21,7 @@ class ProfileBody extends Component {
             <Text name="history"
                   selectedIconStyle={styles.tabsSelected}>History votes </Text>
         </Tabs>
-        <Body />
+        <Body isProfile={true}/>
 
       </View>
 

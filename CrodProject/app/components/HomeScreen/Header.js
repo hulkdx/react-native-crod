@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import {StyleSheet,TextInput,TouchableOpacity,Image,Text,View,Dimensions} from 'react-native';
 import categories from '../../data-manager/categories.js'
 
-// Lists of Categories {name, image}
 const publishButtonLocation = require("../../../img/publish-button.png")
 
 var width = Dimensions.get('window').width; //full width

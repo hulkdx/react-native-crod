@@ -14,7 +14,6 @@ class ProfileScreen extends Component {
     return (
       <ViewContainer>
         <ProfileHeader />
-        <CreateProposal />
         <ProfileBody />
         <FooterBar profileScreen={true}/>
       </ViewContainer>
