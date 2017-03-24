@@ -16,12 +16,12 @@ class ProfileBody extends Component {
     return (
       <View style={styles.container}>
         <Tabs selected={this.state.page}
-            onSelect={el=>onSelectedTab(el)}
+            onSelect={el=>this.onSelectedTab(el)}
             style={styles.tabs}>
             <Text name="proposal" style={styles.textStyle}
-                  selectedIconStyle={this.state.page == 'history' ? styles.tabsSelectedOne : {}}>Your Proposals</Text>
+                  selectedIconStyle={styles.tabsSelectedOne}>Your Proposals</Text>
             <Text name="history" style={styles.textStyle}
-                  selectedIconStyle={this.state.page == 'proposal' ? styles.tabsSelectedTwo : {}}>History votes </Text>
+                  selectedIconStyle={styles.tabsSelectedTwo}>History votes </Text>
         </Tabs>
         <ProposalFeed isProfile={true}/>
 
