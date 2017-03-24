@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { ScrollView, StyleSheet,TextInput,TouchableOpacity,Image,Text,View,ListView} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import proposals from '../../data-manager/proposals'
+import {Actions} from 'react-native-router-flux';
 
 const voteNoSource = require("../../../img/dislike.png")
 const voteYesSource = require("../../../img/like.png")
@@ -70,9 +71,14 @@ class ProposalFeed extends Component {
     )
   }
 
-  // when the row of proposal clicked
+  /*
+    When the row of proposal clicked
+    @param proposal: the proposal elements from /data-manager/proposal.js
+    TODO: change the proposal object with proposal id
+  */
   proposalClicked(proposal){
-
+    console.log(proposal);
+    Actions.voting(proposal)
   }
 }
 

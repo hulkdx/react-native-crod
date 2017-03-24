@@ -4,6 +4,7 @@ import LauncherScreen from './app/screens/LauncherScreen'
 import HomeScreen from './app/screens/HomeScreen'
 import ProfileScreen from './app/screens/ProfileScreen'
 import NotificationScreen from './app/screens/NotificationScreen'
+import VotingScreen from './app/screens/VotingScreen'
 import {Router, Scene, Actions, ActionConst} from 'react-native-router-flux';
 
 const TabIcon = ({ selected, source }) => {
@@ -38,6 +39,7 @@ class CrodProject extends Component {
                         icon={TabIcon} onPress={()=> {Actions.notification({type: ActionConst.REFRESH}) }}>
                         <Scene key='notification' component={NotificationScreen} hideNavBar />
                 </Scene>
+                <Scene key='voting' component={VotingScreen} hideNavBar />
           </Scene>
         </Scene>
 
