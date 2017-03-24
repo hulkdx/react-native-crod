@@ -39,7 +39,9 @@ class CrodProject extends Component {
                         <Scene key='notification' component={NotificationScreen} hideNavBar />
                 </Scene>
           </Scene>
+
         </Scene>
+
 
       </Router>
     )
