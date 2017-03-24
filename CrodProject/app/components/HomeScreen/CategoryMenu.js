@@ -1,14 +1,19 @@
 import React, { Component } from 'react';
 import {ScrollView, StyleSheet,TouchableOpacity,Image,Text,View} from 'react-native';
 import categories from "../../data-manager/categories.js"
+import {Actions} from 'react-native-router-flux';
 
 
 class CategoryMenu extends Component {
 
 
+
+
+
   render() {
 
     return (
+
       <ScrollView scrollsToTop={false} style={styles.categories}>
       {this._renderCategoryImages()}
       </ScrollView>
@@ -33,7 +38,9 @@ class CategoryMenu extends Component {
     )
   }
   _onClickCategoryImage(id){
-    console.log("test");
+
+    //When clicked the id of the category icon is passed as a prop to the HomeScreen through Actions.refresh.
+    Actions.refresh({key: 'home', categoryId: id})
   }
 
 };

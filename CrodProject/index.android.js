@@ -41,7 +41,9 @@ class CrodProject extends Component {
                 </Scene>
                 <Scene key='voting' component={VotingScreen} hideNavBar />
           </Scene>
+
         </Scene>
+
 
       </Router>
     )

@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import {StyleSheet,TextInput,TouchableOpacity,Image,Text,View,Dimensions} from 'react-native';
 import categories from '../../data-manager/categories.js'
-
+import CategoryHeader from './CategoryHeader.js'
 
 var width = Dimensions.get('window').width; //full width
 var height = Dimensions.get('window').height; //full height
@@ -16,6 +16,9 @@ class Header extends Component {
   render() {
     return (
       <View>
+    {/*The id of the category received as a prop from the HomeScreen.js
+       to then be passed as a prop to the HomeScreen/CategoryHeader.js*/}
+        <CategoryHeader categoryId={this.props.categoryId} />
         <TouchableOpacity disabled={this.state.isTabClosed} onPress={()=>this._dropdownOpen()}
           style={styles.topBarRoot}>
           <View style={styles.titleProposalRoot}>
