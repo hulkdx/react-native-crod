@@ -12,22 +12,27 @@ class ProfileBody extends Component {
     }
 
   render() {
+    console.log(this.state.page == 'proposal');
     return (
-      <Image style={styles.container} source={backgroundImage}>
+      <View style={styles.container}>
         <Tabs selected={this.state.page}
-            onSelect={el=>this.setState({page:el.props.name})}
+            onSelect={el=>onSelectedTab(el)}
             style={styles.tabs}>
-            <Text name="proposal"
-                  selectedStyle={styles.tabsSelected}>Your Proposals</Text>
-            <Text name="history"
-                  selectedStyle={styles.tabsSelected}>History votes </Text>
+            <Text name="proposal" style={styles.textStyle}
+                  selectedIconStyle={this.state.page == 'history' ? styles.tabsSelectedOne : {}}>Your Proposals</Text>
+            <Text name="history" style={styles.textStyle}
+                  selectedIconStyle={this.state.page == 'proposal' ? styles.tabsSelectedTwo : {}}>History votes </Text>
         </Tabs>
         <ProposalFeed isProfile={true}/>
 
-      </Image>
+      </View>
 
 
     )
+  }
+
+  onSelectedTab(el){
+    this.setState({page:el.props.name})
   }
 
 }
@@ -35,15 +40,25 @@ class ProfileBody extends Component {
 const styles = StyleSheet.create({
   container: {
     flex:8,
-    backgroundColor: '#ADDBE5',
     width: null, height: null
+  },
+  textStyle:{
+    fontSize: 18.5
   },
   tabs: {
     position:'relative',
   },
-  tabsSelected: {
-    color: 'blue'
+  tabsSelectedOne: {
+    borderBottomWidth: 2,
+    borderRightWidth: 2,
+    borderColor: '#1fbff1'
   },
+  tabsSelectedTwo: {
+    borderBottomWidth: 2,
+    borderLeftWidth: 2,
+    borderColor: '#1fbff1'
+  },
+
 });
 
 module.exports = ProfileBody

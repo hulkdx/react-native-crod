@@ -80,6 +80,7 @@ const styles = StyleSheet.create({
   proposalFeed:{
     flexDirection: 'row',
     flex:8,
+    backgroundColor: 'white'
   },
   rowProposalRoot:{
     flexDirection: 'row',
