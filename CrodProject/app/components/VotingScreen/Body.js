@@ -1,12 +1,16 @@
+'use strict'
 // Android element elevation defined for middle voting image
 import React, { Component } from 'react';
 import {StyleSheet,Text, Image,View,Animated,PanResponder,Dimensions} from 'react-native';
 import Tabs from 'react-native-tabs';
+import Articles from './Articles.js'
+import Statistics from './Statistics.js'
+import Disscussion from './Disscussion.js'
+let Window = Dimensions.get('window');
 
 // TODO: Remove it or change it to backgroundImage
 const backgroundImage = require("../../../img/backgroundblu.jpg")
 
-let Window = Dimensions.get('window');
 // if dragging is less than this number the vote is yes
 const voteNo = 30;
 // if dragging is bigger than this number the vote is no
@@ -91,17 +95,38 @@ class Body extends Component {
           style={styles.tabs}>
           <Text name="articles" style={styles.textStyle}
                 selectedIconStyle={styles.tabsSelectedOne}>Articles</Text>
-          <Text name="Disscussion" style={styles.textStyle}
+          <Text name="disscussion" style={styles.textStyle}
                 selectedIconStyle={styles.tabsSelectedTwo}>Disscussion</Text>
+          {/* TODO: Add statistics when voted */}
       </Tabs>
       </View>
-      {/* Articles / Comments body Section */}
+      {/* Articles / Comments / Statistics body Section */}
       <View style={styles.bodyContainer}>
+        {this._renderExtraParts()}
       </View>
 
       </Image>
 
     )
+  }
+
+  _renderExtraParts(){
+    switch (this.state.page) {
+      case 'articles':
+        return(
+          <Articles />
+        )
+      case 'disscussion':
+      return(
+        <Disscussion />
+      )
+      case 'statistics':
+      return(
+        <Statistics />
+      )
+      default:
+
+    }
   }
 
   onSelectedTab(el){

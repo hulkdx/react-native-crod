@@ -1,19 +1,20 @@
+'use strict'
 import React, { Component } from 'react';
 import {StyleSheet,Text, Image,View} from 'react-native';
 
 const backgroundImage = require("../../../img/backgroundvotingup.jpg")
 
-class Header extends Component {
+class Articles extends Component {
 
   render() {
     console.log(this.props);
     return (
-      <Image source={backgroundImage} style={styles.container}>
-        <Text style={{marginLeft: 10,fontSize: 15, fontWeight:'bold'}}>
-          {this.props.title}
+      <View style={styles.container}>
+        <Text >
+          Articles
         </Text>
 
-      </Image>
+      </View>
 
     )
   }
@@ -22,10 +23,8 @@ class Header extends Component {
 
 const styles = StyleSheet.create({
   container:{
-     flex: 1,
-    width: null, height: null,
-    justifyContent: 'center'
+    flex: 1,
   }
 });
 
-module.exports = Header
+module.exports = Articles
