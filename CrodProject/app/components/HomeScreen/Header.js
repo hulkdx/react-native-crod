@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import {StyleSheet,TextInput,TouchableOpacity,Image,Text,View,Dimensions} from 'react-native';
 import categories from '../../data-manager/categories.js'
 
-const publishButtonLocation = require("../../../img/publish-button.png")
 
 var width = Dimensions.get('window').width; //full width
 var height = Dimensions.get('window').height; //full height
@@ -22,7 +21,7 @@ class Header extends Component {
           <View style={styles.titleProposalRoot}>
             <Text style={this.state.isTabClosed ? styles.textProposalOpen : styles.textProposalClosed}>choose your proposal</Text>
           </View>
-          <Image style={styles.publishImage} source={publishButtonLocation}/>
+
         </TouchableOpacity>
 
         { this.state.viewsTab }
