@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {StyleSheet,Text, Image,View} from 'react-native';
 
- const backgroundImage = require("../../../img/backgroundblu.jpg")
+ const backgroundImage = require("../../../img/backgroundvotingup.jpg")
 
 class Header extends Component {
 
