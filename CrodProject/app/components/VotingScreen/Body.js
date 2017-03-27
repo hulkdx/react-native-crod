@@ -31,7 +31,7 @@ class Body extends Component {
       </View>
       {/* Articles / Comments / Statistics body Section */}
       <View style={styles.bodyContainer}>
-        {this._renderExtraParts()}
+        {this._renderTabContent()}
       </View>
 
       </View>
@@ -39,7 +39,7 @@ class Body extends Component {
     )
   }
 
-  _renderExtraParts(){
+  _renderTabContent(){
     switch (this.state.page) {
       case 'articles':
         return(
