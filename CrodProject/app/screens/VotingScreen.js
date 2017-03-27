@@ -7,9 +7,11 @@ import Body from '../components/VotingScreen/Body.js'
 class VotingScreen extends Component {
 
   render() {
+    console.log(this.props);
     return (
       <ViewContainer>
-        <Header title={this.props.title}/>
+        {/* Get this props id from ProposalFeed.js */}
+        <Header proposalId={this.props.proposalId}/>
         <Body voted={this.props.voted} />
 
       </ViewContainer>

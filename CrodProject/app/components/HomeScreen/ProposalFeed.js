@@ -42,7 +42,7 @@ class ProposalFeed extends Component {
     @param isProfileScreen: {boolean} representing if this is the profile screen to show.
   */
   _renderProposalRow(proposal, isProfileScreen){
-
+    console.log(proposal);
     return(
       <View>
 
@@ -77,7 +77,7 @@ class ProposalFeed extends Component {
     TODO: change the proposal object with proposal id
   */
   proposalClicked(proposal){
-    Actions.voting({type: ActionConst.REFRESH, proposal})
+    Actions.voting({type: ActionConst.REFRESH, proposalId: proposal.id})
   }
 }
 
