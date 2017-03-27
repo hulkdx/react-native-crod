@@ -2,14 +2,15 @@
 // Android element elevation defined for middle voting image
 import React, { Component } from 'react';
 import {StyleSheet,Text, Image,View,Animated,PanResponder,Dimensions} from 'react-native';
-let Window = Dimensions.get('window');
+let WindowWidth = Dimensions.get('window').width;
+let WindowHeight = Dimensions.get('window').height;
 
-const backgroundImage = require("../../../img/backgroundblu.jpg")
+const backgroundImage = require("../../../img/crowlogo.png")
 
 // if dragging is less than this number the vote is yes
 const voteNo = 30;
 // if dragging is bigger than this number the vote is no
-const voteYes = Window.width - voteNo;
+const voteYes = WindowWidth - voteNo;
 
 class VotingAnimation extends Component {
 
@@ -70,23 +71,25 @@ class VotingAnimation extends Component {
 
   render() {
     return (
-
-
         <View style={styles.votingBar}>
           <View style={styles.votingBarRed}/>
+          <View style={styles.votingBarGreen}/>
           <View style={styles.votingBarMiddle} >
-            <Animated.View style={[this.state.pan.getLayout(),{flex:1, borderWidth:2, elevation:1}]} {...this.panResponder.panHandlers}>
+            <Animated.View style={[this.state.pan.getLayout(),{flex:1, elevation:1}]} {...this.panResponder.panHandlers}>
               <Image source={backgroundImage} style={styles.middleImage} />
             </Animated.View>
           </View>
-          <View style={styles.votingBarGreen}/>
-
         </View>
 
     )
   }
 
 }
+
+const middleButtonBigger = 15
+const middleButtonWidth  = WindowWidth / 7;
+const middleButtonHeight = WindowHeight*1/13*5/6 +middleButtonBigger;
+const middleButtonLeft = (WindowWidth / 2) - (middleButtonWidth/2)
 
 const styles = StyleSheet.create({
   votingBar:{
@@ -98,12 +101,18 @@ const styles = StyleSheet.create({
     backgroundColor: 'red'
   },
   votingBarMiddle:{
-    flex:1,
+    // flex:1,
+    position: 'absolute',
+    left:middleButtonLeft,
+    top:-middleButtonBigger/2,
+    width: middleButtonWidth,
+    height: middleButtonHeight,
   },
   middleImage:{
     flex:1,
     width:null,
     height:null,
+    resizeMode: 'stretch'
   },
   votingBarGreen:{
     flex:3,
