@@ -25,9 +25,10 @@ class VotingAnimation extends Component {
       // panResponder for dragging votes
       this.panResponder = PanResponder.create({
         onStartShouldSetPanResponder    : () => !this.state.isVoted,
-        onPanResponderMove              : Animated.event([null,{
-            dx  : this.state.pan.x,
-        }]),
+        onPanResponderMove              : (event, gestureState) => {
+            let panX = gestureState.dx;
+            this.state.pan.setValue({ x: panX });
+        },
         onPanResponderRelease           : (e, gesture) => {
             if(this.isDropZone(gesture)) return
             // Show animation when user not clicked
