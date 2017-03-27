@@ -30,7 +30,7 @@ class VotingAnimation extends Component {
           Animated.event([null, {
           dx: this.state.pan.x,
           }])(event, gesture);
-          {this.movingPan(gesture)}
+          this.changeColor(gesture)
         },
         onPanResponderRelease           : (e, gesture) => {
             if(this.isDropZone(gesture)) return
@@ -66,7 +66,7 @@ class VotingAnimation extends Component {
     }
     else return false;
   }
-  movingPan(gesture){
+  changeColor(gesture){
   if(gesture.moveX > WindowWidth/2){
     this.setState({colorChange: 'green'})
     return true;
