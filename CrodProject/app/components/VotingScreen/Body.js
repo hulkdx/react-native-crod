@@ -23,8 +23,8 @@ class Body extends Component {
   render() {
     return (
       <View style={styles.container}>
-      {/* Voting Section */}
-      <VotingAnimation />
+      {/* Voting Section Appears when its not voted*/}
+      {_.isUndefined(this.props.voted) && <VotingAnimation />}
       {/* Articles / Disscussion Tab Section */}
       <View style={styles.tabContainer}>
         {this._renderTabs()}
