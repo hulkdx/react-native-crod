@@ -7,6 +7,8 @@ import Articles from './Articles.js'
 import Statistics from './Statistics.js'
 import Disscussion from './Disscussion.js'
 import VotingAnimation from './VotingAnimation.js'
+import _ from 'underscore'
+
 
 class Body extends Component {
 
@@ -25,15 +27,7 @@ class Body extends Component {
       <VotingAnimation />
       {/* Articles / Disscussion Tab Section */}
       <View style={styles.tabContainer}>
-      <Tabs selected={this.state.page}
-          onSelect={el=>this.onSelectedTab(el)}
-          style={styles.tabs}>
-          <Text name="articles" style={styles.textStyle}
-                selectedIconStyle={styles.tabsSelectedOne}>Articles</Text>
-          <Text name="disscussion" style={styles.textStyle}
-                selectedIconStyle={styles.tabsSelectedTwo}>Disscussion</Text>
-          {/* TODO: Add statistics when voted */}
-      </Tabs>
+        {this._renderTabs()}
       </View>
       {/* Articles / Comments / Statistics body Section */}
       <View style={styles.bodyContainer}>
@@ -64,6 +58,34 @@ class Body extends Component {
     }
   }
 
+  _renderTabs(){
+    // without statistics
+    if (_.isUndefined(this.props.voted)) return (
+      <Tabs selected={this.state.page}
+          onSelect={el=>this.onSelectedTab(el)}
+          style={styles.tabs}>
+          <Text name="articles" style={styles.textStyle}
+                selectedIconStyle={styles.tabsSelectedOne}>Articles</Text>
+          <Text name="disscussion" style={styles.textStyle}
+                selectedIconStyle={styles.tabsSelectedTwo}>Disscussion</Text>
+      </Tabs>
+    )
+
+    // with statistics
+    return(
+      <Tabs selected={this.state.page}
+          onSelect={el=>this.onSelectedTab(el)}
+          style={styles.tabs}>
+          <Text name="articles" style={styles.textStyle}
+                selectedIconStyle={styles.tabsSelectedOne}>Articles</Text>
+          <Text name="disscussion" style={styles.textStyle}
+                selectedIconStyle={styles.tabsSelectedMiddle}>Disscussion</Text>
+          <Text name="statistics" style={styles.textStyle}
+                selectedIconStyle={styles.tabsSelectedTwo}>Statistics</Text>
+      </Tabs>
+    )
+  }
+
   onSelectedTab(el){
     this.setState({page:el.props.name})
   }
@@ -89,6 +111,12 @@ const styles = StyleSheet.create({
     borderColor: '#1fbff1'
   },
   tabsSelectedTwo: {
+    borderBottomWidth: 2,
+    borderLeftWidth: 2,
+    borderColor: '#1fbff1'
+  },
+  tabsSelectedMiddle: {
+    borderRightWidth: 2,
     borderBottomWidth: 2,
     borderLeftWidth: 2,
     borderColor: '#1fbff1'

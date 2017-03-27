@@ -7,11 +7,10 @@ import Body from '../components/VotingScreen/Body.js'
 class VotingScreen extends Component {
 
   render() {
-    console.log(this.props);
     return (
       <ViewContainer>
         <Header title={this.props.title}/>
-        <Body />
+        <Body voted={this.props.voted} />
 
       </ViewContainer>
 

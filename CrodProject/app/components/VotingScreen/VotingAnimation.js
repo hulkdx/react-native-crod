@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import {StyleSheet,Text, Image,View,Animated,PanResponder,Dimensions} from 'react-native';
 let WindowWidth = Dimensions.get('window').width;
 let WindowHeight = Dimensions.get('window').height;
+import {Actions} from 'react-native-router-flux';
 
 const backgroundImage = require("../../../img/crowlogo.png")
 
@@ -49,12 +50,12 @@ class VotingAnimation extends Component {
     // console.log('voteYes : ' + voteYes);
     if (gesture.moveX < voteNo) {
       this.setState({isVoted   : true})
-      this.onVoted(true)
+      this.onVoted(false)
       return true;
     }
     else if (gesture.moveX > voteYes) {
       this.setState({isVoted   : true})
-      this.onVoted(false)
+      this.onVoted(true)
       return true;
     }
     else return false;
@@ -65,6 +66,8 @@ class VotingAnimation extends Component {
   */
   onVoted(voted){
     /* TODO: 1. show statistics */
+    // Send the voted to @link:VotingScreen.js then to Body.js to refresh the elements (statistics)
+    Actions.refresh({key: 'voting', voted:voted})
     /* TODO: 2. show total yes/no votes instead of the voting bar */
     /* TODO: 3. user cannot vote anymore for this topic */
   }
