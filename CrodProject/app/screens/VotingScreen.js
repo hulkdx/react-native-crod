@@ -7,7 +7,7 @@ import Body from '../components/VotingScreen/Body.js'
 class VotingScreen extends Component {
 
   render() {
-    console.log(this.props);
+    // console.log(this.props);
     return (
       <ViewContainer>
         {/* Get this props id from ProposalFeed.js */}

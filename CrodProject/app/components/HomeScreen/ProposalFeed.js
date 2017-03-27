@@ -42,7 +42,7 @@ class ProposalFeed extends Component {
     @param isProfileScreen: {boolean} representing if this is the profile screen to show.
   */
   _renderProposalRow(proposal, isProfileScreen){
-    console.log(proposal);
+    // console.log(proposal);
     return(
       <View>
 
