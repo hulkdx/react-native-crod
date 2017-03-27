@@ -19,15 +19,18 @@ class VotingAnimation extends Component {
       super(props);
       this.state = {
         isVoted   : false,
-        pan       : new Animated.ValueXY()
+        pan       : new Animated.ValueXY(),
+        colorChange: 'none'
       };
 
       // panResponder for dragging votes
       this.panResponder = PanResponder.create({
         onStartShouldSetPanResponder    : () => !this.state.isVoted,
-        onPanResponderMove              : (event, gestureState) => {
-            let panX = gestureState.dx;
-            this.state.pan.setValue({ x: panX });
+        onPanResponderMove              : (event, gesture) => {
+          Animated.event([null, {
+          dx: this.state.pan.x,
+          }])(event, gesture);
+          {this.movingPan(gesture)}
         },
         onPanResponderRelease           : (e, gesture) => {
             if(this.isDropZone(gesture)) return
@@ -36,6 +39,8 @@ class VotingAnimation extends Component {
                 this.state.pan,
                 {toValue:{x:0,y:0}}
             ).start();
+            //TODO: Create animation for color change.
+            this.setState({colorChange: 'none'})
         }
       });
 
@@ -61,6 +66,18 @@ class VotingAnimation extends Component {
     }
     else return false;
   }
+  movingPan(gesture){
+  if(gesture.moveX > WindowWidth/2){
+    this.setState({colorChange: 'green'})
+    return true;
+  }
+  else if(gesture.moveX < WindowWidth/2){
+    this.setState({colorChange: 'red'})
+    return true;
+  } else return false;
+
+}
+
 
   /*
     @param voted {boolean}: true=>voted yes, false=>voted no
@@ -74,10 +91,11 @@ class VotingAnimation extends Component {
   }
 
   render() {
+    console.log(this.state.colorChange)
     return (
-        <View style={styles.votingBar}>
-          <View style={styles.votingBarRed}/>
-          <View style={styles.votingBarGreen}/>
+        <View style={styles.votingBar} >
+          <View style={[styles.votingBarRed, this.state.colorChange == 'green' ? {backgroundColor: this.state.colorChange} : {backgroundColor: 'red'}]}/>
+          <View style={[styles.votingBarGreen, this.state.colorChange == 'red' ? {backgroundColor: this.state.colorChange} : {backgroundColor: 'green'}]}/>
           <View style={styles.votingBarMiddle} >
             <Animated.View style={[this.state.pan.getLayout(),{flex:1, elevation:1}]} {...this.panResponder.panHandlers}>
               <Image source={backgroundImage} style={styles.middleImage} />
