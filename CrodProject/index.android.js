@@ -39,7 +39,11 @@ class CrodProject extends Component {
                         icon={TabIcon} onPress={()=> {Actions.notification({type: ActionConst.REFRESH}) }}>
                         <Scene key='notification' component={NotificationScreen} hideNavBar />
                 </Scene>
-                <Scene key='voting' component={VotingScreen} hideNavBar />
+                {/* voting scene should be inside another scene, otherwise Actions.refresh doesnt work */}
+                <Scene key='votingTab' >
+                  <Scene key='voting' component={VotingScreen} hideNavBar />
+                </Scene>
+
           </Scene>
 
         </Scene>

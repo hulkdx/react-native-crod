@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { ScrollView, StyleSheet,TextInput,TouchableOpacity,Image,Text,View,ListView} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import proposals from '../../data-manager/proposals'
-import {Actions} from 'react-native-router-flux';
+import {Actions, ActionConst} from 'react-native-router-flux';
 
 const voteNoSource = require("../../../img/dislike.png")
 const voteYesSource = require("../../../img/like.png")
@@ -77,7 +77,7 @@ class ProposalFeed extends Component {
     TODO: change the proposal object with proposal id
   */
   proposalClicked(proposal){
-    Actions.voting(proposal)
+    Actions.voting({type: ActionConst.REFRESH, proposal})
   }
 }
 
