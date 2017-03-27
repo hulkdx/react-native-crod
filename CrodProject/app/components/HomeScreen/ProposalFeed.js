@@ -77,7 +77,6 @@ class ProposalFeed extends Component {
     TODO: change the proposal object with proposal id
   */
   proposalClicked(proposal){
-    console.log(proposal);
     Actions.voting(proposal)
   }
 }

@@ -6,7 +6,6 @@ const backgroundImage = require("../../../img/backgroundvotingup.jpg")
 class Header extends Component {
 
   render() {
-    console.log(this.props);
     return (
       <Image source={backgroundImage} style={styles.container}>
         <Text style={{marginLeft: 10,fontSize: 15, fontWeight:'bold'}}>
