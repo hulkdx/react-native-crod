@@ -13,12 +13,24 @@ const TabIcon = ({ selected, source }) => {
   );
 }
 
+// define this based on the styles/dimensions you use
+const getSceneStyle = (props, computedProps) => {
+  const style = {
+    flex: 1,
+  };
+  if (computedProps.isActive) {
+    style.marginBottom = computedProps.hideTabBar ? 0 : 50;
+  }
+  return style;
+};
+
+
 class CrodProject extends Component {
 
   render() {
     return (
-      <Router>
-        <Scene key='root'>
+      <Router createReducer={reducerCreate}  getSceneStyle={getSceneStyle}>
+        <Scene key='root' hideNavBar hideTabBar>
           <Scene key="footerTab"
                  tabs={true}
                  hideNavBar
