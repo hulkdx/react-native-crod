@@ -1,28 +1,53 @@
 'use strict'
 import React, { Component } from 'react';
-import {StyleSheet,Text, Image,View} from 'react-native';
+import {StyleSheet,Text,Image,View,ListView} from 'react-native';
+import articleData from '../../data-manager/articles'
 
-const backgroundImage = require("../../../img/backgroundvotingup.jpg")
+const dividerImage = require("../../../img/dividerblue.jpg")
 
 class Articles extends Component {
+  constructor() {
+    super();
+    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+    this.state = {
+      dataSource: ds.cloneWithRows(articleData),
+    };
+  }
 
   render() {
     return (
       <View style={styles.container}>
-        <Text >
-          Articles
-        </Text>
-
+        <ListView
+        dataSource={this.state.dataSource}
+        renderRow={(article) => {return this._renderArticleRow(article)} }
+        />
       </View>
-
     )
   }
 
+  _renderArticleRow(article){
+    return(
+      <View style={styles.articleTitleContainer}>
+        <Text style={styles.articleTitleText}>
+          {article.title}
+        </Text>
+        <Image style={{height: 2}} source={dividerImage}/>
+      </View>
+    )
+  }
 }
 
 const styles = StyleSheet.create({
   container:{
     flex: 1,
+  },
+  articleTitleContainer:{
+    alignItems:'center',
+  },
+  articleTitleText:{
+    paddingTop: 20,
+    paddingBottom: 20,
+    fontSize: 20
   }
 });
 
