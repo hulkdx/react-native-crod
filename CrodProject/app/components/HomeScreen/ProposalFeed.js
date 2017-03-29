@@ -61,8 +61,8 @@ class ProposalFeed extends Component {
       {
         isProfileScreen &&
         <View style={styles.votesContainer}>
-          <Image style={styles.votes} source={voteYesSource}/>
-          <Image style={styles.votes} source={voteNoSource}/>
+          <Image style={styles.votesImage} source={voteYesSource}/>
+          <Image style={styles.votesImage} source={voteNoSource}/>
         </View>
       }
       </TouchableOpacity>
@@ -89,19 +89,21 @@ const styles = StyleSheet.create({
   },
   rowProposalRoot:{
     flexDirection: 'row',
-    marginTop: 5,
-    marginBottom: 5,
-    padding: 20,
     alignItems: 'center'
   },
   title: {
     fontSize: 15,
   },
   titleRoot: {
-    flex: 4,
+    padding: 20,
+    flex: 5,
     alignItems:'center'
   },
   deadline: {
+    fontSize: 10,
+    flex:1,
+    paddingTop: 20,
+    paddingBottom: 20,
   },
   angleRightRoot: {
     paddingLeft: 5,
@@ -115,11 +117,15 @@ const styles = StyleSheet.create({
   votesContainer: {
     flex: 1,
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
   },
-  votes:{
+  votesImage:{
+    flex:1,
+    width: null, height: null,
     resizeMode: 'contain',
-    marginRight: 10,
+    paddingTop: 20,
+    paddingBottom: 20,
+    marginRight: 5
   },
 });
 
