@@ -110,9 +110,8 @@ class VotingAnimation extends Component {
 
 const votingHeight = WindowHeight / 14
 const middleButtonBigger = 15
-const middleButtonWidth  = WindowWidth / 7;
 const middleButtonHeight = votingHeight +middleButtonBigger;
-const middleButtonLeft = (WindowWidth / 2) - (middleButtonWidth/2)
+const middleButtonLeft = (WindowWidth / 2) - (middleButtonHeight/2)
 
 const styles = StyleSheet.create({
   votingBar:{
@@ -128,7 +127,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     left:middleButtonLeft,
     top:-middleButtonBigger/2,
-    width: middleButtonWidth,
+    width: middleButtonHeight,
     height: middleButtonHeight,
   },
   middleImage:{
