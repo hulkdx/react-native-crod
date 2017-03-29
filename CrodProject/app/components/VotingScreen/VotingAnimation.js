@@ -108,14 +108,15 @@ class VotingAnimation extends Component {
 
 }
 
+const votingHeight = WindowHeight / 14
 const middleButtonBigger = 15
 const middleButtonWidth  = WindowWidth / 7;
-const middleButtonHeight = WindowHeight*1/13*5/6 +middleButtonBigger;
+const middleButtonHeight = votingHeight +middleButtonBigger;
 const middleButtonLeft = (WindowWidth / 2) - (middleButtonWidth/2)
 
 const styles = StyleSheet.create({
   votingBar:{
-    flex:1,
+    height: votingHeight,
     flexDirection: 'row',
   },
   votingBarRed:{

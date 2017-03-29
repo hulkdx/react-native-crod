@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
     width: null, height: null,
   },
   tabContainer:{
-    flex: 2,
+    height: Dimensions.get('window').height / 14,
     backgroundColor: 'white'
   },
   bodyContainer:{
