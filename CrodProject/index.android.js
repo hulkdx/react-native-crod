@@ -29,7 +29,7 @@ class CrodProject extends Component {
 
   render() {
     return (
-      <Router createReducer={reducerCreate}  getSceneStyle={getSceneStyle}>
+      <Router  getSceneStyle={getSceneStyle}>
         <Scene key='root' hideNavBar hideTabBar>
           <Scene key="footerTab"
                  tabs={true}
