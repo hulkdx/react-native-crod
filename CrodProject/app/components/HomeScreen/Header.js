@@ -19,7 +19,7 @@ class Header extends Component {
     {/*The id of the category received as a prop from the HomeScreen.js
        to then be passed as a prop to the HomeScreen/CategoryHeader.js*/}
         <CategoryHeader categoryId={this.props.categoryId} />
-        <TouchableOpacity disabled={this.state.isTabClosed} onPress={()=>this._dropdownOpen()}
+        <TouchableOpacity disabled={this.state.isTabClosed} onPress={this._dropdownOpen}
           style={styles.topBarRoot}>
           <View style={styles.titleProposalRoot}>
             <Text style={this.state.isTabClosed ? styles.textProposalOpen : styles.textProposalClosed}>choose your proposal</Text>
@@ -33,7 +33,7 @@ class Header extends Component {
     )
   }
 
-  _dropdownOpen(){
+  _dropdownOpen = () => {
     this.setState({
       viewsTab:
       <View style={[styles.expandTab]}>
@@ -61,7 +61,7 @@ class Header extends Component {
         <View style={styles.divider} />
 
         <TouchableOpacity style={{alignItems:'center'}}
-        onPress={()=>this._dropdownClose()}>
+        onPress={this._dropdownClose}>
           <Text>done</Text>
         </TouchableOpacity>
         <View style={styles.divider} />
@@ -71,7 +71,7 @@ class Header extends Component {
     });
   }
 
-  _dropdownClose(){
+  _dropdownClose = () => {
     this.setState((state) => ({viewsTab: [], isTabClosed: false}))
   }
 
@@ -79,7 +79,7 @@ class Header extends Component {
     var rows = [];
     for (let i=0; i<categories.length; i++){
       rows.push(
-        <TouchableOpacity key = {i} onPress={()=>this._onClickCategoryImage(i)} style={styles.categoryDropDown}>
+        <TouchableOpacity key = {i} onPress={this._onClickCategoryImage.bind(this, i)} style={styles.categoryDropDown}>
             <Image source={categories[i].image} style={styles.categoryDropDownImage}/>
         </TouchableOpacity>
       )
@@ -91,7 +91,7 @@ class Header extends Component {
     )
   }
 
-  _onClickCategoryImage(id){
+  _onClickCategoryImage = (id) => {
     console.log("test");
   }
 

@@ -58,7 +58,7 @@ class Disscussion extends Component {
             <Text style={styles.commentText}>
               {disscussion.comment}
             </Text>
-            <TouchableOpacity style={styles.replyTextContainer} onPress={()=>this.replyClicked()}>
+            <TouchableOpacity style={styles.replyTextContainer} onPress={this.replyClicked}>
               <Text style={styles.replyText}>reply</Text>
               <Icon name="angle-down" style={styles.arrowIcon} />
             </TouchableOpacity>
@@ -67,11 +67,11 @@ class Disscussion extends Component {
           <View>
           </View>
           <View style={styles.votesContainer}>
-            <TouchableOpacity style={styles.votesImageContainer} onPress={()=>this.votedClicked(true)}>
+            <TouchableOpacity style={styles.votesImageContainer} onPress={this.votedClicked.bind(this,true)}>
               <Image style={styles.votesImage} source={voteYesSource}/>
               <Text style={styles.voteYesText}>{disscussion.upvoted}</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.votesImageContainer} onPress={()=>this.votedClicked(false)}>
+            <TouchableOpacity style={styles.votesImageContainer} onPress={this.votedClicked.bind(this,false)}>
               <Image style={styles.votesImage} source={voteNoSource}/>
               <Text style={styles.voteNoText}>{disscussion.downvoted}</Text>
             </TouchableOpacity>
@@ -87,11 +87,11 @@ class Disscussion extends Component {
   /*
     @param vote: {bolean} true: voted yes, false: voted no
   */
-  votedClicked(vote){
+  votedClicked = (vote) =>{
 
   }
 
-  replyClicked(){
+  replyClicked = () => {
   }
 
   shareClicked = () => {

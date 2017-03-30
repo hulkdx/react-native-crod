@@ -23,7 +23,7 @@ class CategoryMenu extends Component {
     var rows = [];
     for (let i=0; i<categories.length; i++){
       rows.push(
-        <TouchableOpacity key = {i} onPress={()=>this._onClickCategoryImage(i)} style={styles.categoryDropDown}>
+        <TouchableOpacity key = {i} onPress={this._onClickCategoryImage.bind(this,i)} style={styles.categoryDropDown}>
             <Image source={categories[i].image} style={styles.categoriesLeftSide}/>
               <View style={{backgroundColor:"white", height:10}} />
         </TouchableOpacity>
@@ -37,8 +37,7 @@ class CategoryMenu extends Component {
       </View>
     )
   }
-  _onClickCategoryImage(id){
-
+  _onClickCategoryImage = (id) => {
     //When clicked the id of the category icon is passed as a prop to the HomeScreen through Actions.refresh.
     Actions.refresh({key: 'home', categoryId: id})
   }

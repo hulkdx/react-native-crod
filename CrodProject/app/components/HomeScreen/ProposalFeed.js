@@ -46,7 +46,7 @@ class ProposalFeed extends Component {
     return(
       <View>
 
-      <TouchableOpacity style={styles.rowProposalRoot} onPress={()=>this.proposalClicked(proposal)}>
+      <TouchableOpacity style={styles.rowProposalRoot} onPress={this.proposalClicked.bind(this,proposal)}>
       <View style={styles.titleRoot}>
         <Text style={styles.title}>
           {proposal.title}
@@ -76,7 +76,7 @@ class ProposalFeed extends Component {
     @param proposal: the proposal elements from /data-manager/proposal.js
     TODO: change the proposal object with proposal id
   */
-  proposalClicked(proposal){
+  proposalClicked = (proposal) => {
     Actions.voting({type: ActionConst.REFRESH, proposalId: proposal.id})
   }
 }
