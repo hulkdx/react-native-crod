@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {StyleSheet,TextInput,TouchableOpacity,Image,Text,View,ListView} from 'react-native';
+import {StyleSheet,TextInput,TouchableOpacity,Image,Text,View,ListView,ViewContainer} from 'react-native';
 import notifications from '../../data-manager/notifications'
 const dividerImage = require("../../../img/dividerblue.jpg")
 
@@ -16,12 +16,14 @@ class NotificationBody extends Component {
   render() {
     return (
       <View style={styles.proposalFeed}>
+      <View style={styles.topBar}>
 
+      </View>
       <ListView
+      style={styles.notificationBar}
       dataSource={this.state.dataSource}
       renderRow={(notification) => {return this._renderProposalRow(notification)} }
       />
-
       </View>
     )
   }
@@ -39,18 +41,21 @@ class NotificationBody extends Component {
 
       <TouchableOpacity style={styles.notification}>
         <View style={styles.leftPart}>
-        <Image source={notification.profileImage}/>
+        <Image style={styles.notificationImage} source={notification.profileImage}/>
         </View>
 
         <View style={styles.rightPart}>
 
-        <Text> {notification.fullName} commented on your post</Text>
-        <Text> {notification.minAgo} minutes ago</Text>
+        <Text style={styles.name_message}>
+        <Text style={styles.name}> {notification.fullName} </Text>
+        <Text style={styles.message}>{notification.message} </Text>
+        </Text>
+        <Text style={styles.timeSent}> {notification.minAgo} minutes ago</Text>
 
         </View>
 
       </TouchableOpacity>
-      <Image style={{height: 2}} source={dividerImage}/>
+      <Image style={styles.notificationDivider} source={dividerImage}/>
       </View>
     )
   }
@@ -66,22 +71,57 @@ class NotificationBody extends Component {
 }
 
 const styles = StyleSheet.create({
+  proposalFeed:{
+    flexDirection: 'column',
+    flex:1
+
+  },
+  topBar:{
+    backgroundColor: '#1fbff1',
+    height: 70
+
+  },
+  notificationBar:{
+
+  },
   notification:{
     flexDirection: 'row',
     flex:1,
     alignItems: 'center',
-    backgroundColor: '#fffcf7'
+    backgroundColor: '#fffcf7',
+    paddingLeft: 15,
+    paddingTop: 20,
+    paddingBottom: 20,
+
   },
   leftPart:{
     flex:1,
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+
   },
   rightPart:{
     flex: 5,
-
     alignItems: 'flex-start',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    paddingLeft: 10,
+    paddingRight: 5
+  },
+  notificationImage:{
+     resizeMode: 'center',
+     height: 60,
+  },
+  notificationDivider:{
+    tintColor: '#1fbff1',
+    height: 2,
+  },
+  timeSent:{
+    fontStyle: 'italic',
+    fontSize: 15
+  },
+  name_message: {
+    fontSize: 17,
+
   }
 
 });
