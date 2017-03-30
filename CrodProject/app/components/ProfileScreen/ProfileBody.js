@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {StyleSheet,TextInput,TouchableOpacity,Image,Text,View,ListView} from 'react-native';
 import Tabs from 'react-native-tabs';
 import ProposalFeed from '../HomeScreen/ProposalFeed.js'
+
 const backgroundImage = require("../../../img/backgroundblu.jpg")
 
 class ProfileBody extends Component {
