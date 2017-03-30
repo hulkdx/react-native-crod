@@ -34,7 +34,13 @@ class Disscussion extends Component {
         dataSource={this.state.dataSource}
         renderRow={(disscussion) => {return this._renderDisscussionRow(disscussion)} }
         />
-        <TextInput placeholder="your opinion counts" />
+
+        <View style={styles.shareContainer}>
+        <TextInput style={styles.shareText} placeholder="your opinion counts" />
+        <TouchableOpacity style={styles.shareButton} onPress={this.shareClicked}>
+          <Text>Share</Text>
+        </TouchableOpacity>
+        </View>
       </View>
 
     )
@@ -87,6 +93,11 @@ class Disscussion extends Component {
 
   replyClicked(){
   }
+
+  shareClicked = () => {
+    // TODO: If its not empty
+    // TODO: Add Comments
+  }
 }
 
 const styles = StyleSheet.create({
@@ -95,7 +106,16 @@ const styles = StyleSheet.create({
   },
   disscussionContainer: {
     flex:1,
-
+  },
+  shareContainer:{
+    flexDirection: 'row',
+  },
+  shareText: {
+    flex:1,
+  },
+  shareButton:{
+    borderWidth: 1,
+    justifyContent: 'center'
   },
   disscussionContainerTop:{
     flex:1,
