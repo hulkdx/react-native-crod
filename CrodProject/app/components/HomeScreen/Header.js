@@ -51,6 +51,8 @@ class Header extends Component {
 
         {this._renderSteps(4)}
 
+        {this._renderSteps(5)}
+
         <TouchableOpacity style={{alignItems:'center'}}
         onPress={this.onClickDone}>
           <Text>done</Text>
@@ -83,19 +85,22 @@ class Header extends Component {
   }
 /* render each steps of create proposal
    @param id: id of the step */
-  _renderSteps(id, text){
+  _renderSteps(id){
     var views = [];
 
     switch (id) {
+      // Categories
       case 1:
         views = this._renderCategoryImages()
         break;
+      // Title
       case 2:
         views =
         <TextInput
           style={styles.textInput}
           placeholder="create a title"/>
         break;
+      // Description
       case 3:
         views =
         <TextInput
@@ -104,7 +109,13 @@ class Header extends Component {
           numberOfLines={5}
           placeholder="create a description"/>
         break;
+      // Deadline
       case 4:
+        views =
+        <Text style={{alignSelf:'center'}}>Deadline</Text>
+        break;
+      // Attachment
+      case 5:
         views =
         <Text style={{alignSelf:'center'}}>attachment</Text>
         break;
@@ -127,6 +138,9 @@ class Header extends Component {
 
 /* on done clicked (When create proposal is open), set isTabOpen */
   onClickDone = () => {
+    // TODO: Check for it TextInput is empty
+    if (!true) return;
+    // TODO: Add new proposal
     this.setState((state) => ({ isTabOpen: false}))
   }
 }
