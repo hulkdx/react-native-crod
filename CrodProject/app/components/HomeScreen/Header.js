@@ -1,111 +1,133 @@
 // TODO: TWO ANDROID ELEMENTS
 import React, { Component } from 'react';
-import {StyleSheet,TextInput,TouchableOpacity,Image,Text,View,Dimensions} from 'react-native';
-import categories from '../../data-manager/categories.js'
+import {StyleSheet,TextInput,TouchableOpacity,Image,Text,View,Dimensions,ScrollView} from 'react-native';
+import { RadioButtons } from 'react-native-radio-buttons'
 import CategoryHeader from './CategoryHeader.js'
+
+import categories from '../../data-manager/categories.js'
 
 var width = Dimensions.get('window').width; //full width
 var height = Dimensions.get('window').height; //full height
 
 class Header extends Component {
   state = {
-    viewsTab: [],
-    isTabClosed: false,
+    isTabOpen: false,
   };
 
   render() {
+    /* createProposalViews: is the view of the proposal create when its clicked */
+    const createProposalViews = this._renderCreateProposalViews();
+
     return (
       <View>
-    {/*The id of the category received as a prop from the HomeScreen.js
-       to then be passed as a prop to the HomeScreen/CategoryHeader.js*/}
+      <ScrollView>
+{/* CategoryHeader: Shows the Category (image) when SideMenu clicked
+  The id of the category received as a prop from the HomeScreen.js
+  to then be passed as a prop to the HomeScreen/CategoryHeader.js */}
         <CategoryHeader categoryId={this.props.categoryId} />
-        <TouchableOpacity disabled={this.state.isTabClosed} onPress={this._dropdownOpen}
-          style={styles.topBarRoot}>
+{/* Create Proposal Button */}
+        <TouchableOpacity disabled={this.state.isTabOpen}
+                          onPress={this.onClickCreateProposal}
+                          style={styles.topBarRoot}>
           <View style={styles.titleProposalRoot}>
-            <Text style={this.state.isTabClosed ? styles.textProposalOpen : styles.textProposalClosed}>choose your proposal</Text>
+            <Text style={this.state.isTabOpen ? styles.textProposalOpen : styles.textProposalClosed}>choose your proposal</Text>
           </View>
-
         </TouchableOpacity>
-
-        { this.state.viewsTab }
-
+{/* Create Proposal Button When its clicked it shows these views */}
+        { this.state.isTabOpen && createProposalViews }
+      </ScrollView>
       </View>
     )
   }
-
-  _dropdownOpen = () => {
-    this.setState({
-      viewsTab:
+/* Views of the create proposal */
+  _renderCreateProposalViews(){
+    return(
       <View style={[styles.expandTab]}>
+        {this._renderSteps(1)}
 
-        {this._renderSteps(1,'category')}
-        {this._renderCategoryImages()}
+        {this._renderSteps(2)}
+
+        {this._renderSteps(3)}
+
+        {this._renderSteps(4)}
+
+        <TouchableOpacity style={{alignItems:'center'}}
+        onPress={this.onClickDone}>
+          <Text>done</Text>
+        </TouchableOpacity>
         <View style={styles.divider} />
+    </View>
+    )
+  }
+/* Render category Images (When create proposal is open) is uses RadioButtons
+   (from: https://github.com/ArnaudRinquin/react-native-radio-buttons)*/
+  _renderCategoryImages(){
+    return (
+      <RadioButtons
+        options={ categories }
+        renderOption={ this.renderCategoryOption }
+        renderContainer={ RadioButtons.renderHorizontalContainer }
+      />
+    )
+  }
+/* Render RadioButtons Options that is image of the categories */
+  renderCategoryOption(option, selected, onSelect, index){
+    const style = selected ? styles.categorySelectedImage : styles.categoryImage;
 
-        {this._renderSteps(2,'')}
+    return (
+      <TouchableOpacity onPress={onSelect} style={styles.categoryDropDown} key={index}>
+      <Image key={index} source={categories[index].image}
+             style={style}/>
+      </TouchableOpacity>
+    );
+  }
+/* render each steps of create proposal
+   @param id: id of the step */
+  _renderSteps(id, text){
+    var views = [];
+
+    switch (id) {
+      case 1:
+        views = this._renderCategoryImages()
+        break;
+      case 2:
+        views =
         <TextInput
           style={styles.textInput}
           placeholder="create a title"/>
-        <View style={styles.divider} />
-
-        {this._renderSteps(3,'')}
+        break;
+      case 3:
+        views =
         <TextInput
           style={styles.textInput}
           multiline={true}
           numberOfLines={5}
           placeholder="create a description"/>
-        <View style={styles.divider} />
-
-        {this._renderSteps(4,'')}
+        break;
+      case 4:
+        views =
         <Text style={{alignSelf:'center'}}>attachment</Text>
-        <View style={styles.divider} />
-
-        <TouchableOpacity style={{alignItems:'center'}}
-        onPress={this._dropdownClose}>
-          <Text>done</Text>
-        </TouchableOpacity>
+        break;
+    }
+    return(
+      <View>
+        <Text style={styles.stepsText}>step {id}:</Text>
+        {views}
         <View style={styles.divider} />
       </View>
-      ,
-      isTabClosed: true
+    )
+  }
+
+/* When create proposal clicked, set isTabOpen */
+  onClickCreateProposal = () => {
+    this.setState({
+      isTabOpen: true
     });
   }
 
-  _dropdownClose = () => {
-    this.setState((state) => ({viewsTab: [], isTabClosed: false}))
-  }
-
-  _renderCategoryImages(){
-    var rows = [];
-    for (let i=0; i<categories.length; i++){
-      rows.push(
-        <TouchableOpacity key = {i} onPress={this._onClickCategoryImage.bind(this, i)} style={styles.categoryDropDown}>
-            <Image source={categories[i].image} style={styles.categoryDropDownImage}/>
-        </TouchableOpacity>
-      )
-    }
-    return (
-      <View style={{flexDirection: 'row'}}>
-        {rows}
-      </View>
-    )
-  }
-
-  _onClickCategoryImage = (id) => {
-    console.log("test");
-  }
-
-  _renderSteps(id, text){
-    return(
-      <View style={[styles.stepsRoot]}>
-        <Text style={(text!='') ? {position:'absolute',marginLeft:20} : {marginLeft:20}}>step {id}:</Text>
-        {(text!='') &&
-        <View style={{flex:1, alignItems:'center'}}>
-          <Text >{text}</Text>
-        </View>
-        }
-      </View>
-    )
+/* on done clicked (When create proposal is open), set isTabOpen */
+  onClickDone = () => {
+    this.setState((state) => ({ isTabOpen: false}))
   }
 }
 
@@ -127,13 +149,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     backgroundColor: '#b6b6b6',
   },
-  publishImage: {
-    flex: 1,
-    width: null,
-    height: null,
-    resizeMode: 'contain',
-    marginRight: 5,
-  },
   textProposalClosed: {
 
   },
@@ -143,16 +158,24 @@ const styles = StyleSheet.create({
   stepsRoot: {
     flexDirection: 'row',
   },
+  stepsText: {
+    marginLeft: 10,
+    marginTop: 5,
+  },
   categoryDropDown:{
     flex:1,
     alignItems: 'center',
     justifyContent: 'center',
   },
-  categoryDropDownImage:{
+  categoryImage:{
+    resizeMode: 'center',
+  },
+  categorySelectedImage: {
+    tintColor: 'blue',
     resizeMode: 'center',
   },
   divider: {
-    height: 10,
+    height: 5,
     backgroundColor: '#b6b6b6'
   }
 });
