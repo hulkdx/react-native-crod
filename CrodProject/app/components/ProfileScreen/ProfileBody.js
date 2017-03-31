@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import {StyleSheet,TextInput,TouchableOpacity,Image,Text,View,ListView} from 'react-native';
 import Tabs from 'react-native-tabs';
-import ProposalFeed from '../HomeScreen/ProposalFeed.js'
+import ProfileHistory from '../ProfileScreen/ProfileHistory.js'
+import ProfileProposal from '../ProfileScreen/ProfileProposal.js'
+
 const backgroundImage = require("../../../img/backgroundblu.jpg")
 
 class ProfileBody extends Component {
@@ -12,7 +14,6 @@ class ProfileBody extends Component {
     }
 
   render() {
-    console.log(this.state.page == 'proposal');
     return (
       <View style={styles.container}>
         <Tabs selected={this.state.page}
@@ -23,12 +24,26 @@ class ProfileBody extends Component {
             <Text name="history" style={styles.textStyle}
                   selectedIconStyle={styles.tabsSelectedTwo}>History votes </Text>
         </Tabs>
-        <ProposalFeed isProfile={true}/>
+        {this._renderTabContent()}
 
       </View>
 
 
     )
+  }
+
+  _renderTabContent(){
+    console.log("_renderTabContent");
+    switch (this.state.page) {
+      case 'proposal':
+        return(
+          <ProfileProposal  />
+        )
+      case 'history':
+      return(
+        <ProfileHistory />
+      );
+    }
   }
 
   onSelectedTab(el){

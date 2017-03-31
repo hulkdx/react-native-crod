@@ -1,30 +1,30 @@
 import React, { Component } from 'react';
 import { ScrollView, StyleSheet,TextInput,TouchableOpacity,Image,Text,View,ListView} from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import proposals from '../../data-manager/proposals'
-import ProposalTitle from './ProposalTitle'
 import {Actions, ActionConst} from 'react-native-router-flux';
+import ProposalTitle from '../HomeScreen/ProposalTitle'
+import ProposalVotes from './ProposalVotes'
 
 const voteNoSource = require("../../../img/dislike.png")
 const voteYesSource = require("../../../img/like.png")
 const dividerImage = require("../../../img/dividerblue.jpg")
 
+import userProposal from '../../data-manager/userHistory'
 
-class ProposalFeed extends Component {
-  constructor() {
-    super();
+
+class ProfileHistory extends Component {
+
+
+  constructor(props) {
+    super(props);
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
-      dataSource: ds.cloneWithRows(proposals),
+      dataSource: ds.cloneWithRows(userProposal),
     };
   }
 
   render() {
     return (
       <View style={styles.proposalFeed}>
-        <View style={styles.angleRightRoot}>
-          <Icon name={!this.props.changeArrow ? 'angle-right' : 'angle-left'} style={styles.angleRight} size={40} />
-        </View>
       <ListView
       dataSource={this.state.dataSource}
       renderRow={(proposal) => {return this._renderProposalRow(proposal)} }
@@ -38,6 +38,7 @@ class ProposalFeed extends Component {
     Rendering Each row of ListView
     TODO: get the user info and show history for only that user.
     @param proposal: the proposal elements from /data-manager/proposal.js
+    @param isProfileScreen: {boolean} representing if this is the profile screen to show.
   */
   _renderProposalRow(proposal){
     // console.log(proposal);
@@ -45,11 +46,10 @@ class ProposalFeed extends Component {
       <View>
 
       <TouchableOpacity style={styles.rowProposalRoot} onPress={this.proposalClicked.bind(this,proposal)}>
+
       <ProposalTitle text={proposal.title} />
 
-        <Text style={styles.deadline}>
-            {proposal.deadline}
-        </Text>
+      <ProposalVotes />
 
       </TouchableOpacity>
       <Image style={{height: 2}} source={dividerImage}/>
@@ -77,22 +77,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center'
   },
-  deadline: {
-    fontSize: 10,
-    flex:1,
-    paddingTop: 20,
-    paddingBottom: 20,
-  },
-  angleRightRoot: {
-    paddingLeft: 5,
-    paddingRight: 5,
-    backgroundColor: '#1fbff1',
-    justifyContent: 'center'
-  },
-  angleRight: {
-    color: 'white',
-  },
 });
 
 
-module.exports = ProposalFeed
+module.exports = ProfileHistory
