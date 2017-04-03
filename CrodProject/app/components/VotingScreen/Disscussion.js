@@ -32,7 +32,7 @@ class Disscussion extends Component {
       <View style={styles.container}>
         <ListView style={{flex:1,}}
         dataSource={this.state.dataSource}
-        renderRow={(disscussion) => {return this._renderDisscussionRow(disscussion)} }
+        renderRow={(disscussion, sectionID, rowID) => {return this._renderDisscussionRow(disscussion, sectionID, rowID)} }
         />
 
         <View style={styles.shareContainer}>
@@ -46,7 +46,8 @@ class Disscussion extends Component {
     )
   }
 
-  _renderDisscussionRow(disscussion){
+  _renderDisscussionRow(disscussion, sectionID, rowID){
+    console.log(disscussion);
     return(
       <View style={styles.disscussionContainer}>
         <View style={styles.disscussionContainerTop}>
@@ -58,7 +59,7 @@ class Disscussion extends Component {
             <Text style={styles.commentText}>
               {disscussion.comment}
             </Text>
-            <TouchableOpacity style={styles.replyTextContainer} onPress={this.replyClicked}>
+            <TouchableOpacity style={styles.replyTextContainer} onPress={this.replyClicked.bind(this, rowID)}>
               <Text style={styles.replyText}>reply</Text>
               <Icon name="angle-down" style={styles.arrowIcon} />
             </TouchableOpacity>
@@ -75,9 +76,17 @@ class Disscussion extends Component {
               <Image style={styles.votesImage} source={voteNoSource}/>
               <Text style={styles.voteNoText}>{disscussion.downvoted}</Text>
             </TouchableOpacity>
-
           </View>
         </View>
+
+        {disscussion.selected &&
+          <View style={styles.shareContainer}>
+          <TextInput style={styles.shareText} placeholder="Leave a reply" />
+          <TouchableOpacity style={styles.shareButton} onPress={this.repliedToComment}>
+            <Text>Reply</Text>
+          </TouchableOpacity>
+          </View>
+        }
         <Image style={{height: 2}} source={dividerImage}/>
 
       </View>
@@ -86,12 +95,46 @@ class Disscussion extends Component {
 
   /*
     @param vote: {bolean} true: voted yes, false: voted no
+    TODO: Add votes
   */
   votedClicked = (vote) =>{
 
   }
 
-  replyClicked = () => {
+  /*
+    When reply button clicked, it shows the TextInput on
+    _renderDisscussionRow; it clones the database and put selected to true on
+    rowID
+    TODO: it is a bad practice to clone the rows for checking selected reply,
+    check other solutions.
+  */
+  replyClicked = (rowID) => {
+    var clone = disscussion.map((disscussion, i) => {
+      return {
+        ...disscussion,
+        selected: i == rowID ? true : false
+      }
+    });
+    this.setState({dataSource: this.state.dataSource.cloneWithRows(clone)})
+  }
+
+  /*
+    When the user replied to a comment
+    TODO: check for validation
+    TODO: Add reply
+    TODO: it is a bad practice to clone the rows for checking selected reply,
+    check other solutions.
+  */
+  repliedToComment = () => {
+    // Hide reply
+    var clone = disscussion.map((disscussion, i) => {
+      return {
+        ...disscussion,
+        selected: false
+      }
+    });
+    this.setState({dataSource: this.state.dataSource.cloneWithRows(clone)})
+
   }
 
   shareClicked = () => {
