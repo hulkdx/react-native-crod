@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Dimensions, ScrollView, PropTypes, StyleSheet,TextInput,TouchableOpacity,Image,Text,View,ListView} from 'react-native';
+import { ScrollView, PropTypes, StyleSheet,TextInput,TouchableOpacity,Image,Text,View,ListView} from 'react-native';
 import CategoryMenu from "./CategoryMenu.js"
 import ProposalFeed from "./ProposalFeed.js"
 
