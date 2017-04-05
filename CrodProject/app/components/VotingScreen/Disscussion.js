@@ -2,7 +2,9 @@
 
 import React, { Component } from 'react';
 import {StyleSheet,Text, Image,View,ListView,TouchableOpacity,TextInput} from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome'
+import Icon from 'react-native-vector-icons/FontAwesome';
+import ProposalVotes from '../ProfileScreen/ProposalVotes';
+
 
 const disscussion = [
   {profileImage: require("../../../img/profile-icon.png"),
@@ -65,18 +67,8 @@ class Disscussion extends Component {
             </TouchableOpacity>
           </View>
 
-          <View>
-          </View>
-          <View style={styles.votesContainer}>
-            <TouchableOpacity style={styles.votesImageContainer} onPress={this.votedClicked.bind(this,true)}>
-              <Image style={styles.votesImage} source={voteYesSource}/>
-              <Text style={styles.voteYesText}>{disscussion.upvoted}</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.votesImageContainer} onPress={this.votedClicked.bind(this,false)}>
-              <Image style={styles.votesImage} source={voteNoSource}/>
-              <Text style={styles.voteNoText}>{disscussion.downvoted}</Text>
-            </TouchableOpacity>
-          </View>
+          <ProposalVotes isClickable={true} votedYes={disscussion.upvoted} votedNo={disscussion.downvoted} votedClicked={this.votedClicked}/>
+
         </View>
 
         {disscussion.selected &&

@@ -26,9 +26,8 @@ class ProfileHeader extends Component {
 const styles = StyleSheet.create({
   container:{
     flex:3.5,
-    padding: 10,
     width: null, height: null,
-    paddingBottom: 20,
+    paddingBottom: 5,
     paddingTop: 20,
     justifyContent: 'flex-end'
   },

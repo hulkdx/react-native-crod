@@ -38,10 +38,9 @@ class ProfileProposal extends Component {
     Rendering Each row of ListView
     TODO: get the user info and show history for only that user.
     @param proposal: the proposal elements from /data-manager/proposal.js
-    @param isProfileScreen: {boolean} representing if this is the profile screen to show.
   */
   _renderProposalRow(proposal){
-    // console.log(proposal);
+    console.log(proposal);
     return(
       <View>
 
@@ -49,7 +48,7 @@ class ProfileProposal extends Component {
 
       <ProposalTitle text={proposal.title} />
 
-      <ProposalVotes />
+      <ProposalVotes votedYes={proposal.voteYes} votedNo={proposal.voteNo}/>
 
       </TouchableOpacity>
       <Image style={{height: 2}} source={dividerImage}/>

@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-import {StyleSheet,TextInput,TouchableOpacity,Image,Text,View,ListView} from 'react-native';
+import {StyleSheet,TextInput,TouchableOpacity,Image,Text,View,ListView,Dimensions} from 'react-native';
 import Tabs from 'react-native-tabs';
 import ProfileHistory from '../ProfileScreen/ProfileHistory.js'
 import ProfileProposal from '../ProfileScreen/ProfileProposal.js'
 
 const backgroundImage = require("../../../img/backgroundblu.jpg")
+
+Dimensions.get('window').height / 14;
 
 class ProfileBody extends Component {
 
@@ -16,15 +18,13 @@ class ProfileBody extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Tabs selected={this.state.page}
-            onSelect={el=>this.onSelectedTab(el)}
-            style={styles.tabs}>
-            <Text name="proposal" style={styles.textStyle}
-                  selectedIconStyle={styles.tabsSelectedOne}>Your Proposals</Text>
-            <Text name="history" style={styles.textStyle}
-                  selectedIconStyle={styles.tabsSelectedTwo}>History votes </Text>
-        </Tabs>
-        {this._renderTabContent()}
+        <View style={styles.tabContainer}>
+          {this._renderTabs()}
+        </View>
+        {/* Articles / Comments / Statistics body Section */}
+        <View style={styles.bodyContainer}>
+          {this._renderTabContent()}
+        </View>
 
       </View>
 
@@ -33,7 +33,6 @@ class ProfileBody extends Component {
   }
 
   _renderTabContent(){
-    console.log("_renderTabContent");
     switch (this.state.page) {
       case 'proposal':
         return(
@@ -50,18 +49,33 @@ class ProfileBody extends Component {
     this.setState({page:el.props.name})
   }
 
+  _renderTabs(){
+    return (
+      <Tabs selected={this.state.page}
+          onSelect={el=>this.onSelectedTab(el)}>
+          <Text name="proposal" style={styles.textStyle}
+                selectedIconStyle={styles.tabsSelectedOne}>Your Proposal</Text>
+          <Text name="history" style={styles.textStyle}
+                selectedIconStyle={styles.tabsSelectedTwo}>History of votes</Text>
+      </Tabs>
+    )
+  }
 }
 
 const styles = StyleSheet.create({
   container: {
     flex:8,
-    width: null, height: null
   },
   textStyle:{
     fontSize: 18.5
   },
-  tabs: {
-    position:'relative',
+  tabContainer:{
+    height: Dimensions.get('window').height / 14,
+    backgroundColor: 'white'
+  },
+  bodyContainer:{
+    flex: 10,
+    backgroundColor: 'white',
   },
   tabsSelectedOne: {
     borderBottomWidth: 2,
