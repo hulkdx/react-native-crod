@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ScrollView, StyleSheet,TextInput,TouchableOpacity,Image,Text,View,ListView} from 'react-native';
+import { ScrollView, StyleSheet,TextInput,TouchableOpacity,Image,Text,View,ListView,ViewContainer} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import proposals from '../../data-manager/proposals'
 import ProposalTitle from './ProposalTitle'
@@ -7,10 +7,17 @@ import {Actions, ActionConst} from 'react-native-router-flux';
 
 const voteNoSource = require("../../../img/dislike.png")
 const voteYesSource = require("../../../img/like.png")
-const dividerImage = require("../../../img/dividerblue.jpg")
+
+var moment = require('moment')
+
+//var deadline = moment([2007, 0, 29]);
+//var b = moment([2007, 0, 2]);
+//var diff = a.diff(b, 'days')
+
 
 
 class ProposalFeed extends Component {
+
   constructor() {
     super();
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
@@ -20,6 +27,7 @@ class ProposalFeed extends Component {
   }
 
   render() {
+    //console.log(diff)
     return (
       <View style={styles.proposalFeed}>
         <View style={styles.angleRightRoot}>
@@ -44,15 +52,38 @@ class ProposalFeed extends Component {
     return(
       <View>
 
-      <TouchableOpacity style={styles.rowProposalRoot} onPress={this.proposalClicked.bind(this,proposal)}>
-      <ProposalTitle text={proposal.title} />
 
-        <Text style={styles.deadline}>
-            {proposal.deadline}
+      <TouchableOpacity style={styles.rowProposalRoot} onPress={()=>this.proposalClicked(proposal)}>
+      <View style={styles.titleRoot}>
+
+        <Text style={styles.title}>
+          {proposal.title}
         </Text>
+        <View style={styles.emoji}>
+        <Text> <Icon name='hand-o-up' size={22} color="#7FE57F"/> </Text>
+        <Text> <Icon name='hand-o-down' size={22} color="#ff7f7f"/> </Text>
+        </View>
+
+      </View>
+
+
+      <View style={styles.deadlineRoot}>
+
+      <View style={styles.daysLeft}>
+        <Text style={{color: 'white', textAlign: 'center',}}> 12 days </Text>
+      </View>
+
+      <View style={styles.day}>
+        <Text style={{color: '#2575BB', fontSize: 25, textAlign: 'center',}}> {proposal.day} </Text>
+      </View>
+
+      <View style={styles.date}>
+        <Text style={{color: 'white', textAlign: 'center',}}> {proposal.monthText} {proposal.date} </Text>
+      </View>
+
+      </View>
 
       </TouchableOpacity>
-      <Image style={{height: 2}} source={dividerImage}/>
       </View>
     )
   }
@@ -71,26 +102,82 @@ const styles = StyleSheet.create({
   proposalFeed:{
     flexDirection: 'row',
     flex:8,
-    backgroundColor: 'white'
+    backgroundColor: '#E9EBEE'
   },
   rowProposalRoot:{
     flexDirection: 'row',
-    alignItems: 'center'
+    marginTop: 5,
+    marginBottom: 5,
+    padding: 20,
+    alignItems: 'center',
+    justifyContent: 'flex-start'
+
   },
-  deadline: {
-    fontSize: 10,
+  titleRoot: {
+    flex: 3,
+    marginTop: -15,
+    backgroundColor: 'white',
+    paddingTop: 30,
+    paddingBottom: 30,
+    paddingLeft: 15,
+    paddingRight: 15,
+    borderColor: '#2575BB',
+    borderWidth: 0.2,
+    borderRadius: 10,
+  },
+  title: {
+    fontSize: 20,
+    fontFamily: 'sans-serif',
+  },
+  emoji: {
+    flexDirection: 'row',
+
+  },
+  calendarIcon: {
+    tintColor: '#2575BB'
+  },
+  daysLeft:{
     flex:1,
-    paddingTop: 20,
-    paddingBottom: 20,
+    justifyContent: 'center',
+    padding: 5,
+    backgroundColor: 'red',
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
   },
+  day:{
+    flex:1,
+    justifyContent: 'center',
+    padding: 5
+  },
+  date:{
+    flex:1,
+    justifyContent: 'center',
+    // padding: 15,
+    backgroundColor: '#2575BB',
+    borderColor: '#2575BB',
+    borderBottomWidth: 0.2,
+    borderBottomLeftRadius: 10,
+    borderBottomRightRadius: 10,
+  },
+  deadlineRoot: {
+    flex: 1,  
+    marginTop: 15,
+    marginBottom: 15,
+    marginLeft: 9,
+    backgroundColor: 'white',
+    borderColor: '#2575BB',
+    borderWidth: 0.2,
+    borderRadius: 10,
+  },
+
   angleRightRoot: {
     paddingLeft: 5,
     paddingRight: 5,
-    backgroundColor: '#1fbff1',
+    backgroundColor: '#E9EBEE',
     justifyContent: 'center'
   },
   angleRight: {
-    color: 'white',
+    color: '#2575BB',
   },
 });
 

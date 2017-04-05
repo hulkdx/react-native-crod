@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
   categoryHeader:{
 
     flexDirection: 'row',
-    backgroundColor: '#1fbff1',
+    backgroundColor: '#2575BB',
    justifyContent: 'center',
 
   }
