@@ -18,3 +18,6 @@ npm install react-native-side-menu --save
 
 https://github.com/aksonov/react-native-tabs
 npm i react-native-tabs  --save
+
+https://github.com/ArnaudRinquin/react-native-radio-buttons
+npm i -S react-native-radio-buttons
