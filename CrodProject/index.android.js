@@ -9,7 +9,7 @@ import {Router, Scene, Actions, ActionConst} from 'react-native-router-flux';
 
 const TabIcon = ({ selected, source }) => {
   return (
-    <Image style={[styles.icon, {tintColor: selected ? '#1fbff1' :'white'}]} source={source}/>
+    <Image style={[styles.icon, {tintColor: selected ? '#2575bb' :'white'}]} source={source}/>
   );
 }
 

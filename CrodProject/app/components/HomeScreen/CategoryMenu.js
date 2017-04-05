@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
 
   },
   categoriesLeftSide:{
-
+    tintColor: '#2575BB',
     resizeMode: 'center',
 
   }
