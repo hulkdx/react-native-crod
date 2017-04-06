@@ -3,11 +3,14 @@ import { ScrollView, StyleSheet,TextInput,TouchableOpacity,Image,Text,View,ListV
 import Icon from 'react-native-vector-icons/FontAwesome';
 import proposals from '../../data-manager/proposals'
 import ProposalTitle from './ProposalTitle'
+//import categories from '../../data-manager/categories'
 import {Actions, ActionConst} from 'react-native-router-flux';
 
 const voteNoSource = require("../../../img/dislike.png")
 const voteYesSource = require("../../../img/like.png")
-const topBackgroundCalendar = require("../../../img/top_calendar.png")
+const discussionIcon = require("../../../img/discussion-icon1.png")
+const articlesIcon = require("../../../img/articles-icon1.png")
+const categoriesIcon = require("../../../img/categories/science_small.png")
 var moment = require('moment')
 
 //var deadline = moment([2007, 0, 29]);
@@ -55,13 +58,23 @@ class ProposalFeed extends Component {
 
       <TouchableOpacity style={styles.rowProposalRoot} onPress={()=>this.proposalClicked(proposal)}>
       <View style={styles.titleRoot}>
-
+        <View style={styles.proposalHeader} >
+         <Image style={styles.profilePic} source={proposal.profilePic} />
+         <Text style={styles.fullName}> {proposal.fullName} </Text>
+        </View>
         <Text style={styles.title}>
           {proposal.title}
         </Text>
         <View style={styles.emoji}>
-        <Text> <Icon name='hand-o-up' size={22} color="#7FE57F"/> </Text>
-        <Text> <Icon name='hand-o-down' size={22} color="#ff7f7f"/> </Text>
+        <View style={styles.leftEmoji}>
+        <Image source={articlesIcon} />
+        <Image source={discussionIcon} />
+        </View>
+        <View style={styles.rightEmoji}>
+        <Text> <Icon name='hand-o-up' size={25} color="#7FE57F"/> </Text>
+        <Text> <Icon name='hand-o-down' size={25} color="#C00"/> </Text>
+        <Image style={styles.categoryIcon} source={categoriesIcon} />
+        </View>
         </View>
 
       </View>
@@ -117,20 +130,55 @@ const styles = StyleSheet.create({
     flex: 3,
     //marginTop: -15,
     backgroundColor: 'white',
-    paddingTop: 30,
-    paddingBottom: 30,
+    paddingTop: 10,
+    paddingBottom: 10,
     paddingLeft: 15,
     paddingRight: 15,
     borderColor: '#2575BB',
     borderWidth: 0.2,
     borderRadius: 10,
+    alignItems: 'flex-start'
+
   },
+  proposalHeader: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center'
+  },
+  profilePic: {
+    flex: 1,
+    // height: null, width: null,
+    resizeMode: 'center',
+    height: 45,
+
+  },
+  fullName: {
+    flex: 3,
+    fontSize: 18
+},
   title: {
-    fontSize: 20,
+    // height: 100,
+    fontSize: 22,
+    marginTop: 15,
+    marginBottom: 30,
     fontFamily: 'sans-serif',
   },
   emoji: {
+    // height: 30,
     flexDirection: 'row',
+    justifyContent: 'flex-start'
+  },
+  leftEmoji: {
+    flexDirection: 'row',
+    flex: 1,
+
+  },
+  rightEmoji: {
+    flexDirection: 'row',
+    flex: 2,
+  },
+  categoryIcon: {
+    tintColor: '#88B3D9'
 
   },
   daysLeft:{
