@@ -7,7 +7,7 @@ import {Actions, ActionConst} from 'react-native-router-flux';
 
 const voteNoSource = require("../../../img/dislike.png")
 const voteYesSource = require("../../../img/like.png")
-
+const topBackgroundCalendar = require("../../../img/top_calendar.png")
 var moment = require('moment')
 
 //var deadline = moment([2007, 0, 29]);
@@ -70,11 +70,11 @@ class ProposalFeed extends Component {
       <View style={styles.deadlineRoot}>
 
       <View style={styles.daysLeft}>
-        <Text style={{color: 'white', textAlign: 'center',}}> 12 days </Text>
+        <Text style={{color: 'white', textAlign: 'center'}}> 12 days </Text>
       </View>
 
       <View style={styles.day}>
-        <Text style={{color: '#2575BB', fontSize: 25, textAlign: 'center',}}> {proposal.day} </Text>
+        <Text style={{color: '#88B3D9', fontSize: 25, textAlign: 'center',}}> {proposal.day} </Text>
       </View>
 
       <View style={styles.date}>
@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
   },
   titleRoot: {
     flex: 3,
-    marginTop: -15,
+    //marginTop: -15,
     backgroundColor: 'white',
     paddingTop: 30,
     paddingBottom: 30,
@@ -133,41 +133,32 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
 
   },
-  calendarIcon: {
-    tintColor: '#2575BB'
-  },
   daysLeft:{
     flex:1,
     justifyContent: 'center',
-    padding: 5,
-    backgroundColor: 'red',
+    backgroundColor: '#C00',
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
   },
   day:{
     flex:1,
     justifyContent: 'center',
-    padding: 5
+    backgroundColor: 'white',
   },
   date:{
     flex:1,
     justifyContent: 'center',
-    // padding: 15,
-    backgroundColor: '#2575BB',
-    borderColor: '#2575BB',
+    backgroundColor: '#88B3D9',
+    borderColor: '#88B3D9',
     borderBottomWidth: 0.2,
     borderBottomLeftRadius: 10,
     borderBottomRightRadius: 10,
   },
   deadlineRoot: {
-    flex: 1,  
+    flex: 1,
     marginTop: 15,
     marginBottom: 15,
     marginLeft: 9,
-    backgroundColor: 'white',
-    borderColor: '#2575BB',
-    borderWidth: 0.2,
-    borderRadius: 10,
   },
 
   angleRightRoot: {
@@ -177,7 +168,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   angleRight: {
-    color: '#2575BB',
+    color: '#88B3D9',
   },
 });
 

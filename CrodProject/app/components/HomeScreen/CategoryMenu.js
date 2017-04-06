@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
 
   },
   categoriesLeftSide:{
-    tintColor: '#2575BB',
+    tintColor: '#88B3D9',
     resizeMode: 'center',
 
   }
