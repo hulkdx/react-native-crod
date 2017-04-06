@@ -11,6 +11,7 @@ const voteYesSource = require("../../../img/like.png")
 const discussionIcon = require("../../../img/discussion-icon1.png")
 const articlesIcon = require("../../../img/articles-icon1.png")
 const categoriesIcon = require("../../../img/categories/science_small.png")
+const categoryBackground = require("../../../img/category-background.png")
 var moment = require('moment')
 
 //var deadline = moment([2007, 0, 29]);
@@ -62,18 +63,20 @@ class ProposalFeed extends Component {
          <Image style={styles.profilePic} source={proposal.profilePic} />
          <Text style={styles.fullName}> {proposal.fullName} </Text>
         </View>
+        <Image source={categoryBackground} style={styles.categoryBackground}>
         <Text style={styles.title}>
           {proposal.title}
         </Text>
+        </Image>
         <View style={styles.emoji}>
         <View style={styles.leftEmoji}>
         <Image source={articlesIcon} />
         <Image source={discussionIcon} />
         </View>
         <View style={styles.rightEmoji}>
-        <Text> <Icon name='hand-o-up' size={25} color="#7FE57F"/> </Text>
-        <Text> <Icon name='hand-o-down' size={25} color="#C00"/> </Text>
-        <Image style={styles.categoryIcon} source={categoriesIcon} />
+        <Icon name='hand-o-up' size={25} color="#7FE57F" />
+        <Icon name='hand-o-down' size={25} color="#C00"/>
+
         </View>
         </View>
 
@@ -112,6 +115,11 @@ class ProposalFeed extends Component {
 }
 
 const styles = StyleSheet.create({
+  categoryBackground: {
+    resizeMode: 'cover',
+    marginTop: 15,
+    marginBottom: 30,
+  },
   proposalFeed:{
     flexDirection: 'row',
     flex:8,
@@ -159,9 +167,8 @@ const styles = StyleSheet.create({
   title: {
     // height: 100,
     fontSize: 22,
-    marginTop: 15,
-    marginBottom: 30,
     fontFamily: 'sans-serif',
+
   },
   emoji: {
     // height: 30,
@@ -175,6 +182,8 @@ const styles = StyleSheet.create({
   },
   rightEmoji: {
     flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
     flex: 2,
   },
   categoryIcon: {
