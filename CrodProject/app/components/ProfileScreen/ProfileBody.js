@@ -81,7 +81,6 @@ const styles = StyleSheet.create({
   },
   bodyContainer:{
     flex: 10,
-    backgroundColor: 'white',
   },
   textStyle:{
     fontSize: 23,

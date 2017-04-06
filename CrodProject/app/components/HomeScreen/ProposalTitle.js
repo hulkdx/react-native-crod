@@ -8,15 +8,27 @@ class ProposalTitle extends Component {
     return (
       <View style={styles.titleRoot}>
 
+      <View style={styles.titleContainer}>
         <Text style={styles.title}>
           {this.props.text}
         </Text>
+      </View>
 
-        <View style={styles.emoji}>
-        <Text> <Icon name='hand-o-up' size={22} color="#7FE57F"/> </Text>
-        <Text> <Icon name='hand-o-down' size={22} color="#ff7f7f"/> </Text>
+        <View style={styles.bottomContainer}>
+
+        {this.props.emoji &&
+        <View>
+          <Icon name='hand-o-up' size={22} color="#7FE57F"/>
+          <Icon name='hand-o-down' size={22} color="#ff7f7f"/>
         </View>
+        }
 
+        {
+          this.props.category &&
+          <Image style={styles.category} source={this.props.category}/>
+        }
+
+        </View>
       </View>
     )
   }
@@ -25,24 +37,36 @@ class ProposalTitle extends Component {
 const styles = StyleSheet.create({
   titleRoot: {
     flex: 3,
-    marginTop: -15,
+    // marginTop: -15, THIS SHOULD BE REMOVED
     backgroundColor: 'white',
-    paddingTop: 30,
-    paddingBottom: 30,
-    paddingLeft: 15,
-    paddingRight: 15,
+    // paddingTop: 30,
+    // paddingBottom: 30,
+    // paddingLeft: 15,
+    // paddingRight: 15,
     borderColor: '#2575BB',
     borderWidth: 0.2,
     borderRadius: 10,
   },
+  titleContainer:{
+    flex:1,
+    justifyContent:'center'
+  },
   title: {
+    textAlign: 'center',
     fontSize: 20,
     fontFamily: 'sans-serif',
   },
-  emoji: {
+  bottomContainer: {
     flexDirection: 'row',
-
+    height: 20,
+    marginLeft: 5,
+    marginBottom: 5,
   },
+  category: {
+    width: 20,
+    height: null,
+    resizeMode: 'contain',
+  }
 });
 
 module.exports = ProposalTitle
