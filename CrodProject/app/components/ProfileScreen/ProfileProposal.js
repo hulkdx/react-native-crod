@@ -2,11 +2,13 @@ import React, { Component } from 'react';
 import { ScrollView, StyleSheet,TextInput,TouchableOpacity,Image,Text,View,ListView} from 'react-native';
 import {Actions, ActionConst} from 'react-native-router-flux';
 import ProposalTitle from '../HomeScreen/ProposalTitle'
-import ProposalVotes from './ProposalVotes'
+import ProposalDeadline from '../HomeScreen/ProposalDeadline'
 
 const voteNoSource = require("../../../img/dislike.png")
 const voteYesSource = require("../../../img/like.png")
 const dividerImage = require("../../../img/dividerblue.jpg")
+// TODO: change this from category data-manager
+const categorySource = require("../../../img/categories/science.png")
 
 import userProposal from '../../data-manager/userProposal'
 
@@ -24,7 +26,7 @@ class ProfileProposal extends Component {
 
   render() {
     return (
-      <View style={styles.proposalFeed}>
+      <View style={styles.container}>
       <ListView
       dataSource={this.state.dataSource}
       renderRow={(proposal) => {return this._renderProposalRow(proposal)} }
@@ -42,16 +44,15 @@ class ProfileProposal extends Component {
   _renderProposalRow(proposal){
     console.log(proposal);
     return(
-      <View>
+      <View style={{flex:1}}>
 
       <TouchableOpacity style={styles.rowProposalRoot} onPress={this.proposalClicked.bind(this,proposal)}>
 
-      <ProposalTitle text={proposal.title} />
+      <ProposalTitle text={proposal.title} category={categorySource} />
 
-      <ProposalVotes votedYes={proposal.voteYes} votedNo={proposal.voteNo}/>
+      <ProposalDeadline day={proposal.day} date={proposal.date} month={proposal.monthText} />
 
       </TouchableOpacity>
-      <Image style={{height: 2}} source={dividerImage}/>
       </View>
     )
   }
@@ -67,14 +68,18 @@ class ProfileProposal extends Component {
 }
 
 const styles = StyleSheet.create({
-  proposalFeed:{
-    flexDirection: 'row',
+  container:{
     flex:8,
-    backgroundColor: 'white'
+    backgroundColor: '#E9EBEE',
+    // borderWidth: 2,
   },
   rowProposalRoot:{
+    flex:1,
     flexDirection: 'row',
-    alignItems: 'center'
+    margin: 5,
+    // padding: 20,
+    // alignItems: 'center',
+    // justifyContent: 'flex-start',
   },
 });
 

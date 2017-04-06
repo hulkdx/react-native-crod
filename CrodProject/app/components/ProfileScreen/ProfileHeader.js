@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {StyleSheet,TouchableOpacity,Image,Text,Dimensions} from 'react-native';
+import {View, StyleSheet,TouchableOpacity,Image,Text,Dimensions} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome'
 
 
@@ -9,14 +9,14 @@ class ProfileHeader extends Component {
 
   render() {
     return (
-      <Image style={styles.container} source={profileImage}>
+      <View style={styles.container} >
         <TouchableOpacity style={styles.pencilContainer}>
         <Icon name="pencil" style={styles.pencilIcon} />
         </TouchableOpacity>
         <Text style={[styles.profileText, styles.profileName]}>Michele Paoletti</Text>
         <Text style={styles.profileText}>23 years old</Text>
         <Text style={styles.profileText}>from Milan</Text>
-      </Image>
+      </View>
 
 
     )
@@ -26,10 +26,12 @@ class ProfileHeader extends Component {
 const styles = StyleSheet.create({
   container:{
     flex:3.5,
-    width: null, height: null,
+    // width: null, height: null,
+    // resizeMode: 'stretch',
     paddingBottom: 5,
     paddingTop: 20,
-    justifyContent: 'flex-end'
+    justifyContent: 'flex-end',
+    backgroundColor: 'blue'
   },
   profileText:{
     alignSelf: 'center',
