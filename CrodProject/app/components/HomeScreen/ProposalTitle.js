@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import {StyleSheet,TextInput,TouchableOpacity,Image,Text,View} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
+const attachmentSource = require("../../../img/attachment.png")
+const commentSource = require("../../../img/comment.png")
+
 class ProposalTitle extends Component {
 
   render() {
@@ -27,6 +30,13 @@ class ProposalTitle extends Component {
           this.props.category &&
           <Image style={styles.category} source={this.props.category}/>
         }
+
+        <View style={styles.extraIcons}>
+          <Text>6</Text>
+          <Image style={styles.category} source={attachmentSource}/>
+          <Text>3</Text>
+          <Image style={styles.category} source={commentSource}/>
+        </View>
 
         </View>
       </View>
@@ -66,6 +76,12 @@ const styles = StyleSheet.create({
     width: 20,
     height: null,
     resizeMode: 'contain',
+  },
+  extraIcons: {
+    flex: 1,
+    marginRight: 5,
+    flexDirection: 'row',
+    justifyContent: 'flex-end'
   }
 });
 
