@@ -52,11 +52,14 @@ class ProfileBody extends Component {
   _renderTabs(){
     return (
       <Tabs selected={this.state.page}
-          onSelect={el=>this.onSelectedTab(el)}>
+          onSelect={el=>this.onSelectedTab(el)}
+          style={styles.tabs}>
           <Text name="proposal" style={styles.textStyle}
-                selectedIconStyle={styles.tabsSelectedOne}>Your Proposal</Text>
+                selectedStyle={styles.tabsSelected}
+                selectedIconStyle={styles.tabsIconSelected} >Your Proposal</Text>
           <Text name="history" style={styles.textStyle}
-                selectedIconStyle={styles.tabsSelectedTwo}>History of votes</Text>
+                selectedStyle={styles.tabsSelected}
+                selectedIconStyle={styles.tabsIconSelected} >History of votes</Text>
       </Tabs>
     )
   }
@@ -73,20 +76,23 @@ const styles = StyleSheet.create({
     height: Dimensions.get('window').height / 14,
     backgroundColor: 'white'
   },
+  tabs:{
+    backgroundColor: 'rgba(26, 105, 178, 0.49)',
+  },
   bodyContainer:{
     flex: 10,
     backgroundColor: 'white',
   },
-  tabsSelectedOne: {
-    borderBottomWidth: 2,
-    borderRightWidth: 2,
-    borderColor: '#1fbff1'
+  textStyle:{
+    fontSize: 23,
+    color: '#D2EEFF'
   },
-  tabsSelectedTwo: {
-    borderBottomWidth: 2,
-    borderLeftWidth: 2,
-    borderColor: '#1fbff1'
+  tabsSelected: {
+    color: 'rgba(37, 36, 51, 0.3)',
   },
+  tabsIconSelected: {
+    backgroundColor: '#E9EBEE'
+  }
 
 });
 

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { ScrollView, StyleSheet,TextInput,TouchableOpacity,Image,Text,View,ListView} from 'react-native';
 import {Actions, ActionConst} from 'react-native-router-flux';
 import ProposalTitle from '../HomeScreen/ProposalTitle'
-import ProposalVotes from './ProposalVotes'
+import ProposalDeadline from '../HomeScreen/ProposalDeadline'
 
 const voteNoSource = require("../../../img/dislike.png")
 const voteYesSource = require("../../../img/like.png")
@@ -48,10 +48,9 @@ class ProfileProposal extends Component {
 
       <ProposalTitle text={proposal.title} />
 
-      <ProposalVotes votedYes={proposal.voteYes} votedNo={proposal.voteNo}/>
+      <ProposalDeadline day={proposal.day} date={proposal.date} month={proposal.monthText} />
 
       </TouchableOpacity>
-      <Image style={{height: 2}} source={dividerImage}/>
       </View>
     )
   }
@@ -70,11 +69,15 @@ const styles = StyleSheet.create({
   proposalFeed:{
     flexDirection: 'row',
     flex:8,
-    backgroundColor: 'white'
+    backgroundColor: '#E9EBEE'
   },
   rowProposalRoot:{
     flexDirection: 'row',
-    alignItems: 'center'
+    marginTop: 5,
+    marginBottom: 5,
+    padding: 20,
+    alignItems: 'center',
+    justifyContent: 'flex-start'
   },
 });
 
