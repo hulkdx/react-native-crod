@@ -60,28 +60,22 @@ class Body extends Component {
 
   _renderTabs(){
     // without statistics
-    if (_.isUndefined(this.props.voted)) return (
+    return (
       <Tabs selected={this.state.page}
           onSelect={el=>this.onSelectedTab(el)}
           style={styles.tabs}>
           <Text name="articles" style={styles.textStyle}
-                selectedIconStyle={styles.tabsSelectedOne}>Articles</Text>
+                selectedStyle={styles.tabsSelected}
+                selectedIconStyle={styles.tabsIconSelected}>Articles</Text>
           <Text name="disscussion" style={styles.textStyle}
-                selectedIconStyle={styles.tabsSelectedTwo}>Disscussion</Text>
-      </Tabs>
-    )
+                selectedStyle={styles.tabsSelected}
+                selectedIconStyle={styles.tabsIconSelected}>Disscussion</Text>
 
-    // with statistics
-    return(
-      <Tabs selected={this.state.page}
-          onSelect={el=>this.onSelectedTab(el)}
-          style={styles.tabs}>
-          <Text name="articles" style={styles.textStyle}
-                selectedIconStyle={styles.tabsSelectedOne}>Articles</Text>
-          <Text name="disscussion" style={styles.textStyle}
-                selectedIconStyle={styles.tabsSelectedMiddle}>Disscussion</Text>
+          {!_.isUndefined(this.props.voted) &&
           <Text name="statistics" style={styles.textStyle}
-                selectedIconStyle={styles.tabsSelectedTwo}>Statistics</Text>
+                selectedStyle={styles.tabsSelected}
+                selectedIconStyle={styles.tabsIconSelected}>Statistics</Text>
+          }
       </Tabs>
     )
   }
@@ -97,33 +91,27 @@ const styles = StyleSheet.create({
     flex: 5,
     width: null, height: null,
   },
-  tabContainer:{
-    height: Dimensions.get('window').height / 14,
-    backgroundColor: 'white'
-  },
   bodyContainer:{
     flex: 10,
     backgroundColor: 'white',
   },
-  tabsSelectedOne: {
-    borderBottomWidth: 2,
-    borderRightWidth: 2,
-    borderColor: '#1fbff1'
+  tabContainer:{
+    height: Dimensions.get('window').height / 14,
+    backgroundColor: 'white'
   },
-  tabsSelectedTwo: {
-    borderBottomWidth: 2,
-    borderLeftWidth: 2,
-    borderColor: '#1fbff1'
-  },
-  tabsSelectedMiddle: {
-    borderRightWidth: 2,
-    borderBottomWidth: 2,
-    borderLeftWidth: 2,
-    borderColor: '#1fbff1'
+  tabs:{
+    backgroundColor: 'rgba(26, 105, 178, 0.49)',
   },
   textStyle:{
-    fontSize: 18.5
+    fontSize: 23,
+    color: '#D2EEFF'
   },
+  tabsSelected: {
+    color: 'rgba(37, 36, 51, 0.3)',
+  },
+  tabsIconSelected: {
+    backgroundColor: '#E9EBEE'
+  }
 });
 
 module.exports = Body
