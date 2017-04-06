@@ -24,8 +24,8 @@ const proposals = [
      day: 'Mon',
      year: 2017,
      category: 'financial',
-     articles: 7,
-     discussions: 10,
+     articles: 10,
+     discussions: 57,
      voteYes: 10,
      voteNo: 5
    },
@@ -39,8 +39,8 @@ const proposals = [
      day: 'Sat',
      year: 2017,
      category: 'science',
-     articles: 7,
-     discussions: 10,
+     articles: 3,
+     discussions: 6,
      voteYes: 10,
      voteNo: 5
    },
@@ -54,8 +54,8 @@ const proposals = [
      day: 'Thu',
      year: 2017,
      category: 'politics',
-     articles: 7,
-     discussions: 10,
+     articles: 8,
+     discussions: 41,
      voteYes: 10,
      voteNo: 5
    },
@@ -69,8 +69,8 @@ const proposals = [
      day: 'Fri',
      year: 2017,
      category: 'science',
-     articles: 7,
-     discussions: 10,
+     articles: 16,
+     discussions: 88,
      voteYes: 10,
      voteNo: 5
    },

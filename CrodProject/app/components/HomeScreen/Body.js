@@ -33,7 +33,7 @@ class Body extends Component {
 const styles = StyleSheet.create({
   leftMenu:{
     flex:8,
-    backgroundColor: "#2575BB"
+    backgroundColor: "#ebd5c2"
   }
 });
 

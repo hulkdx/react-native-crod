@@ -8,9 +8,8 @@ import {Actions, ActionConst} from 'react-native-router-flux';
 
 const voteNoSource = require("../../../img/dislike.png")
 const voteYesSource = require("../../../img/like.png")
-const discussionIcon = require("../../../img/discussion-icon1.png")
-const articlesIcon = require("../../../img/articles-icon1.png")
-const categoriesIcon = require("../../../img/categories/science_small.png")
+const discussionIcon = require("../../../img/discussion-icon.png")
+const articlesIcon = require("../../../img/article-icon.png")
 const categoryBackground = require("../../../img/category-background.png")
 var moment = require('moment')
 
@@ -70,12 +69,13 @@ class ProposalFeed extends Component {
         </Image>
         <View style={styles.emoji}>
         <View style={styles.leftEmoji}>
-        <Image source={articlesIcon} />
-        <Image source={discussionIcon} />
+        <Text style={styles.proposalStatistics}><Image source={articlesIcon} /> {proposal.articles} </Text>
+        <Text style={styles.proposalStatistics}><Image source={discussionIcon} /> {proposal.discussions}  </Text>
         </View>
         <View style={styles.rightEmoji}>
-        <Icon name='hand-o-up' size={25} color="#7FE57F" />
-        <Icon name='hand-o-down' size={25} color="#C00"/>
+        <Text style={{color: '#32CD32'}}>61%</Text>
+        <Icon name='hand-o-up' size={25} color="#32CD32" />
+        <Text style={{color: '#C00'}}><Icon name='hand-o-down' size={25} color="#C00"/> 39% </Text>
 
         </View>
         </View>
@@ -178,7 +178,9 @@ const styles = StyleSheet.create({
   leftEmoji: {
     flexDirection: 'row',
     flex: 1,
-
+  },
+  proposalStatistics: {
+    fontFamily: 'sans-serif'
   },
   rightEmoji: {
     flexDirection: 'row',
