@@ -1,7 +1,7 @@
 'use strict'
 
 import React, { Component } from 'react';
-import {StyleSheet,Text, Image,View,ListView,TouchableOpacity,TextInput} from 'react-native';
+import {StyleSheet,Text, Image,View,ListView,TouchableOpacity,Dimensions,TextInput} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import ProposalVotes from '../ProfileScreen/ProposalVotes';
 
@@ -16,7 +16,6 @@ const disscussion = [
    upvoted: 5,
    downvoted: 1,},
 ]
-const dividerImage = require("../../../img/dividerblue.jpg")
 const voteNoSource = require("../../../img/dislike.png")
 const voteYesSource = require("../../../img/like.png")
 
@@ -51,24 +50,33 @@ class Disscussion extends Component {
   _renderDisscussionRow(disscussion, sectionID, rowID){
     console.log(disscussion);
     return(
-      <View style={styles.disscussionContainer}>
+      <View style={[styles.disscussionContainer]}>
         <View style={styles.disscussionContainerTop}>
         <View style={{flex:1,}}>
         <Image style={styles.profileImage} source={disscussion.profileImage}/>
         </View>
 
           <View style={styles.commentContainer}>
+
             <Text style={styles.commentText}>
               {disscussion.comment}
             </Text>
-            <TouchableOpacity style={styles.replyTextContainer} onPress={this.replyClicked.bind(this, rowID)}>
-              <Text style={styles.replyText}>reply</Text>
-              <Icon name="angle-down" style={styles.arrowIcon} />
-            </TouchableOpacity>
+
+            <View style={styles.bottomBarCommentContainer}>
+              <TouchableOpacity style={styles.replyTextContainer} onPress={this.replyClicked.bind(this, rowID)}>
+                <Text style={styles.replyText}>reply</Text>
+                <Icon name="angle-down" style={styles.arrowIcon} />
+              </TouchableOpacity>
+
+              <ProposalVotes isClickable={true}
+                             votedYes={disscussion.upvoted}
+                             style={{justifyContent:'flex-end'}}
+                             votedNo={disscussion.downvoted}
+                             votedClicked={this.votedClicked}/>
+
+            </View>
+
           </View>
-
-          <ProposalVotes isClickable={true} votedYes={disscussion.upvoted} votedNo={disscussion.downvoted} votedClicked={this.votedClicked}/>
-
         </View>
 
         {disscussion.selected &&
@@ -79,7 +87,6 @@ class Disscussion extends Component {
           </TouchableOpacity>
           </View>
         }
-        <Image style={{height: 2}} source={dividerImage}/>
 
       </View>
     )
@@ -138,9 +145,12 @@ class Disscussion extends Component {
 const styles = StyleSheet.create({
   container:{
     flex: 1,
+    backgroundColor: '#E9EBEE',
   },
   disscussionContainer: {
     flex:1,
+    marginTop: 8,
+    backgroundColor: 'white'
   },
   shareContainer:{
     flexDirection: 'row',
@@ -149,7 +159,6 @@ const styles = StyleSheet.create({
     flex:1,
   },
   shareButton:{
-    borderWidth: 1,
     justifyContent: 'center'
   },
   disscussionContainerTop:{
@@ -164,15 +173,20 @@ const styles = StyleSheet.create({
     width:null, height: null,
     resizeMode: 'contain',
     marginLeft: 10,
+    paddingBottom: 10,
   },
   commentContainer: {
-    flex:3,
+    flex:4,
     flexDirection: 'column',
     paddingTop: 20,
     paddingLeft: 10,
   },
   commentText: {
 
+  },
+  bottomBarCommentContainer : {
+    flexDirection: 'row',
+    marginTop: 3,
   },
   replyTextContainer: {
     flexDirection: 'row',

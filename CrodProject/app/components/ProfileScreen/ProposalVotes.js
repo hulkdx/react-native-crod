@@ -10,7 +10,7 @@ class ProposalVotes extends Component {
     var viewYes = [];
     if (this.props.isClickable) {
       return(
-      <View style={styles.votesContainer}>
+      <View style={[styles.votesContainer, this.props.style]} >
 
         <TouchableOpacity style={styles.votesImageContainer} onPress={this.props.votedClicked.bind(this,true)} >
           <Image style={styles.votesImage} source={voteYesSource}/>
@@ -40,17 +40,15 @@ class ProposalVotes extends Component {
 
 const styles = StyleSheet.create({
   votesContainer: {
-    flex: 1,
+    flex:1,
     flexDirection: 'row',
-    alignItems: 'center',
+    justifyContent: 'center',
   },
   votesImageContainer:{
-    flex:1,
     marginRight: 10,
   },
   votesImage:{
-    flex:1,
-    width: null, height: null,
+    width: 20, height: 20,
     resizeMode: 'contain',
 
   },

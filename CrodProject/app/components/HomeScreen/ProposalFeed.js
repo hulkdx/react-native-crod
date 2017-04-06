@@ -7,7 +7,7 @@ import {Actions, ActionConst} from 'react-native-router-flux';
 
 const voteNoSource = require("../../../img/dislike.png")
 const voteYesSource = require("../../../img/like.png")
-const topBackgroundCalendar = require("../../../img/top_calendar.png")
+// const topBackgroundCalendar = require("../../../img/top_calendar.png")
 var moment = require('moment')
 
 //var deadline = moment([2007, 0, 29]);

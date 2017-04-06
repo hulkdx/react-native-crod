@@ -72,6 +72,7 @@ const styles = StyleSheet.create({
     flex:8,
     backgroundColor: '#E9EBEE',
     // borderWidth: 2,
+    paddingTop: 5,
   },
   rowProposalRoot:{
     flex:1,

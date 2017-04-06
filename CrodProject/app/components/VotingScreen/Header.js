@@ -7,10 +7,10 @@ const backgroundImage = require("../../../img/backgroundvotingup.jpg")
 class Header extends Component {
 
   render() {
-  console.log(this.props.colorChange)
+  // console.log(this.props.colorChange)
     return (
       <Image style={styles.container} source={backgroundImage}>
-        <Text style={{marginLeft: 10,fontSize: 15, fontWeight:'bold'}}>
+        <Text style={styles.title}>
           {proposals[this.props.proposalId].title}
         </Text>
 
@@ -24,9 +24,15 @@ class Header extends Component {
 var height = Dimensions.get('window').height; //full height
 const styles = StyleSheet.create({
   container:{
-    width: null, height:height/7 ,
-    justifyContent: 'center'
-  }
+    width: null, height:height/4.2 ,
+     justifyContent: 'center'
+  },
+  title:{
+    marginLeft: 10,
+    marginTop: 40,
+    fontSize: 15,
+    fontWeight:'bold'
+  },
 });
 
 module.exports = Header

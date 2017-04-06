@@ -108,7 +108,7 @@ class VotingAnimation extends Component {
 
 }
 
-const votingHeight = WindowHeight / 14
+const votingHeight = WindowHeight / 19
 const middleButtonBigger = 15
 const middleButtonHeight = votingHeight +middleButtonBigger;
 const middleButtonLeft = (WindowWidth / 2) - (middleButtonHeight/2)
