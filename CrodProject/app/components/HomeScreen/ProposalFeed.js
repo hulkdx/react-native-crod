@@ -3,10 +3,17 @@ import { ScrollView, StyleSheet,TextInput,TouchableOpacity,Image,Text,View,ListV
 import Icon from 'react-native-vector-icons/FontAwesome';
 import proposals from '../../data-manager/proposals'
 import ProposalTitle from './ProposalTitle'
+//import categories from '../../data-manager/categories'
 import {Actions, ActionConst} from 'react-native-router-flux';
 
 const voteNoSource = require("../../../img/dislike.png")
 const voteYesSource = require("../../../img/like.png")
+<<<<<<< HEAD
+=======
+const discussionIcon = require("../../../img/discussion-icon.png")
+const articlesIcon = require("../../../img/article-icon.png")
+const categoryBackground = require("../../../img/category-background.png")
+>>>>>>> Home_Screen_Update
 var moment = require('moment')
 
 //var deadline = moment([2007, 0, 29]);
@@ -54,13 +61,26 @@ class ProposalFeed extends Component {
 
       <TouchableOpacity style={styles.rowProposalRoot} onPress={()=>this.proposalClicked(proposal)}>
       <View style={styles.titleRoot}>
-
+        <View style={styles.proposalHeader} >
+         <Image style={styles.profilePic} source={proposal.profilePic} />
+         <Text style={styles.fullName}> {proposal.fullName} </Text>
+        </View>
+        <Image source={categoryBackground} style={styles.categoryBackground}>
         <Text style={styles.title}>
           {proposal.title}
         </Text>
+        </Image>
         <View style={styles.emoji}>
-        <Text> <Icon name='hand-o-up' size={22} color="#7FE57F"/> </Text>
-        <Text> <Icon name='hand-o-down' size={22} color="#ff7f7f"/> </Text>
+        <View style={styles.leftEmoji}>
+        <Text style={styles.proposalStatistics}><Image source={articlesIcon} /> {proposal.articles} </Text>
+        <Text style={styles.proposalStatistics}><Image source={discussionIcon} /> {proposal.discussions}  </Text>
+        </View>
+        <View style={styles.rightEmoji}>
+        <Text style={{color: '#32CD32'}}>61%</Text>
+        <Icon name='hand-o-up' size={25} color="#32CD32" />
+        <Text style={{color: '#C00'}}><Icon name='hand-o-down' size={25} color="#C00"/> 39% </Text>
+
+        </View>
         </View>
 
       </View>
@@ -98,6 +118,11 @@ class ProposalFeed extends Component {
 }
 
 const styles = StyleSheet.create({
+  categoryBackground: {
+    resizeMode: 'cover',
+    marginTop: 15,
+    marginBottom: 30,
+  },
   proposalFeed:{
     flexDirection: 'row',
     flex:8,
@@ -116,20 +141,58 @@ const styles = StyleSheet.create({
     flex: 3,
     //marginTop: -15,
     backgroundColor: 'white',
-    paddingTop: 30,
-    paddingBottom: 30,
+    paddingTop: 10,
+    paddingBottom: 10,
     paddingLeft: 15,
     paddingRight: 15,
     borderColor: '#2575BB',
     borderWidth: 0.2,
     borderRadius: 10,
+    alignItems: 'flex-start'
+
   },
+  proposalHeader: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center'
+  },
+  profilePic: {
+    flex: 1,
+    // height: null, width: null,
+    resizeMode: 'center',
+    height: 45,
+
+  },
+  fullName: {
+    flex: 3,
+    fontSize: 18
+},
   title: {
-    fontSize: 20,
+    // height: 100,
+    fontSize: 22,
     fontFamily: 'sans-serif',
+
   },
   emoji: {
+    // height: 30,
     flexDirection: 'row',
+    justifyContent: 'flex-start'
+  },
+  leftEmoji: {
+    flexDirection: 'row',
+    flex: 1,
+  },
+  proposalStatistics: {
+    fontFamily: 'sans-serif'
+  },
+  rightEmoji: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    flex: 2,
+  },
+  categoryIcon: {
+    tintColor: '#88B3D9'
 
   },
   daysLeft:{

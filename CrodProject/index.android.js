@@ -9,7 +9,7 @@ import {Router, Scene, Actions, ActionConst} from 'react-native-router-flux';
 
 const TabIcon = ({ selected, source }) => {
   return (
-    <Image style={[styles.icon, {tintColor: selected ? '#000' :'white'}]} source={source}/>
+    <Image style={[styles.icon, {tintColor: selected ? '#ebd5c2' :'white'}]} source={source}/>
   );
 }
 
@@ -40,11 +40,11 @@ class CrodProject extends Component {
                         <Scene key='launcher' component={LauncherScreen} hideNavBar/>
                         </Scene>
                  <Scene key="homeTab" source={require('./img/home-icon.png')}
-                        icon={TabIcon} onPress={()=> {Actions.home({type: ActionConst.REFRESH})}} >
+                        icon={TabIcon} onPress={()=> {Actions.home({type: ActionConst.REFRESH})}} initial >
                         <Scene key='home' component={HomeScreen} hideNavBar/>
                  </Scene>
                  <Scene key="profileTab" source={require('./img/profile-icon.png')}
-                        icon={TabIcon} onPress={()=> {Actions.profile({type: ActionConst.REFRESH}) }} initial >
+                        icon={TabIcon} onPress={()=> {Actions.profile({type: ActionConst.REFRESH}) }}  >
                         <Scene key='profile' component={ProfileScreen} hideNavBar/>
                 </Scene>
                  <Scene key="notificationTab" source={require('./img/notification-icon.png')}
