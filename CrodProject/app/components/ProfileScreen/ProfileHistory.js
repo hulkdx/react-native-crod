@@ -7,6 +7,8 @@ import ProposalDeadline from '../HomeScreen/ProposalDeadline'
 const voteNoSource = require("../../../img/dislike.png")
 const voteYesSource = require("../../../img/like.png")
 const dividerImage = require("../../../img/dividerblue.jpg")
+// TODO: change this from category data-manager
+const categorySource = require("../../../img/categories/science.png")
 
 import userProposal from '../../data-manager/userHistory'
 
@@ -45,7 +47,7 @@ class ProfileHistory extends Component {
 
       <TouchableOpacity style={styles.rowProposalRoot} onPress={this.proposalClicked.bind(this,proposal)}>
 
-      <ProposalTitle text={proposal.title} />
+      <ProposalTitle text={proposal.title} category={categorySource} />
 
       <ProposalDeadline day={proposal.day} date={proposal.date} month={proposal.monthText} />
 
@@ -66,17 +68,18 @@ class ProfileHistory extends Component {
 
 const styles = StyleSheet.create({
   proposalFeed:{
-    flexDirection: 'row',
     flex:8,
-    backgroundColor: '#E9EBEE'
+    backgroundColor: '#E9EBEE',
+    // borderWidth: 2,
+    paddingTop: 5,
   },
   rowProposalRoot:{
+    flex:1,
     flexDirection: 'row',
-    marginTop: 5,
-    marginBottom: 5,
-    padding: 20,
-    alignItems: 'center',
-    justifyContent: 'flex-start'
+    margin: 5,
+    // padding: 20,
+    // alignItems: 'center',
+    // justifyContent: 'flex-start',
   },
 });
 

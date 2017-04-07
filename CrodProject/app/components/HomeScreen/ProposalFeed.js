@@ -8,12 +8,9 @@ import {Actions, ActionConst} from 'react-native-router-flux';
 
 const voteNoSource = require("../../../img/dislike.png")
 const voteYesSource = require("../../../img/like.png")
-<<<<<<< HEAD
-=======
 const discussionIcon = require("../../../img/discussion-icon.png")
 const articlesIcon = require("../../../img/article-icon.png")
 const categoryBackground = require("../../../img/category-background.png")
->>>>>>> Home_Screen_Update
 var moment = require('moment')
 
 //var deadline = moment([2007, 0, 29]);
@@ -70,18 +67,8 @@ class ProposalFeed extends Component {
           {proposal.title}
         </Text>
         </Image>
-        <View style={styles.emoji}>
-        <View style={styles.leftEmoji}>
-        <Text style={styles.proposalStatistics}><Image source={articlesIcon} /> {proposal.articles} </Text>
-        <Text style={styles.proposalStatistics}><Image source={discussionIcon} /> {proposal.discussions}  </Text>
-        </View>
-        <View style={styles.rightEmoji}>
-        <Text style={{color: '#32CD32'}}>61%</Text>
-        <Icon name='hand-o-up' size={25} color="#32CD32" />
-        <Text style={{color: '#C00'}}><Icon name='hand-o-down' size={25} color="#C00"/> 39% </Text>
 
-        </View>
-        </View>
+        
 
       </View>
 
@@ -135,7 +122,6 @@ const styles = StyleSheet.create({
     padding: 20,
     alignItems: 'center',
     justifyContent: 'flex-start'
-
   },
   titleRoot: {
     flex: 3,
