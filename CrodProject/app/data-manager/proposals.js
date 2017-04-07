@@ -11,8 +11,8 @@ const proposals = [
      category: 'social',
      articles: 7,
      discussions: 10,
-     voteYes: 10,
-     voteNo: 5
+     voteYes: 80,
+     voteNo: 20,
    },
    { id:1,
      profilePic: require("../../img/notification/man2.png"),
@@ -26,7 +26,7 @@ const proposals = [
      category: 'financial',
      articles: 10,
      discussions: 57,
-     voteYes: 10,
+     voteYes: 95,
      voteNo: 5
    },
    { id:2,
@@ -41,8 +41,8 @@ const proposals = [
      category: 'science',
      articles: 3,
      discussions: 6,
-     voteYes: 10,
-     voteNo: 5
+     voteYes: 49,
+     voteNo: 51
    },
    { id:3,
      profilePic: require("../../img/notification/woman1.png"),
@@ -56,8 +56,8 @@ const proposals = [
      category: 'politics',
      articles: 8,
      discussions: 41,
-     voteYes: 10,
-     voteNo: 5
+     voteYes: 65,
+     voteNo: 35
    },
    { id:4,
      profilePic: require("../../img/notification/woman2.png"),
@@ -71,8 +71,8 @@ const proposals = [
      category: 'science',
      articles: 16,
      discussions: 88,
-     voteYes: 10,
-     voteNo: 5
+     voteYes: 88,
+     voteNo: 12
    },
 ]
 

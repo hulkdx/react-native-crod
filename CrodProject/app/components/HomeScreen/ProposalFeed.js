@@ -13,9 +13,6 @@ const articlesIcon = require("../../../img/article-icon.png")
 const categoryBackground = require("../../../img/category-background.png")
 var moment = require('moment')
 
-//var deadline = moment([2007, 0, 29]);
-//var b = moment([2007, 0, 2]);
-//var diff = a.diff(b, 'days')
 
 
 
@@ -26,11 +23,11 @@ class ProposalFeed extends Component {
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
       dataSource: ds.cloneWithRows(proposals),
+      diff: 0,
     };
   }
 
   render() {
-    //console.log(diff)
     return (
       <View style={styles.proposalFeed}>
         <View style={styles.angleRightRoot}>
@@ -51,14 +48,19 @@ class ProposalFeed extends Component {
     @param proposal: the proposal elements from /data-manager/proposal.js
   */
   _renderProposalRow(proposal){
-    // console.log(proposal);
+    var deadline= moment([proposal.year, proposal.monthNumber - 1, proposal.date]);
+    console.log(deadline)
+    var today = moment();
+    console.log(today)
+    //this.setState({diff: deadline.diff(today, 'days')})
+    //console.log(diff + "days");
     return(
       <View>
 
 
       <TouchableOpacity style={styles.rowProposalRoot} onPress={()=>this.proposalClicked(proposal)}>
       <View style={styles.titleRoot}>
-        <View style={styles.proposalHeader} >
+        <View style={styles.proposalHeader}>
          <Image style={styles.profilePic} source={proposal.profilePic} />
          <Text style={styles.fullName}> {proposal.fullName} </Text>
         </View>
@@ -73,9 +75,9 @@ class ProposalFeed extends Component {
         <Text style={styles.proposalStatistics}><Image source={discussionIcon} /> {proposal.discussions}  </Text>
         </View>
         <View style={styles.rightEmoji}>
-        <Text style={{color: '#32CD32'}}>61%</Text>
+        <Text style={{color: '#32CD32'}}>{proposal.voteYes}%</Text>
         <Icon name='hand-o-up' size={25} color="#32CD32" />
-        <Text style={{color: '#C00'}}><Icon name='hand-o-down' size={25} color="#C00"/> 39% </Text>
+        <Text style={{color: '#C00'}}><Icon name='hand-o-down' size={25} color="#C00"/> {proposal.voteNo}%</Text>
 
         </View>
         </View>
@@ -86,15 +88,15 @@ class ProposalFeed extends Component {
       <View style={styles.deadlineRoot}>
 
       <View style={styles.daysLeft}>
-        <Text style={{color: 'white', textAlign: 'center'}}> 12 days </Text>
+        <Text style={{color: 'white', fontSize: 18, textAlign: 'center'}}> 12 days  </Text>
       </View>
 
       <View style={styles.day}>
-        <Text style={{color: '#88B3D9', fontSize: 25, textAlign: 'center',}}> {proposal.day} </Text>
+        <Text style={{color: '#88B3D9', fontSize: 25, textAlign: 'center'}}> {proposal.day} </Text>
       </View>
 
       <View style={styles.date}>
-        <Text style={{color: 'white', textAlign: 'center',}}> {proposal.monthText} {proposal.date} </Text>
+        <Text style={{color: 'white', fontSize: 18, textAlign: 'center'}}> {proposal.monthText} {proposal.date} </Text>
       </View>
 
       </View>
@@ -115,11 +117,6 @@ class ProposalFeed extends Component {
 }
 
 const styles = StyleSheet.create({
-  categoryBackground: {
-    resizeMode: 'cover',
-    marginTop: 15,
-    marginBottom: 30,
-  },
   proposalFeed:{
     flexDirection: 'row',
     flex:8,
@@ -163,12 +160,16 @@ const styles = StyleSheet.create({
   fullName: {
     flex: 3,
     fontSize: 18
+ },
+  categoryBackground: {
+  resizeMode: 'cover',
+  marginTop: 15,
+
 },
   title: {
     // height: 100,
     fontSize: 22,
     fontFamily: 'sans-serif',
-
   },
   emoji: {
     // height: 30,
@@ -218,6 +219,7 @@ const styles = StyleSheet.create({
     marginTop: 15,
     marginBottom: 15,
     marginLeft: 9,
+    height: 150,
   },
 
   angleRightRoot: {
