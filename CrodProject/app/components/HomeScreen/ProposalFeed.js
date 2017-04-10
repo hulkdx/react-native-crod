@@ -5,7 +5,8 @@ import proposals from '../../data-manager/proposals'
 import ProposalTitle from './ProposalTitle'
 import ProposalDeadline from './ProposalDeadline'
 //import categories from '../../data-manager/categories'
-import {Actions, ActionConst} from 'react-native-router-flux';
+import {Actions, ActionConst} from 'react-native-router-flux'
+import PopupDialog, { DialogButton, DialogTitle, SlideAnimation } from 'react-native-popup-dialog'
 
 const voteNoSource = require("../../../img/dislike.png")
 const voteYesSource = require("../../../img/like.png")
@@ -27,20 +28,62 @@ class ProposalFeed extends Component {
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
       dataSource: ds.cloneWithRows(proposals),
+      proposalsId: -1
     };
   }
 
   render() {
-    //console.log(diff)
+   //console.log(1)
     return (
       <View style={styles.proposalFeed}>
         <View style={styles.angleRightRoot}>
-          <Icon name={!this.props.changeArrow ? 'angle-right' : 'angle-left'} style={styles.angleRight} size={40} />
-        </View>
+        <Icon name={!this.props.changeArrow ? 'angle-right' : 'angle-left'} style={styles.angleRight} size={40} />
+      </View>
       <ListView
-      dataSource={this.state.dataSource}
-      renderRow={(proposal) => {return this._renderProposalRow(proposal)} }
-      />
+        dataSource={this.state.dataSource}
+        renderRow={(proposal) => {return this._renderProposalRow(proposal)} }/>
+        {/*Pop up called when the onLongPress on any proposal is triggered.
+           For it to work run: npm install --save react-native-popup-dialog   */}
+
+           <PopupDialog
+             ref={(popupDialog) => { this.popupDialog = popupDialog }}
+             dialogAnimation = { new SlideAnimation({ slideFrom: 'bottom' }) }
+             dialogTitle={<DialogTitle title="Proposal Details" />}
+             dialogStyle={2}
+             height={400}
+             actions={[
+                 <DialogButton
+                   text="Done"
+                   textStyle={{color: 'green'}}
+                   onPress={() => {
+                     this.popupDialog.dismiss();
+                   }}
+                   key="button-1"
+                 />,
+               ]}>
+
+             <ScrollView style={styles.customizePopUp}>
+
+              <View style={styles.rowPopUp}>
+              <Text style={styles.caption}> Title: </Text>
+              <Text style={styles.text}> {proposals[0].title}</Text>
+              </View>
+              <View style={styles.rowPopUp}>
+              <Text style={styles.caption}> Category: </Text>
+              <Text style={styles.text}> {proposals[0].category} </Text>
+              </View>
+              <View style={styles.rowPopUp}>
+              <Text style={styles.caption}> Deadline: </Text>
+              <Text style={styles.text}> {proposals[0].monthText} {proposals[0].date}, {proposals[0].year}</Text>
+              </View>
+              <View style={styles.rowPopUp}>
+              <Text style={styles.caption}> Description: </Text>
+              <Text style={styles.text}>{proposals[0].description}</Text>
+              </View>
+
+             </ScrollView>
+            </PopupDialog>
+
 
       </View>
     )
@@ -52,16 +95,19 @@ class ProposalFeed extends Component {
     @param proposal: the proposal elements from /data-manager/proposal.js
   */
   _renderProposalRow(proposal){
-    // console.log(proposal);
+    //this.setState({proposalsId: proposal.id})
     return(
       <View style={styles.rowContainer}>
 
-      <TouchableOpacity style={styles.proposal} onPress={()=>this.proposalClicked(proposal)}>
+      <TouchableOpacity style={styles.proposal} onPress={()=>this.proposalClicked(proposal)} onLongPress={() => this.popupDialog.show()}>
         <ProposalTitle fullName={proposal.fullName} profilePic={proposal.profilePic} text={proposal.title} category={categoryBackground} />
       </TouchableOpacity>
 
       <ProposalDeadline day={proposal.day} date={proposal.date} month={proposal.monthText} />
       </View>
+
+
+
     )
   }
 
@@ -108,6 +154,24 @@ const styles = StyleSheet.create({
   angleRight: {
     color: '#88B3D9',
   },
+  customizePopUp: {
+    flex:1,
+    marginRight: 10,
+    marginLeft: 10
+
+  },
+  rowPopUp: {
+    paddingTop: 10,
+    alignItems:'flex-start'
+  },
+  caption: {
+    fontSize: 18,
+    color: '#88B3D9'
+  },
+  text: {
+    fontSize: 18,
+
+  }
 });
 
 
