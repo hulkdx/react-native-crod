@@ -8,15 +8,18 @@ class ProposalDeadline extends Component {
       <View style={styles.deadlineRoot}>
 
       <View style={styles.daysLeft}>
-        <Text style={{color: 'white', textAlign: 'center',}}> 12 days </Text>
+        <Text style={{color: 'red', textAlign: 'center', fontSize: 16.5}}> 12 days </Text>
       </View>
+
 
       <View style={styles.day}>
         <Text style={{color: '#2575BB', fontSize: 25, textAlign: 'center',}}> {this.props.day} </Text>
       </View>
 
+      <View style={{height: 1, backgroundColor: '#2575BB'}} />
+
       <View style={styles.date}>
-        <Text style={{color: 'white', textAlign: 'center',}}> {this.props.month} {this.props.date} </Text>
+        <Text style={{color: '#2575BB', textAlign: 'center',}}> {this.props.month} {this.props.date} </Text>
       </View>
 
       </View>
@@ -29,7 +32,7 @@ const styles = StyleSheet.create({
     flex:1,
     justifyContent: 'center',
     padding: 5,
-    backgroundColor: 'red',
+    backgroundColor: 'white',
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
   },
@@ -42,7 +45,7 @@ const styles = StyleSheet.create({
     flex:1,
     justifyContent: 'center',
     // padding: 15,
-    backgroundColor: '#2575BB',
+    // backgroundColor: 'white',
     borderColor: '#2575BB',
     borderBottomWidth: 0.2,
     borderBottomLeftRadius: 10,
@@ -50,8 +53,8 @@ const styles = StyleSheet.create({
   },
   deadlineRoot: {
     flex: 1,
-    marginTop: 15,
-    marginBottom: 15,
+    height: 100,
+    justifyContent: 'center',
     marginLeft: 9,
     backgroundColor: 'white',
     borderColor: '#2575BB',

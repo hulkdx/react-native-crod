@@ -54,17 +54,13 @@ class ProposalFeed extends Component {
   _renderProposalRow(proposal){
     // console.log(proposal);
     return(
-      <View>
+      <View style={styles.rowContainer}>
 
-      <TouchableOpacity style={styles.rowProposalRoot} onPress={()=>this.proposalClicked(proposal)}>
-
-
-      <ProposalTitle fullName={proposal.fullName} profilePic={proposal.profilePic} text={proposal.title} category={categoryBackground} />
-
+      <TouchableOpacity style={styles.proposal} onPress={()=>this.proposalClicked(proposal)}>
+        <ProposalTitle fullName={proposal.fullName} profilePic={proposal.profilePic} text={proposal.title} category={categoryBackground} />
+      </TouchableOpacity>
 
       <ProposalDeadline day={proposal.day} date={proposal.date} month={proposal.monthText} />
-
-      </TouchableOpacity>
       </View>
     )
   }
@@ -90,10 +86,15 @@ const styles = StyleSheet.create({
     flex:8,
     backgroundColor: '#E9EBEE'
   },
-  rowProposalRoot:{
+  rowContainer:{
     flex:1,
     flexDirection: 'row',
     margin: 5,
+    alignItems: 'center'
+  },
+  proposal:{
+    flex:3,
+    flexDirection: 'row',
   },
   categoryIcon: {
     tintColor: '#88B3D9'
