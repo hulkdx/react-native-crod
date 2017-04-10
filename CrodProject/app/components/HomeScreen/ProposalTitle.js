@@ -102,6 +102,7 @@ const styles = StyleSheet.create({
     height: 45,
     width: 45,
     margin:3,
+    marginLeft: 9,
   },
   fullName: {
     flex: 3,

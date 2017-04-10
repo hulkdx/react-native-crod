@@ -29,9 +29,8 @@ class Header extends Component {
         <TouchableOpacity disabled={this.state.isTabOpen}
                           onPress={this.onClickCreateProposal}
                           style={styles.topBarRoot}>
-          <View style={styles.titleProposalRoot}>
-            <Text style={this.state.isTabOpen ? styles.textProposalOpen : styles.textProposalClosed}>choose your proposal</Text>
-          </View>
+
+          <Text style={styles.textProposal}>Create Your Proposal</Text>
         </TouchableOpacity>
 {/* Create Proposal Button When its clicked it shows these views */}
         { this.state.isTabOpen && createProposalViews }
@@ -91,40 +90,56 @@ class Header extends Component {
     switch (id) {
       // Categories
       case 1:
-        views = this._renderCategoryImages()
+        views =
+        <View>
+        <Text style={styles.stepsText}>Choose a category</Text>
+        {this._renderCategoryImages()}
+        </View>
+
         break;
       // Title
       case 2:
         views =
+        <View>
+        <Text style={styles.stepsText}>Choose a Title</Text>
         <TextInput
           style={styles.textInput}
-          placeholder="create a title"/>
+          placeholder="type title"/>
+        </View>
         break;
       // Description
       case 3:
         views =
+        <View>
+        <Text style={styles.stepsText}>Description</Text>
         <TextInput
           style={styles.textInput}
           multiline={true}
           numberOfLines={5}
-          placeholder="create a description"/>
+          placeholder="type description"/>
+        </View>
         break;
       // Deadline
       case 4:
         views =
-        <Text style={{alignSelf:'center'}}>Deadline</Text>
+        <View>
+        <Text style={styles.stepsText}>Deadline</Text>
+        </View>
         break;
       // Attachment
       case 5:
         views =
-        <Text style={{alignSelf:'center'}}>attachment</Text>
+        <View>
+        <Text style={styles.stepsText}>Attachment</Text>
+        <TouchableOpacity style={{alignSelf:'center'}}>
+          <Image source={require("../../../img/attachment.png")}/>
+        </TouchableOpacity>
+        </View>
         break;
     }
     return(
       <View>
-        <Text style={styles.stepsText}>step {id}:</Text>
         {views}
-        <View style={styles.divider} />
       </View>
     )
   }
@@ -150,24 +165,20 @@ const styles = StyleSheet.create({
     flex:1,
     marginLeft: 50,
   },
-  titleProposalRoot: {
-    flex: 4,
-    alignItems: 'center',
-    paddingTop: 20,
-    paddingBottom: 20,
-  },
   expandTab: {
     backgroundColor: 'white',
   },
   topBarRoot:{
     flexDirection: 'row',
-    backgroundColor: '#b6b6b6',
+    backgroundColor: '#88B3D9',
   },
-  textProposalClosed: {
-
-  },
-  textProposalOpen: {
-     fontSize: 25,
+  textProposal: {
+    flex: 1,
+    textAlign: 'center',
+    paddingTop: 20,
+    paddingBottom: 20,
+    color: 'rgba(255,255,255,0.7)',
+    fontSize: 18,
   },
   stepsRoot: {
     flexDirection: 'row',
@@ -175,6 +186,9 @@ const styles = StyleSheet.create({
   stepsText: {
     marginLeft: 10,
     marginTop: 5,
+    color: 'rgba(136, 179, 217, 0.9)',
+    fontSize: 14,
+    fontWeight: 'bold'
   },
   categoryDropDown:{
     flex:1,

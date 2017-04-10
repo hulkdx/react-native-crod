@@ -44,15 +44,13 @@ class ProfileProposal extends Component {
   _renderProposalRow(proposal){
     console.log(proposal);
     return(
-      <View style={{flex:1}}>
+      <View style={styles.rowContainer}>
 
       <TouchableOpacity style={styles.rowProposalRoot} onPress={this.proposalClicked.bind(this,proposal)}>
-
-      <ProposalTitle text={proposal.title} category={categorySource} />
-
-      <ProposalDeadline day={proposal.day} date={proposal.date} month={proposal.monthText} />
-
+        <ProposalTitle text={proposal.title} category={categorySource} />
       </TouchableOpacity>
+
+      <ProposalDeadline style={styles.deadline} day={proposal.day} date={proposal.date} month={proposal.monthText} />
       </View>
     )
   }
@@ -74,13 +72,15 @@ const styles = StyleSheet.create({
     // borderWidth: 2,
     paddingTop: 5,
   },
-  rowProposalRoot:{
-    flex:1,
+  rowContainer: {
     flexDirection: 'row',
+    flex:1,
     margin: 5,
-    // padding: 20,
-    // alignItems: 'center',
-    // justifyContent: 'flex-start',
+
+  },
+  rowProposalRoot:{
+    flex:3,
+    flexDirection: 'row',
   },
 });
 

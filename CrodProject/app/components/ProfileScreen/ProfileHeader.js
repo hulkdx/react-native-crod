@@ -3,20 +3,20 @@ import {View, StyleSheet,TouchableOpacity,Image,Text,Dimensions} from 'react-nat
 import Icon from 'react-native-vector-icons/FontAwesome'
 
 
-const profileImage = require("../../../img/topprofileblu.jpg");
+const profileImage = require("../../../img/brigelTestImage.png");
 
 class ProfileHeader extends Component {
 
   render() {
     return (
-      <View style={styles.container} >
+      <Image style={styles.container} source={profileImage}>
         <TouchableOpacity style={styles.pencilContainer}>
         <Icon name="pencil" style={styles.pencilIcon} />
         </TouchableOpacity>
         <Text style={[styles.profileText, styles.profileName]}>Michele Paoletti</Text>
         <Text style={styles.profileText}>23 years old</Text>
         <Text style={styles.profileText}>from Milan</Text>
-      </View>
+      </Image>
 
 
     )
@@ -26,12 +26,12 @@ class ProfileHeader extends Component {
 const styles = StyleSheet.create({
   container:{
     flex:3.5,
-    // width: null, height: null,
-    // resizeMode: 'stretch',
+    width: null, height: null,
+    resizeMode: 'stretch',
     paddingBottom: 5,
     paddingTop: 20,
     justifyContent: 'flex-end',
-    backgroundColor: 'blue'
+    // backgroundColor: 'blue'
   },
   profileText:{
     alignSelf: 'center',
