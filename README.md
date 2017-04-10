@@ -21,3 +21,6 @@ npm i react-native-tabs  --save
 
 https://github.com/ArnaudRinquin/react-native-radio-buttons
 npm i -S react-native-radio-buttons
+
+https://github.com/jacklam718/react-native-popup-dialog
+npm install --save react-native-popup-dialog
