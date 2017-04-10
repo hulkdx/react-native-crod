@@ -35,9 +35,9 @@ class CrodProject extends Component {
                  tabs={true}
                  hideNavBar
                  tabBarStyle={styles.customizeFooter}>
-                 <Scene key="launcherTab" source={require('./img/back-icon.png')}
-                        icon={TabIcon} onPress={()=> {Actions.launcher({type: ActionConst.REFRESH}) }}>
-                        <Scene key='launcher' component={LauncherScreen} hideNavBar/>
+                 <Scene key="votingTab" source={require('./img/back-icon.png')}
+                        icon={TabIcon} onPress={()=> {Actions.voting({type: ActionConst.REFRESH, proposalId: 0}) }}>
+                        <Scene key='voting' component={VotingScreen} hideNavBar/>
                         </Scene>
                  <Scene key="homeTab" source={require('./img/home-icon.png')}
                         icon={TabIcon} onPress={()=> {Actions.home({type: ActionConst.REFRESH})}} initial >
@@ -51,10 +51,7 @@ class CrodProject extends Component {
                         icon={TabIcon} onPress={()=> {Actions.notification({type: ActionConst.REFRESH}) }}>
                         <Scene key='notification' component={NotificationScreen} hideNavBar />
                 </Scene>
-                {/* voting scene should be inside another scene, otherwise Actions.refresh doesnt work */}
-                <Scene key='votingTab' >
-                  <Scene key='voting' component={VotingScreen} hideNavBar />
-                </Scene>
+
 
           </Scene>
 
