@@ -46,7 +46,7 @@ class ProfileHistory extends Component {
       <View style={styles.rowContainer}>
 
       <TouchableOpacity style={styles.rowProposalRoot} onPress={this.proposalClicked.bind(this,proposal)}>
-        <ProposalTitle text={proposal.title} category={categorySource} />
+        <ProposalTitle fullName={proposal.fullName} profilePic={proposal.profilePic} text={proposal.title} category={categorySource} />
       </TouchableOpacity>
 
       <ProposalDeadline style={styles.deadline} day={proposal.day} date={proposal.date} month={proposal.monthText} />
