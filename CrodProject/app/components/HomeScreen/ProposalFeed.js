@@ -28,7 +28,7 @@ class ProposalFeed extends Component {
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
       dataSource: ds.cloneWithRows(proposals),
-      proposalsId: -1
+      proposalsId: 0
     };
   }
 
@@ -66,19 +66,19 @@ class ProposalFeed extends Component {
 
               <View style={styles.rowPopUp}>
               <Text style={styles.caption}> Title: </Text>
-              <Text style={styles.text}> {proposals[0].title}</Text>
+              <Text style={styles.text}> {proposals[this.state.proposalsId].title}</Text>
               </View>
               <View style={styles.rowPopUp}>
               <Text style={styles.caption}> Category: </Text>
-              <Text style={styles.text}> {proposals[0].category} </Text>
+              <Text style={styles.text}> {proposals[this.state.proposalsId].category} </Text>
               </View>
               <View style={styles.rowPopUp}>
               <Text style={styles.caption}> Deadline: </Text>
-              <Text style={styles.text}> {proposals[0].monthText} {proposals[0].date}, {proposals[0].year}</Text>
+              <Text style={styles.text}> {proposals[this.state.proposalsId].monthText} {proposals[this.state.proposalsId].date}, {proposals[this.state.proposalsId].year}</Text>
               </View>
               <View style={styles.rowPopUp}>
               <Text style={styles.caption}> Description: </Text>
-              <Text style={styles.text}>{proposals[0].description}</Text>
+              <Text style={styles.text}>{proposals[this.state.proposalsId].description}</Text>
               </View>
 
              </ScrollView>
@@ -95,11 +95,11 @@ class ProposalFeed extends Component {
     @param proposal: the proposal elements from /data-manager/proposal.js
   */
   _renderProposalRow(proposal){
-    //this.setState({proposalsId: proposal.id})
+
     return(
       <View style={styles.rowContainer}>
 
-      <TouchableOpacity style={styles.proposal} onPress={()=>this.proposalClicked(proposal)} onLongPress={() => this.popupDialog.show()}>
+      <TouchableOpacity style={styles.proposal} onPress={this.proposalClicked.bind(this, proposal)} onLongPress={this.onLongPress.bind(this,proposal)}>
         <ProposalTitle fullName={proposal.fullName} profilePic={proposal.profilePic} text={proposal.title} category={categoryBackground} />
       </TouchableOpacity>
 
@@ -118,6 +118,11 @@ class ProposalFeed extends Component {
   */
   proposalClicked = (proposal) => {
     Actions.voting({type: ActionConst.REFRESH, proposalId: proposal.id})
+  }
+  onLongPress = (proposal) => {
+    console.log(proposal.id);
+    this.setState({proposalsId: proposal.id})
+    this.popupDialog.show()
   }
 }
 
@@ -169,6 +174,7 @@ const styles = StyleSheet.create({
     color: '#88B3D9'
   },
   text: {
+    paddingTop: 5,
     fontSize: 18,
 
   }
