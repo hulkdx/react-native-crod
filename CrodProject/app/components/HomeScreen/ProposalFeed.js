@@ -46,6 +46,7 @@ class ProposalFeed extends Component {
            For it to work run: npm install --save react-native-popup-dialog   */}
 
            <PopupDialog
+
              ref={(popupDialog) => { this.popupDialog = popupDialog }}
              dialogAnimation = { new SlideAnimation({ slideFrom: 'bottom' }) }
              dialogTitle={<DialogTitle title="Proposal Details" />}
@@ -61,7 +62,7 @@ class ProposalFeed extends Component {
                    key="button-1"
                  />,
                ]}>
-
+               {/* The content of the pop-up dialog. */}
              <ScrollView style={styles.customizePopUp}>
 
               <View style={styles.rowPopUp}>

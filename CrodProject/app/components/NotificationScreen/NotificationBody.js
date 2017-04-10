@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
 
   },
   topBar:{
-    backgroundColor: '#1fbff1',
+    backgroundColor: '#88B3D9',
     height: 70
 
   },
@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
      height: 60,
   },
   notificationDivider:{
-    tintColor: '#1fbff1',
+    tintColor: '#88B3D9',
     height: 2,
   },
   timeSent:{
