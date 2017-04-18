@@ -24,3 +24,9 @@ npm i -S react-native-radio-buttons
 
 https://github.com/jacklam718/react-native-popup-dialog
 npm install --save react-native-popup-dialog
+
+Redux
+npm install --save redux
+npm install --save react-redux
+npm install --save redux-thunk
+npm install --save redux-logger
