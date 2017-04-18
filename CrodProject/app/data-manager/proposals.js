@@ -13,6 +13,7 @@ const proposals = [
      categoryIcon: require("../../img/categories/social.png"),
      articles: 7,
      discussions: 10,
+     comment: 'HAHA',
      voteYes: 10,
      voteNo: 5
    },
@@ -30,6 +31,7 @@ const proposals = [
      categoryIcon: require("../../img/categories/social.png"),
      articles: 10,
      discussions: 57,
+     comment: 'HAHAHA',
      voteYes: 10,
      voteNo: 5
    },
@@ -47,6 +49,7 @@ const proposals = [
      categoryIcon: require("../../img/categories/politics.png"),
      articles: 3,
      discussions: 6,
+     comment: 1,
      voteYes: 10,
      voteNo: 5
    },
@@ -64,6 +67,7 @@ const proposals = [
      categoryIcon: require("../../img/categories/financial.png"),
      articles: 8,
      discussions: 41,
+     comment: 1,
      voteYes: 10,
      voteNo: 5
    },
@@ -81,6 +85,7 @@ const proposals = [
      categoryIcon: require("../../img/categories/science.png"),
      articles: 16,
      discussions: 88,
+     comment: 1,
      voteYes: 10,
      voteNo: 5
    },
@@ -98,6 +103,7 @@ const proposals = [
      categoryIcon: require("../../img/categories/environment.png"),
      articles: 16,
      discussions: 88,
+     comment: 1,
      voteYes: 10,
      voteNo: 5
    },

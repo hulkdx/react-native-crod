@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
     width: 20,
     height: null,
     resizeMode: 'contain',
-    tintColor: '#2575BB'
+    tintColor: '#88B3D9'
   },
   ar_dis: {
     width: 20,
@@ -93,8 +93,9 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
   },
   ar_dis_statistics: {
-    color: '#2575BB',
-    fontWeight: 500
+    color: '#88B3D9',
+    fontWeight: 'bold',
+    marginRight: 5
   },
   extraIcons: {
     flex: 1,
