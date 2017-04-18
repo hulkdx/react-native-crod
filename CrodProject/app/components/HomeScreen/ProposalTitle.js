@@ -32,10 +32,8 @@ class ProposalTitle extends Component {
         </View>
         }
 
-        {
-          this.props.category &&
-          <Image style={styles.category} source={this.props.category}/>
-        }
+          <Image style={styles.category} source={this.props.categoryIcon}/>
+
         {/* TODO: get these numbers */}
         <View style={styles.extraIcons}>
           <Text>6</Text>
