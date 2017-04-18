@@ -7,7 +7,7 @@ import CategoryHeader from './CategoryHeader.js'
 import categories from '../../data-manager/categories.js'
 
 const proposalIcon = require("../../../img/proposal-icon.png")
-const searchIcon = require("../../../img/search-icon.png")
+const searchIcon = require("../../../img/search-icon1.png")
 
 var width = Dimensions.get('window').width; //full width
 var height = Dimensions.get('window').height; //full height
@@ -112,7 +112,10 @@ class Header extends Component {
         <Text style={styles.stepsText}>Choose a Title</Text>
         <TextInput
           style={styles.textInput}
-          placeholder="type title"/>
+          multiline={true}
+          numberOfLines={2}
+          underlineColorAndroid='transparent'
+          placeholder="the title must be 50-200 characters long."/>
         </View>
         break;
       // Description
@@ -123,8 +126,8 @@ class Header extends Component {
         <TextInput
           style={styles.textInput}
           multiline={true}
-          numberOfLines={5}
-          placeholder="type description"/>
+          numberOfLines={4}
+          placeholder="the description must be 250-500 characters long."/>
         </View>
         break;
       // Deadline
@@ -195,6 +198,13 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
     tintColor: 'white'
   },
+  textInput: {
+    marginLeft: 10,
+    marginRight: 10,
+    borderWidth: 1,
+    borderColor: '#88B3D9',
+    fontSize: 16
+  },
   stepsRoot: {
     flexDirection: 'row',
   },
@@ -202,7 +212,7 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     marginTop: 5,
     color: 'rgba(136, 179, 217, 0.9)',
-    fontSize: 14,
+    fontSize: 18,
     fontWeight: 'bold'
   },
   categoryDropDown:{
@@ -214,7 +224,7 @@ const styles = StyleSheet.create({
     resizeMode: 'center',
   },
   categorySelectedImage: {
-    tintColor: 'blue',
+    tintColor: '#88B3D9',
     resizeMode: 'center',
   },
   divider: {

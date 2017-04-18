@@ -163,12 +163,13 @@ const styles = StyleSheet.create({
   customizePopUp: {
     flex:1,
     marginRight: 10,
-    marginLeft: 10
+    marginLeft: 10,
 
   },
   rowPopUp: {
     paddingTop: 10,
-    alignItems:'flex-start'
+    alignItems:'flex-start',
+    justifyContent: 'flex-start'
   },
   caption: {
     fontSize: 18,
@@ -177,6 +178,7 @@ const styles = StyleSheet.create({
   text: {
     paddingTop: 5,
     fontSize: 18,
+    textAlign: 'left'
 
   }
 });
