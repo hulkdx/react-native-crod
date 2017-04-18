@@ -4,6 +4,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import proposals from '../../data-manager/proposals'
 import ProposalTitle from './ProposalTitle'
 import ProposalDeadline from './ProposalDeadline'
+import _ from 'underscore'
 //import categories from '../../data-manager/categories'
 import {Actions, ActionConst} from 'react-native-router-flux'
 import PopupDialog, { DialogButton, DialogTitle, SlideAnimation } from 'react-native-popup-dialog'
@@ -32,8 +33,12 @@ class ProposalFeed extends Component {
     };
   }
 
+  componentDidUpdate(){
+    // it will dismiss the popupDialog if the user goes to another screen while it is open.
+    if (!_.isUndefined(this.popupDialog)) {this.popupDialog.dismiss();}
+  }
+
   render() {
-   //console.log(1)
     return (
       <View style={styles.proposalFeed}>
         <View style={styles.angleRightRoot}>
