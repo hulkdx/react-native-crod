@@ -39,21 +39,27 @@ class CrodProject extends Component {
                         icon={TabIcon} onPress={()=> {Actions.home({type: ActionConst.REFRESH})}} initial >
                         <Scene key='home' component={HomeScreen} hideNavBar/>
                  </Scene>
+
+                 {/* When you clicked on tab bar goes to last proposal */}
                  <Scene key="votingTab" source={require('./img/deadline-voting-icon.png')}
-                        icon={TabIcon} onPress={()=> {Actions.voting({type: ActionConst.REFRESH, proposalId: 0}) }}>
-                        <Scene key='voting' component={VotingScreen} hideNavBar/>
+                        icon={TabIcon} onPress={()=> {Actions.voteNow({type: ActionConst.REFRESH, proposalId: 0}) }}>
+                        <Scene key='voteNow' component={VotingScreen} hideNavBar/>
                         </Scene>
 
                  <Scene key="profileTab" source={require('./img/profile-icon.png')}
                         icon={TabIcon} onPress={()=> {Actions.profile({type: ActionConst.REFRESH}) }}  >
                         <Scene key='profile' component={ProfileScreen} hideNavBar/>
                 </Scene>
+
                  <Scene key="notificationTab" source={require('./img/notification-icon-updated.png')}
                         icon={TabIcon} onPress={()=> {Actions.notification({type: ActionConst.REFRESH}) }}>
                         <Scene key='notification' component={NotificationScreen} hideNavBar />
                 </Scene>
-
-
+                
+                {/* When you clicked on proposal */}
+                <Scene key="votingNonClicked">
+                  <Scene key='voting' component={VotingScreen} hideNavBar/>
+                </Scene>
           </Scene>
 
         </Scene>
