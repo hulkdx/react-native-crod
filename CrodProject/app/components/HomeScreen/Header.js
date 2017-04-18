@@ -6,6 +6,9 @@ import CategoryHeader from './CategoryHeader.js'
 
 import categories from '../../data-manager/categories.js'
 
+const proposalIcon = require("../../../img/proposal-icon.png")
+const searchIcon = require("../../../img/search-icon.png")
+
 var width = Dimensions.get('window').width; //full width
 var height = Dimensions.get('window').height; //full height
 
@@ -26,12 +29,17 @@ class Header extends Component {
   to then be passed as a prop to the HomeScreen/CategoryHeader.js */}
         <CategoryHeader categoryId={this.props.categoryId} />
 {/* Create Proposal Button */}
+        <View style={styles.topBarRoot}>
+        <TouchableOpacity style={styles.search}>
+         <Image style={styles.proposalBtn} source={searchIcon}/>
+         </TouchableOpacity>
         <TouchableOpacity disabled={this.state.isTabOpen}
                           onPress={this.onClickCreateProposal}
-                          style={styles.topBarRoot}>
+                          style={styles.proposal}>
 
-          <Text style={styles.textProposal}>Create Your Proposal</Text>
+          <Image style={styles.proposalBtn} source={proposalIcon}/>
         </TouchableOpacity>
+        </View>
 {/* Create Proposal Button When its clicked it shows these views */}
         { this.state.isTabOpen && createProposalViews }
       </ScrollView>
@@ -171,14 +179,21 @@ const styles = StyleSheet.create({
   topBarRoot:{
     flexDirection: 'row',
     backgroundColor: '#88B3D9',
+    height: 50,
+    alignItems: 'center'
   },
-  textProposal: {
+  search: {
     flex: 1,
-    textAlign: 'center',
-    paddingTop: 20,
-    paddingBottom: 20,
-    color: 'rgba(255,255,255,0.7)',
-    fontSize: 18,
+  },
+  proposal: {
+    flex: 1,
+    alignItems: 'flex-end',
+    paddingRight: 10
+  },
+  proposalBtn: {
+    height: 30,
+    resizeMode: 'contain',
+    tintColor: 'white'
   },
   stepsRoot: {
     flexDirection: 'row',
