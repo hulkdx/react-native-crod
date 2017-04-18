@@ -65,12 +65,15 @@ const styles = StyleSheet.create({
   },
   titleContainer:{
     flex:1,
-    justifyContent:'center'
+    justifyContent:'flex-start',
+    paddingLeft: 12,
+    paddingRight: 10
   },
   title: {
-    textAlign: 'center',
+    textAlign: 'left',
     fontSize: 20,
     fontFamily: 'sans-serif',
+
   },
   bottomContainer: {
     flexDirection: 'row',

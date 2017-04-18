@@ -35,14 +35,15 @@ class CrodProject extends Component {
                  tabs={true}
                  hideNavBar
                  tabBarStyle={styles.customizeFooter}>
-                 <Scene key="votingTab" source={require('./img/back-icon.png')}
-                        icon={TabIcon} onPress={()=> {Actions.voting({type: ActionConst.REFRESH, proposalId: 0}) }}>
-                        <Scene key='voting' component={VotingScreen} hideNavBar/>
-                        </Scene>
                  <Scene key="homeTab" source={require('./img/home-icon.png')}
                         icon={TabIcon} onPress={()=> {Actions.home({type: ActionConst.REFRESH})}} initial >
                         <Scene key='home' component={HomeScreen} hideNavBar/>
                  </Scene>
+                 <Scene key="votingTab" source={require('./img/deadline-voting-icon.png')}
+                        icon={TabIcon} onPress={()=> {Actions.voting({type: ActionConst.REFRESH, proposalId: 0}) }}>
+                        <Scene key='voting' component={VotingScreen} hideNavBar/>
+                        </Scene>
+
                  <Scene key="profileTab" source={require('./img/profile-icon.png')}
                         icon={TabIcon} onPress={()=> {Actions.profile({type: ActionConst.REFRESH}) }}  >
                         <Scene key='profile' component={ProfileScreen} hideNavBar/>
