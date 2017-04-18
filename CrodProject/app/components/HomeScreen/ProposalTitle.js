@@ -36,10 +36,10 @@ class ProposalTitle extends Component {
 
         {/* TODO: get these numbers */}
         <View style={styles.extraIcons}>
-          <Text>6</Text>
-          <Image style={styles.category} source={attachmentSource}/>
-          <Text>3</Text>
-          <Image style={styles.category} source={commentSource}/>
+          <Text style={styles.ar_dis_statistics}>{this.props.articles}</Text>
+          <Image style={styles.ar_dis} source={attachmentSource}/>
+          <Text style={styles.ar_dis_statistics}>{this.props.discussions}</Text>
+          <Image style={styles.ar_dis} source={commentSource}/>
         </View>
 
         </View>
@@ -76,14 +76,25 @@ const styles = StyleSheet.create({
   bottomContainer: {
     flexDirection: 'row',
     height: 20,
-    marginLeft: 5,
-    marginBottom: 5,
-    marginTop: 5,
+    marginLeft: 12,
+    marginRight: 12,
+    marginBottom: 10,
+    marginTop: 20,
   },
   category: {
     width: 20,
     height: null,
     resizeMode: 'contain',
+    tintColor: '#2575BB'
+  },
+  ar_dis: {
+    width: 20,
+    height: null,
+    resizeMode: 'contain',
+  },
+  ar_dis_statistics: {
+    color: '#2575BB',
+    fontWeight: 500
   },
   extraIcons: {
     flex: 1,
