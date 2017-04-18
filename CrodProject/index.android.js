@@ -1,4 +1,9 @@
 import React, { Component } from 'react';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware, combineReduxers, compose } from 'redux';
+import thunkMiddleware from 'redux-thunk';
+import createLogger from 'redux-logger';
+
 import {AppRegistry,Image,StyleSheet} from 'react-native';
 import LauncherScreen from './app/screens/LauncherScreen'
 import HomeScreen from './app/screens/HomeScreen'
@@ -55,7 +60,7 @@ class CrodProject extends Component {
                         icon={TabIcon} onPress={()=> {Actions.notification({type: ActionConst.REFRESH}) }}>
                         <Scene key='notification' component={NotificationScreen} hideNavBar />
                 </Scene>
-                
+
                 {/* When you clicked on proposal */}
                 <Scene key="votingNonClicked">
                   <Scene key='voting' component={VotingScreen} hideNavBar/>
