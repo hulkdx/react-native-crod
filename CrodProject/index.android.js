@@ -47,7 +47,7 @@ class CrodProject extends Component {
                         icon={TabIcon} onPress={()=> {Actions.profile({type: ActionConst.REFRESH}) }}  >
                         <Scene key='profile' component={ProfileScreen} hideNavBar/>
                 </Scene>
-                 <Scene key="notificationTab" source={require('./img/notification-icon.png')}
+                 <Scene key="notificationTab" source={require('./img/notification-icon-updated.png')}
                         icon={TabIcon} onPress={()=> {Actions.notification({type: ActionConst.REFRESH}) }}>
                         <Scene key='notification' component={NotificationScreen} hideNavBar />
                 </Scene>
@@ -70,10 +70,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#88B3D9',
-    //opacity: 50
   },
   icon:{
-    resizeMode: 'center'
+    height: 25,
+    width: 25,
+    resizeMode: 'contain'
   }
   });
 
