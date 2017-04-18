@@ -32,10 +32,8 @@ class ProposalTitle extends Component {
         </View>
         }
 
-        {
-          this.props.category &&
-          <Image style={styles.category} source={this.props.category}/>
-        }
+          <Image style={styles.category} source={this.props.categoryIcon}/>
+
         {/* TODO: get these numbers */}
         <View style={styles.extraIcons}>
           <Text>6</Text>
@@ -65,12 +63,15 @@ const styles = StyleSheet.create({
   },
   titleContainer:{
     flex:1,
-    justifyContent:'center'
+    justifyContent:'flex-start',
+    paddingLeft: 12,
+    paddingRight: 10
   },
   title: {
-    textAlign: 'center',
+    textAlign: 'left',
     fontSize: 20,
     fontFamily: 'sans-serif',
+
   },
   bottomContainer: {
     flexDirection: 'row',

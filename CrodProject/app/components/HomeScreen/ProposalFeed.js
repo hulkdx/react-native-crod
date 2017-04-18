@@ -106,7 +106,7 @@ class ProposalFeed extends Component {
       <View style={styles.rowContainer}>
 
       <TouchableOpacity style={styles.proposal} onPress={this.proposalClicked.bind(this, proposal)} onLongPress={this.onLongPress.bind(this,proposal)}>
-        <ProposalTitle fullName={proposal.fullName} profilePic={proposal.profilePic} text={proposal.title} category={categoryBackground} />
+        <ProposalTitle fullName={proposal.fullName} profilePic={proposal.profilePic} text={proposal.title} categoryIcon={proposal.categoryIcon} />
       </TouchableOpacity>
 
       <ProposalDeadline day={proposal.day} date={proposal.date} month={proposal.monthText} />
