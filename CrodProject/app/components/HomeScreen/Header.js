@@ -36,11 +36,14 @@ class Header extends Component {
           </View>
         <TouchableOpacity style={styles.search}>
 
-         <Image style={styles.proposalBtn} source={searchIcon}/>
+         <View style={styles.searchBtnContainer}>
+         <Image style={styles.searchBtn} source={searchIcon}/>
+         </View>
 
          <TextInput
               placeholder = "enter proposal title"
               placeholderTextColor = "#88B3D9"
+              underlineColorAndroid='transparent'
               style={styles.searchText}/>
               </TouchableOpacity>
          <TouchableOpacity disabled={this.state.isTabOpen}
@@ -195,37 +198,55 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderBottomWidth: 1,
     borderBottomColor: "#88B3D9",
-    height: 55,
+    height: 60,
     alignItems: 'center',
     justifyContent: 'center',
   },
   profile: {
     flex: 1,
-    paddingLeft: 15,
+    marginLeft: 15,
   },
   search: {
-    flex: 3,
+    flex: 2,
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    borderWidth: 1,
+    borderRadius: 10,
+    backgroundColor: '#E9EBEE',
+    borderColor: '#88B3D9'
+
+  },
+  searchBtnContainer: {
+    height: 35,
+    paddingLeft: 5,
+    paddingTop: 2,
   },
   searchText: {
-    flex: 1
+    flex: 1,
+    height: 35,
+
   },
   proposal: {
     flex: 1,
     alignItems: 'flex-end',
     paddingRight: 10
   },
-
-  proposalBtn: {
+  searchBtn: {
     height: 30,
+    width: 30,
+    resizeMode: 'contain',
+    tintColor: '#88B3D9',
+  },
+  proposalBtn: {
+    height: 35,
+    width: 35,
     resizeMode: 'contain',
     tintColor: '#88B3D9'
   },
   profilePhoto: {
-    height: 30,
-    width: 30,
+    height: 35,
+    width: 35,
     resizeMode: 'contain',
   },
   textInput: {
