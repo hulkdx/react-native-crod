@@ -73,9 +73,9 @@ class Header extends Component {
 
         {this._renderSteps(5)}
 
-        <TouchableOpacity style={{alignItems:'center'}}
+        <TouchableOpacity style={styles.createProposalBtnContainer}
         onPress={this.onClickDone}>
-          <Text>done</Text>
+          <Text style={styles.createProposalBtn}>Create Proposal</Text>
         </TouchableOpacity>
         <View style={styles.divider} />
     </View>
@@ -113,7 +113,7 @@ class Header extends Component {
       case 1:
         views =
         <View>
-        <Text style={styles.stepsText}>Choose a category</Text>
+        <Text style={styles.stepsText}>Pick a Category</Text>
         {this._renderCategoryImages()}
         </View>
 
@@ -126,9 +126,10 @@ class Header extends Component {
         <TextInput
           style={styles.textInput}
           multiline={true}
-          numberOfLines={2}
+          numberOfLines={3}
           underlineColorAndroid='transparent'
-          placeholder="the title must be 50-200 characters long."/>
+          placeholder="the title must be 50-200 characters long."
+          placeholderTextColor="#d7dade"/>
         </View>
         break;
       // Description
@@ -139,8 +140,9 @@ class Header extends Component {
         <TextInput
           style={styles.textInput}
           multiline={true}
-          numberOfLines={4}
-          placeholder="the description must be 250-500 characters long."/>
+          numberOfLines={5}
+          placeholder="the description must be 250-500 characters long."
+          placeholderTextColor="#d7dade"/>
         </View>
         break;
       // Deadline
@@ -153,10 +155,10 @@ class Header extends Component {
       // Attachment
       case 5:
         views =
-        <View>
-        <Text style={styles.stepsText}>Attachment</Text>
-        <TouchableOpacity style={{alignSelf:'center'}}>
-          <Image source={require("../../../img/attachment.png")}/>
+        <View style={styles.attachments}>
+        <Text style={styles.stepsText}>Attachments</Text>
+        <TouchableOpacity>
+          <Image style={styles.attachMore} source={require("../../../img/add-more-icon.png")}/>
         </TouchableOpacity>
         </View>
         break;
@@ -190,7 +192,7 @@ const styles = StyleSheet.create({
     marginLeft: 50,
   },
   expandTab: {
-    backgroundColor: 'white',
+    backgroundColor: '#FFF',
   },
   topBarRoot:{
     flex: 1,
@@ -211,20 +213,22 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    borderWidth: 1,
     borderRadius: 10,
     backgroundColor: '#E9EBEE',
-    borderColor: '#88B3D9'
 
   },
   searchBtnContainer: {
-    height: 35,
+    height: 37,
     paddingLeft: 5,
     paddingTop: 2,
   },
   searchText: {
     flex: 1,
-    height: 35,
+    height: 37,
+    fontSize: 15,
+    marginTop: 5,
+    color: '#88B3D9',
+    fontFamily: 'Roboto',
 
   },
   proposal: {
@@ -253,7 +257,9 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     marginRight: 10,
     borderWidth: 1,
-    borderColor: '#88B3D9',
+    borderColor: '#E9EBEE',
+    backgroundColor: 'white',
+    borderRadius: 10,
     fontSize: 16
   },
   stepsRoot: {
@@ -261,7 +267,8 @@ const styles = StyleSheet.create({
   },
   stepsText: {
     marginLeft: 10,
-    marginTop: 5,
+    paddingTop: 10,
+    paddingBottom: 10,
     color: 'rgba(136, 179, 217, 0.9)',
     fontSize: 18,
     fontWeight: 'bold'
@@ -279,9 +286,31 @@ const styles = StyleSheet.create({
     resizeMode: 'center',
   },
   divider: {
-    height: 5,
-    backgroundColor: '#b6b6b6'
+    height: 1,
+    backgroundColor: '#88B3D9'
   },
+  createProposalBtn: {
+    fontSize: 20,
+    color: 'white',
+    backgroundColor: '#88B3D9',
+    padding: 15,
+    borderRadius: 10,
+  },
+  createProposalBtnContainer: {
+    paddingTop: 10,
+    paddingBottom: 10,
+    alignItems:'center'
+  },
+  attachMore: {
+    height: 40,
+    width: 40,
+    resizeMode: 'contain',
+    tintColor: '#88B3D9',
+    marginLeft: 15
+  },
+  attachments: {
+    flexDirection: 'row'
+  }
 
 
 });

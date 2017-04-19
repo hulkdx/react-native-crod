@@ -19,9 +19,12 @@ class Body extends Component {
 
     return (
       <View style={styles.leftMenu}>
-      <LeftSideMenu menu={menu}  openMenuOffset = {80}
-      isOpen={this.state.isOpen}
-      onChange={(isOpen) => this.updateMenuState(isOpen)} >
+      <LeftSideMenu
+                menu={menu}
+                openMenuOffset = {80}
+                isOpen={this.state.isOpen}
+                onChange={(isOpen) => this.updateMenuState(isOpen)}
+                style={styles.leftSideMenu} >
       <ProposalFeed changeArrow={this.state.isOpen}/>
       </LeftSideMenu>
       </View>
@@ -33,7 +36,12 @@ class Body extends Component {
 const styles = StyleSheet.create({
   leftMenu:{
     flex:8,
-    backgroundColor: "#ebd5c2"
+    backgroundColor: "white",
+  },
+  leftSideMenu: {
+    borderRightWidth: 1,
+    borderRightColor: '#88B3D9'
+
   }
 });
 
