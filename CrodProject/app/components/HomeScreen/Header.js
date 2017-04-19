@@ -8,6 +8,7 @@ import categories from '../../data-manager/categories.js'
 
 const proposalIcon = require("../../../img/proposal-icon.png")
 const searchIcon = require("../../../img/search-icon1.png")
+const profilePhoto = require("../../../img/notification/man1.png")
 
 var width = Dimensions.get('window').width; //full width
 var height = Dimensions.get('window').height; //full height
@@ -30,16 +31,25 @@ class Header extends Component {
         <CategoryHeader categoryId={this.props.categoryId} />
 {/* Create Proposal Button */}
         <View style={styles.topBarRoot}>
+        <View style={styles.profile}>
+        <Image source={profilePhoto} style={styles.profilePhoto}/>
+          </View>
         <TouchableOpacity style={styles.search}>
+
          <Image style={styles.proposalBtn} source={searchIcon}/>
-         </TouchableOpacity>
-        <TouchableOpacity disabled={this.state.isTabOpen}
+
+         <TextInput
+              placeholder = "enter proposal title"
+              placeholderTextColor = "#88B3D9"
+              style={styles.searchText}/>
+              </TouchableOpacity>
+         <TouchableOpacity disabled={this.state.isTabOpen}
                           onPress={this.onClickCreateProposal}
                           style={styles.proposal}>
 
           <Image style={styles.proposalBtn} source={proposalIcon}/>
-        </TouchableOpacity>
-        </View>
+         </TouchableOpacity>
+         </View>
 {/* Create Proposal Button When its clicked it shows these views */}
         { this.state.isTabOpen && createProposalViews }
       </ScrollView>
@@ -180,23 +190,43 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   topBarRoot:{
+    flex: 1,
     flexDirection: 'row',
-    backgroundColor: '#88B3D9',
-    height: 50,
-    alignItems: 'center'
+    backgroundColor: 'white',
+    borderBottomWidth: 1,
+    borderBottomColor: "#88B3D9",
+    height: 55,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  profile: {
+    flex: 1,
+    paddingLeft: 15,
   },
   search: {
-    flex: 1,
+    flex: 3,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  searchText: {
+    flex: 1
   },
   proposal: {
     flex: 1,
     alignItems: 'flex-end',
     paddingRight: 10
   },
+
   proposalBtn: {
     height: 30,
     resizeMode: 'contain',
-    tintColor: 'white'
+    tintColor: '#88B3D9'
+  },
+  profilePhoto: {
+    height: 30,
+    width: 30,
+    resizeMode: 'contain',
   },
   textInput: {
     marginLeft: 10,
@@ -230,7 +260,9 @@ const styles = StyleSheet.create({
   divider: {
     height: 5,
     backgroundColor: '#b6b6b6'
-  }
+  },
+
+
 });
 
 module.exports = Header

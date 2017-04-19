@@ -1,7 +1,7 @@
 const proposals = [
    { id:0,
      profilePic: require("../../img/notification/man1.png"),
-     fullName: "Brigel Pineti",
+     fullName: "Just You",
      title: "Reduce parking lot by 20% in favor of bicycle parking",
      description: "React Native is like React, but it uses native components instead of web components as building blocks. So to understand the basic structure of a React Native app, you need to understand some of the basic React concepts, like JSX, components, state, and props. If you already know React, you still need to learn some React-Native-specific stuff, like the native components. This tutorial is aimed at all audiences, whether you have React experience or not. Let's do this thing.",
      date: 16,
