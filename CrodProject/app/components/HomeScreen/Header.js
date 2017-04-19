@@ -126,8 +126,9 @@ class Header extends Component {
         <TextInput
           style={styles.textInput}
           multiline={true}
-          numberOfLines={3}
+          numberOfLines={5}
           underlineColorAndroid='transparent'
+          maxLength={200}
           placeholder="the title must be 50-200 characters long."
           placeholderTextColor="#d7dade"/>
         </View>
@@ -140,7 +141,8 @@ class Header extends Component {
         <TextInput
           style={styles.textInput}
           multiline={true}
-          numberOfLines={5}
+          numberOfLines={12}
+          maxLength={500}
           placeholder="the description must be 250-500 characters long."
           placeholderTextColor="#d7dade"/>
         </View>
