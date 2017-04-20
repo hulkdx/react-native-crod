@@ -29,7 +29,8 @@ let style = StyleSheet.create({
     color: '#c9c9c9'
   },
   placeholderText: {
-    color: '#c9c9c9'
+    color: '#c9c9c9',
+    paddingLeft: 20
   },
   datePickerMask: {
     flex: 1,

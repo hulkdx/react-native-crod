@@ -9,7 +9,7 @@ import Moment from 'moment';
 const proposalIcon = require("../../../img/proposal-icon.png")
 const searchIcon = require("../../../img/search-icon1.png")
 const profilePhoto = require("../../../img/notification/man1.png")
-
+const closeIcon = require("../../../img/close-icon.png")
 var width = Dimensions.get('window').width; //full width
 var height = Dimensions.get('window').height; //full height
 
@@ -51,11 +51,9 @@ class Header extends Component {
               underlineColorAndroid='transparent'
               style={styles.searchText}/>
               </TouchableOpacity>
-         <TouchableOpacity disabled={this.state.isTabOpen}
-                          onPress={this.onClickCreateProposal}
-                          style={styles.proposal}>
-
-          <Image style={styles.proposalBtn} source={proposalIcon}/>
+         <TouchableOpacity onPress={this.onClickCreateProposal}
+                           style={styles.proposal}>
+          { this.state.isTabOpen == false ? <Image style={styles.proposalBtn} source={proposalIcon}/> : <Image style={styles.proposalBtn} source={closeIcon}/> }
          </TouchableOpacity>
          </View>
 {/* Create Proposal Button When its clicked it shows these views */}
@@ -129,7 +127,9 @@ class Header extends Component {
         views =
         <View>
         <Text style={styles.stepsText}>Pick a Category</Text>
+
         {this._renderCategoryImages()}
+
         </View>
 
         break;

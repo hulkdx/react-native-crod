@@ -111,7 +111,7 @@ class DatePicker extends Component {
   getDate(date = this.props.date) {
     const {mode, minDate, maxDate, format = FORMATS[mode]} = this.props;
 
-    // date默认值
+    // date
     if (!date) {
       let now = new Date();
       if (minDate) {
@@ -369,8 +369,8 @@ DatePicker.defaultProps = {
   // whether or not show the icon
   showIcon: true,
   disabled: false,
-  calendar: 'date',
-  time: 'time',
+  calendar: 'yyyy-mm-dd',
+  time: 'hh-mm',
   modalOnResponderTerminationRequest: e => true
 };
 
