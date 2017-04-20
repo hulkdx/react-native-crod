@@ -11,8 +11,9 @@ class VotingScreen extends Component {
     // console.log(this.props);
     return (
       <ViewContainer>
-        {/* Get this props id from ProposalFeed.js */}
+
         <Header />
+        {/* Get this props id from ProposalFeed.js */}
         <Proposal proposalId={this.props.proposalId}/>
         <Body voted={this.props.voted} />
 
