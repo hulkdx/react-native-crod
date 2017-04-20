@@ -25,6 +25,9 @@ npm i -S react-native-radio-buttons
 https://github.com/jacklam718/react-native-popup-dialog
 npm install --save react-native-popup-dialog
 
+https://github.com/xgfe/react-native-datepicker
+npm install react-native-datepicker --save
+
 Redux
 npm install --save redux
 npm install --save react-redux
