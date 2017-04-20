@@ -1,24 +1,26 @@
 import React, { Component } from 'react';
+import { AppRegistry, Image, StyleSheet } from 'react-native';
+import { Router, Scene, Actions, ActionConst } from 'react-native-router-flux';
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware, combineReduxers, compose } from 'redux';
-import thunkMiddleware from 'redux-thunk';
-import createLogger from 'redux-logger';
+import configureStore from './app/lib/configureStore'
 
-import {AppRegistry,Image,StyleSheet} from 'react-native';
+// Screens
 import LauncherScreen from './app/screens/LauncherScreen'
 import HomeScreen from './app/screens/HomeScreen'
 import ProfileScreen from './app/screens/ProfileScreen'
 import NotificationScreen from './app/screens/NotificationScreen'
 import VotingScreen from './app/screens/VotingScreen'
-import {Router, Scene, Actions, ActionConst} from 'react-native-router-flux';
 
+/*
+ * Displays the icon for the tab w/ color dependent upon selection
+*/
 const TabIcon = ({ selected, source }) => {
   return (
     <Image style={[styles.icon, {tintColor: selected ? 'rgba(0, 0, 0, 0.5)' :'white'}]} source={source}/>
   );
 }
 
-// define this based on the styles/dimensions you use
+// This will modify the margin for the TabBar
 const getSceneStyle = (props, computedProps) => {
   const style = {
     flex: 1,
@@ -33,15 +35,17 @@ const getSceneStyle = (props, computedProps) => {
 class CrodProject extends Component {
 
   render() {
+    const store = configureStore({});
     return (
-      <Router  getSceneStyle={getSceneStyle}>
+      <Provider store={store}>
+      <Router getSceneStyle={getSceneStyle}>
         <Scene key='root' hideNavBar hideTabBar>
           <Scene key="footerTab"
                  tabs={true}
                  hideNavBar
                  tabBarStyle={styles.customizeFooter}>
                  <Scene key="homeTab" source={require('./img/home-icon.png')}
-                        icon={TabIcon} onPress={()=> {Actions.home({type: ActionConst.REFRESH})}} initial >
+                        icon={TabIcon} onPress={()=> {Actions.home({type: ActionConst.REFRESH})}} >
                         <Scene key='home' component={HomeScreen} hideNavBar/>
                  </Scene>
 
@@ -65,12 +69,17 @@ class CrodProject extends Component {
                 <Scene key="votingNonClicked">
                   <Scene key='voting' component={VotingScreen} hideNavBar/>
                 </Scene>
+
+                <Scene key="loginContainer" initial >
+                       <Scene key='login' component={LauncherScreen} hideNavBar hideTabBar/>
+                </Scene>
           </Scene>
 
         </Scene>
 
 
       </Router>
+      </Provider>
     )
   }
 
