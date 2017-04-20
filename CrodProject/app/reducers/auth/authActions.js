@@ -53,3 +53,21 @@ export function loginFailure (error) {
 export function saveToken (token) {
    return store.save('TOKEN_KEY', token)
 }
+export function getToken (token) {
+  return dispatch => {
+    return store.get('TOKEN_KEY')
+      .then((token) => {
+        if (token) {
+          //dispatch(sessionTokenRequestSuccess(token))
+          Actions.home({type: ActionConst.REFRESH})
+        } else {
+          //dispatch(sessionTokenRequestFailure())
+          Actions.login({type: ActionConst.REFRESH})
+        }
+      })
+      .catch((error) => {
+        //dispatch(sessionTokenRequestFailure(error))
+        Actions.login({type: ActionConst.REFRESH})
+      })
+  }
+}
