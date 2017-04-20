@@ -1,4 +1,5 @@
 'use strict'
+import _ from 'underscore'
 
 const {
   LOGIN_REQUEST,
@@ -24,11 +25,23 @@ export default function authReducer (state = initialState, action) {
        return state.set('isFetching', false)
 
      case LOGIN_FAILURE:
+
        return state.set('isFetching', false)
-       // TODO .set('error', action.payload)
+        .set('error', validateLoginError(action.payload))
 
   }
 
   // Default State
   return state
+}
+
+function validateLoginError(payload){
+  var error = '';
+  if (!_.isUndefined(payload.username))
+    error += 'Username: ' + payload.username
+  if (!_.isUndefined(payload.password))
+    error += 'Password: ' + payload.password
+  if (!_.isUndefined(payload.error))
+    error += payload.error
+  return error
 }
