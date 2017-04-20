@@ -1,9 +1,15 @@
+'use strict'
+
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 import React, { Component } from 'react';
 import {StyleSheet,Text,View,TouchableOpacity, TextInput} from 'react-native';
+
+// Actions
+import * as authActions from '../../reducers/auth/authActions'
+
 import ViewContainer from '../ViewContainer.js'
-import Icon from 'react-native-vector-icons/FontAwesome'
 import CircleSwipe from '../CircleSwipe.js'
-import {api} from '../../services/Service'
 
 
 class Login extends Component {
@@ -17,11 +23,14 @@ class Login extends Component {
 
 
   render() {
-
     return (
       <ViewContainer style={styles.container}>
-
       <View style={{flex: 1, justifyContent: 'center'}}>
+
+        <Text style={styles.errorHandle}>
+          {this.props.auth.isFetching ? 'Loading...'
+            : this.props.auth.error}
+        </Text>
 
         <TextInput
           placeholder="username"
@@ -37,7 +46,7 @@ class Login extends Component {
           onChangeText={(password) => this.setState({password})}
           style={styles.password}/>
 
-        <TouchableOpacity style={styles.buttonContainer} onPress={(event)=>api.postLogin(this.state.username,this.state.password)}>
+        <TouchableOpacity style={styles.buttonContainer} onPress={this._onPressLogin}>
           <Text style={styles.buttonText}>Login</Text>
         </TouchableOpacity>
         <TouchableOpacity>
@@ -47,9 +56,12 @@ class Login extends Component {
       </View>
 
       <CircleSwipe pageNumber={3} />
-
       </ViewContainer>
     )
+  }
+
+  _onPressLogin = () => {
+    this.props.login(this.state.username, this.state.password);
   }
 
 }
@@ -76,7 +88,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     fontSize: 18,
     borderRadius: 8,
-    marginBottom: 30
   },
   buttonContainer: {
     borderRadius: 50,
@@ -97,6 +108,20 @@ const styles = StyleSheet.create({
     color: 'white',
     alignSelf: "center"
   },
+  errorHandle: {
+    height: 25,
+    color: 'red',
+    alignSelf: 'center'
+  }
 });
 
-module.exports = Login
+// Redux boilerplate
+function mapStateToProps (state) {
+  return {
+    auth: state.auth,
+  }
+}
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(authActions, dispatch)
+}
+export default connect(mapStateToProps , mapDispatchToProps)(Login);
