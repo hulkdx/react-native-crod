@@ -3,8 +3,8 @@ import React, { Component } from 'react';
 import {StyleSheet,TextInput,TouchableOpacity,Image,Text,View,Dimensions,ScrollView} from 'react-native';
 import { RadioButtons } from 'react-native-radio-buttons'
 import CategoryHeader from './CategoryHeader.js'
-
 import categories from '../../data-manager/categories.js'
+import ModalPicker from 'react-native-modal-picker'
 
 const proposalIcon = require("../../../img/proposal-icon.png")
 const searchIcon = require("../../../img/search-icon1.png")
@@ -16,15 +16,19 @@ var height = Dimensions.get('window').height; //full height
 class Header extends Component {
   state = {
     isTabOpen: false,
+    textInputValue: ''
   };
 
+
+
   render() {
+
     /* createProposalViews: is the view of the proposal create when its clicked */
     const createProposalViews = this._renderCreateProposalViews();
 
     return (
       <View>
-      <ScrollView>
+      <ScrollView keyboardShouldPersistTaps= "always">
 {/* CategoryHeader: Shows the Category (image) when SideMenu clicked
   The id of the category received as a prop from the HomeScreen.js
   to then be passed as a prop to the HomeScreen/CategoryHeader.js */}
@@ -61,6 +65,7 @@ class Header extends Component {
   }
 /* Views of the create proposal */
   _renderCreateProposalViews(){
+
     return(
       <View style={[styles.expandTab]}>
         {this._renderSteps(1)}
@@ -106,6 +111,15 @@ class Header extends Component {
 /* render each steps of create proposal
    @param id: id of the step */
   _renderSteps(id){
+    let index = 0
+    let initial = 10
+    let days = " days"
+        var data = []
+        for(let i = 10; i <= 30; i++)
+        {
+          data.push({ key: index++,
+                      label: i + days })
+        }
     var views = [];
 
     switch (id) {
@@ -150,8 +164,25 @@ class Header extends Component {
       // Deadline
       case 4:
         views =
-        <View>
+        <View style={styles.deadlineContainer}>
         <Text style={styles.stepsText}>Deadline</Text>
+                 { /*
+                   Wrapper mode: just wrap your existing component with ModalPicker.
+                   When the user clicks on your element, the modal selector is shown.
+                   */ }
+               <ModalPicker
+                   data={data}
+                   initValue="Select number of day left"
+                   onChange={(option)=>{ this.setState({textInputValue:option.label})}}>
+
+                   <TextInput
+                       style={[{width: 200, textAlign: 'center'}, styles.textInput]}
+                       editable={false}
+                       placeholder="number of days left"
+                       placeholderTextColor= '#d7dade'
+                       value={this.state.textInputValue}/>
+
+               </ModalPicker>
         </View>
         break;
       // Attachment
@@ -262,7 +293,7 @@ const styles = StyleSheet.create({
     borderColor: '#E9EBEE',
     backgroundColor: 'white',
     borderRadius: 10,
-    fontSize: 16
+    fontSize: 16,
   },
   stepsRoot: {
     flexDirection: 'row',
@@ -273,7 +304,7 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
     color: 'rgba(136, 179, 217, 0.9)',
     fontSize: 18,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
   },
   categoryDropDown:{
     flex:1,
@@ -290,6 +321,14 @@ const styles = StyleSheet.create({
   divider: {
     height: 1,
     backgroundColor: '#88B3D9'
+  },
+  deadlineContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    paddingTop: 20,
+    paddingBottom: 20
   },
   createProposalBtn: {
     fontSize: 20,
