@@ -157,11 +157,14 @@ class DatePicker extends Component {
   }
 
   getTitleElement() {
-    const {date, placeholder, customStyles} = this.props;
+    const {mode, date, calendar, time, customStyles} = this.props;
 
-    if (!date && placeholder) {
-      return (<Text style={[Style.placeholderText, customStyles.placeholderText]}>{placeholder}</Text>);
-    }
+    if (!date && mode==='date' && calendar) {
+      return (<Text style={[Style.placeholderText, customStyles.placeholderText]}>{calendar}</Text>);
+    } else if (!date && mode==='time' && time) {
+    return (<Text style={[Style.placeholderText, customStyles.placeholderText]}>{time}</Text>);
+  }
+
     return (<Text style={[Style.dateText, customStyles.dateText]}>{this.getDateStr()}</Text>);
   }
 
@@ -223,7 +226,7 @@ class DatePicker extends Component {
 
       const {mode, androidMode, format = FORMATS[mode], minDate, maxDate, is24Hour = !format.match(/h|a/)} = this.props;
 
-      // 选日期
+      // showing the date popup
       if (mode === 'date') {
         DatePickerAndroid.open({
           date: this.state.date,
@@ -232,7 +235,7 @@ class DatePicker extends Component {
           mode: androidMode
         }).then(this.onDatePicked);
       } else if (mode === 'time') {
-        // 选时间
+        // showing the time popup
 
         let timeMoment = Moment(this.state.date);
 
@@ -242,7 +245,7 @@ class DatePicker extends Component {
           is24Hour: is24Hour
         }).then(this.onTimePicked);
       } else if (mode === 'datetime') {
-        // 选日期和时间
+        // showing the date and time popup together
 
         DatePickerAndroid.open({
           date: this.state.date,
@@ -359,14 +362,15 @@ DatePicker.defaultProps = {
 
   // slide animation duration time, default to 300ms, IOS only
   duration: 300,
-  confirmBtnText: '确定',
-  cancelBtnText: '取消',
+  confirmBtnText: 'Confirm',
+  cancelBtnText: 'Cancel',
   customStyles: {},
 
   // whether or not show the icon
   showIcon: true,
   disabled: false,
-  placeholder: 'date & time',
+  calendar: 'date',
+  time: 'time',
   modalOnResponderTerminationRequest: e => true
 };
 

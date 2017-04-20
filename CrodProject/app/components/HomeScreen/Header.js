@@ -170,11 +170,11 @@ class Header extends Component {
         <DatePicker
           style={styles.deadlineTextInput}
           date={this.state.datetime1}
-          mode="datetime"
-          format="YYYY-MM-DD HH:mm"
+          mode="date"
+          format="YYYY-MM-DD"
           confirmBtnText="Confirm"
           cancelBtnText="Cancel"
-
+          iconSource={require('../../../img/deadline-icon.png')}
           customStyles={{
             dateIcon: {
               position: 'absolute',
@@ -188,6 +188,28 @@ class Header extends Component {
           }}
           minuteInterval={10}
           onDateChange={(datetime) => {this.setState({datetime1: datetime});}}
+        />
+        <DatePicker
+          style={styles.deadlineTextInput}
+          date={this.state.time}
+          mode="time"
+          format="HH:mm"
+          confirmBtnText="Confirm"
+          cancelBtnText="Cancel"
+          iconSource={require('../../../img/time-icon.png')}
+          customStyles={{
+            dateIcon: {
+              position: 'absolute',
+              left: 0,
+              top: 4,
+              marginLeft: 3
+            },
+            dateInput: {
+              marginLeft: 36
+            }
+          }}
+          minuteInterval={10}
+          onDateChange={(time) => {this.setState({time: time});}}
         />
         </View>
         break;
@@ -334,16 +356,17 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'center',
     paddingTop: 20,
-    paddingBottom: 20
+    paddingBottom: 20,
+    paddingRight: 10
   },
   deadlineTextInput: {
-    width: 200,
-    marginLeft: 10,
-    marginRight: 10,
+    flex: 1,
+    marginLeft: 15,
     borderWidth: 1,
     borderColor: '#E9EBEE',
     backgroundColor: 'white',
     borderRadius: 10,
+
   },
   createProposalBtn: {
     fontSize: 20,

@@ -13,8 +13,9 @@ let style = StyleSheet.create({
   dateIcon: {
     width: 32,
     height: 32,
-    marginLeft: 5,
-    marginRight: 5
+    marginLeft: 10,
+    marginRight: 10,
+    tintColor: '#88B3D9'
   },
   dateInput: {
     flex: 1,
