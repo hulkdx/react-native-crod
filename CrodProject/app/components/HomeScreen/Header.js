@@ -30,10 +30,10 @@ class Header extends Component {
     return (
       <View>
       <ScrollView keyboardShouldPersistTaps= "always">
-{/* CategoryHeader: Shows the Category (image) when SideMenu clicked
-  The id of the category received as a prop from the HomeScreen.js
-  to then be passed as a prop to the HomeScreen/CategoryHeader.js */}
-        <CategoryHeader categoryId={this.props.categoryId} />
+         {/* CategoryHeader: Shows the Category (image) when SideMenu clicked
+          The id of the category received as a prop from the HomeScreen.js
+          to then be passed as a prop to the HomeScreen/CategoryHeader.js */}
+
 {/* Create Proposal Button */}
         <View style={styles.topBarRoot}>
         <View style={styles.profile}>
@@ -57,6 +57,7 @@ class Header extends Component {
           { this.state.isTabOpen == false ? <Image style={styles.proposalBtn} source={proposalIcon}/> : <Image style={styles.proposalBtn} source={closeIcon}/> }
          </TouchableOpacity>
          </View>
+         <CategoryHeader categoryId={this.props.categoryId} />
 {/* Create Proposal Button When its clicked it shows these views */}
         { this.state.isTabOpen && createProposalViews }
       </ScrollView>
