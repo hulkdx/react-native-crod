@@ -51,7 +51,7 @@ class Header extends Component {
               underlineColorAndroid='transparent'
               style={styles.searchText}/>
               </TouchableOpacity>
-         <TouchableOpacity onPress={this.onClickCreateProposal}
+         <TouchableOpacity onPress={this.state.isTabOpen == false ? this.onClickCreateProposal : this.onClickDone}
                            style={styles.proposal}>
           { this.state.isTabOpen == false ? <Image style={styles.proposalBtn} source={proposalIcon}/> : <Image style={styles.proposalBtn} source={closeIcon}/> }
          </TouchableOpacity>
@@ -110,15 +110,6 @@ class Header extends Component {
 /* render each steps of create proposal
    @param id: id of the step */
   _renderSteps(id){
-    let index = 0
-    let initial = 10
-    let days = " days"
-        var data = []
-        for(let i = 10; i <= 30; i++)
-        {
-          data.push({ key: index++,
-                      label: i + days })
-        }
     var views = [];
 
     switch (id) {
