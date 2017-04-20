@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import {StyleSheet,TextInput,TouchableOpacity,Image,Text,View} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-const attachmentSource = require("../../../img/attachment.png")
-const commentSource = require("../../../img/comment.png")
+const attachmentSource = require("../../../../img/attachment.png")
+const commentSource = require("../../../../img/comment.png")
 
 class ProposalTitle extends Component {
 

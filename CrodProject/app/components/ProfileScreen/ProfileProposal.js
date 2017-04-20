@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { ScrollView, StyleSheet,TextInput,TouchableOpacity,Image,Text,View,ListView} from 'react-native';
 import {Actions, ActionConst} from 'react-native-router-flux';
-import ProposalTitle from '../HomeScreen/ProposalTitle'
-import ProposalDeadline from '../HomeScreen/ProposalDeadline'
+import ProposalTitle from '../HomeScreen/ProposalFeed/ProposalTitle.js'
+import ProposalDeadline from '../HomeScreen/ProposalFeed/ProposalDeadline.js'
 
 const voteNoSource = require("../../../img/dislike.png")
 const voteYesSource = require("../../../img/like.png")
