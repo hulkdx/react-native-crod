@@ -46,6 +46,7 @@ class Header extends Component {
          </View>
 
          <TextInput
+              editable = {!this.state.isTabOpen}
               placeholder = "enter proposal title"
               placeholderTextColor = "#88B3D9"
               underlineColorAndroid='transparent'
