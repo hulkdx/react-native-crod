@@ -29,7 +29,7 @@ class Header extends Component {
 
     return (
       <View>
-      <ScrollView keyboardShouldPersistTaps= "always">
+      <ScrollView>
          {/* CategoryHeader: Shows the Category (image) when SideMenu clicked
           The id of the category received as a prop from the HomeScreen.js
           to then be passed as a prop to the HomeScreen/CategoryHeader.js */}
