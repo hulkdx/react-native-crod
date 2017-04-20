@@ -1,5 +1,7 @@
 'use strict'
-import {api} from '../../lib/Api'
+import { Actions, ActionConst } from 'react-native-router-flux';
+import { api } from '../../lib/Api'
+import store from 'react-native-simple-store'
 const {
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
@@ -7,21 +9,19 @@ const {
 } = require('../../lib/constants').default
 
 
-/*############## Login section ##############*/
+/*############## Login Section ##############*/
 export function login (username, password) {
   return dispatch => {
     dispatch(loginRequest())
     return api.login(username, password)
 
     .then(function (json) {
-      console.log(json);
-      // TODO return saveToken(json)
-        // .then(function () {
+      return saveToken(json.token)
+        .then(function () {
           dispatch(loginSuccess(json))
           // navigate to Home
-          // Actions.Tabbar()
-          // dispatch(logoutState())
-        // })
+          Actions.home({type: ActionConst.REFRESH})
+        })
     })
     .catch((error) => {
       dispatch(loginFailure(error))
@@ -47,4 +47,9 @@ export function loginFailure (error) {
     type: LOGIN_FAILURE,
     payload: error
   }
+}
+
+/*############## Token Section ##############*/
+export function saveToken (token) {
+   return store.save('TOKEN_KEY', token)
 }
