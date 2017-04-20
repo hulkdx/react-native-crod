@@ -4,8 +4,8 @@ import {StyleSheet,TextInput,TouchableOpacity,Image,Text,View,Dimensions,ScrollV
 import { RadioButtons } from 'react-native-radio-buttons'
 import CategoryHeader from './CategoryHeader.js'
 import categories from '../../data-manager/categories.js'
-import ModalPicker from 'react-native-modal-picker'
-
+import DatePicker from './DateTimePicker/DatePicker.js'
+import Moment from 'moment';
 const proposalIcon = require("../../../img/proposal-icon.png")
 const searchIcon = require("../../../img/search-icon1.png")
 const profilePhoto = require("../../../img/notification/man1.png")
@@ -16,7 +16,8 @@ var height = Dimensions.get('window').height; //full height
 class Header extends Component {
   state = {
     isTabOpen: false,
-    textInputValue: ''
+    textInputValue: '',
+    date: ''
   };
 
 
@@ -166,23 +167,28 @@ class Header extends Component {
         views =
         <View style={styles.deadlineContainer}>
         <Text style={styles.stepsText}>Deadline</Text>
-                 { /*
-                   Wrapper mode: just wrap your existing component with ModalPicker.
-                   When the user clicks on your element, the modal selector is shown.
-                   */ }
-               <ModalPicker
-                   data={data}
-                   initValue="Select number of day left"
-                   onChange={(option)=>{ this.setState({textInputValue:option.label})}}>
+        <DatePicker
+          style={styles.deadlineTextInput}
+          date={this.state.datetime1}
+          mode="datetime"
+          format="YYYY-MM-DD HH:mm"
+          confirmBtnText="Confirm"
+          cancelBtnText="Cancel"
 
-                   <TextInput
-                       style={[{width: 200, textAlign: 'center'}, styles.textInput]}
-                       editable={false}
-                       placeholder="number of days left"
-                       placeholderTextColor= '#d7dade'
-                       value={this.state.textInputValue}/>
-
-               </ModalPicker>
+          customStyles={{
+            dateIcon: {
+              position: 'absolute',
+              left: 0,
+              top: 4,
+              marginLeft: 0
+            },
+            dateInput: {
+              marginLeft: 36
+            }
+          }}
+          minuteInterval={10}
+          onDateChange={(datetime) => {this.setState({datetime1: datetime});}}
+        />
         </View>
         break;
       // Attachment
@@ -329,6 +335,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingTop: 20,
     paddingBottom: 20
+  },
+  deadlineTextInput: {
+    width: 200,
+    marginLeft: 10,
+    marginRight: 10,
+    borderWidth: 1,
+    borderColor: '#E9EBEE',
+    backgroundColor: 'white',
+    borderRadius: 10,
   },
   createProposalBtn: {
     fontSize: 20,
