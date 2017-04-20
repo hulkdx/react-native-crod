@@ -10,6 +10,7 @@ import HomeScreen from './app/screens/HomeScreen'
 import ProfileScreen from './app/screens/ProfileScreen'
 import NotificationScreen from './app/screens/NotificationScreen'
 import VotingScreen from './app/screens/VotingScreen'
+import App from './app/screens/App'
 
 /*
  * Displays the icon for the tab w/ color dependent upon selection
@@ -44,6 +45,10 @@ class CrodProject extends Component {
                  tabs={true}
                  hideNavBar
                  tabBarStyle={styles.customizeFooter}>
+                 <Scene key="App" initial>
+                        <Scene key='app' component={App} hideNavBar hideTabBar/>
+                 </Scene>
+
                  <Scene key="homeTab" source={require('./img/home-icon.png')}
                         icon={TabIcon} onPress={()=> {Actions.home({type: ActionConst.REFRESH})}} >
                         <Scene key='home' component={HomeScreen} hideNavBar/>
@@ -70,7 +75,7 @@ class CrodProject extends Component {
                   <Scene key='voting' component={VotingScreen} hideNavBar/>
                 </Scene>
 
-                <Scene key="loginContainer" initial >
+                <Scene key="loginContainer" >
                        <Scene key='login' component={LauncherScreen} hideNavBar hideTabBar/>
                 </Scene>
           </Scene>
