@@ -355,7 +355,7 @@ class DatePicker extends Component {
 
 DatePicker.defaultProps = {
   mode: 'date',
-  androidMode: 'spinner',
+  androidMode: 'default',
   date: '',
   // component height: 216(DatePickerIOS) + 1(borderTop) + 42(marginTop), IOS only
   height: 259,
