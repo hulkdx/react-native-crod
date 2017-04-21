@@ -1,38 +1,53 @@
 import React, { Component } from 'react';
-import {StyleSheet,Text,Image,Dimensions} from 'react-native';
+import {StyleSheet,Text,Image,Dimensions,View} from 'react-native';
 import proposals from '../../data-manager/proposals'
 
-const backgroundImage = require("../../../img/backgroundvotingup.jpg")
+
+const skipIcon = require("../../../img/skip-icon.png")
 
 class Header extends Component {
 
   render() {
-  // console.log(this.props.colorChange)
+
     return (
-      <Image style={styles.container} source={backgroundImage}>
-        <Text style={styles.title}>
-          {proposals[this.props.proposalId].title}
-        </Text>
+            <View style={styles.header}>
+            <Text style={styles.daysLeftTxt}> 12 days left </Text>
 
-      </Image>
-
+            <View style={styles.skipIconContainer}>
+            <Image style={styles.skipIcon}source={skipIcon}  />
+            </View>
+            </View>
     )
   }
 
 }
 
-var height = Dimensions.get('window').height; //full height
 const styles = StyleSheet.create({
-  container:{
-    width: null, height:height/4.2 ,
-     justifyContent: 'center'
+
+  header: {
+    flex: 1,
+    flexDirection: 'row',
+    backgroundColor: 'white',
+    borderBottomWidth: 1,
+    borderBottomColor: "#88B3D9",
+    height: 60,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
-  title:{
-    marginLeft: 10,
-    marginTop: 40,
-    fontSize: 15,
-    fontWeight:'bold'
+  daysLeftTxt: {
+    flex: 1,
   },
+  skipIconContainer: {
+    flex: 1,
+    alignItems: 'flex-end'
+  },
+  skipIcon: {
+    height: 45,
+    width: 45,
+    resizeMode: 'contain',
+    paddingRight: 20
+  },
+
 });
 
 module.exports = Header

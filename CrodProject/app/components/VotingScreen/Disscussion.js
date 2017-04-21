@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import {StyleSheet,Text, Image,View,ListView,TouchableOpacity,Dimensions,TextInput} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import ProposalVotes from '../ProfileScreen/ProposalVotes';
+import proposals from '../../data-manager/proposals'
 
 
 const disscussion = [

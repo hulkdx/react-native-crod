@@ -1,7 +1,7 @@
 const proposals = [
    { id:0,
      profilePic: require("../../img/notification/man1.png"),
-     fullName: "Brigel Pineti",
+     fullName: "Just You",
      title: "Reduce parking lot by 20% in favor of bicycle parking",
      description: "React Native is like React, but it uses native components instead of web components as building blocks. So to understand the basic structure of a React Native app, you need to understand some of the basic React concepts, like JSX, components, state, and props. If you already know React, you still need to learn some React-Native-specific stuff, like the native components. This tutorial is aimed at all audiences, whether you have React experience or not. Let's do this thing.",
      date: 16,
@@ -13,6 +13,7 @@ const proposals = [
      categoryIcon: require("../../img/categories/social.png"),
      articles: 7,
      discussions: 10,
+     comment: 'HAHA',
      voteYes: 10,
      voteNo: 5
    },
@@ -30,6 +31,7 @@ const proposals = [
      categoryIcon: require("../../img/categories/social.png"),
      articles: 10,
      discussions: 57,
+     comment: 'HAHAHA',
      voteYes: 10,
      voteNo: 5
    },
@@ -47,6 +49,7 @@ const proposals = [
      categoryIcon: require("../../img/categories/politics.png"),
      articles: 3,
      discussions: 6,
+     comment: 1,
      voteYes: 10,
      voteNo: 5
    },
@@ -64,6 +67,7 @@ const proposals = [
      categoryIcon: require("../../img/categories/financial.png"),
      articles: 8,
      discussions: 41,
+     comment: 1,
      voteYes: 10,
      voteNo: 5
    },
@@ -81,6 +85,7 @@ const proposals = [
      categoryIcon: require("../../img/categories/science.png"),
      articles: 16,
      discussions: 88,
+     comment: 1,
      voteYes: 10,
      voteNo: 5
    },
@@ -98,6 +103,7 @@ const proposals = [
      categoryIcon: require("../../img/categories/environment.png"),
      articles: 16,
      discussions: 88,
+     comment: 1,
      voteYes: 10,
      voteNo: 5
    },

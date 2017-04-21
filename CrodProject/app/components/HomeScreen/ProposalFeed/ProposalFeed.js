@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { ScrollView, StyleSheet,TextInput,TouchableOpacity,Image,Text,View,ListView,ViewContainer} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import proposals from '../../data-manager/proposals'
+import proposals from '../../../data-manager/proposals'
 import ProposalTitle from './ProposalTitle'
 import ProposalDeadline from './ProposalDeadline'
 import _ from 'underscore'
@@ -9,11 +9,11 @@ import _ from 'underscore'
 import {Actions, ActionConst} from 'react-native-router-flux'
 import PopupDialog, { DialogButton, DialogTitle, SlideAnimation } from 'react-native-popup-dialog'
 
-const voteNoSource = require("../../../img/dislike.png")
-const voteYesSource = require("../../../img/like.png")
-const discussionIcon = require("../../../img/discussion-icon.png")
-const articlesIcon = require("../../../img/article-icon.png")
-const categoryBackground = require("../../../img/categories/science.png")
+const voteNoSource = require("../../../../img/dislike.png")
+const voteYesSource = require("../../../../img/like.png")
+const discussionIcon = require("../../../../img/discussion-icon.png")
+const articlesIcon = require("../../../../img/article-icon.png")
+const categoryBackground = require("../../../../img/categories/science.png")
 var moment = require('moment')
 
 //var deadline = moment([2007, 0, 29]);
@@ -106,7 +106,7 @@ class ProposalFeed extends Component {
       <View style={styles.rowContainer}>
 
       <TouchableOpacity style={styles.proposal} onPress={this.proposalClicked.bind(this, proposal)} onLongPress={this.onLongPress.bind(this,proposal)}>
-        <ProposalTitle fullName={proposal.fullName} profilePic={proposal.profilePic} text={proposal.title} categoryIcon={proposal.categoryIcon} />
+        <ProposalTitle fullName={proposal.fullName} profilePic={proposal.profilePic} text={proposal.title} articles={proposal.articles} discussions={proposal.discussions}categoryIcon={proposal.categoryIcon} />
       </TouchableOpacity>
 
       <ProposalDeadline day={proposal.day} date={proposal.date} month={proposal.monthText} />
@@ -168,12 +168,13 @@ const styles = StyleSheet.create({
   customizePopUp: {
     flex:1,
     marginRight: 10,
-    marginLeft: 10
+    marginLeft: 10,
 
   },
   rowPopUp: {
     paddingTop: 10,
-    alignItems:'flex-start'
+    alignItems:'flex-start',
+    justifyContent: 'flex-start'
   },
   caption: {
     fontSize: 18,
@@ -182,6 +183,7 @@ const styles = StyleSheet.create({
   text: {
     paddingTop: 5,
     fontSize: 18,
+    textAlign: 'left'
 
   }
 });

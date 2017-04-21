@@ -3,35 +3,61 @@ import React, { Component } from 'react';
 import {StyleSheet,TextInput,TouchableOpacity,Image,Text,View,Dimensions,ScrollView} from 'react-native';
 import { RadioButtons } from 'react-native-radio-buttons'
 import CategoryHeader from './CategoryHeader.js'
-
 import categories from '../../data-manager/categories.js'
-
+import DatePicker from './DateTimePicker/DatePicker.js'
+import Moment from 'moment';
+const proposalIcon = require("../../../img/proposal-icon.png")
+const searchIcon = require("../../../img/search-icon1.png")
+const profilePhoto = require("../../../img/notification/man1.png")
+const closeIcon = require("../../../img/close-icon.png")
 var width = Dimensions.get('window').width; //full width
 var height = Dimensions.get('window').height; //full height
 
 class Header extends Component {
   state = {
     isTabOpen: false,
+    textInputValue: '',
+    date: ''
   };
 
+
+
   render() {
+
     /* createProposalViews: is the view of the proposal create when its clicked */
     const createProposalViews = this._renderCreateProposalViews();
 
     return (
       <View>
       <ScrollView>
-{/* CategoryHeader: Shows the Category (image) when SideMenu clicked
-  The id of the category received as a prop from the HomeScreen.js
-  to then be passed as a prop to the HomeScreen/CategoryHeader.js */}
-        <CategoryHeader categoryId={this.props.categoryId} />
-{/* Create Proposal Button */}
-        <TouchableOpacity disabled={this.state.isTabOpen}
-                          onPress={this.onClickCreateProposal}
-                          style={styles.topBarRoot}>
+         {/* CategoryHeader: Shows the Category (image) when SideMenu clicked
+          The id of the category received as a prop from the HomeScreen.js
+          to then be passed as a prop to the HomeScreen/CategoryHeader.js */}
 
-          <Text style={styles.textProposal}>Create Your Proposal</Text>
-        </TouchableOpacity>
+{/* Create Proposal Button */}
+        <View style={styles.topBarRoot}>
+        <View style={styles.profile}>
+        <Image source={profilePhoto} style={styles.profilePhoto}/>
+          </View>
+        <TouchableOpacity style={styles.search}>
+
+         <View style={styles.searchBtnContainer}>
+         <Image style={styles.searchBtn} source={searchIcon}/>
+         </View>
+
+         <TextInput
+              editable = {!this.state.isTabOpen}
+              placeholder = "enter proposal title"
+              placeholderTextColor = "#88B3D9"
+              underlineColorAndroid='transparent'
+              style={styles.searchText}/>
+              </TouchableOpacity>
+         <TouchableOpacity onPress={this.state.isTabOpen == false ? this.onClickCreateProposal : this.onClickDone}
+                           style={styles.proposal}>
+          { this.state.isTabOpen == false ? <Image style={styles.proposalBtn} source={proposalIcon}/> : <Image style={styles.proposalBtn} source={closeIcon}/> }
+         </TouchableOpacity>
+         </View>
+         <CategoryHeader categoryId={this.props.categoryId} />
 {/* Create Proposal Button When its clicked it shows these views */}
         { this.state.isTabOpen && createProposalViews }
       </ScrollView>
@@ -40,6 +66,7 @@ class Header extends Component {
   }
 /* Views of the create proposal */
   _renderCreateProposalViews(){
+
     return(
       <View style={[styles.expandTab]}>
         {this._renderSteps(1)}
@@ -52,9 +79,9 @@ class Header extends Component {
 
         {this._renderSteps(5)}
 
-        <TouchableOpacity style={{alignItems:'center'}}
+        <TouchableOpacity style={styles.createProposalBtnContainer}
         onPress={this.onClickDone}>
-          <Text>done</Text>
+          <Text style={styles.createProposalBtn}>Create Proposal</Text>
         </TouchableOpacity>
         <View style={styles.divider} />
     </View>
@@ -92,8 +119,10 @@ class Header extends Component {
       case 1:
         views =
         <View>
-        <Text style={styles.stepsText}>Choose a category</Text>
+        <Text style={styles.stepsText}>Pick a Category</Text>
+
         {this._renderCategoryImages()}
+
         </View>
 
         break;
@@ -104,7 +133,12 @@ class Header extends Component {
         <Text style={styles.stepsText}>Choose a Title</Text>
         <TextInput
           style={styles.textInput}
-          placeholder="type title"/>
+          multiline={true}
+          numberOfLines={5}
+          underlineColorAndroid='transparent'
+          maxLength={200}
+          placeholder="the title must be 50-200 characters long."
+          placeholderTextColor="#d7dade"/>
         </View>
         break;
       // Description
@@ -115,24 +149,70 @@ class Header extends Component {
         <TextInput
           style={styles.textInput}
           multiline={true}
-          numberOfLines={5}
-          placeholder="type description"/>
+          numberOfLines={12}
+          maxLength={500}
+          placeholder="the description must be 250-500 characters long."
+          placeholderTextColor="#d7dade"/>
         </View>
         break;
       // Deadline
       case 4:
         views =
-        <View>
+        <View style={styles.deadlineContainer}>
         <Text style={styles.stepsText}>Deadline</Text>
+        <DatePicker
+          style={styles.deadlineTextInput}
+          date={this.state.datetime1}
+          mode="date"
+          format="YYYY-MM-DD"
+          confirmBtnText="Confirm"
+          cancelBtnText="Cancel"
+          iconSource={require('../../../img/deadline-icon.png')}
+          customStyles={{
+            dateIcon: {
+              position: 'absolute',
+              left: 0,
+              top: 4,
+              marginLeft: 0
+            },
+            dateInput: {
+              marginLeft: 36
+            }
+          }}
+          minuteInterval={10}
+          onDateChange={(datetime) => {this.setState({datetime1: datetime});}}
+        />
+        <DatePicker
+          style={styles.deadlineTextInput}
+          date={this.state.time}
+          mode="time"
+          format="HH:mm"
+          confirmBtnText="Confirm"
+          cancelBtnText="Cancel"
+          iconSource={require('../../../img/time-icon.png')}
+          customStyles={{
+            dateIcon: {
+              position: 'absolute',
+              left: 0,
+              top: 4,
+              marginLeft: 3
+            },
+            dateInput: {
+              marginLeft: 36
+            }
+          }}
+          minuteInterval={10}
+          onDateChange={(time) => {this.setState({time: time});}}
+        />
         </View>
         break;
       // Attachment
       case 5:
         views =
-        <View>
-        <Text style={styles.stepsText}>Attachment</Text>
-        <TouchableOpacity style={{alignSelf:'center'}}>
-          <Image source={require("../../../img/attachment.png")}/>
+        <View style={styles.attachments}>
+        <Text style={styles.stepsText}>Attachments</Text>
+        <TouchableOpacity>
+          <Image style={styles.attachMore} source={require("../../../img/add-more-icon.png")}/>
         </TouchableOpacity>
         </View>
         break;
@@ -166,29 +246,86 @@ const styles = StyleSheet.create({
     marginLeft: 50,
   },
   expandTab: {
-    backgroundColor: 'white',
+    backgroundColor: '#FFF',
   },
   topBarRoot:{
-    flexDirection: 'row',
-    backgroundColor: '#88B3D9',
-  },
-  textProposal: {
     flex: 1,
-    textAlign: 'center',
-    paddingTop: 20,
-    paddingBottom: 20,
-    color: 'rgba(255,255,255,0.7)',
-    fontSize: 18,
+    flexDirection: 'row',
+    backgroundColor: 'white',
+    borderBottomWidth: 1,
+    borderBottomColor: "#88B3D9",
+    height: 60,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  profile: {
+    flex: 1,
+    marginLeft: 15,
+  },
+  search: {
+    flex: 2,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 10,
+    backgroundColor: '#E9EBEE',
+
+  },
+  searchBtnContainer: {
+    height: 37,
+    paddingLeft: 5,
+    paddingTop: 2,
+  },
+  searchText: {
+    flex: 1,
+    height: 37,
+    fontSize: 15,
+    marginTop: 5,
+    color: '#88B3D9',
+    fontFamily: 'Roboto',
+
+  },
+  proposal: {
+    flex: 1,
+    alignItems: 'flex-end',
+    paddingRight: 10
+  },
+  searchBtn: {
+    height: 30,
+    width: 30,
+    resizeMode: 'contain',
+    tintColor: '#88B3D9',
+  },
+  proposalBtn: {
+    height: 35,
+    width: 35,
+    resizeMode: 'contain',
+    tintColor: '#88B3D9'
+  },
+  profilePhoto: {
+    height: 35,
+    width: 35,
+    resizeMode: 'contain',
+  },
+  textInput: {
+    marginLeft: 10,
+    marginRight: 10,
+    borderWidth: 1,
+    borderColor: '#E9EBEE',
+    backgroundColor: 'white',
+    borderRadius: 10,
+    fontSize: 16,
   },
   stepsRoot: {
     flexDirection: 'row',
   },
   stepsText: {
     marginLeft: 10,
-    marginTop: 5,
+    paddingTop: 10,
+    paddingBottom: 10,
     color: 'rgba(136, 179, 217, 0.9)',
-    fontSize: 14,
-    fontWeight: 'bold'
+    fontSize: 18,
+    fontWeight: 'bold',
   },
   categoryDropDown:{
     flex:1,
@@ -199,13 +336,55 @@ const styles = StyleSheet.create({
     resizeMode: 'center',
   },
   categorySelectedImage: {
-    tintColor: 'blue',
+    tintColor: '#88B3D9',
     resizeMode: 'center',
   },
   divider: {
-    height: 5,
-    backgroundColor: '#b6b6b6'
+    height: 1,
+    backgroundColor: '#88B3D9'
+  },
+  deadlineContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    paddingTop: 20,
+    paddingBottom: 20,
+    paddingRight: 10
+  },
+  deadlineTextInput: {
+    flex: 1,
+    marginLeft: 15,
+    borderWidth: 1,
+    borderColor: '#E9EBEE',
+    backgroundColor: 'white',
+    borderRadius: 10,
+
+  },
+  createProposalBtn: {
+    fontSize: 20,
+    color: 'white',
+    backgroundColor: '#88B3D9',
+    padding: 15,
+    borderRadius: 10,
+  },
+  createProposalBtnContainer: {
+    paddingTop: 10,
+    paddingBottom: 10,
+    alignItems:'center'
+  },
+  attachMore: {
+    height: 40,
+    width: 40,
+    resizeMode: 'contain',
+    tintColor: '#88B3D9',
+    marginLeft: 15
+  },
+  attachments: {
+    flexDirection: 'row'
   }
+
+
 });
 
 module.exports = Header
