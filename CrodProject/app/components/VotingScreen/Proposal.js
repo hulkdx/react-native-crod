@@ -24,7 +24,7 @@ class Proposal extends Component {
 var height = Dimensions.get('window').height; //full height
 const styles = StyleSheet.create({
   container:{
-    width: null, height:height/2 ,
+    width: null, height:height/5 ,
      justifyContent: 'center'
   },
   title:{
