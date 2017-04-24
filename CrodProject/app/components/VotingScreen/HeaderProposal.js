@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {StyleSheet,Text,Image,Dimensions} from 'react-native';
-import proposals from '../../data-manager/proposals'
 
+import proposals from '../../data-manager/proposals'
 const backgroundImage = require("../../../img/backgroundvotingup.jpg")
 
 class Proposal extends Component {
@@ -21,10 +21,9 @@ class Proposal extends Component {
 
 }
 
-var height = Dimensions.get('window').height; //full height
 const styles = StyleSheet.create({
   container:{
-    width: null, height:height/5 ,
+    width: null, height:Dimensions.get('window').height/5 ,
      justifyContent: 'center'
   },
   title:{

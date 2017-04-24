@@ -1,19 +1,23 @@
+/*
+  Created by Mohammad Jafarzadeh Rezvan, Brigel Pineti
+
+  Proposal tab
+*/
+'use strict'
 import React, { Component } from 'react';
-import { ScrollView, StyleSheet,TextInput,TouchableOpacity,Image,Text,View,ListView} from 'react-native';
+import {StyleSheet,TouchableOpacity,View,ListView} from 'react-native';
 import {Actions, ActionConst} from 'react-native-router-flux';
+
 import ProposalTitle from '../HomeScreen/ProposalFeed/ProposalTitle.js'
 import ProposalDeadline from '../HomeScreen/ProposalFeed/ProposalDeadline.js'
-
 const voteNoSource = require("../../../img/dislike.png")
 const voteYesSource = require("../../../img/like.png")
-const dividerImage = require("../../../img/dividerblue.jpg")
+
 // TODO: change this from category data-manager
 const categorySource = require("../../../img/categories/science.png")
+import userProposal from '../../data-manager/userProposal'
 
-import userProposal from '../../data-manager/userHistory'
-
-
-class ProfileHistory extends Component {
+class ProfileProposal extends Component {
 
 
   constructor(props) {
@@ -26,7 +30,7 @@ class ProfileHistory extends Component {
 
   render() {
     return (
-      <View style={styles.proposalFeed}>
+      <View style={styles.container}>
       <ListView
       dataSource={this.state.dataSource}
       renderRow={(proposal) => {return this._renderProposalRow(proposal)} }
@@ -42,11 +46,12 @@ class ProfileHistory extends Component {
     @param proposal: the proposal elements from /data-manager/proposal.js
   */
   _renderProposalRow(proposal){
+    console.log(proposal);
     return(
       <View style={styles.rowContainer}>
 
       <TouchableOpacity style={styles.rowProposalRoot} onPress={this.proposalClicked.bind(this,proposal)}>
-        <ProposalTitle fullName={proposal.fullName} profilePic={proposal.profilePic} text={proposal.title} category={categorySource} />
+        <ProposalTitle text={proposal.title} category={categorySource} />
       </TouchableOpacity>
 
       <ProposalDeadline style={styles.deadline} day={proposal.day} date={proposal.date} month={proposal.monthText} />
@@ -65,7 +70,7 @@ class ProfileHistory extends Component {
 }
 
 const styles = StyleSheet.create({
-  proposalFeed:{
+  container:{
     flex:8,
     backgroundColor: '#E9EBEE',
     // borderWidth: 2,
@@ -84,4 +89,4 @@ const styles = StyleSheet.create({
 });
 
 
-module.exports = ProfileHistory
+module.exports = ProfileProposal

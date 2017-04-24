@@ -1,3 +1,8 @@
+/*
+  Created by Mohammad Jafarzadeh Rezvan, Brigel Pineti
+
+  ViewContainer that is root of each screen
+*/
 'use strict'
 import React, { Component } from 'react';
 import {AppRegistry,StyleSheet,Text,View,TouchableHighlight} from 'react-native';

@@ -1,3 +1,8 @@
+/*
+  Created by Mohammad Jafarzadeh Rezvan, Brigel Pineti
+
+  Actions
+*/
 'use strict'
 import { Actions, ActionConst } from 'react-native-router-flux';
 import { api } from '../../lib/Api'

@@ -1,15 +1,24 @@
-// TODO: TWO ANDROID ELEMENTS
+/*
+  Created by Mohammad Jafarzadeh Rezvan, Brigel Pineti
+
+  Header
+  TODO: TWO ANDROID ELEMENTS are used in this file
+*/
+'use strict'
 import React, { Component } from 'react';
 import {StyleSheet,TextInput,TouchableOpacity,Image,Text,View,Dimensions,ScrollView} from 'react-native';
 import { RadioButtons } from 'react-native-radio-buttons'
+import Moment from 'moment';
+
 import CategoryHeader from './CategoryHeader.js'
 import categories from '../../data-manager/categories.js'
 import DatePicker from './DateTimePicker/DatePicker.js'
-import Moment from 'moment';
+
 const proposalIcon = require("../../../img/proposal-icon.png")
 const searchIcon = require("../../../img/search-icon1.png")
 const profilePhoto = require("../../../img/notification/man1.png")
 const closeIcon = require("../../../img/close-icon.png")
+
 var width = Dimensions.get('window').width; //full width
 var height = Dimensions.get('window').height; //full height
 

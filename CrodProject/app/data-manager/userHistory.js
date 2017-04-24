@@ -1,3 +1,9 @@
+/*
+  Created by Mohammad Jafarzadeh Rezvan, Brigel Pineti
+
+  All of these data shall be change with API
+*/
+'use strict'
 const proposals = [
   {id:0, title: "userHistory1", deadline: "1.5.2017", voteYes: 10, voteNo: 5,date: 16,
   monthNumber: 4,

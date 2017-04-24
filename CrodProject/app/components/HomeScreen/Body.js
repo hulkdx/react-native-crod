@@ -1,5 +1,13 @@
+/*
+  Created by Mohammad Jafarzadeh Rezvan, Brigel Pineti
+
+  Body This file contains SideMenu and ProposalFeed (on the right hand of
+  SideMenu) Check the SideMenu https://github.com/react-native-community/react-native-side-menu
+  For more informatin of the instruction.
+*/
+'use strict'
 import React, { Component } from 'react';
-import { ScrollView, PropTypes, StyleSheet,TextInput,TouchableOpacity,Image,Text,View,ListView} from 'react-native';
+import {StyleSheet,View} from 'react-native';
 import CategoryMenu from "./CategoryMenu.js"
 import ProposalFeed from "./ProposalFeed/ProposalFeed.js"
 

@@ -1,3 +1,8 @@
+/*
+  Created by Mohammad Jafarzadeh Rezvan, Brigel Pineti
+
+  Circles of swipes on the bottom of the LoginScreen
+*/
 import React, { Component } from 'react';
 import {StyleSheet,Text,View,TouchableOpacity, TextInput, Image} from 'react-native';
 import ViewContainer from '../components/ViewContainer.js'

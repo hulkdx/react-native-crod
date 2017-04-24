@@ -1,3 +1,8 @@
+/*
+  Created by Mohammad Jafarzadeh Rezvan, Brigel Pineti
+
+  Reducers
+*/
 'use strict'
 import _ from 'underscore'
 

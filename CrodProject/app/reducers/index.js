@@ -1,3 +1,8 @@
+/*
+  Created by Mohammad Jafarzadeh Rezvan, Brigel Pineti
+
+  Combine each reducers
+*/
 'use strict'
 
 import { combineReducers } from 'redux'

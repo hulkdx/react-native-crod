@@ -1,3 +1,8 @@
+/*
+  Created by Mohammad Jafarzadeh Rezvan, Brigel Pineti
+
+  All of these data shall be change with API
+*/
 'use strict'
 
 const articles = [

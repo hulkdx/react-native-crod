@@ -1,3 +1,8 @@
+/*
+  Created by Mohammad Jafarzadeh Rezvan, Brigel Pineti
+
+  HomeScreen, This screen will show first after the user login
+*/
 'use strict'
 import React, { Component } from 'react';
 

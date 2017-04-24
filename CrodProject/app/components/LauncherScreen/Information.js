@@ -1,3 +1,10 @@
+/*
+  Created by Mohammad Jafarzadeh Rezvan, Brigel Pineti
+
+  Information Tab
+  TODO: maybe it contain the info of this app
+*/
+'use strict'
 import React, { Component } from 'react';
 import {StyleSheet,Text,View} from 'react-native';
 import ViewContainer from '../ViewContainer.js'
@@ -51,8 +58,7 @@ const styles = StyleSheet.create({
     color: '#FFF',
     paddingHorizontal: 10,
     fontSize: 18,
-    borderRadius: 8,
-    marginBottom: 30
+    borderRadius: 8
   },
   buttonContainer: {
     borderRadius: 50,

@@ -1,12 +1,15 @@
+/*
+  Created by Mohammad Jafarzadeh Rezvan, Brigel Pineti
+
+  Body, contains 2 tabs (ProfileProposal, ProfileHistory)
+*/
+'use strict'
 import React, { Component } from 'react';
-import {StyleSheet,TextInput,TouchableOpacity,Image,Text,View,ListView,Dimensions} from 'react-native';
+import {StyleSheet,Text,View,Dimensions} from 'react-native';
 import Tabs from 'react-native-tabs';
-import ProfileHistory from '../ProfileScreen/ProfileHistory.js'
-import ProfileProposal from '../ProfileScreen/ProfileProposal.js'
 
-const backgroundImage = require("../../../img/backgroundblu.jpg")
-
-Dimensions.get('window').height / 14;
+import History from '../ProfileScreen/History.js'
+import YourProposal from '../ProfileScreen/YourProposal.js'
 
 class ProfileBody extends Component {
 
@@ -36,11 +39,11 @@ class ProfileBody extends Component {
     switch (this.state.page) {
       case 'proposal':
         return(
-          <ProfileProposal  />
+          <YourProposal  />
         )
       case 'history':
       return(
-        <ProfileHistory />
+        <History />
       );
     }
   }
@@ -68,9 +71,6 @@ class ProfileBody extends Component {
 const styles = StyleSheet.create({
   container: {
     flex:8,
-  },
-  textStyle:{
-    fontSize: 18.5
   },
   tabContainer:{
     height: Dimensions.get('window').height / 14,

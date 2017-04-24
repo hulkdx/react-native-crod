@@ -1,3 +1,8 @@
+/*
+  Created by Mohammad Jafarzadeh Rezvan, Brigel Pineti
+
+  Root of Android
+*/
 import React, { Component } from 'react';
 import { AppRegistry, Image, StyleSheet } from 'react-native';
 import { Router, Scene, Actions, ActionConst } from 'react-native-router-flux';

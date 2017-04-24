@@ -1,5 +1,9 @@
+/*
+  Created by Mohammad Jafarzadeh Rezvan, Brigel Pineti
 
-
+  All of these data shall be change with API
+*/
+'use strict'
 const categories = [
     { name: "environment",
       image: require("../../img/categories/environment.png"),

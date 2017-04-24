@@ -1,13 +1,20 @@
+/*
+  Created by Mohammad Jafarzadeh Rezvan, Brigel Pineti
+
+  Body of VotingScreen, contains 3 tabs (Articles, Disscussion, Statistics) 4
+  and VotingAnimation
+*/
 'use strict'
 // Android element elevation defined for middle voting image
 import React, { Component } from 'react';
-import {StyleSheet,Text, Image,View,Animated,PanResponder,Dimensions} from 'react-native';
+import {StyleSheet,Text,View,Dimensions} from 'react-native';
+import _ from 'underscore'
+
 import Tabs from 'react-native-tabs';
 import Articles from './Articles.js'
 import Statistics from './Statistics.js'
 import Disscussion from './Disscussion.js'
 import VotingAnimation from './VotingAnimation.js'
-import _ from 'underscore'
 
 
 class Body extends Component {

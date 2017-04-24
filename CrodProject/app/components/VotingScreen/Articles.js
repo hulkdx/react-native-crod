@@ -1,8 +1,13 @@
+/*
+  Created by Mohammad Jafarzadeh Rezvan, Brigel Pineti
+
+  Articles tab bar
+*/
 'use strict'
 import React, { Component } from 'react';
 import {StyleSheet,Text,Image,View,ListView} from 'react-native';
-import articleData from '../../data-manager/articles'
 
+import articleData from '../../data-manager/articles'
 const dividerImage = require("../../../img/dividerblue.jpg")
 
 class Articles extends Component {

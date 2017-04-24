@@ -1,3 +1,8 @@
+/*
+  Created by Mohammad Jafarzadeh Rezvan, Brigel Pineti
+
+  Login Screen
+*/
 'use strict'
 
 import { bindActionCreators } from 'redux'

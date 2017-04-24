@@ -1,10 +1,16 @@
+/*
+  Created by Mohammad Jafarzadeh Rezvan, Brigel Pineti
+
+  VotingAnimation shows animation of voting (going to left or right)
+*/
 'use strict'
 // Android element elevation defined for middle voting image
 import React, { Component } from 'react';
-import {StyleSheet,Text, Image,View,Animated,PanResponder,Dimensions} from 'react-native';
+import {StyleSheet,Image,View,Animated,PanResponder,Dimensions} from 'react-native';
+import {Actions} from 'react-native-router-flux';
+
 let WindowWidth = Dimensions.get('window').width;
 let WindowHeight = Dimensions.get('window').height;
-import {Actions} from 'react-native-router-flux';
 
 const backgroundImage = require("../../../img/crowlogo.png")
 

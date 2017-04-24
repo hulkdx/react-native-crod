@@ -1,5 +1,11 @@
+/*
+  Created by Mohammad Jafarzadeh Rezvan, Brigel Pineti
+
+  A shared component representing the deadlines
+*/
+'use strict'
 import React, { Component } from 'react';
-import {StyleSheet,TextInput,TouchableOpacity,Image,Text,View} from 'react-native';
+import {StyleSheet,Text,View} from 'react-native';
 
 class ProposalDeadline extends Component {
 
@@ -58,7 +64,7 @@ const styles = StyleSheet.create({
     marginLeft: 9,
     backgroundColor: 'white',
     borderColor: '#2575BB',
-    borderWidth: 0.2,
+    //borderWidth: 0.2,
     borderRadius: 10,
   },
 });

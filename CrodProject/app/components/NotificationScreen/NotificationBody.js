@@ -1,5 +1,12 @@
+/*
+  Created by Mohammad Jafarzadeh Rezvan, Brigel Pineti
+
+  Body
+*/
+'use strict'
 import React, { Component } from 'react';
-import {StyleSheet,TextInput,TouchableOpacity,Image,Text,View,ListView,ViewContainer} from 'react-native';
+import {StyleSheet,TouchableOpacity,Image,Text,View,ListView} from 'react-native';
+
 import notifications from '../../data-manager/notifications'
 const dividerImage = require("../../../img/dividerblue.jpg")
 

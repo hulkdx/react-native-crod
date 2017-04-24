@@ -1,20 +1,23 @@
-import React, { Component } from 'react';
-import {StyleSheet,TextInput,TouchableOpacity,Image,Text,View} from 'react-native';
-import ViewContainer from '../components/ViewContainer.js'
-import ProfileHeader from '../components/ProfileScreen/ProfileHeader.js'
+/*
+  Created by Mohammad Jafarzadeh Rezvan, Brigel Pineti
 
-import ProfileBody from '../components/ProfileScreen/ProfileBody.js'
-import CreateProposal from '../components/HomeScreen/Header.js'
+  ProfileScreen to show profile information
+*/
+'use strict'
+import React, { Component } from 'react';
+//import {StyleSheet} from 'react-native';
+
+import ViewContainer from '../components/ViewContainer.js'
+import Header from '../components/ProfileScreen/Header.js'
+import Body from '../components/ProfileScreen/Body.js'
 
 class ProfileScreen extends Component {
-
-
 
   render() {
     return (
       <ViewContainer>
-        <ProfileHeader />
-        <ProfileBody />
+        <Header />
+        <Body />
       </ViewContainer>
 
     )
@@ -22,8 +25,8 @@ class ProfileScreen extends Component {
 
 }
 
-const styles = StyleSheet.create({
-
-});
+// const styles = StyleSheet.create({
+//
+// });
 
 module.exports = ProfileScreen

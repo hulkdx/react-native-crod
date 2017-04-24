@@ -1,9 +1,15 @@
+/*
+  Created by Mohammad Jafarzadeh Rezvan, Brigel Pineti
+
+  Disscussion tab bar
+*/
 'use strict'
 
 import React, { Component } from 'react';
-import {StyleSheet,Text, Image,View,ListView,TouchableOpacity,Dimensions,TextInput} from 'react-native';
+import {StyleSheet,Text, Image,View,ListView,TouchableOpacity,TextInput} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import ProposalVotes from '../ProfileScreen/ProposalVotes';
+
+import ProposalVotes from './ProposalVotes';
 import proposals from '../../data-manager/proposals'
 
 

@@ -1,5 +1,10 @@
+/*
+  Created by Mohammad Jafarzadeh Rezvan, Brigel Pineti
+
+  Show the Notifications
+*/
+'use strict'
 import React, { Component } from 'react';
-import {StyleSheet,TextInput,TouchableOpacity,Image,Text,View} from 'react-native';
 import ViewContainer from '../components/ViewContainer.js'
 import NotificationBody from '../components/NotificationScreen/NotificationBody.js'
 
@@ -19,9 +24,5 @@ class NotificationScreen extends Component {
   }
 
 }
-
-const styles = StyleSheet.create({
-
-});
 
 module.exports = NotificationScreen

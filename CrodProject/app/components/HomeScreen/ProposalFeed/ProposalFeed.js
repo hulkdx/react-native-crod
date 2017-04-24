@@ -1,26 +1,20 @@
+/*
+  Created by Mohammad Jafarzadeh Rezvan, Brigel Pineti
+
+  A shared component representing the ProposalFeed
+*/
+'use strict'
 import React, { Component } from 'react';
-import { ScrollView, StyleSheet,TextInput,TouchableOpacity,Image,Text,View,ListView,ViewContainer} from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import proposals from '../../../data-manager/proposals'
-import ProposalTitle from './ProposalTitle'
-import ProposalDeadline from './ProposalDeadline'
-import _ from 'underscore'
-//import categories from '../../data-manager/categories'
+import { ScrollView, StyleSheet,TouchableOpacity,Text,View,ListView} from 'react-native';
 import {Actions, ActionConst} from 'react-native-router-flux'
 import PopupDialog, { DialogButton, DialogTitle, SlideAnimation } from 'react-native-popup-dialog'
+import Icon from 'react-native-vector-icons/FontAwesome';
+import _ from 'underscore'
 
-const voteNoSource = require("../../../../img/dislike.png")
-const voteYesSource = require("../../../../img/like.png")
-const discussionIcon = require("../../../../img/discussion-icon.png")
-const articlesIcon = require("../../../../img/article-icon.png")
-const categoryBackground = require("../../../../img/categories/science.png")
-var moment = require('moment')
+import ProposalTitle from './ProposalTitle'
+import ProposalDeadline from './ProposalDeadline'
 
-//var deadline = moment([2007, 0, 29]);
-//var b = moment([2007, 0, 2]);
-//var diff = a.diff(b, 'days')
-
-
+import proposals from '../../../data-manager/proposals'
 
 class ProposalFeed extends Component {
 

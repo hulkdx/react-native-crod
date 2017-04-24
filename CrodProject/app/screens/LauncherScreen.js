@@ -1,3 +1,10 @@
+/*
+  Created by Mohammad Jafarzadeh Rezvan, Brigel Pineti
+
+  Login Screen
+  TODO: Register Screen
+*/
+'use strict'
 import React, { Component } from 'react';
 import {StyleSheet} from 'react-native';
 import Swiper from 'react-native-swiper'
@@ -45,8 +52,7 @@ const styles = StyleSheet.create({
     color: '#FFF',
     paddingHorizontal: 10,
     fontSize: 18,
-    borderRadius: 8,
-    marginBottom: 30
+    borderRadius: 8
   },
   buttonContainer: {
     borderRadius: 50,

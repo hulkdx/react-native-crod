@@ -1,7 +1,12 @@
-import React, { Component } from 'react';
-import {View, StyleSheet,TouchableOpacity,Image,Text,Dimensions} from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome'
+/*
+  Created by Mohammad Jafarzadeh Rezvan, Brigel Pineti
 
+  Header
+*/
+'use strict'
+import React, { Component } from 'react';
+import {StyleSheet,TouchableOpacity,Image,Text,Dimensions} from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome'
 
 const profileImage = require("../../../img/brigelTestImage.png");
 

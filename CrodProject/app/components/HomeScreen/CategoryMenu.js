@@ -1,3 +1,9 @@
+/*
+  Created by Mohammad Jafarzadeh Rezvan, Brigel Pineti
+
+  Categories listed in SideMenu
+*/
+'use strict'
 import React, { Component } from 'react';
 import {ScrollView, StyleSheet,TouchableOpacity,Image,Text,View} from 'react-native';
 import categories from "../../data-manager/categories.js"

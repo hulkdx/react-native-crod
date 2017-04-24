@@ -1,5 +1,11 @@
+/*
+  Created by Mohammad Jafarzadeh Rezvan, Brigel Pineti
+
+  A shared component representing the Proposal Title
+*/
+'use strict'
 import React, { Component } from 'react';
-import {StyleSheet,TextInput,TouchableOpacity,Image,Text,View} from 'react-native';
+import {StyleSheet,Image,Text,View} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 const attachmentSource = require("../../../../img/attachment.png")

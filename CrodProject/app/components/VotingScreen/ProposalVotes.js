@@ -1,3 +1,9 @@
+/*
+  Created by Mohammad Jafarzadeh Rezvan, Brigel Pineti
+
+
+*/
+'use strict'
 import React, { Component } from 'react';
 import {StyleSheet,TouchableOpacity,Image,Text,View} from 'react-native';
 
@@ -7,7 +13,6 @@ const voteYesSource = require("../../../img/like.png")
 class ProposalVotes extends Component {
 
   render() {
-    var viewYes = [];
     if (this.props.isClickable) {
       return(
       <View style={[styles.votesContainer, this.props.style]} >

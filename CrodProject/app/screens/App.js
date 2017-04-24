@@ -1,3 +1,9 @@
+/*
+  Created by Mohammad Jafarzadeh Rezvan, Brigel Pineti
+
+  Decide if it goes to LoginScreen or HomeScreen
+*/
+
 'use strict'
 
 import { bindActionCreators } from 'redux'

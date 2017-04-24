@@ -1,3 +1,10 @@
+/*
+  Modifed library
+  SideMenu https://github.com/react-native-community/react-native-side-menu
+  by Mohammad Jafarzadeh Rezvan, Brigel Pineti
+
+  It sets limit to how much it can get sided
+*/
 //@noflow
 const ReactNative = require('react-native');
 const React = require('react');
