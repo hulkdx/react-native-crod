@@ -6,11 +6,16 @@ import {Actions} from 'react-native-router-flux';
 
 class CategoryMenu extends Component {
 
-
-
-
+  constructor(props) {
+  super(props)
+  this.state = {
+    //Initialy, isSelected contains an array of false values.
+    isSelected: Array(categories.length).fill(false)
+  }
+}
 
   render() {
+
 
     return (
 
@@ -20,12 +25,13 @@ class CategoryMenu extends Component {
     );
   }
   _renderCategoryImages(){
+    var isSelected= []
     var rows = [];
     for (let i=0; i<categories.length; i++){
       rows.push(
         <TouchableOpacity key = {i} onPress={this._onClickCategoryImage.bind(this,i)} style={styles.categoryDropDown}>
-            <Image source={categories[i].image} style={styles.categoriesLeftSide}/>
-            <Text style={styles.categoryNameTxt}> {categories[i].name} </Text>
+            <Image source={categories[i].image} style={[styles.categoriesLeftSide, {tintColor: this.state.isSelected[i] ? '#88B3D9' : 'white' }]}/>
+            <Text style={[styles.categoryNameTxt, {color: this.state.isSelected[i] ? '#88B3D9' : 'white' }]}> {categories[i].name} </Text>
         </TouchableOpacity>
 
       )
@@ -38,8 +44,11 @@ class CategoryMenu extends Component {
     )
   }
   _onClickCategoryImage = (id) => {
+    //Toggle property: when clicked from false => true && true => false
+    this.state.isSelected[id]= !this.state.isSelected[id]
+
     //When clicked the id of the category icon is passed as a prop to the HomeScreen through Actions.refresh.
-    Actions.refresh({key: 'home', categoryId: id})
+    Actions.refresh()
   }
 
 };
