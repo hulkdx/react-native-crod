@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import {StyleSheet,Text,Image,Dimensions,View} from 'react-native';
+import {StyleSheet,Text,Image,Dimensions,View, TouchableOpacity} from 'react-native';
 import proposals from '../../data-manager/proposals'
-
+import {Actions, ActionConst} from 'react-native-router-flux'
+const profilePhoto = require("../../../img/notification/man1.png")
 
 const skipIcon = require("../../../img/skip-icon.png")
 
@@ -11,11 +12,14 @@ class Header extends Component {
 
     return (
             <View style={styles.header}>
+            <TouchableOpacity style={styles.profileContainer} onPress={()=> {Actions.profile({type: ActionConst.REFRESH}) }}>
+            <Image source={profilePhoto} style={styles.profilePhoto}/>
+            </TouchableOpacity>
             <Text style={styles.daysLeftTxt}> 12 days left </Text>
 
-            <View style={styles.skipIconContainer}>
+            <TouchableOpacity style={styles.skipIconContainer}>
             <Image style={styles.skipIcon}source={skipIcon}  />
-            </View>
+            </TouchableOpacity>
             </View>
     )
   }
@@ -25,27 +29,40 @@ class Header extends Component {
 const styles = StyleSheet.create({
 
   header: {
-    flex: 1,
     flexDirection: 'row',
     backgroundColor: 'white',
     borderBottomWidth: 1,
     borderBottomColor: "#88B3D9",
-    height: 60,
     alignItems: 'center',
     justifyContent: 'center',
+    height: 60
+  },
+  profileContainer: {
+    flex: 1,
+    marginLeft: 15,
+    borderWidth: 1
+  },
+  profilePhoto: {
+    height: 35,
+    width: 35,
+    resizeMode: 'contain',
   },
   daysLeftTxt: {
     flex: 1,
+    color: 'red',
+    fontSize: 18,
+    textAlign: 'center'
   },
   skipIconContainer: {
     flex: 1,
-    alignItems: 'flex-end'
+    alignItems: 'flex-end',
+    borderWidth: 1,
   },
   skipIcon: {
-    height: 45,
-    width: 45,
+    height: 50,
+    width: 50,
     resizeMode: 'contain',
-    paddingRight: 20
+    marginRight: 15
   },
 
 });

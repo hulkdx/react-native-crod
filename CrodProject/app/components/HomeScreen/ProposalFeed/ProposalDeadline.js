@@ -32,7 +32,6 @@ const styles = StyleSheet.create({
     flex:1,
     justifyContent: 'center',
     padding: 5,
-    backgroundColor: 'white',
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
   },
@@ -44,8 +43,6 @@ const styles = StyleSheet.create({
   date:{
     flex:1,
     justifyContent: 'center',
-    // padding: 15,
-    // backgroundColor: 'white',
     borderColor: '#2575BB',
     borderBottomWidth: 0.2,
     borderBottomLeftRadius: 10,
@@ -57,8 +54,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginLeft: 9,
     backgroundColor: 'white',
-    borderColor: '#2575BB',
-    borderWidth: 0.2,
     borderRadius: 10,
   },
 });

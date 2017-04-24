@@ -51,14 +51,7 @@ class ProposalTitle extends Component {
 const styles = StyleSheet.create({
   titleRoot: {
     flex: 3,
-    // marginTop: -15, THIS SHOULD BE REMOVED
     backgroundColor: 'white',
-    // paddingTop: 30,
-    // paddingBottom: 30,
-    // paddingLeft: 15,
-    // paddingRight: 15,
-    borderColor: '#2575BB',
-    borderWidth: 0.2,
     borderRadius: 10,
   },
   titleContainer:{

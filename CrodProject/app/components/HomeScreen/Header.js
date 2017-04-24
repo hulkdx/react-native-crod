@@ -5,6 +5,7 @@ import { RadioButtons } from 'react-native-radio-buttons'
 import CategoryHeader from './CategoryHeader.js'
 import categories from '../../data-manager/categories.js'
 import DatePicker from './DateTimePicker/DatePicker.js'
+import {Actions, ActionConst} from 'react-native-router-flux'
 import Moment from 'moment';
 const proposalIcon = require("../../../img/proposal-icon.png")
 const searchIcon = require("../../../img/search-icon1.png")
@@ -36,9 +37,9 @@ class Header extends Component {
 
 {/* Create Proposal Button */}
         <View style={styles.topBarRoot}>
-        <View style={styles.profile}>
+        <TouchableOpacity style={styles.profile} onPress={()=> {Actions.profile({type: ActionConst.REFRESH}) }}>
         <Image source={profilePhoto} style={styles.profilePhoto}/>
-          </View>
+          </TouchableOpacity>
         <TouchableOpacity style={styles.search}>
 
          <View style={styles.searchBtnContainer}>
