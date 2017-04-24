@@ -8,6 +8,7 @@
 import React, { Component } from 'react';
 import {StyleSheet,TextInput,TouchableOpacity,Image,Text,View,Dimensions,ScrollView} from 'react-native';
 import { RadioButtons } from 'react-native-radio-buttons'
+import {Actions, ActionConst} from 'react-native-router-flux'
 import Moment from 'moment';
 
 import CategoryHeader from './CategoryHeader.js'
@@ -45,9 +46,9 @@ class Header extends Component {
 
 {/* Create Proposal Button */}
         <View style={styles.topBarRoot}>
-        <View style={styles.profile}>
+        <TouchableOpacity style={styles.profile} onPress={()=> {Actions.profile({type: ActionConst.REFRESH}) }}>
         <Image source={profilePhoto} style={styles.profilePhoto}/>
-          </View>
+          </TouchableOpacity>
         <TouchableOpacity style={styles.search}>
 
          <View style={styles.searchBtnContainer}>
