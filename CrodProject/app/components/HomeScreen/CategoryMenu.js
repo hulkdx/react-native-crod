@@ -50,7 +50,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   categories:{
-
     flexDirection: 'column',
   },
   categoryDropDown:{
@@ -58,7 +57,7 @@ const styles = StyleSheet.create({
 
   },
   categoriesLeftSide:{
-    tintColor: '#88B3D9',
+    tintColor: 'white',
     resizeMode: 'center',
 
   }
