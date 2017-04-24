@@ -25,7 +25,7 @@ class CategoryMenu extends Component {
       rows.push(
         <TouchableOpacity key = {i} onPress={this._onClickCategoryImage.bind(this,i)} style={styles.categoryDropDown}>
             <Image source={categories[i].image} style={styles.categoriesLeftSide}/>
-              <View style={{backgroundColor:"white", height:10}} />
+            <Text style={styles.categoryNameTxt}> {categories[i].name} </Text>
         </TouchableOpacity>
 
       )
@@ -53,13 +53,21 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
   },
   categoryDropDown:{
-    alignItems:'center'
+    marginTop: 25,
+    alignItems:'center',
+    justifyContent: 'center'
 
   },
   categoriesLeftSide:{
     tintColor: 'white',
-    resizeMode: 'center',
+    height: 50,
+    width: 50,
+    resizeMode: 'contain',
 
+  },
+  categoryNameTxt: {
+    marginTop: 5,
+    color: 'white'
   }
 });
 

@@ -1,24 +1,24 @@
 
 
 const categories = [
-    { name: "environment",
+    { name: "Environment",
       image: require("../../img/categories/environment.png"),
       icon: require("../../img/categories/science_small.png")
     },
-    { name: "financial",
+    { name: "Financial",
       image: require("../../img/categories/financial.png"),
       icon: require("../../img/categories/science_small.png")
     },
     {
-      name: "politics",
+      name: "Politics",
       image: require("../../img/categories/politics.png"),
       icon: require("../../img/categories/science_small.png")
     },
-    { name: "science",
+    { name: "Science",
       image: require("../../img/categories/science.png"),
       icon: require("../../img/categories/science_small.png")
     },
-    { name: "social",
+    { name: "Social",
       image: require("../../img/categories/social.png"),
       icon: require("../../img/categories/science_small.png")
     },

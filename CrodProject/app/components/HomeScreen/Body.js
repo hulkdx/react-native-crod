@@ -21,7 +21,7 @@ class Body extends Component {
       <View style={styles.leftMenu}>
       <LeftSideMenu
                 menu={menu}
-                openMenuOffset = {80}
+                openMenuOffset = {90}
                 isOpen={this.state.isOpen}
                 onChange={(isOpen) => this.updateMenuState(isOpen)}
                 style={styles.leftSideMenu} >
