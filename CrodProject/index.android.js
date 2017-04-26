@@ -51,7 +51,7 @@ class CrodProject extends Component {
                  tabs={true}
                  hideNavBar
                  tabBarStyle={styles.customizeFooter}>
-                 <Scene key="App">
+                 <Scene key="App" initial>
                         <Scene key='app' component={App} hideNavBar hideTabBar/>
                  </Scene>
 
@@ -85,7 +85,7 @@ class CrodProject extends Component {
                        <Scene key='login' component={LoginScreen} hideNavBar hideTabBar/>
                 </Scene>
 
-                <Scene key="registerContainer" initial>
+                <Scene key="registerContainer" >
                        <Scene key='register' component={RegisterScreen} hideNavBar hideTabBar/>
                 </Scene>
           </Scene>
