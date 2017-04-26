@@ -9,6 +9,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import React, { Component } from 'react';
 import {StyleSheet,Text,View,TouchableOpacity, TextInput} from 'react-native';
+import { Actions, ActionConst } from 'react-native-router-flux';
 
 // Actions
 import * as authActions from '../../reducers/auth/authActions'
@@ -54,7 +55,7 @@ class Login extends Component {
         <TouchableOpacity style={styles.buttonContainer} onPress={this._onPressLogin}>
           <Text style={styles.buttonText}>Login</Text>
         </TouchableOpacity>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={this._onPressRegister}>
           <Text style={styles.loginText}>Already a member</Text>
         </TouchableOpacity>
 
@@ -67,6 +68,10 @@ class Login extends Component {
 
   _onPressLogin = () => {
     this.props.login(this.state.username, this.state.password);
+  }
+
+  _onPressRegister = () => {
+    Actions.register({type: ActionConst.REFRESH})
   }
 
 }

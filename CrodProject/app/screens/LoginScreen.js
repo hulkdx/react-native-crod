@@ -8,12 +8,12 @@
 import React, { Component } from 'react';
 import {StyleSheet} from 'react-native';
 import Swiper from 'react-native-swiper'
-import Initial from '../components/LauncherScreen/Initial'
-import Information from '../components/LauncherScreen/Information'
-import Login from '../components/LauncherScreen/Login'
+import Initial from '../components/LoginScreen/Initial'
+import Information from '../components/LoginScreen/Information'
+import Login from '../components/LoginScreen/Login'
 
 
-class LauncherScreenLogin extends Component {
+class LoginScreen extends Component {
   constructor(props) {
     super(props)
   }
@@ -75,4 +75,4 @@ const styles = StyleSheet.create({
   },
 });
 
-module.exports = LauncherScreenLogin
+module.exports = LoginScreen

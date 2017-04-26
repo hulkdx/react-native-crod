@@ -10,7 +10,8 @@ import { Provider } from 'react-redux';
 import configureStore from './app/lib/configureStore'
 
 // Screens
-import LauncherScreen from './app/screens/LauncherScreen'
+import LoginScreen from './app/screens/LoginScreen'
+import RegisterScreen from './app/screens/RegisterScreen'
 import HomeScreen from './app/screens/HomeScreen'
 import ProfileScreen from './app/screens/ProfileScreen'
 import NotificationScreen from './app/screens/NotificationScreen'
@@ -50,7 +51,7 @@ class CrodProject extends Component {
                  tabs={true}
                  hideNavBar
                  tabBarStyle={styles.customizeFooter}>
-                 <Scene key="App" initial>
+                 <Scene key="App">
                         <Scene key='app' component={App} hideNavBar hideTabBar/>
                  </Scene>
 
@@ -81,7 +82,11 @@ class CrodProject extends Component {
                 </Scene>
 
                 <Scene key="loginContainer" >
-                       <Scene key='login' component={LauncherScreen} hideNavBar hideTabBar/>
+                       <Scene key='login' component={LoginScreen} hideNavBar hideTabBar/>
+                </Scene>
+
+                <Scene key="registerContainer" initial>
+                       <Scene key='register' component={RegisterScreen} hideNavBar hideTabBar/>
                 </Scene>
           </Scene>
 
