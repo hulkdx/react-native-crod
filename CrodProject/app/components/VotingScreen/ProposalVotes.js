@@ -17,14 +17,15 @@ class ProposalVotes extends Component {
       return(
       <View style={[styles.votesContainer, this.props.style]} >
 
-        <TouchableOpacity style={styles.votesImageContainer} onPress={this.props.votedClicked.bind(this,true)} >
+        <View style={styles.votesImageContainer} onPress={this.props.votedClicked.bind(this,true)} >
+        <Text style={styles.voteYesText}>{this.props.votedYes}</Text>
           <Image style={styles.votesImageYes} source={upVoteIcon}/>
-          <Text style={styles.voteYesText}>{this.props.votedYes}</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.votesImageContainer} onPress={this.props.votedClicked.bind(this,false)} >
+
+        </View>
+        <View style={styles.votesImageContainer} onPress={this.props.votedClicked.bind(this,false)} >
           <Image style={styles.votesImageNo} source={downVoteIcon}/>
           <Text style={styles.voteNoText}>{this.props.votedNo}</Text>
-        </TouchableOpacity>
+        </View>
       </View>)
     }
     return (
@@ -45,13 +46,12 @@ class ProposalVotes extends Component {
 
 const styles = StyleSheet.create({
   votesContainer: {
-    flex:1,
     flexDirection: 'row',
     justifyContent: 'center',
+    alignItems: 'center',
   },
   votesImageContainer:{
     flexDirection: 'row',
-    marginRight: 10,
   },
   votesImageYes:{
     width: 20, height: 20,

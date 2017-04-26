@@ -11,19 +11,20 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 import ProposalVotes from './ProposalVotes';
 import proposals from '../../data-manager/proposals'
-
+const repliesIcon = require("../../../img/replies-icon.png")
 
 const disscussion = [
-  {profileImage: require("../../../img/notification/woman1.png"),
-   comment: "comment One bla bla bla comment One bla bla bla comment One bla bla bla comment One bla bla bla comment One bla bla blacomment One bla bla bla",
-   fullName: 'Coby Babani',
-   upvoted: 10,
-   downvoted: 2,},
   {profileImage: require("../../../img/notification/man3.png"),
-   comment: "comment two bla bla bla",
+   comment: "Yes, Facebook is totally awesome! It's so cool, you can connect with peepz all over your State and even all the way down to Oklahoma. I have more than 1000 friendz by now, duh!",
    fullName: 'Saba Saba',
    upvoted: 5,
    downvoted: 1,},
+  {profileImage: require("../../../img/notification/woman1.png"),
+   comment: "I believe there's many sides to this story and it's hard to depict the entire picture. It may look like are spending more time interacting through Facebook than in real life, but the time Americans spend behind their computers is significant anyway. I applaud Facebook for giving us the means to connect to people easily from a long distance and the ease of gathering people from an area. Also, it gives us a break whenever we're vegetating behind our office desks!",
+   fullName: 'Coby Babani',
+   upvoted: 10,
+   downvoted: 2,},
+
 ]
 
 
@@ -44,7 +45,7 @@ class Disscussion extends Component {
         renderRow={(disscussion, sectionID, rowID) => {return this._renderDisscussionRow(disscussion, sectionID, rowID)} }
         />
 
-        <View style={styles.shareContainer}>
+        <View style={styles.createDiscussion}>
         <TextInput style={styles.shareText} placeholder="your opinion counts" />
         <TouchableOpacity style={styles.shareButton} onPress={this.shareClicked}>
           <Text>Share</Text>
@@ -65,7 +66,14 @@ class Disscussion extends Component {
                 <View style={styles.topBarContainer}>
                     <View style={styles.discussionImageContainer}>
                     <Image style={styles.profileImage} source={disscussion.profileImage}/>
+                    <ProposalVotes isClickable={true}
+                                   votedYes={disscussion.upvoted}
+                                   style={styles.votes}
+                                   votedNo={disscussion.downvoted}
+                                   votedClicked={this.votedClicked}/>
                     </View>
+
+
 
                 <View style={styles.commentContainer}>
 
@@ -82,20 +90,20 @@ class Disscussion extends Component {
                 <Text style={styles.replyText}>Reply</Text>
                 <Icon name="reply" style={styles.arrowIcon} size={20} />
               </TouchableOpacity>
+              <TouchableOpacity style={styles.replyTextContainer} onPress={this.replyClicked.bind(this, rowID)}>
+                <Text style={styles.replyText}>10</Text>
+                <Image style={styles.repliesIcon} source={repliesIcon} />
+              </TouchableOpacity>
 
-              <ProposalVotes isClickable={true}
-                             votedYes={disscussion.upvoted}
-                             style={styles.votes}
-                             votedNo={disscussion.downvoted}
-                             votedClicked={this.votedClicked}/>
+
 
             </View>
 
         </View>
 
         {disscussion.selected &&
-          <View style={styles.shareContainer}>
-          <TextInput style={styles.shareText} placeholder="Leave a reply" />
+          <View style={styles.replyContainer}>
+          <TextInput style={styles.shareText} multiline={true} blurOnSubmit={true} placeholder="leave a reply" />
           <TouchableOpacity style={styles.shareButton} onPress={this.repliedToComment}>
             <Text>Reply</Text>
           </TouchableOpacity>
@@ -166,12 +174,16 @@ const styles = StyleSheet.create({
     margin: 8,
     backgroundColor: 'white',
     borderRadius: 10,
-    paddingTop: 10,
+    paddingTop: 15,
     paddingBottom: 10,
     paddingRight: 5,
     paddingLeft: 5
   },
-  shareContainer:{
+  createDiscussion: {
+    flexDirection: 'row',
+  },
+  replyContainer:{
+    borderWidth: 1,
     flexDirection: 'row',
   },
   shareText: {
@@ -185,7 +197,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   votes: {
-    justifyContent:'flex-end',
+    justifyContent:'center',
+    alignItems: 'center',
+    paddingTop: 20,
     borderWidth: 1
   },
   profileImage: {
@@ -208,11 +222,13 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
   },
   fullNameText: {
-    fontSize: 18,
+    fontSize: 20,
+    fontFamily: 'Roboto'
   },
   commentText: {
     fontSize: 16,
-    paddingTop: 10,
+    paddingTop: 15,
+    fontFamily: 'Roboto'
   },
   bottomBarCommentContainer : {
     flexDirection: 'row',
@@ -226,6 +242,11 @@ const styles = StyleSheet.create({
   replyText: {
     fontSize: 12,
     color: '#bcbcbb'
+  },
+  repliesIcon: {
+    height: 21, width: 21,
+    resizeMode: 'contain',
+    tintColor: '#88B3D9'
   },
   arrowIcon: {
     marginLeft:2,
@@ -244,14 +265,6 @@ const styles = StyleSheet.create({
     flex:1,
     width: null, height: null,
     resizeMode: 'contain',
-  },
-  voteYesText: {
-    alignSelf:'center',
-    color: 'green',
-  },
-  voteNoText: {
-    alignSelf:'center',
-    color: 'red',
   },
 });
 
