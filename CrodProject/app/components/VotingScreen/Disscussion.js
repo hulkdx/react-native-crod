@@ -14,17 +14,18 @@ import proposals from '../../data-manager/proposals'
 
 
 const disscussion = [
-  {profileImage: require("../../../img/profile-icon.png"),
-   comment: "comment One bla bla bla",
+  {profileImage: require("../../../img/notification/woman1.png"),
+   comment: "comment One bla bla bla comment One bla bla bla comment One bla bla bla comment One bla bla bla comment One bla bla blacomment One bla bla bla",
+   fullName: 'Coby Babani',
    upvoted: 10,
    downvoted: 2,},
-  {profileImage: require("../../../img/profile-icon.png"),
+  {profileImage: require("../../../img/notification/man3.png"),
    comment: "comment two bla bla bla",
+   fullName: 'Saba Saba',
    upvoted: 5,
    downvoted: 1,},
 ]
-const voteNoSource = require("../../../img/dislike.png")
-const voteYesSource = require("../../../img/like.png")
+
 
 class Disscussion extends Component {
   constructor() {
@@ -58,32 +59,38 @@ class Disscussion extends Component {
     console.log(disscussion);
     return(
       <View style={[styles.disscussionContainer]}>
+
         <View style={styles.disscussionContainerTop}>
-        <View style={{flex:1,}}>
-        <Image style={styles.profileImage} source={disscussion.profileImage}/>
-        </View>
 
-          <View style={styles.commentContainer}>
+                <View style={styles.topBarContainer}>
+                    <View style={styles.discussionImageContainer}>
+                    <Image style={styles.profileImage} source={disscussion.profileImage}/>
+                    </View>
 
-            <Text style={styles.commentText}>
-              {disscussion.comment}
-            </Text>
+                <View style={styles.commentContainer}>
+
+                    <Text style={styles.fullNameText}>{disscussion.fullName} </Text>
+                    <Text style={styles.commentText}>
+                    {disscussion.comment}
+                    </Text>
+                </View>
+
+                </View>
 
             <View style={styles.bottomBarCommentContainer}>
               <TouchableOpacity style={styles.replyTextContainer} onPress={this.replyClicked.bind(this, rowID)}>
-                <Text style={styles.replyText}>reply</Text>
-                <Icon name="angle-down" style={styles.arrowIcon} />
+                <Text style={styles.replyText}>Reply</Text>
+                <Icon name="reply" style={styles.arrowIcon} size={20} />
               </TouchableOpacity>
 
               <ProposalVotes isClickable={true}
                              votedYes={disscussion.upvoted}
-                             style={{justifyContent:'flex-end'}}
+                             style={styles.votes}
                              votedNo={disscussion.downvoted}
                              votedClicked={this.votedClicked}/>
 
             </View>
 
-          </View>
         </View>
 
         {disscussion.selected &&
@@ -156,8 +163,13 @@ const styles = StyleSheet.create({
   },
   disscussionContainer: {
     flex:1,
-    marginTop: 8,
-    backgroundColor: 'white'
+    margin: 8,
+    backgroundColor: 'white',
+    borderRadius: 10,
+    paddingTop: 10,
+    paddingBottom: 10,
+    paddingRight: 5,
+    paddingLeft: 5
   },
   shareContainer:{
     flexDirection: 'row',
@@ -170,38 +182,49 @@ const styles = StyleSheet.create({
   },
   disscussionContainerTop:{
     flex:1,
-    flexDirection: 'row',
     alignItems: 'center',
-    paddingTop: 4,
-    paddingBottom: 4,
+  },
+  votes: {
+    justifyContent:'flex-end',
+    borderWidth: 1
   },
   profileImage: {
-    flex:1,
-    width:null, height: null,
+
+    width:70, height: 70,
     resizeMode: 'contain',
-    marginLeft: 10,
-    paddingBottom: 10,
+  },
+  discussionImageContainer: {
+    flex:1,
+    alignItems: 'center'
+
+  },
+  topBarContainer: {
+    flex:1,
+    flexDirection: 'row',
   },
   commentContainer: {
-    flex:4,
-    flexDirection: 'column',
-    paddingTop: 20,
+    flex: 4,
     paddingLeft: 10,
+    paddingBottom: 10,
+  },
+  fullNameText: {
+    fontSize: 18,
   },
   commentText: {
-
+    fontSize: 16,
+    paddingTop: 10,
   },
   bottomBarCommentContainer : {
     flexDirection: 'row',
-    marginTop: 3,
+    marginTop: 20,
   },
   replyTextContainer: {
     flexDirection: 'row',
     alignSelf: 'flex-start',
-    marginTop: 20,
+    borderWidth: 1
   },
   replyText: {
-    fontSize: 10,
+    fontSize: 12,
     color: '#bcbcbb'
   },
   arrowIcon: {

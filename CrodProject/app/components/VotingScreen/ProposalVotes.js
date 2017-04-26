@@ -7,8 +7,8 @@
 import React, { Component } from 'react';
 import {StyleSheet,TouchableOpacity,Image,Text,View} from 'react-native';
 
-const voteNoSource = require("../../../img/dislike.png")
-const voteYesSource = require("../../../img/like.png")
+const upVoteIcon = require("../../../img/upvote-icon.png")
+const downVoteIcon = require("../../../img/downvote-icon.png")
 
 class ProposalVotes extends Component {
 
@@ -18,11 +18,11 @@ class ProposalVotes extends Component {
       <View style={[styles.votesContainer, this.props.style]} >
 
         <TouchableOpacity style={styles.votesImageContainer} onPress={this.props.votedClicked.bind(this,true)} >
-          <Image style={styles.votesImage} source={voteYesSource}/>
+          <Image style={styles.votesImageYes} source={upVoteIcon}/>
           <Text style={styles.voteYesText}>{this.props.votedYes}</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.votesImageContainer} onPress={this.props.votedClicked.bind(this,false)} >
-          <Image style={styles.votesImage} source={voteNoSource}/>
+          <Image style={styles.votesImageNo} source={downVoteIcon}/>
           <Text style={styles.voteNoText}>{this.props.votedNo}</Text>
         </TouchableOpacity>
       </View>)
@@ -31,11 +31,11 @@ class ProposalVotes extends Component {
       <View style={styles.votesContainer}>
 
         <View style={styles.votesImageContainer} >
-          <Image style={styles.votesImage} source={voteYesSource}/>
+          <Image style={styles.votesImageYes} source={upVoteIcon}/>
           <Text style={styles.voteYesText}>{this.props.votedYes}</Text>
         </View>
         <View style={styles.votesImageContainer} >
-          <Image style={styles.votesImage} source={voteNoSource}/>
+          <Image style={styles.votesImageNo} source={downVoteIcon}/>
           <Text style={styles.voteNoText}>{this.props.votedNo}</Text>
         </View>
       </View>
@@ -50,20 +50,28 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   votesImageContainer:{
+    flexDirection: 'row',
     marginRight: 10,
   },
-  votesImage:{
+  votesImageYes:{
     width: 20, height: 20,
     resizeMode: 'contain',
+    tintColor: '#228b22'
+
+  },
+  votesImageNo:{
+    width: 20, height: 20,
+    resizeMode: 'contain',
+    tintColor: '#DC143C'
 
   },
   voteYesText: {
     alignSelf:'center',
-    color: 'green',
+    color: '#228b22',
   },
   voteNoText: {
     alignSelf:'center',
-    color: 'red',
+    color: '#DC143C',
   },
 });
 
