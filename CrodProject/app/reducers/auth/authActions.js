@@ -11,6 +11,9 @@ const {
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
+  SIGNUP_REQUEST,
+  SIGNUP_SUCCESS,
+  SIGNUP_FAILURE,
 } = require('../../lib/constants').default
 
 
@@ -50,6 +53,43 @@ export function loginSuccess (json) {
 export function loginFailure (error) {
   return {
     type: LOGIN_FAILURE,
+    payload: error
+  }
+}
+
+/*############## Register Section ##############*/
+export function register (username, email, email2, password) {
+  return dispatch => {
+    dispatch(registerRequest())
+    return api.register(username, email, email2, password)
+
+    .then(function (json) {
+          dispatch(registerSuccess(json))
+          // navigate to login
+          Actions.login({type: ActionConst.REFRESH})
+    })
+    .catch((error) => {
+      dispatch(registerFailure(error))
+    })
+  }
+}
+
+export function registerRequest () {
+  return {
+    type: SIGNUP_REQUEST
+  }
+}
+
+export function registerSuccess (json) {
+  return {
+    type: SIGNUP_SUCCESS,
+    payload: json
+  }
+}
+
+export function registerFailure (error) {
+  return {
+    type: SIGNUP_FAILURE,
     payload: error
   }
 }

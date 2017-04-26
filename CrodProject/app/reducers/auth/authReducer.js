@@ -10,6 +10,9 @@ const {
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
+  SIGNUP_REQUEST,
+  SIGNUP_SUCCESS,
+  SIGNUP_FAILURE,
 } = require('../../lib/constants').default
 
 // Get the initial state
@@ -20,19 +23,20 @@ export default function authReducer (state = initialState, action) {
   if (!(state instanceof InitialState)) return initialState.mergeDeep(state)
 
   switch (action.type) {
+    case SIGNUP_REQUEST:
+    case LOGIN_REQUEST: {
+     return state.set('isFetching', true)
+     .set('error', null)
+    }
+    case SIGNUP_SUCCESS:
+    case LOGIN_SUCCESS:
+     return state.set('isFetching', false)
 
-     case LOGIN_REQUEST: {
-       return state.set('isFetching', true)
-       .set('error', null)
-     }
 
-     case LOGIN_SUCCESS:
-       return state.set('isFetching', false)
-
-     case LOGIN_FAILURE:
-
-       return state.set('isFetching', false)
-        .set('error', validateLoginError(action.payload))
+    case LOGIN_FAILURE:
+    case SIGNUP_FAILURE:
+     return state.set('isFetching', false)
+      .set('error', validateLoginError(action.payload))
 
   }
 

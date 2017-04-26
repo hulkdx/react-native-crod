@@ -43,6 +43,36 @@ export default class Api {
         throw (error)
       })
   }
+
+  async register (username, email, email2, password) {
+    const ENDPOINT = 'api/register'
+    return await fetch(API_BASE_URL+ENDPOINT, {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+          },
+        body: JSON.stringify({
+          username: username,
+          email: email,
+          email2: email2,
+          password: password
+        })
+      })
+      .then((res) => {
+        return res.json()
+      .then((json) => {
+          if (res.status === 200 || res.status === 201) {
+            return json
+          } else {
+            throw (json)
+          }
+        })
+      })
+      .catch((error) => {
+        throw (error)
+      })
+  }
 }
 // The singleton variable
 export let api = new Api()

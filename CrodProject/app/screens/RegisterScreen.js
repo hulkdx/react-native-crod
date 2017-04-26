@@ -5,24 +5,35 @@
   TODO: Register Screen
 */
 'use strict'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 import React, { Component } from 'react';
 import { StyleSheet, Text, TextInput, TouchableOpacity } from 'react-native';
 import ViewContainer from '../components/ViewContainer.js'
 import { Actions, ActionConst } from 'react-native-router-flux';
 
-
+// Actions
+import * as authActions from '../reducers/auth/authActions'
 
 class RegisterScreen extends Component {
   constructor(props) {
-    super(props)
+    super(props);
+    this.state = {
+      username: '',
+      email: '',
+      email2: '',
+      password: '',
+     };
   }
-  // <Text style={styles.errorHandle}>
-  //   {this.props.auth.isFetching ? 'Loading...'
-  //     : this.props.auth.error}
-  // </Text>
+
   render() {
     return (
       <ViewContainer style={styles.container}>
+
+      <Text style={styles.errorHandle}>
+        {this.props.auth.isFetching ? 'Loading...'
+          : this.props.auth.error}
+      </Text>
 
         <TextInput
           placeholder="username"
@@ -35,14 +46,14 @@ class RegisterScreen extends Component {
           placeholder="email"
           placeholderTextColor="rgba(255,255,255,0.7)"
           underlineColorAndroid="transparent"
-          onChangeText={(username) => this.setState({username})}
+          onChangeText={(email) => this.setState({email})}
           style={styles.input}/>
 
         <TextInput
           placeholder="confirm email"
           placeholderTextColor="rgba(255,255,255,0.7)"
           underlineColorAndroid="transparent"
-          onChangeText={(username) => this.setState({username})}
+          onChangeText={(email2) => this.setState({email2})}
           style={styles.input}/>
 
         <TextInput
@@ -70,7 +81,8 @@ class RegisterScreen extends Component {
   }
 
   _onPressRegister = () => {
-    // Actions.register({type: ActionConst.REFRESH})
+    // this.props.register(this.state.username, this.state.email, this.state.email2, this.state.password);
+    this.props.register("test", "test@test.com", "test@test.com", "123456");
   }
 }
 
@@ -124,4 +136,13 @@ const styles = StyleSheet.create({
   }
 });
 
-module.exports = RegisterScreen
+// Redux boilerplate
+function mapStateToProps (state) {
+  return {
+    auth: state.auth,
+  }
+}
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(authActions, dispatch)
+}
+export default connect(mapStateToProps , mapDispatchToProps)(RegisterScreen);
