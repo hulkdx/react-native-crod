@@ -81,8 +81,7 @@ class RegisterScreen extends Component {
   }
 
   _onPressRegister = () => {
-    // this.props.register(this.state.username, this.state.email, this.state.email2, this.state.password);
-    this.props.register("test", "test@test.com", "test@test.com", "123456");
+    this.props.register(this.state.username, this.state.email, this.state.email2, this.state.password);
   }
 }
 
