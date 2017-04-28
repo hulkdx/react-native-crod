@@ -8,7 +8,7 @@
 import React, { Component } from 'react';
 import {StyleSheet,Text, Image,View,ListView,TouchableOpacity,TextInput} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import {Kohana} from 'react-native-textinput-effects';
+import Kohana from './TextInputAnimation/Kohana.js';
 import ProposalVotes from './ProposalVotes';
 import proposals from '../../data-manager/proposals'
 const numberOfRepliesIcon = require("../../../img/replies-icon.png")
@@ -117,7 +117,7 @@ class Disscussion extends Component {
           />
 
           <TouchableOpacity style={styles.shareButton} onPress={this.repliedToComment}>
-            <Icon name={'paper-plane-o'} size={25} color={'#88B3D9'} style={styles.replyBtn}/>
+            <Icon name={'paper-plane-o'} size={20} color={'#88B3D9'} style={styles.replyBtn}/>
           </TouchableOpacity>
           </View>
         }
@@ -195,7 +195,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   replyContainer:{
-    flex: 1,
     flexDirection: 'row',
     borderWidth: 1,
     borderRadius: 10,
@@ -287,8 +286,8 @@ const styles = StyleSheet.create({
   },
   replyTextInput: {
     flex: 1,
-    marginLeft: 10,
-    marginRight: 10,
+    marginLeft: 5,
+    marginRight: 5,
     // borderWidth: 1,
     // borderRadius: 10,
     // borderColor: '#88B3D9'
