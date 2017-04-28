@@ -7,8 +7,8 @@
 import React, { Component } from 'react';
 import {StyleSheet,TouchableOpacity,Image,Text,View} from 'react-native';
 
-const upVoteIcon = require("../../../img/upvote-icon.png")
-const downVoteIcon = require("../../../img/downvote-icon.png")
+const upVoteIcon = require("../../../img/up-vote-icon.png")
+const downVoteIcon = require("../../../img/down-vote-icon.png")
 
 class ProposalVotes extends Component {
 
@@ -54,15 +54,17 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   votesImageYes:{
-    width: 20, height: 20,
+    width: 22, height: 22,
     resizeMode: 'contain',
-    tintColor: '#228b22'
+    tintColor: '#228b22',
+    marginLeft: 2.5
 
   },
   votesImageNo:{
-    width: 20, height: 20,
+    width: 22, height: 22,
     resizeMode: 'contain',
-    tintColor: '#DC143C'
+    tintColor: '#DC143C',
+    marginRight: 2.5
 
   },
   voteYesText: {

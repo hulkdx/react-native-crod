@@ -8,10 +8,11 @@
 import React, { Component } from 'react';
 import {StyleSheet,Text, Image,View,ListView,TouchableOpacity,TextInput} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-
+import {Kohana} from 'react-native-textinput-effects';
 import ProposalVotes from './ProposalVotes';
 import proposals from '../../data-manager/proposals'
-const repliesIcon = require("../../../img/replies-icon.png")
+const numberOfRepliesIcon = require("../../../img/replies-icon.png")
+const replyIcon = require("../../../img/reply-icon.png")
 
 const disscussion = [
   {profileImage: require("../../../img/notification/man3.png"),
@@ -88,11 +89,11 @@ class Disscussion extends Component {
             <View style={styles.bottomBarCommentContainer}>
               <TouchableOpacity style={styles.replyTextContainer} onPress={this.replyClicked.bind(this, rowID)}>
                 <Text style={styles.replyText}>Reply</Text>
-                <Icon name="reply" style={styles.arrowIcon} size={20} />
+                <Image source={replyIcon} style={styles.arrowIcon} />
               </TouchableOpacity>
               <TouchableOpacity style={styles.replyTextContainer} onPress={this.replyClicked.bind(this, rowID)}>
                 <Text style={styles.replyText}>10</Text>
-                <Image style={styles.repliesIcon} source={repliesIcon} />
+                <Image style={styles.repliesIcon} source={numberOfRepliesIcon} />
               </TouchableOpacity>
 
 
@@ -102,10 +103,21 @@ class Disscussion extends Component {
         </View>
 
         {disscussion.selected &&
+
           <View style={styles.replyContainer}>
-          <TextInput style={styles.shareText} multiline={true} blurOnSubmit={true} placeholder="leave a reply" />
+
+          <Kohana
+          style={styles.replyTextInput}
+          label={'Leave a Reply'}
+          iconClass={Icon}
+          iconName={'comments-o'}
+          iconColor={'#88B3D9'}
+          labelStyle={{ color: '#88B3D9' }}
+          inputStyle={{ color: '#88B3D9' }}
+          />
+
           <TouchableOpacity style={styles.shareButton} onPress={this.repliedToComment}>
-            <Text>Reply</Text>
+            <Icon name={'paper-plane-o'} size={25} color={'#88B3D9'} style={styles.replyBtn}/>
           </TouchableOpacity>
           </View>
         }
@@ -183,14 +195,20 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   replyContainer:{
-    borderWidth: 1,
+    flex: 1,
     flexDirection: 'row',
+    borderWidth: 1,
+    borderRadius: 10,
+    borderColor: '#88B3D9',
+    marginTop: 10
   },
   shareText: {
     flex:1,
   },
   shareButton:{
-    justifyContent: 'center'
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: 15,
   },
   disscussionContainerTop:{
     flex:1,
@@ -200,7 +218,6 @@ const styles = StyleSheet.create({
     justifyContent:'center',
     alignItems: 'center',
     paddingTop: 20,
-    borderWidth: 1
   },
   profileImage: {
 
@@ -240,17 +257,19 @@ const styles = StyleSheet.create({
     borderWidth: 1
   },
   replyText: {
-    fontSize: 12,
+    fontSize: 15,
     color: '#bcbcbb'
   },
   repliesIcon: {
-    height: 21, width: 21,
+    height: 25, width: 25,
     resizeMode: 'contain',
     tintColor: '#88B3D9'
   },
   arrowIcon: {
     marginLeft:2,
-    color: '#bcbcbb'
+    height: 25, width: 25,
+    resizeMode: 'contain',
+    tintColor: '#88B3D9'
   },
   votesContainer: {
     flex: 1,
@@ -266,6 +285,17 @@ const styles = StyleSheet.create({
     width: null, height: null,
     resizeMode: 'contain',
   },
+  replyTextInput: {
+    flex: 1,
+    marginLeft: 10,
+    marginRight: 10,
+    // borderWidth: 1,
+    // borderRadius: 10,
+    // borderColor: '#88B3D9'
+  },
+  replyBtn: {
+
+  }
 });
 
 module.exports = Disscussion
