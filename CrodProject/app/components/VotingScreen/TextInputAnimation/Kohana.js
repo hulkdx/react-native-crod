@@ -88,6 +88,7 @@ export default class Kohana extends BaseInput {
           ref="input"
           {...this.props}
           style={[styles.textInput, inputStyle]}
+          multiline={true}
           value={value}
           onBlur={this._onBlur}
           onFocus={this._onFocus}

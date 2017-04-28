@@ -87,6 +87,7 @@ class Disscussion extends Component {
                 </View>
 
             <View style={styles.bottomBarCommentContainer}>
+            <View style={styles.leftSideBottomBar}>
               <TouchableOpacity style={styles.replyTextContainer} onPress={this.replyClicked.bind(this, rowID)}>
                 <Text style={styles.replyText}>Reply</Text>
                 <Image source={replyIcon} style={styles.arrowIcon} />
@@ -95,6 +96,18 @@ class Disscussion extends Component {
                 <Text style={styles.replyText}>10</Text>
                 <Image style={styles.repliesIcon} source={numberOfRepliesIcon} />
               </TouchableOpacity>
+              </View>
+              <View style={styles.rightSideBottomBar}>
+              <TouchableOpacity style={styles.voteUpDown}>
+                <Text style={{color: '#228b22'}}> Up </Text>
+                <Icon name={'hand-o-up'} size={20} color={'#E9EBEE'} />
+              </TouchableOpacity>
+
+              <TouchableOpacity style={styles.voteUpDown}>
+                <Icon name={'hand-o-down'} size={20} color={'#E9EBEE'} />
+                <Text style={{color: '#DC143C'}}> Down </Text>
+              </TouchableOpacity>
+              </View>
 
 
 
@@ -112,12 +125,12 @@ class Disscussion extends Component {
           iconClass={Icon}
           iconName={'comments-o'}
           iconColor={'#88B3D9'}
-          labelStyle={{ color: '#88B3D9' }}
-          inputStyle={{ color: '#88B3D9' }}
+          labelStyle={{ color: '#E9EBEE' }}
+          inputStyle={{ color: 'black' }}
           />
 
           <TouchableOpacity style={styles.shareButton} onPress={this.repliedToComment}>
-            <Icon name={'paper-plane-o'} size={20} color={'#88B3D9'} style={styles.replyBtn}/>
+            <Icon name={'paper-plane-o'} size={22.5} color={'#88B3D9'} style={styles.replyBtn}/>
           </TouchableOpacity>
           </View>
         }
@@ -198,7 +211,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     borderWidth: 1,
     borderRadius: 10,
-    borderColor: '#88B3D9',
+    borderColor: '#E9EBEE',
     marginTop: 10
   },
   shareText: {
@@ -288,13 +301,21 @@ const styles = StyleSheet.create({
     flex: 1,
     marginLeft: 5,
     marginRight: 5,
-    // borderWidth: 1,
-    // borderRadius: 10,
-    // borderColor: '#88B3D9'
   },
-  replyBtn: {
-
-  }
+  leftSideBottomBar: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'flex-start'
+  },
+  rightSideBottomBar: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'flex-end'
+  },
+  voteUpDown: {
+    flexDirection: 'row',
+    paddingRight: 7.5
+  },
 });
 
 module.exports = Disscussion
