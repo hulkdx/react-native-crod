@@ -52,9 +52,9 @@ class Disscussion extends Component {
         />
 
         <View style={styles.createDiscussion}>
-        <TextInput style={styles.shareText} placeholder="your opinion counts" />
+        <TextInput style={styles.shareText} placeholder="open a discussion ..." placeholderTextColor= '#bcbcbb'/>
         <TouchableOpacity style={styles.shareButton} onPress={this.shareClicked}>
-          <Text>Share</Text>
+          <Icon name='send-o' size={25} color={'#88B3D9'} />
         </TouchableOpacity>
         </View>
       </View>
@@ -222,6 +222,9 @@ const styles = StyleSheet.create({
   },
   createDiscussion: {
     flexDirection: 'row',
+    backgroundColor: 'white',
+    borderTopWidth: 1,
+    borderColor: '#88B3D9'
   },
   replyContainer:{
     flexDirection: 'row',
@@ -232,6 +235,10 @@ const styles = StyleSheet.create({
   },
   shareText: {
     flex:1,
+    borderWidth: 1,
+    borderRadius: 10,
+    borderColor: '#E9EBEE',
+    margin: 10
   },
   shareButton:{
     justifyContent: 'center',
