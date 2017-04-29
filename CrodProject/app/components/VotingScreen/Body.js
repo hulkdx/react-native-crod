@@ -107,17 +107,21 @@ const styles = StyleSheet.create({
     backgroundColor: 'white'
   },
   tabs:{
-    backgroundColor: 'rgba(26, 105, 178, 0.49)',
+  //  backgroundColor: 'rgba(26, 105, 178, 0.49)',
+  backgroundColor: 'white'
   },
   textStyle:{
     fontSize: 23,
-    color: '#D2EEFF'
+    color: '#bcbcbb'
   },
   tabsSelected: {
-    color: 'rgba(37, 36, 51, 0.3)',
+    //color: 'rgba(37, 36, 51, 0.3)',
+    color: '#88B3D9'
   },
   tabsIconSelected: {
-    backgroundColor: '#E9EBEE'
+    borderBottomWidth: 3,
+    borderColor: '#88B3D9',
+    //backgroundColor: '#E9EBEE'
   }
 });
 

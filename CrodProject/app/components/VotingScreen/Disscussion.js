@@ -129,7 +129,7 @@ class Disscussion extends Component {
           style={styles.replyTextInput}
           label={'Leave a Reply'}
           iconClass={Icon}
-          iconName={'comments-o'}
+          iconName={'mail-forward'}
           iconColor={'#88B3D9'}
           labelStyle={{ color: '#E9EBEE' }}
           inputStyle={{ color: 'black' }}
