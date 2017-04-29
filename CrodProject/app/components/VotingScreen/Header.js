@@ -7,8 +7,7 @@
 import React, { Component } from 'react';
 import {StyleSheet,Text,Image,Dimensions,View, TouchableOpacity} from 'react-native';
 import {Actions, ActionConst} from 'react-native-router-flux'
-const profilePhoto = require("../../../img/notification/man1.png")
-
+const profilePhoto = require("../../../img/categories/social.png")
 import proposals from '../../data-manager/proposals'
 const skipIcon = require("../../../img/skip-icon.png")
 
@@ -46,23 +45,23 @@ const styles = StyleSheet.create({
   profileContainer: {
     flex: 1,
     marginLeft: 15,
-    borderWidth: 1
   },
   profilePhoto: {
     height: 35,
     width: 35,
     resizeMode: 'contain',
+    tintColor: '#88B3D9'
   },
   daysLeftTxt: {
-    flex: 1,
+    flex: 2,
     color: 'red',
     fontSize: 18,
-    textAlign: 'center'
+    textAlign: 'center',
+    marginRight:20,
   },
   skipIconContainer: {
     flex: 1,
     alignItems: 'flex-end',
-    borderWidth: 1,
   },
   skipIcon: {
     height: 50,
