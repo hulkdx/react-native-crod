@@ -7,6 +7,7 @@
 
 import React, { Component } from 'react';
 import {StyleSheet,Text, Image,View,ListView,TouchableOpacity,TextInput} from 'react-native';
+import {Actions} from 'react-native-router-flux';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Kohana from './TextInputAnimation/Kohana.js';
 import ProposalVotes from './ProposalVotes';
@@ -34,7 +35,11 @@ class Disscussion extends Component {
     super();
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
+      isUpVote: false,
+      isDownVote: false,
       dataSource: ds.cloneWithRows(disscussion),
+
+
     };
   }
 
@@ -59,6 +64,7 @@ class Disscussion extends Component {
 
   _renderDisscussionRow(disscussion, sectionID, rowID){
     console.log(disscussion);
+    console.log(this.state.isUpVote)
     return(
       <View style={[styles.disscussionContainer]}>
 
@@ -88,24 +94,24 @@ class Disscussion extends Component {
 
             <View style={styles.bottomBarCommentContainer}>
             <View style={styles.leftSideBottomBar}>
-              <TouchableOpacity style={styles.replyTextContainer} onPress={this.replyClicked.bind(this, rowID)}>
-                <Text style={styles.replyText}>Reply</Text>
-                <Image source={replyIcon} style={styles.arrowIcon} />
+              <TouchableOpacity style={styles.replyTextContainer}>
+                <Text style={styles.replyText}>10</Text>
+                <Icon name={'comments-o'} size={22.5} color={'#88B3D9'} style={styles.arrowIcon}/>
               </TouchableOpacity>
               <TouchableOpacity style={styles.replyTextContainer} onPress={this.replyClicked.bind(this, rowID)}>
-                <Text style={styles.replyText}>10</Text>
-                <Image style={styles.repliesIcon} source={numberOfRepliesIcon} />
+                <Text style={styles.replyText}>Reply</Text>
+                <Icon name={'angle-double-down'} size ={25} color={'#88B3D9'} style={styles.arrowIcon} />
               </TouchableOpacity>
               </View>
               <View style={styles.rightSideBottomBar}>
-              <TouchableOpacity style={styles.voteUpDown}>
-                <Text style={{color: '#228b22'}}> Up </Text>
-                <Icon name={'hand-o-up'} size={20} color={'#E9EBEE'} />
+              <TouchableOpacity style={styles.voteUpDown} onPress={this.upVoteClicked}>
+                <Text style={{color: this.state.isUpVote ? '#228b22' : '#bcbcbb'}}> Up </Text>
+                <Icon name={'hand-o-up'} size={20} color = {this.state.isUpVote ? '#228b22' : '#bcbcbb'}/>
               </TouchableOpacity>
 
-              <TouchableOpacity style={styles.voteUpDown}>
-                <Icon name={'hand-o-down'} size={20} color={'#E9EBEE'} />
-                <Text style={{color: '#DC143C'}}> Down </Text>
+              <TouchableOpacity style={styles.voteUpDown} onPress={this.downVoteClicked}>
+                <Icon name={'hand-o-down'} size={20} color = {this.state.isDownVote ? '#DC143C' : '#bcbcbb'} />
+                <Text style={{color: this.state.isDownVote ? '#DC143C' : '#bcbcbb'}}> Down </Text>
               </TouchableOpacity>
               </View>
 
@@ -139,6 +145,14 @@ class Disscussion extends Component {
     )
   }
 
+  upVoteClicked  = () =>{
+    this.setState({isUpVote: true, isDownVote: false})
+    //console.log(this.state.isUpVote);
+  }
+  downVoteClicked  = () =>{
+    this.setState({isUpVote: false, isDownVote: true})
+  }
+
   /*
     @param vote: {bolean} true: voted yes, false: voted no
     TODO: Add votes
@@ -163,6 +177,8 @@ class Disscussion extends Component {
     });
     this.setState({dataSource: this.state.dataSource.cloneWithRows(clone)})
   }
+
+
 
   /*
     When the user replied to a comment
@@ -266,22 +282,17 @@ const styles = StyleSheet.create({
   replyTextContainer: {
     flexDirection: 'row',
     alignSelf: 'flex-start',
-    borderWidth: 1
+    paddingLeft: 10,
   },
   replyText: {
     fontSize: 15,
     color: '#bcbcbb'
   },
-  repliesIcon: {
-    height: 25, width: 25,
-    resizeMode: 'contain',
-    tintColor: '#88B3D9'
-  },
   arrowIcon: {
-    marginLeft:2,
-    height: 25, width: 25,
-    resizeMode: 'contain',
-    tintColor: '#88B3D9'
+     marginLeft:3,
+    // height: 25, width: 25,
+    // resizeMode: 'contain',
+    // tintColor: '#88B3D9'
   },
   votesContainer: {
     flex: 1,
