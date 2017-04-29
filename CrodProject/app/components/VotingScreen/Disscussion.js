@@ -14,6 +14,7 @@ import ProposalVotes from './ProposalVotes';
 import proposals from '../../data-manager/proposals'
 const numberOfRepliesIcon = require("../../../img/replies-icon.png")
 const replyIcon = require("../../../img/reply-icon.png")
+const profilePhoto = require("../../../img/notification/man1.png")
 
 const disscussion = [
   {profileImage: require("../../../img/notification/man3.png"),
@@ -52,6 +53,9 @@ class Disscussion extends Component {
         />
 
         <View style={styles.createDiscussion}>
+        <TouchableOpacity style={styles.profileContainer} onPress={()=> {Actions.profile({type: ActionConst.REFRESH}) }}>
+        <Image source={profilePhoto} style={styles.profilePhoto}/>
+        </TouchableOpacity>
         <TextInput style={styles.shareText} placeholder="open a discussion ..." placeholderTextColor= '#bcbcbb'/>
         <TouchableOpacity style={styles.shareButton} onPress={this.shareClicked}>
           <Icon name='send-o' size={25} color={'#88B3D9'} />
@@ -224,7 +228,19 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     backgroundColor: 'white',
     borderTopWidth: 1,
-    borderColor: '#88B3D9'
+    borderColor: '#88B3D9',
+    paddingTop: 10,
+    paddingBottom: 10
+  },
+  profileContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginLeft: 10,
+  },
+  profilePhoto: {
+    height: 40,
+    width: 40,
+    resizeMode: 'contain',
   },
   replyContainer:{
     flexDirection: 'row',
@@ -238,7 +254,9 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 10,
     borderColor: '#E9EBEE',
-    margin: 10
+    marginLeft: 10,
+    marginRight: 10,
+    paddingTop: 5,
   },
   shareButton:{
     justifyContent: 'center',
