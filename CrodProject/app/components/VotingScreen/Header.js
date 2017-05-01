@@ -19,6 +19,7 @@ class Header extends Component {
             <View style={styles.header}>
             <TouchableOpacity style={styles.profileContainer} onPress={()=> {Actions.profile({type: ActionConst.REFRESH}) }}>
             <Image source={profilePhoto} style={styles.profilePhoto}/>
+            <Text style={styles.categoryTxt}> Social </Text>
             </TouchableOpacity>
             <Text style={styles.daysLeftTxt}> 12 days left </Text>
 
@@ -44,20 +45,25 @@ const styles = StyleSheet.create({
   },
   profileContainer: {
     flex: 1,
-    marginLeft: 15,
+    marginLeft: -10,
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   profilePhoto: {
-    height: 35,
-    width: 35,
+    height: 25,
+    width: 25,
     resizeMode: 'contain',
     tintColor: '#1070b6'
+  },
+  categoryTxt: {
+    color: '#1070b6',
+    fontSize: 16
   },
   daysLeftTxt: {
     flex: 2,
     color: 'red',
     fontSize: 18,
     textAlign: 'center',
-    marginRight:20,
   },
   skipIconContainer: {
     flex: 1,

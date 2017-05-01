@@ -350,7 +350,7 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     paddingTop: 10,
     paddingBottom: 10,
-    color: 'rgba(136, 179, 217, 0.9)',
+    color: '#1070b6',
     fontSize: 18,
     fontWeight: 'bold',
   },
