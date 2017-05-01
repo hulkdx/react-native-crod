@@ -6,8 +6,9 @@
 'use strict'
 
 import React, { Component } from 'react';
-import {StyleSheet,Text, Image,View,ListView,TouchableOpacity,TextInput} from 'react-native';
-import {Actions} from 'react-native-router-flux';
+import {StyleSheet,Text, Image,View,ListView,TouchableOpacity,TextInput, Animated, Easing} from 'react-native';
+import {Actions, ActionConst} from 'react-native-router-flux';
+// import AutoExpandingTextInput from 'react-native-auto-expanding-textinput'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Kohana from './TextInputAnimation/Kohana.js';
 import ProposalVotes from './ProposalVotes';
@@ -21,12 +22,14 @@ const disscussion = [
    comment: "Yes, Facebook is totally awesome! It's so cool, you can connect with peepz all over your State and even all the way down to Oklahoma. I have more than 1000 friendz by now, duh!",
    fullName: 'Saba Saba',
    upvoted: 5,
-   downvoted: 1,},
+   downvoted: 1,
+   isUpvoted: null,},
   {profileImage: require("../../../img/notification/woman1.png"),
    comment: "I believe there's many sides to this story and it's hard to depict the entire picture. It may look like are spending more time interacting through Facebook than in real life, but the time Americans spend behind their computers is significant anyway. I applaud Facebook for giving us the means to connect to people easily from a long distance and the ease of gathering people from an area. Also, it gives us a break whenever we're vegetating behind our office desks!",
    fullName: 'Coby Babani',
    upvoted: 10,
-   downvoted: 2,},
+   downvoted: 2,
+   isUpvoted: null,},
 
 ]
 
@@ -34,21 +37,31 @@ const disscussion = [
 class Disscussion extends Component {
   constructor() {
     super();
-    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+    this.spinValue = new Animated.Value(0)
+    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => true});
     this.state = {
-      isUpVote: false,
-      isDownVote: false,
       dataSource: ds.cloneWithRows(disscussion),
-
-
     };
+
+
+
+  }
+
+  _pressData = ({}: {[key: number]: boolean})
+  componentDidMount() {
+     this.spin()
   }
 
   render() {
+
+    console.log(this._pressData)
+
+
+
     return (
       <View style={styles.container}>
         <ListView style={{flex:1,}}
-        dataSource={this.state.dataSource}
+        dataSource={ this.state.dataSource}
         renderRow={(disscussion, sectionID, rowID) => {return this._renderDisscussionRow(disscussion, sectionID, rowID)} }
         />
 
@@ -66,9 +79,11 @@ class Disscussion extends Component {
     )
   }
 
-  _renderDisscussionRow(disscussion, sectionID, rowID){
-    console.log(disscussion);
-    console.log(this.state.isUpVote)
+  _renderDisscussionRow(rowData, sectionID, rowID){
+    const spin = this.spinValue.interpolate({
+    inputRange: [0, 1],
+    outputRange: ['0deg', '360deg']
+  })
     return(
       <View style={[styles.disscussionContainer]}>
 
@@ -76,11 +91,11 @@ class Disscussion extends Component {
 
                 <View style={styles.topBarContainer}>
                     <View style={styles.discussionImageContainer}>
-                    <Image style={styles.profileImage} source={disscussion.profileImage}/>
+                    <Image style={styles.profileImage} source={rowData.profileImage}/>
                     <ProposalVotes isClickable={true}
-                                   votedYes={disscussion.upvoted}
+                                   votedYes={rowData.upvoted}
                                    style={styles.votes}
-                                   votedNo={disscussion.downvoted}
+                                   votedNo={rowData.downvoted}
                                    votedClicked={this.votedClicked}/>
                     </View>
 
@@ -88,9 +103,9 @@ class Disscussion extends Component {
 
                 <View style={styles.commentContainer}>
 
-                    <Text style={styles.fullNameText}>{disscussion.fullName} </Text>
+                    <Text style={styles.fullNameText}>{rowData.fullName} </Text>
                     <Text style={styles.commentText}>
-                    {disscussion.comment}
+                    {rowData.comment}
                     </Text>
                 </View>
 
@@ -104,17 +119,18 @@ class Disscussion extends Component {
               </TouchableOpacity>
               <TouchableOpacity style={styles.replyTextContainer} onPress={this.replyClicked.bind(this, rowID)}>
                 <Text style={styles.replyText}>Reply</Text>
-                <Icon name={'angle-double-down'} size ={25} color={'#88B3D9'} style={styles.arrowIcon} />
+              {/*  <Animated.Image style={[styles.animatedReply, {transform: [{rotate: spin}]}]} source={replyIcon} /> */}
+               <Icon name={'angle-double-down'} size ={25} color={'#88B3D9'} style={styles.arrowIcon} />
               </TouchableOpacity>
               </View>
               <View style={styles.rightSideBottomBar}>
-              <TouchableOpacity style={styles.voteUpDown} onPress={this.upVoteClicked}>
+              <TouchableOpacity style={styles.voteUpDown} onPress={this.upVoteClicked.bind(this, rowID)}>
                 <Text style={{color: this.state.isUpVote ? '#228b22' : '#bcbcbb'}}> Up </Text>
-                <Icon name={'hand-o-up'} size={20} color = {this.state.isUpVote ? '#228b22' : '#bcbcbb'}/>
+                <Icon name={'hand-o-up'} size={20} color = {disscussion[rowID].isUpvoted ? '#228b22' : '#bcbcbb'}/>
               </TouchableOpacity>
 
-              <TouchableOpacity style={styles.voteUpDown} onPress={this.downVoteClicked}>
-                <Icon name={'hand-o-down'} size={20} color = {this.state.isDownVote ? '#DC143C' : '#bcbcbb'} />
+              <TouchableOpacity style={styles.voteUpDown} onPress={this.downVoteClicked.bind(this, rowID)}>
+                <Icon name={'hand-o-down'} size={20} color = {disscussion[rowID].isUpvoted === null ? '#bcbcbb' : disscussion[rowID].isUpvoted ?  '#bcbcbb' : '#DC143C'} />
                 <Text style={{color: this.state.isDownVote ? '#DC143C' : '#bcbcbb'}}> Down </Text>
               </TouchableOpacity>
               </View>
@@ -125,7 +141,7 @@ class Disscussion extends Component {
 
         </View>
 
-        {disscussion.selected &&
+        {rowData.selected &&
 
           <View style={styles.replyContainer}>
 
@@ -148,13 +164,30 @@ class Disscussion extends Component {
       </View>
     )
   }
+/*
+isUpdated changes according to @param toggleVoting
+      null -> default value, in other words the user has not voted yet.
+      true -> upVoteClicked(),
+      false -> downVoteClicked()
 
-  upVoteClicked  = () =>{
-    this.setState({isUpVote: true, isDownVote: false})
-    //console.log(this.state.isUpVote);
+
+*/
+  updateDiscussion(toggleVoting, rowID){
+    disscussion = disscussion.map((row, i) => {
+      return {
+        ...row,
+        isUpvoted: i == rowID ? toggleVoting : row.isUpvoted
+      }
+    });
+    this.setState({dataSource: this.state.dataSource.cloneWithRows(disscussion)})
+
   }
-  downVoteClicked  = () =>{
-    this.setState({isUpVote: false, isDownVote: true})
+
+  upVoteClicked  = (rowID) =>{
+      this.updateDiscussion(true, rowID)
+  }
+  downVoteClicked  = (rowID) =>{
+      this.updateDiscussion(false, rowID)
   }
 
   /*
@@ -170,16 +203,16 @@ class Disscussion extends Component {
     _renderDisscussionRow; it clones the database and put selected to true on
     rowID
     TODO: it is a bad practice to clone the rows for checking selected reply,
-    check other solutions.
+    check other solutions. But I think its the only practice.
   */
   replyClicked = (rowID) => {
-    var clone = disscussion.map((disscussion, i) => {
+    disscussion = disscussion.map((row, i) => {
       return {
-        ...disscussion,
+        ...row,
         selected: i == rowID ? true : false
       }
     });
-    this.setState({dataSource: this.state.dataSource.cloneWithRows(clone)})
+    this.setState({dataSource: this.state.dataSource.cloneWithRows(disscussion)})
   }
 
 
@@ -207,6 +240,17 @@ class Disscussion extends Component {
     // TODO: If its not empty
     // TODO: Add Comments
   }
+  spin () {
+  this.spinValue.setValue(0)
+  Animated.timing(
+    this.spinValue,
+    {
+      toValue: 1,
+      duration: 4000,
+      easing: Easing.linear
+    }
+  ).start(() => this.spin())
+}
 }
 
 const styles = StyleSheet.create({
@@ -251,12 +295,12 @@ const styles = StyleSheet.create({
   },
   shareText: {
     flex:1,
-    borderWidth: 1,
-    borderRadius: 10,
-    borderColor: '#E9EBEE',
-    marginLeft: 10,
+    // borderWidth: 1,
+    // borderRadius: 10,
+    // borderColor: '#E9EBEE',
+    marginLeft: 15,
     marginRight: 10,
-    paddingTop: 5,
+    paddingTop: 10,
   },
   shareButton:{
     justifyContent: 'center',
@@ -352,6 +396,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     paddingRight: 7.5
   },
+  animatedReply: {
+    width: 30,
+    height: 30,
+
+  }
 });
 
 module.exports = Disscussion

@@ -9,11 +9,17 @@ import {
   StyleSheet,
 } from 'react-native';
 
+import AutoExpandingTextInput from 'react-native-auto-expanding-textinput'
+
 import BaseInput from './BaseInput';
 
 const PADDING = 16;
 
 export default class Kohana extends BaseInput {
+
+  _onChangeHeight(before, after) {
+   console.log('before: ' + before + ' after: ' + after);
+ }
 
   static propTypes = {
     /*
@@ -84,7 +90,7 @@ export default class Kohana extends BaseInput {
             </Text>
           </Animated.View>
         </TouchableWithoutFeedback>
-        <TextInput
+        <AutoExpandingTextInput
           ref="input"
           {...this.props}
           style={[styles.textInput, inputStyle]}
@@ -94,7 +100,13 @@ export default class Kohana extends BaseInput {
           onFocus={this._onFocus}
           onChange={this._onChange}
           underlineColorAndroid={'transparent'}
+          enablesReturnKeyAutomatically={true}
+          returnKeyType="done"
+          minHeight={40}
+          maxHeight={1000}
+          onChangeHeight={this._onChangeHeight}
         />
+
       </View>
     );
   }
@@ -116,7 +128,7 @@ const styles = StyleSheet.create({
   textInput: {
     flex: 1,
     paddingHorizontal: PADDING,
-    paddingVertical: 0,
+    paddingVertical: 10,
     color: 'black',
     fontSize: 18,
   },
