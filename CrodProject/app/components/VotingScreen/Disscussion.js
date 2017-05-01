@@ -8,7 +8,7 @@
 import React, { Component } from 'react';
 import {StyleSheet,Text, Image,View,ListView,TouchableOpacity,TextInput, Animated, Easing} from 'react-native';
 import {Actions, ActionConst} from 'react-native-router-flux';
-// import AutoExpandingTextInput from 'react-native-auto-expanding-textinput'
+import AutoExpandingTextInput from 'react-native-auto-expanding-textinput'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Kohana from './TextInputAnimation/Kohana.js';
 import ProposalVotes from './ProposalVotes';
@@ -69,7 +69,17 @@ class Disscussion extends Component {
         <TouchableOpacity style={styles.profileContainer} onPress={()=> {Actions.profile({type: ActionConst.REFRESH}) }}>
         <Image source={profilePhoto} style={styles.profilePhoto}/>
         </TouchableOpacity>
-        <TextInput style={styles.shareText} placeholder="open a discussion ..." placeholderTextColor= '#bcbcbb'/>
+        <AutoExpandingTextInput
+          style={styles.shareText}
+          underlineColorAndroid={'transparent'}
+          enablesReturnKeyAutomatically={true}
+          returnKeyType="done"
+          minHeight={40}
+          maxHeight={1000}
+          placeholder="open a discussion ..."
+          placeholderTextColor= '#bcbcbb'
+          onChangeHeight={this._onChangeHeight}
+        />
         <TouchableOpacity style={styles.shareButton} onPress={this.shareClicked}>
           <Icon name='send-o' size={25} color={'#88B3D9'} />
         </TouchableOpacity>
@@ -235,6 +245,10 @@ isUpdated changes according to @param toggleVoting
     this.setState({dataSource: this.state.dataSource.cloneWithRows(clone)})
 
   }
+  _onChangeHeight(before, after) {
+   console.log('before: ' + before + ' after: ' + after);
+ }
+
 
   shareClicked = () => {
     // TODO: If its not empty

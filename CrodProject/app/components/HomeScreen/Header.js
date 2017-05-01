@@ -9,6 +9,7 @@ import React, { Component } from 'react';
 import {StyleSheet,TextInput,TouchableOpacity,Image,Text,View,Dimensions,ScrollView} from 'react-native';
 import { RadioButtons } from 'react-native-radio-buttons'
 import {Actions, ActionConst} from 'react-native-router-flux'
+import AutoExpandingTextInput from 'react-native-auto-expanding-textinput'
 import Moment from 'moment';
 
 import CategoryHeader from './CategoryHeader.js'
@@ -19,6 +20,8 @@ const proposalIcon = require("../../../img/proposal-icon.png")
 const searchIcon = require("../../../img/search-icon1.png")
 const profilePhoto = require("../../../img/notification/man1.png")
 const closeIcon = require("../../../img/close-icon.png")
+
+const PADDING = 16;
 
 var width = Dimensions.get('window').width; //full width
 var height = Dimensions.get('window').height; //full height
@@ -141,14 +144,18 @@ class Header extends Component {
         views =
         <View>
         <Text style={styles.stepsText}>Choose a Title</Text>
-        <TextInput
+        <AutoExpandingTextInput
           style={styles.textInput}
-          multiline={true}
-          numberOfLines={5}
-          underlineColorAndroid='transparent'
-          maxLength={200}
+          underlineColorAndroid={'transparent'}
+          enablesReturnKeyAutomatically={true}
+          returnKeyType="done"
           placeholder="the title must be 50-200 characters long."
-          placeholderTextColor="#d7dade"/>
+          placeholderTextColor="#d7dade"
+          minHeight={70}
+          maxHeight={1000}
+          maxLength={200}
+          onChangeHeight={this._onChangeHeight}
+        />
         </View>
         break;
       // Description
@@ -156,13 +163,19 @@ class Header extends Component {
         views =
         <View>
         <Text style={styles.stepsText}>Description</Text>
-        <TextInput
+        <AutoExpandingTextInput
           style={styles.textInput}
-          multiline={true}
-          numberOfLines={12}
+          underlineColorAndroid={'transparent'}
+          enablesReturnKeyAutomatically={true}
+          returnKeyType="done"
+          minHeight={70}
+          maxHeight={1000}
           maxLength={500}
           placeholder="the description must be 250-500 characters long."
-          placeholderTextColor="#d7dade"/>
+          placeholderTextColor="#d7dade"
+          onChangeHeight={this._onChangeHeight}
+        />
+
         </View>
         break;
       // Deadline
@@ -240,6 +253,10 @@ class Header extends Component {
       isTabOpen: true
     });
   }
+
+  _onChangeHeight(before, after) {
+   console.log('before: ' + before + ' after: ' + after);
+ }
 
 /* on done clicked (When create proposal is open), set isTabOpen */
   onClickDone = () => {
