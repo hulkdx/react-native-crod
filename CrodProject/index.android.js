@@ -4,7 +4,7 @@
   Root of Android
 */
 import React, { Component } from 'react';
-import { AppRegistry, Image, StyleSheet } from 'react-native';
+import { AppRegistry, Image, StyleSheet, Text } from 'react-native';
 import { Router, Scene, Actions, ActionConst } from 'react-native-router-flux';
 import { Provider } from 'react-redux';
 import configureStore from './app/lib/configureStore'
@@ -22,7 +22,7 @@ import App from './app/screens/App'
 */
 const TabIcon = ({ selected, source }) => {
   return (
-    <Image style={[styles.icon, {tintColor: selected ? 'rgba(0, 0, 0, 0.5)' :'white'}]} source={source}/>
+    <Image style={[styles.icon, {tintColor: selected ? '#1070b6' :'#c4c6c9'}]} source={source}/>
   );
 }
 
@@ -100,11 +100,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#88B3D9',
+    backgroundColor: 'white',
+    borderTopWidth: 0.7,
+    borderColor: '#1070b6'
   },
   icon:{
-    height: 25,
-    width: 25,
+    height: 22.5,
+    width: 22.5,
     resizeMode: 'contain'
   }
   });

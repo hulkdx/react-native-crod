@@ -44,7 +44,7 @@ class Body extends Component {
 const styles = StyleSheet.create({
   leftMenu:{
     flex:8,
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    backgroundColor: "#c4c6c9",
   },
   leftSideMenu: {
     borderRightWidth: 1,

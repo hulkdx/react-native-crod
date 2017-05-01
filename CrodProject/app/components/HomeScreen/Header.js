@@ -61,7 +61,7 @@ class Header extends Component {
          <TextInput
               editable = {!this.state.isTabOpen}
               placeholder = "enter proposal title"
-              placeholderTextColor = "#88B3D9"
+              placeholderTextColor = "#1070b6"
               underlineColorAndroid='transparent'
               style={styles.searchText}/>
               </TouchableOpacity>
@@ -280,7 +280,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     backgroundColor: 'white',
     borderBottomWidth: 1,
-    borderBottomColor: "#88B3D9",
+    borderBottomColor: "#1070b6",
     height: 60,
     alignItems: 'center',
     justifyContent: 'center',
@@ -308,7 +308,7 @@ const styles = StyleSheet.create({
     height: 37,
     fontSize: 15,
     marginTop: 5,
-    color: '#88B3D9',
+    color: '#1070b6',
     fontFamily: 'Roboto',
 
   },
@@ -321,13 +321,13 @@ const styles = StyleSheet.create({
     height: 30,
     width: 30,
     resizeMode: 'contain',
-    tintColor: '#88B3D9',
+    tintColor: '#1070b6',
   },
   proposalBtn: {
     height: 35,
     width: 35,
     resizeMode: 'contain',
-    tintColor: '#88B3D9'
+    tintColor: '#1070b6'
   },
   profilePhoto: {
     height: 35,
@@ -363,12 +363,12 @@ const styles = StyleSheet.create({
     resizeMode: 'center',
   },
   categorySelectedImage: {
-    tintColor: '#88B3D9',
+    tintColor: '#1070b6',
     resizeMode: 'center',
   },
   divider: {
     height: 1,
-    backgroundColor: '#88B3D9'
+    backgroundColor: '#1070b6'
   },
   deadlineContainer: {
     flex: 1,
@@ -391,7 +391,7 @@ const styles = StyleSheet.create({
   createProposalBtn: {
     fontSize: 20,
     color: 'white',
-    backgroundColor: '#88B3D9',
+    backgroundColor: '#1070b6',
     padding: 15,
     borderRadius: 10,
   },
@@ -404,7 +404,7 @@ const styles = StyleSheet.create({
     height: 40,
     width: 40,
     resizeMode: 'contain',
-    tintColor: '#88B3D9',
+    tintColor: '#1070b6',
     marginLeft: 15
   },
   attachments: {

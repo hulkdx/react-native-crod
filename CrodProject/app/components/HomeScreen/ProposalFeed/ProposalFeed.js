@@ -157,7 +157,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   angleRight: {
-    color: '#88B3D9',
+    color: '#1070b6',
   },
   customizePopUp: {
     flex:1,
@@ -172,7 +172,7 @@ const styles = StyleSheet.create({
   },
   caption: {
     fontSize: 18,
-    color: '#88B3D9'
+    color: '#1070b6'
   },
   text: {
     paddingTop: 5,

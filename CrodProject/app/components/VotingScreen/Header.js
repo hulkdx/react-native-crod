@@ -36,8 +36,8 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
     backgroundColor: 'white',
-    borderBottomWidth: 1,
-    borderBottomColor: "#88B3D9",
+    borderBottomWidth: 0.7,
+    borderBottomColor: "#1070b6",
     alignItems: 'center',
     justifyContent: 'center',
     height: 60
@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
     height: 35,
     width: 35,
     resizeMode: 'contain',
-    tintColor: '#88B3D9'
+    tintColor: '#1070b6'
   },
   daysLeftTxt: {
     flex: 2,

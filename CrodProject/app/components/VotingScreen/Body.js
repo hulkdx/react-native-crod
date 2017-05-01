@@ -112,15 +112,15 @@ const styles = StyleSheet.create({
   },
   textStyle:{
     fontSize: 23,
-    color: '#bcbcbb'
+    color: '#c4c6c9'
   },
   tabsSelected: {
     //color: 'rgba(37, 36, 51, 0.3)',
-    color: '#88B3D9'
+    color: '#1070b6'
   },
   tabsIconSelected: {
-    borderBottomWidth: 3,
-    borderColor: '#88B3D9',
+    borderBottomWidth: 2,
+    borderColor: '#1070b6',
     //backgroundColor: '#E9EBEE'
   }
 });

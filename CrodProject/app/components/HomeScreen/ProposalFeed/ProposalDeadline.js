@@ -19,13 +19,13 @@ class ProposalDeadline extends Component {
 
 
       <View style={styles.day}>
-        <Text style={{color: '#2575BB', fontSize: 25, textAlign: 'center',}}> {this.props.day} </Text>
+        <Text style={{color: '#1070b6', fontSize: 25, textAlign: 'center',}}> {this.props.day} </Text>
       </View>
 
-      <View style={{height: 1, backgroundColor: '#2575BB'}} />
+      <View style={{height: 1, backgroundColor: '#1070b6'}} />
 
       <View style={styles.date}>
-        <Text style={{color: '#2575BB', textAlign: 'center',}}> {this.props.month} {this.props.date} </Text>
+        <Text style={{color: '#1070b6', textAlign: 'center',}}> {this.props.month} {this.props.date} </Text>
       </View>
 
       </View>
@@ -49,8 +49,8 @@ const styles = StyleSheet.create({
   date:{
     flex:1,
     justifyContent: 'center',
-    borderColor: '#2575BB',
-    borderBottomWidth: 0.2,
+    borderColor: '#1070b6',
+    borderBottomWidth: 0.7,
     borderBottomLeftRadius: 10,
     borderBottomRightRadius: 10,
   },

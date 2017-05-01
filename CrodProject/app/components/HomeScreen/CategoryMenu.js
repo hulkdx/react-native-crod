@@ -35,9 +35,9 @@ class CategoryMenu extends Component {
     var rows = [];
     for (let i=0; i<categories.length; i++){
       rows.push(
-        <TouchableOpacity key = {i} onPress={this._onClickCategoryImage.bind(this,i)} style={styles.categoryDropDown}>
-            <Image source={categories[i].image} style={[styles.categoriesLeftSide, {tintColor: this.state.isSelected[i] ? '#88B3D9' : 'white' }]}/>
-            <Text style={[styles.categoryNameTxt, {color: this.state.isSelected[i] ? '#88B3D9' : 'white' }]}> {categories[i].name} </Text>
+        <TouchableOpacity key = {i} onPress={this._onClickCategoryImage.bind(this,i)} style={[styles.categoryDropDown, {borderRightWidth: this.state.isSelected[i] ? 2 : 0} ]}>
+            <Image source={categories[i].image} style={[styles.categoriesLeftSide, {tintColor: this.state.isSelected[i] ? '#1070b6' : 'white' }]}/>
+            <Text style={[styles.categoryNameTxt, {color: this.state.isSelected[i] ? '#1070b6' : 'white' }]}> {categories[i].name} </Text>
         </TouchableOpacity>
 
       )
@@ -70,7 +70,9 @@ const styles = StyleSheet.create({
   categoryDropDown:{
     marginTop: 25,
     alignItems:'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    borderColor: '#1070b6',
+    borderRightWidth: 2
 
   },
   categoriesLeftSide:{

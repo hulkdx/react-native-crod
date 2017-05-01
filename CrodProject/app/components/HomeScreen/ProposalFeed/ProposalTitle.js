@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
     width: 20,
     height: null,
     resizeMode: 'contain',
-    tintColor: '#88B3D9'
+    tintColor: '#1070b6'
   },
   ar_dis: {
     width: 20,
@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
   },
   ar_dis_statistics: {
-    color: '#88B3D9',
+    color: '#1070b6',
     fontWeight: 'bold',
     marginRight: 5
   },
