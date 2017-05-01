@@ -279,7 +279,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     backgroundColor: 'white',
-    borderBottomWidth: 1,
+    borderBottomWidth: 0.7,
     borderBottomColor: "#1070b6",
     height: 60,
     alignItems: 'center',

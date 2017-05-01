@@ -135,13 +135,13 @@ class Disscussion extends Component {
               </View>
               <View style={styles.rightSideBottomBar}>
               <TouchableOpacity style={styles.voteUpDown} onPress={this.upVoteClicked.bind(this, rowID)}>
-                <Text style={{color: this.state.isUpVote ? '#228b22' : '#bcbcbb'}}> Up </Text>
+                <Text style={{color: disscussion[rowID].isUpvoted ? '#228b22' : '#bcbcbb'}}> Up </Text>
                 <Icon name={'hand-o-up'} size={20} color = {disscussion[rowID].isUpvoted ? '#228b22' : '#bcbcbb'}/>
               </TouchableOpacity>
 
               <TouchableOpacity style={styles.voteUpDown} onPress={this.downVoteClicked.bind(this, rowID)}>
                 <Icon name={'hand-o-down'} size={20} color = {disscussion[rowID].isUpvoted === null ? '#bcbcbb' : disscussion[rowID].isUpvoted ?  '#bcbcbb' : '#DC143C'} />
-                <Text style={{color: this.state.isDownVote ? '#DC143C' : '#bcbcbb'}}> Down </Text>
+                <Text style={{color: disscussion[rowID].isUpvoted === null ? '#bcbcbb' : disscussion[rowID].isUpvoted ? '#bcbcbb' : '#DC143C'}}> Down </Text>
               </TouchableOpacity>
               </View>
 

@@ -68,6 +68,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
   },
   categoryDropDown:{
+    paddingTop: 5,
     marginTop: 25,
     alignItems:'center',
     justifyContent: 'center',
@@ -76,6 +77,7 @@ const styles = StyleSheet.create({
 
   },
   categoriesLeftSide:{
+
     tintColor: 'white',
     height: 50,
     width: 50,
