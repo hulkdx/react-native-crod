@@ -148,7 +148,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   categoryIcon: {
-    tintColor: '#88B3D9'
+    tintColor: '#5d95c4'
   },
   angleRightRoot: {
     paddingLeft: 5,
@@ -157,7 +157,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   angleRight: {
-    color: '#1070b6',
+    color: '#5d95c4',
   },
   customizePopUp: {
     flex:1,
@@ -172,7 +172,7 @@ const styles = StyleSheet.create({
   },
   caption: {
     fontSize: 18,
-    color: '#1070b6'
+    color: '#5d95c4'
   },
   text: {
     paddingTop: 5,

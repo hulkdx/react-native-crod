@@ -61,7 +61,7 @@ class Header extends Component {
          <TextInput
               editable = {!this.state.isTabOpen}
               placeholder = "enter proposal title"
-              placeholderTextColor = "#1070b6"
+              placeholderTextColor = "#5d95c4"
               underlineColorAndroid='transparent'
               style={styles.searchText}/>
               </TouchableOpacity>
@@ -279,8 +279,8 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     backgroundColor: 'white',
-    borderBottomWidth: 0.7,
-    borderBottomColor: "#1070b6",
+    borderBottomWidth: 0.5,
+    borderBottomColor: "#5d95c4",
     height: 60,
     alignItems: 'center',
     justifyContent: 'center',
@@ -308,7 +308,7 @@ const styles = StyleSheet.create({
     height: 37,
     fontSize: 15,
     marginTop: 5,
-    color: '#1070b6',
+    color: '#5d95c4',
     fontFamily: 'Roboto',
 
   },
@@ -321,13 +321,13 @@ const styles = StyleSheet.create({
     height: 30,
     width: 30,
     resizeMode: 'contain',
-    tintColor: '#1070b6',
+    tintColor: '#5d95c4',
   },
   proposalBtn: {
     height: 35,
     width: 35,
     resizeMode: 'contain',
-    tintColor: '#1070b6'
+    tintColor: '#5d95c4'
   },
   profilePhoto: {
     height: 35,
@@ -350,9 +350,8 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     paddingTop: 10,
     paddingBottom: 10,
-    color: '#1070b6',
+    color: '#5d95c4',
     fontSize: 18,
-    fontWeight: 'bold',
   },
   categoryDropDown:{
     flex:1,
@@ -363,12 +362,12 @@ const styles = StyleSheet.create({
     resizeMode: 'center',
   },
   categorySelectedImage: {
-    tintColor: '#1070b6',
+    tintColor: '#5d95c4',
     resizeMode: 'center',
   },
   divider: {
     height: 1,
-    backgroundColor: '#1070b6'
+    backgroundColor: '#5d95c4'
   },
   deadlineContainer: {
     flex: 1,

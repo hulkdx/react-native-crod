@@ -9,7 +9,7 @@
 import React, { Component } from 'react';
 import {StyleSheet,Text,View,Dimensions} from 'react-native';
 import _ from 'underscore'
-
+import { TabViewAnimated, TabBar } from 'react-native-tab-view';
 import Tabs from 'react-native-tabs';
 import Articles from './Articles.js'
 import Statistics from './Statistics.js'
@@ -19,29 +19,56 @@ import VotingAnimation from './VotingAnimation.js'
 
 class Body extends Component {
 
-  constructor(props){
-      super(props);
-      this.state = {
-        page      : 'disscussion',
+        state = {
+          index: 0,
+          routes: [
+            { key: '1', title: 'Discussion' },
+            { key: '2', title: 'Articles' },
+            { key: '3', title: 'Statistics'}
+          ],
+        };
+
+        _handleChangeTab = (index) => {
+        this.setState({ index });
       };
 
-  }
+      _renderHeader = (props) => {
+        console.log(props)
+        return <TabBar style={styles.tabs} {...props} />;
+      };
+
+      _renderSceneVoting = ({ route }) => {
+        switch (route.key) {
+        case '1':
+          return <Disscussion />;
+        case '2':
+          return <Articles />;
+        case '3':
+          return <Statistics />;
+
+        default:
+          return null;
+        }
+      };
+
 
   render() {
+    console.log(this.state.routes);
     return (
-      <View style={styles.container}>
-      {/* Voting Section Appears when its not voted*/}
+
+       <View style={styles.container}>
+
       {_.isUndefined(this.props.voted) && <VotingAnimation />}
-      {/* Articles / Disscussion Tab Section */}
-      <View style={styles.tabContainer}>
-        {this._renderTabs()}
-      </View>
-      {/* Articles / Comments / Statistics body Section */}
-      <View style={styles.bodyContainer}>
-        {this._renderTabContent()}
+
+      <TabViewAnimated
+        navigationState={this.state}
+        renderScene={this._renderSceneVoting}
+        renderHeader={this._renderHeader}
+        onRequestChangeTab={this._handleChangeTab}
+      />
       </View>
 
-      </View>
+
 
     )
   }
@@ -108,7 +135,7 @@ const styles = StyleSheet.create({
   },
   tabs:{
   //  backgroundColor: 'rgba(26, 105, 178, 0.49)',
-  backgroundColor: 'white'
+  backgroundColor: '#5d95c4',
   },
   textStyle:{
     fontSize: 23,
@@ -116,11 +143,11 @@ const styles = StyleSheet.create({
   },
   tabsSelected: {
     //color: 'rgba(37, 36, 51, 0.3)',
-    color: '#1070b6'
+    color: '#5d95c4'
   },
   tabsIconSelected: {
     borderBottomWidth: 2,
-    borderColor: '#1070b6',
+    borderColor: '#5d95c4',
     //backgroundColor: '#E9EBEE'
   }
 });

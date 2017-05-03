@@ -81,7 +81,7 @@ class Disscussion extends Component {
           onChangeHeight={this._onChangeHeight}
         />
         <TouchableOpacity style={styles.shareButton} onPress={this.shareClicked}>
-          <Icon name='send-o' size={25} color={'#1070b6'} />
+          <Icon name='send-o' size={25} color={'#5d95c4'} />
         </TouchableOpacity>
         </View>
       </View>
@@ -125,12 +125,12 @@ class Disscussion extends Component {
             <View style={styles.leftSideBottomBar}>
               <TouchableOpacity style={styles.replyTextContainer}>
                 <Text style={styles.replyText}>10</Text>
-                <Icon name={'comments-o'} size={22.5} color={'#1070b6'} style={styles.arrowIcon}/>
+                <Icon name={'comments-o'} size={22.5} color={'#5d95c4'} style={styles.arrowIcon}/>
               </TouchableOpacity>
               <TouchableOpacity style={styles.replyTextContainer} onPress={this.replyClicked.bind(this, rowID)}>
                 <Text style={styles.replyText}>Reply</Text>
               {/*  <Animated.Image style={[styles.animatedReply, {transform: [{rotate: spin}]}]} source={replyIcon} /> */}
-               <Icon name={'angle-double-down'} size ={25} color={'#1070b6'} style={styles.arrowIcon} />
+               <Icon name={'angle-double-down'} size ={25} color={'#5d95c4'} style={styles.arrowIcon} />
               </TouchableOpacity>
               </View>
               <View style={styles.rightSideBottomBar}>
@@ -160,13 +160,13 @@ class Disscussion extends Component {
           label={'Leave a Reply'}
           iconClass={Icon}
           iconName={'mail-forward'}
-          iconColor={'#0D64B6'}
+          iconColor={'#5d95c4'}
           labelStyle={{ color: '#E9EBEE' }}
           inputStyle={{ color: 'black' }}
           />
 
           <TouchableOpacity style={styles.shareButton} onPress={this.repliedToComment}>
-            <Icon name={'paper-plane-o'} size={22.5} color={'#0D64B6'} style={styles.replyBtn}/>
+            <Icon name={'paper-plane-o'} size={22.5} color={'#5d95c4'} style={styles.replyBtn}/>
           </TouchableOpacity>
           </View>
         }
@@ -286,7 +286,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     backgroundColor: 'white',
     borderTopWidth: 0.7,
-    borderColor: '#1070b6',
+    borderColor: '#5d95c4',
     paddingTop: 10,
     paddingBottom: 10
   },
@@ -315,6 +315,13 @@ const styles = StyleSheet.create({
     marginLeft: 15,
     marginRight: 10,
     paddingTop: 10,
+    shadowColor: 'black',
+    shadowOpacity: 0.1,
+    shadowRadius: StyleSheet.hairlineWidth,
+    shadowOffset: {
+      height: StyleSheet.hairlineWidth,
+    },
+    zIndex: 1,
   },
   shareButton:{
     justifyContent: 'center',

@@ -22,7 +22,7 @@ import App from './app/screens/App'
 */
 const TabIcon = ({ selected, source }) => {
   return (
-    <Image style={[styles.icon, {tintColor: selected ? '#1070b6' :'#c4c6c9'}]} source={source}/>
+    <Image style={[styles.icon, {tintColor: selected ? '#5d95c4' :'#dad9de'}]} source={source}/>
   );
 }
 
@@ -102,7 +102,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'white',
     borderTopWidth: 0.7,
-    borderColor: '#1070b6'
+    borderColor: '#5d95c4',
+
   },
   icon:{
     height: 22.5,

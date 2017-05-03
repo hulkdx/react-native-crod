@@ -22,6 +22,7 @@
     "react-native-side-menu": "^0.20.1",
     "react-native-simple-store": "^1.1.0",
     "react-native-swiper": "^1.5.4",
+    "react-native-tab-view": "0.0.62",
     "react-native-tabs": "^1.0.9",
     "react-native-textinput-effects": "^0.3.0",
     "react-native-vector-icons": "^4.0.0",
