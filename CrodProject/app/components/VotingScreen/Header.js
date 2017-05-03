@@ -7,8 +7,7 @@
 import React, { Component } from 'react';
 import {StyleSheet,Text,Image,Dimensions,View, TouchableOpacity} from 'react-native';
 import {Actions, ActionConst} from 'react-native-router-flux'
-const profilePhoto = require("../../../img/notification/man1.png")
-
+const profilePhoto = require("../../../img/categories/social.png")
 import proposals from '../../data-manager/proposals'
 const skipIcon = require("../../../img/skip-icon.png")
 
@@ -20,6 +19,7 @@ class Header extends Component {
             <View style={styles.header}>
             <TouchableOpacity style={styles.profileContainer} onPress={()=> {Actions.profile({type: ActionConst.REFRESH}) }}>
             <Image source={profilePhoto} style={styles.profilePhoto}/>
+            <Text style={styles.categoryTxt}> Social </Text>
             </TouchableOpacity>
             <Text style={styles.daysLeftTxt}> 12 days left </Text>
 
@@ -37,32 +37,37 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
     backgroundColor: 'white',
-    borderBottomWidth: 1,
-    borderBottomColor: "#88B3D9",
+    borderBottomWidth: 0.7,
+    borderBottomColor: "#5d95c4",
     alignItems: 'center',
     justifyContent: 'center',
     height: 60
   },
   profileContainer: {
     flex: 1,
-    marginLeft: 15,
-    borderWidth: 1
+    marginLeft: -10,
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   profilePhoto: {
-    height: 35,
-    width: 35,
+    height: 25,
+    width: 25,
     resizeMode: 'contain',
+    tintColor: '#5d95c4'
+  },
+  categoryTxt: {
+    color: '#5d95c4',
+    fontSize: 14
   },
   daysLeftTxt: {
-    flex: 1,
+    flex: 2,
     color: 'red',
     fontSize: 18,
-    textAlign: 'center'
+    textAlign: 'center',
   },
   skipIconContainer: {
     flex: 1,
     alignItems: 'flex-end',
-    borderWidth: 1,
   },
   skipIcon: {
     height: 50,

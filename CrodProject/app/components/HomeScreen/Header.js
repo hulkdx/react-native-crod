@@ -9,6 +9,7 @@ import React, { Component } from 'react';
 import {StyleSheet,TextInput,TouchableOpacity,Image,Text,View,Dimensions,ScrollView} from 'react-native';
 import { RadioButtons } from 'react-native-radio-buttons'
 import {Actions, ActionConst} from 'react-native-router-flux'
+import AutoExpandingTextInput from 'react-native-auto-expanding-textinput'
 import Moment from 'moment';
 
 import CategoryHeader from './CategoryHeader.js'
@@ -19,6 +20,8 @@ const proposalIcon = require("../../../img/proposal-icon.png")
 const searchIcon = require("../../../img/search-icon1.png")
 const profilePhoto = require("../../../img/notification/man1.png")
 const closeIcon = require("../../../img/close-icon.png")
+
+const PADDING = 16;
 
 var width = Dimensions.get('window').width; //full width
 var height = Dimensions.get('window').height; //full height
@@ -58,7 +61,7 @@ class Header extends Component {
          <TextInput
               editable = {!this.state.isTabOpen}
               placeholder = "enter proposal title"
-              placeholderTextColor = "#88B3D9"
+              placeholderTextColor = "#5d95c4"
               underlineColorAndroid='transparent'
               style={styles.searchText}/>
               </TouchableOpacity>
@@ -141,14 +144,18 @@ class Header extends Component {
         views =
         <View>
         <Text style={styles.stepsText}>Choose a Title</Text>
-        <TextInput
+        <AutoExpandingTextInput
           style={styles.textInput}
-          multiline={true}
-          numberOfLines={5}
-          underlineColorAndroid='transparent'
-          maxLength={200}
+          underlineColorAndroid={'transparent'}
+          enablesReturnKeyAutomatically={true}
+          returnKeyType="done"
           placeholder="the title must be 50-200 characters long."
-          placeholderTextColor="#d7dade"/>
+          placeholderTextColor="#d7dade"
+          minHeight={70}
+          maxHeight={1000}
+          maxLength={200}
+          onChangeHeight={this._onChangeHeight}
+        />
         </View>
         break;
       // Description
@@ -156,13 +163,19 @@ class Header extends Component {
         views =
         <View>
         <Text style={styles.stepsText}>Description</Text>
-        <TextInput
+        <AutoExpandingTextInput
           style={styles.textInput}
-          multiline={true}
-          numberOfLines={12}
+          underlineColorAndroid={'transparent'}
+          enablesReturnKeyAutomatically={true}
+          returnKeyType="done"
+          minHeight={70}
+          maxHeight={1000}
           maxLength={500}
           placeholder="the description must be 250-500 characters long."
-          placeholderTextColor="#d7dade"/>
+          placeholderTextColor="#d7dade"
+          onChangeHeight={this._onChangeHeight}
+        />
+
         </View>
         break;
       // Deadline
@@ -241,6 +254,10 @@ class Header extends Component {
     });
   }
 
+  _onChangeHeight(before, after) {
+   console.log('before: ' + before + ' after: ' + after);
+ }
+
 /* on done clicked (When create proposal is open), set isTabOpen */
   onClickDone = () => {
     // TODO: Check for it TextInput is empty
@@ -262,8 +279,8 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     backgroundColor: 'white',
-    borderBottomWidth: 1,
-    borderBottomColor: "#88B3D9",
+    borderBottomWidth: 0.5,
+    borderBottomColor: "#5d95c4",
     height: 60,
     alignItems: 'center',
     justifyContent: 'center',
@@ -291,7 +308,7 @@ const styles = StyleSheet.create({
     height: 37,
     fontSize: 15,
     marginTop: 5,
-    color: '#88B3D9',
+    color: '#5d95c4',
     fontFamily: 'Roboto',
 
   },
@@ -304,13 +321,13 @@ const styles = StyleSheet.create({
     height: 30,
     width: 30,
     resizeMode: 'contain',
-    tintColor: '#88B3D9',
+    tintColor: '#5d95c4',
   },
   proposalBtn: {
     height: 35,
     width: 35,
     resizeMode: 'contain',
-    tintColor: '#88B3D9'
+    tintColor: '#5d95c4'
   },
   profilePhoto: {
     height: 35,
@@ -333,9 +350,8 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     paddingTop: 10,
     paddingBottom: 10,
-    color: 'rgba(136, 179, 217, 0.9)',
+    color: '#5d95c4',
     fontSize: 18,
-    fontWeight: 'bold',
   },
   categoryDropDown:{
     flex:1,
@@ -346,12 +362,12 @@ const styles = StyleSheet.create({
     resizeMode: 'center',
   },
   categorySelectedImage: {
-    tintColor: '#88B3D9',
+    tintColor: '#5d95c4',
     resizeMode: 'center',
   },
   divider: {
     height: 1,
-    backgroundColor: '#88B3D9'
+    backgroundColor: '#5d95c4'
   },
   deadlineContainer: {
     flex: 1,
@@ -374,7 +390,7 @@ const styles = StyleSheet.create({
   createProposalBtn: {
     fontSize: 20,
     color: 'white',
-    backgroundColor: '#88B3D9',
+    backgroundColor: '#1070b6',
     padding: 15,
     borderRadius: 10,
   },
@@ -387,7 +403,7 @@ const styles = StyleSheet.create({
     height: 40,
     width: 40,
     resizeMode: 'contain',
-    tintColor: '#88B3D9',
+    tintColor: '#1070b6',
     marginLeft: 15
   },
   attachments: {

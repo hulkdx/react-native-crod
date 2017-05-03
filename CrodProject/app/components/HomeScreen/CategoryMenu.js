@@ -35,9 +35,9 @@ class CategoryMenu extends Component {
     var rows = [];
     for (let i=0; i<categories.length; i++){
       rows.push(
-        <TouchableOpacity key = {i} onPress={this._onClickCategoryImage.bind(this,i)} style={styles.categoryDropDown}>
-            <Image source={categories[i].image} style={[styles.categoriesLeftSide, {tintColor: this.state.isSelected[i] ? '#88B3D9' : 'white' }]}/>
-            <Text style={[styles.categoryNameTxt, {color: this.state.isSelected[i] ? '#88B3D9' : 'white' }]}> {categories[i].name} </Text>
+        <TouchableOpacity key = {i} onPress={this._onClickCategoryImage.bind(this,i)} style={[styles.categoryDropDown, {borderRightWidth: this.state.isSelected[i] ? 3 : 0} ]}>
+            <Image source={categories[i].image} style={[styles.categoriesLeftSide, {tintColor: this.state.isSelected[i] ? 'white' : 'white' }]}/>
+            <Text style={[styles.categoryNameTxt, {color: this.state.isSelected[i] ? 'white' : 'white' }]}> {categories[i].name} </Text>
         </TouchableOpacity>
 
       )
@@ -68,12 +68,17 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
   },
   categoryDropDown:{
+    paddingTop: 5,
     marginTop: 25,
     alignItems:'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    borderColor: 'white',
+    //borderColor: '#5d95c4',
+    borderRightWidth: 2
 
   },
   categoriesLeftSide:{
+
     tintColor: 'white',
     height: 50,
     width: 50,

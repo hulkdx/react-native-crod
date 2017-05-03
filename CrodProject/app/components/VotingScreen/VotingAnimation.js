@@ -89,7 +89,8 @@ class VotingAnimation extends Component {
     @param voted {boolean}: true=>voted yes, false=>voted no
   */
   onVoted(voted){
-    /* TODO: 1. show statistics */
+    /* TODO: 1. show statistics
+             2. Exception Error : Check for the right scene. (voting || votingNow)*/ 
     // Send the voted to @link:VotingScreen.js then to Body.js to refresh the elements (statistics)
     Actions.refresh({key: 'voting', voted:voted})
     /* TODO: 2. show total yes/no votes instead of the voting bar */
