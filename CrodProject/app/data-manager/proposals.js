@@ -70,7 +70,7 @@ const proposals = [
      day: 'Thu',
      year: 2017,
      category: 'Financial',
-     categoryIcon: require("../../img/categories/financial.png"),
+     categoryIcon: require("../../img/categories/finance.png"),
      articles: 8,
      discussions: 41,
      comment: 1,
