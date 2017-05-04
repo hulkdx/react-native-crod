@@ -37,8 +37,9 @@ class ProposalTitle extends Component {
           <Icon name='hand-o-down' size={22} color="#ff7f7f"/>
         </View>
         }
-
+          <View style={styles.categoryContainer}>
           <Image style={styles.category} source={this.props.categoryIcon}/>
+          </View>
 
         {/* TODO: get these numbers */}
         <View style={styles.extraIcons}>
@@ -81,10 +82,17 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   category: {
-    width: 20,
-    height: null,
+    width: 30,
+    height: 30,
     resizeMode: 'contain',
-    tintColor: '#5d95c4'
+    tintColor: '#5d95c4',
+
+  },
+  categoryContainer: {
+    flex: 1,
+    alignItems: 'flex-start',
+    justifyContent: 'center',
+
   },
   ar_dis: {
     width: 20,
