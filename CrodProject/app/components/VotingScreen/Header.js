@@ -21,7 +21,7 @@ class Header extends Component {
             <Image source={profilePhoto} style={styles.profilePhoto}/>
             <Text style={styles.categoryTxt}> Social </Text>
             </TouchableOpacity>
-            <Text style={styles.daysLeftTxt}> 12 days left </Text>
+            <Text style={styles.daysLeftTxt}> 2 days left </Text>
 
             <TouchableOpacity style={styles.skipIconContainer}>
             <Image style={styles.skipIcon}source={skipIcon}  />

@@ -14,7 +14,7 @@ class ProposalDeadline extends Component {
       <View style={styles.deadlineRoot}>
 
       <View style={styles.daysLeft}>
-        <Text style={{color: '#DC143C', textAlign: 'center', fontSize: 16.5}}> 12 days </Text>
+        <Text style={{color: '#DC143C', textAlign: 'center', fontSize: 16.5}}>2 days</Text>
       </View>
 
 

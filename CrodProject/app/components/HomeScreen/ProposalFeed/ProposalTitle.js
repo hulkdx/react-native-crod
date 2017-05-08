@@ -8,9 +8,6 @@ import React, { Component } from 'react';
 import {StyleSheet,Image,Text,View} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-const attachmentSource = require("../../../../img/attachment.png")
-const commentSource = require("../../../../img/comment.png")
-
 class ProposalTitle extends Component {
 
   render() {
@@ -41,12 +38,11 @@ class ProposalTitle extends Component {
           <Image style={styles.category} source={this.props.categoryIcon}/>
           </View>
 
-        {/* TODO: get these numbers */}
         <View style={styles.extraIcons}>
           <Text style={styles.ar_dis_statistics}>{this.props.articles}</Text>
-          <Image style={styles.ar_dis} source={attachmentSource}/>
+          <Icon name='paperclip' size={22} color="#5d95c4"/>
           <Text style={styles.ar_dis_statistics}>{this.props.discussions}</Text>
-          <Image style={styles.ar_dis} source={commentSource}/>
+          <Icon name='comments-o' size={22} color="#5d95c4"/>
         </View>
 
         </View>
@@ -69,7 +65,7 @@ const styles = StyleSheet.create({
   },
   title: {
     textAlign: 'left',
-    fontSize: 20,
+    fontSize: 18,
     fontFamily: 'sans-serif',
 
   },
@@ -97,12 +93,14 @@ const styles = StyleSheet.create({
   ar_dis: {
     width: 20,
     height: null,
-    resizeMode: 'contain',
   },
   ar_dis_statistics: {
-    color: '#5d95c4',
+    fontSize: 14,
     fontWeight: 'bold',
-    marginRight: 5
+    fontStyle: 'italic',
+    marginRight: 5,
+    marginLeft: 5,
+    marginTop: 2.5,
   },
   extraIcons: {
     flex: 1,
@@ -126,7 +124,7 @@ const styles = StyleSheet.create({
   },
   fullName: {
     flex: 3,
-    fontSize: 18
+    fontSize: 20
   },
 });
 
