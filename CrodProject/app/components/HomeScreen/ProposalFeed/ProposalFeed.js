@@ -6,10 +6,13 @@
 'use strict'
 import React, { Component } from 'react';
 import { ScrollView, StyleSheet,TouchableOpacity,Text,View,ListView} from 'react-native';
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 import {Actions, ActionConst} from 'react-native-router-flux'
 import PopupDialog, { DialogButton, DialogTitle, SlideAnimation } from 'react-native-popup-dialog'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import _ from 'underscore'
+import * as proposalsActions from '../../../reducers/proposals/proposalsActions'
 
 import ProposalTitle from './ProposalTitle'
 import ProposalDeadline from './ProposalDeadline'
@@ -30,6 +33,15 @@ class ProposalFeed extends Component {
   componentDidUpdate(){
     // it will dismiss the popupDialog if the user goes to another screen while it is open.
     if (!_.isUndefined(this.popupDialog)) {this.popupDialog.dismiss();}
+  }
+
+  // Recive the proposals when components mounted
+  componentDidMount() {
+    this.props.getProposals();
+  }
+
+  componentWillReceiveProps(nextProps){
+    // TODO update data source with this.props.proposals somehow
   }
 
   render() {
@@ -182,5 +194,13 @@ const styles = StyleSheet.create({
   }
 });
 
-
-module.exports = ProposalFeed
+// Redux boilerplate
+function mapStateToProps (state) {
+  return {
+    proposals: state.proposals,
+  }
+}
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(proposalsActions, dispatch)
+}
+export default connect(mapStateToProps , mapDispatchToProps)(ProposalFeed);

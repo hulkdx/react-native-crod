@@ -18,4 +18,8 @@ export default keyMirror({
   LOGOUT_SUCCESS: null,
   LOGOUT_FAILURE: null,
 
+  PROPOSAL_REQUEST: null,
+  PROPOSAL_SUCCESS: null,
+  PROPOSAL_FAILURE: null,
+
 })

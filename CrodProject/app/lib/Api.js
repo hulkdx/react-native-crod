@@ -73,6 +73,31 @@ export default class Api {
         throw (error)
       })
   }
+
+  async getProposals () {
+    const ENDPOINT = 'api/proposal'
+    return await fetch(API_BASE_URL+ENDPOINT, {
+        method: 'GET',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwidXNlcl9pZCI6MSwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJleHAiOjE0OTk1MjM2MjZ9.RigTwRhgM8_BYP9eW6bfAgjbvIv1tZ05OkQInSj_ZMQ'
+          }
+      })
+      .then((res) => {
+        return res.json()
+      .then((json) => {
+          if (res.status === 200 || res.status === 201) {
+            return json
+          } else {
+            throw (json)
+          }
+        })
+      })
+      .catch((error) => {
+        throw (error)
+      })
+  }
 }
 // The singleton variable
 export let api = new Api()

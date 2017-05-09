@@ -7,6 +7,7 @@
 
 import { combineReducers } from 'redux'
 import auth from './auth/authReducer'
+import proposals from './proposals/proposalsReducer'
 
 /**
  * ## CombineReducers
@@ -16,6 +17,7 @@ import auth from './auth/authReducer'
  */
 const rootReducer = combineReducers({
   auth,
+  proposals
 })
 
 export default rootReducer
