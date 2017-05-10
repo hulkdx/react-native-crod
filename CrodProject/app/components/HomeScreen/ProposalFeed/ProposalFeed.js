@@ -42,6 +42,8 @@ class ProposalFeed extends Component {
 
   componentWillReceiveProps(nextProps){
     // TODO update data source with this.props.proposals somehow
+    if (nextProps.proposals.proposals.length === 0) return;
+    this.setState({dataSource: this.state.dataSource.cloneWithRows(nextProps.proposals.proposals)})
   }
 
   render() {
@@ -52,7 +54,7 @@ class ProposalFeed extends Component {
       </View>
       <ListView
         dataSource={this.state.dataSource}
-        renderRow={(proposal) => {return this._renderProposalRow(proposal)} }/>
+        renderRow={this._renderProposalRow}/>
         {/*Pop up called when the onLongPress on any proposal is triggered.
            For it to work run: npm install --save react-native-popup-dialog   */}
 
@@ -106,7 +108,7 @@ class ProposalFeed extends Component {
     TODO: get the user info and show history for only that user.
     @param proposal: the proposal elements from /data-manager/proposal.js
   */
-  _renderProposalRow(proposal){
+  _renderProposalRow = (proposal) => {
 
     return(
       <View style={styles.rowContainer}>
