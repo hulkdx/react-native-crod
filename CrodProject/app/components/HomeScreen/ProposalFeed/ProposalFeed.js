@@ -17,7 +17,6 @@ import * as proposalsActions from '../../../reducers/proposals/proposalsActions'
 import ProposalTitle from './ProposalTitle'
 import ProposalDeadline from './ProposalDeadline'
 
-import proposals from '../../../data-manager/proposals'
 
 class ProposalFeed extends Component {
 
@@ -25,7 +24,7 @@ class ProposalFeed extends Component {
     super();
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
-      dataSource: ds.cloneWithRows(proposals),
+      dataSource: ds,
       proposalsId: 0
     };
   }
@@ -75,31 +74,39 @@ class ProposalFeed extends Component {
                    key="button-1"
                  />,
                ]}>
-               {/* The content of the pop-up dialog. */}
-             <ScrollView style={styles.customizePopUp}>
-
-              <View style={styles.rowPopUp}>
-              <Text style={styles.caption}> Title: </Text>
-              <Text style={styles.text}> {proposals[this.state.proposalsId].title}</Text>
-              </View>
-              <View style={styles.rowPopUp}>
-              <Text style={styles.caption}> Category: </Text>
-              <Text style={styles.text}> {proposals[this.state.proposalsId].category} </Text>
-              </View>
-              <View style={styles.rowPopUp}>
-              <Text style={styles.caption}> Deadline: </Text>
-              <Text style={styles.text}> {proposals[this.state.proposalsId].monthText} {proposals[this.state.proposalsId].date}, {proposals[this.state.proposalsId].year}</Text>
-              </View>
-              <View style={styles.rowPopUp}>
-              <Text style={styles.caption}> Description: </Text>
-              <Text style={styles.text}>{proposals[this.state.proposalsId].description}</Text>
-              </View>
-
-             </ScrollView>
+               {this._PopupDialogContent()}
             </PopupDialog>
 
 
       </View>
+    )
+  }
+
+{/* The content of the pop-up dialog.
+    This will show when users long click on proposals
+    TODO: Update this information with back-end */}
+  _PopupDialogContent(){
+    return(
+      <ScrollView style={styles.customizePopUp}>
+
+       <View style={styles.rowPopUp}>
+       <Text style={styles.caption}> Title: </Text>
+       <Text style={styles.text}> {proposals[this.state.proposalsId].title}</Text>
+       </View>
+       <View style={styles.rowPopUp}>
+       <Text style={styles.caption}> Category: </Text>
+       <Text style={styles.text}> {proposals[this.state.proposalsId].category} </Text>
+       </View>
+       <View style={styles.rowPopUp}>
+       <Text style={styles.caption}> Deadline: </Text>
+       <Text style={styles.text}> {proposals[this.state.proposalsId].monthText} {proposals[this.state.proposalsId].date}, {proposals[this.state.proposalsId].year}</Text>
+       </View>
+       <View style={styles.rowPopUp}>
+       <Text style={styles.caption}> Description: </Text>
+       <Text style={styles.text}>{proposals[this.state.proposalsId].description}</Text>
+       </View>
+
+      </ScrollView>
     )
   }
 
