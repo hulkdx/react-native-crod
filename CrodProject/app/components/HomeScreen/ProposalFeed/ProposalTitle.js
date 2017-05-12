@@ -14,9 +14,12 @@ class ProposalTitle extends Component {
     return (
       <View style={styles.titleRoot}>
 
-      {this.props.profilePic &&
+      {this.props.fullName &&
       <View style={styles.proposalHeader} >
-       <Image style={styles.profilePic} source={{uri: this.props.profilePic}} />
+      {this.props.profilePic !== "" ?
+        <Image style={styles.profilePic} source={{uri: this.props.profilePic}} />
+      : <Text> No Image</Text>
+      }
        <Text style={styles.fullName}> {this.props.fullName} </Text>
       </View>
       }
