@@ -127,10 +127,9 @@ class ProposalFeed extends Component {
         text={proposal.title}
         articles={proposal.articles}
         discussions={proposal.discussions}
-        categoryIcon={proposal.category_source_fill} />
+        categoryIcon={proposal.category_source_fill}
+        deadline={proposal.deadline} />
       </TouchableOpacity>
-
-      <ProposalDeadline deadline={proposal.deadline} />
       </View>
 
 

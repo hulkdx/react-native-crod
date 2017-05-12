@@ -10,7 +10,31 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 class ProposalTitle extends Component {
 
+  constructor() {
+    super();
+    this.state = {
+      dateLeft: 0,
+      date: '',
+    };
+  }
+
+  // TODO: change this to componentWillReceiveProps to update the proposals
+  componentDidMount() {
+    var deadlineDate = new Date(this.props.deadline);
+    var currentDate = new Date();
+    var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+      "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+     // convert milisecond to day
+    var dateLeft = Math.round((deadlineDate - currentDate) / 86400000);
+    this.setState({
+      dateLeft: dateLeft,
+      date: monthNames[deadlineDate.getMonth()] + ' ' + deadlineDate.getDate()
+    });
+
+  }
+
   render() {
+    console.log(this.state.dateLeft);
     return (
       <View style={styles.titleRoot}>
 
@@ -21,6 +45,12 @@ class ProposalTitle extends Component {
       : <Text> No Image</Text>
       }
        <Text style={styles.fullName}> {this.props.fullName} </Text>
+
+       <View style={styles.deadlineContainer}>
+           <Text style={styles.daysLeft}>{this.state.dateLeft} days left</Text>
+           <Text style={styles.date}>{this.state.date}</Text>
+       </View>
+
       </View>
       }
       <View style={styles.titleContainer}>
@@ -129,6 +159,17 @@ const styles = StyleSheet.create({
     flex: 3,
     fontSize: 20
   },
+  deadlineContainer:{
+    marginRight: 5,
+  },
+  daysLeft: {
+    color: '#DC143C',
+    textAlign: 'center'
+  },
+  date: {
+    color: '#5d95c4',
+    textAlign: 'center',
+  }
 });
 
 module.exports = ProposalTitle
