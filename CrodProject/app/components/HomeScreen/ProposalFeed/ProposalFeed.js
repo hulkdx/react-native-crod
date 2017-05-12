@@ -5,7 +5,7 @@
 */
 'use strict'
 import React, { Component } from 'react';
-import { ScrollView, StyleSheet,TouchableOpacity,Text,View,ListView} from 'react-native';
+import { ActivityIndicator, ScrollView, StyleSheet,TouchableOpacity,Text,View,ListView} from 'react-native';
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import {Actions, ActionConst} from 'react-native-router-flux'
@@ -82,13 +82,15 @@ class ProposalFeed extends Component {
     )
   }
 
-{/* The content of the pop-up dialog.
-    This will show when users long click on proposals
-    TODO: Update this information with back-end */}
+/*
+  The content of the pop-up dialog.
+  This will show when users long click on proposals
+  TODO: Update this information with back-end
+*/
   _PopupDialogContent(){
     return(
       <ScrollView style={styles.customizePopUp}>
-
+{/*
        <View style={styles.rowPopUp}>
        <Text style={styles.caption}> Title: </Text>
        <Text style={styles.text}> {proposals[this.state.proposalsId].title}</Text>
@@ -105,7 +107,7 @@ class ProposalFeed extends Component {
        <Text style={styles.caption}> Description: </Text>
        <Text style={styles.text}>{proposals[this.state.proposalsId].description}</Text>
        </View>
-
+*/}
       </ScrollView>
     )
   }
@@ -116,15 +118,20 @@ class ProposalFeed extends Component {
     @param proposal: the proposal elements from /data-manager/proposal.js
   */
   _renderProposalRow = (proposal) => {
-
+    console.log(proposal);
     return(
       <View style={styles.rowContainer}>
 
       <TouchableOpacity style={styles.proposal} onPress={this.proposalClicked.bind(this, proposal)} onLongPress={this.onLongPress.bind(this,proposal)}>
-        <ProposalTitle fullName={proposal.fullName} profilePic={proposal.profilePic} text={proposal.title} articles={proposal.articles} discussions={proposal.discussions}categoryIcon={proposal.categoryIcon} />
+        <ProposalTitle fullName={proposal.user.first_name + " " + proposal.user.last_name}
+        profilePic={proposal.user.profile_pic_url}
+        text={proposal.title}
+        articles={proposal.articles}
+        discussions={proposal.discussions}
+        categoryIcon={proposal.category_source_fill} />
       </TouchableOpacity>
 
-      <ProposalDeadline day={proposal.day} date={proposal.date} month={proposal.monthText} />
+      <ProposalDeadline deadline={proposal.deadline} />
       </View>
 
 

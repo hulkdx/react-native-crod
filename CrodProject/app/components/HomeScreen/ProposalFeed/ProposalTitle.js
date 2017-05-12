@@ -16,7 +16,7 @@ class ProposalTitle extends Component {
 
       {this.props.profilePic &&
       <View style={styles.proposalHeader} >
-       <Image style={styles.profilePic} source={this.props.profilePic} />
+       <Image style={styles.profilePic} source={{uri: this.props.profilePic}} />
        <Text style={styles.fullName}> {this.props.fullName} </Text>
       </View>
       }
@@ -35,7 +35,7 @@ class ProposalTitle extends Component {
         </View>
         }
           <View style={styles.categoryContainer}>
-          <Image style={styles.category} source={this.props.categoryIcon}/>
+          <Image style={styles.category} source={{uri: this.props.categoryIcon}}/>
           </View>
 
         <View style={styles.extraIcons}>
