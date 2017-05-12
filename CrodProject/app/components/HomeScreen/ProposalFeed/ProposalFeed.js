@@ -87,26 +87,26 @@ class ProposalFeed extends Component {
   TODO: Update this information with back-end
 */
   _PopupDialogContent(){
+    console.log(this.state.proposalsId);
+    if (this.props.proposals.proposals.length > 0)
     return(
       <ScrollView style={styles.customizePopUp}>
-{/*
        <View style={styles.rowPopUp}>
        <Text style={styles.caption}> Title: </Text>
-       <Text style={styles.text}> {proposals[this.state.proposalsId].title}</Text>
+       <Text style={styles.text}> {this.props.proposals.proposals[this.state.proposalsId].title}</Text>
        </View>
        <View style={styles.rowPopUp}>
        <Text style={styles.caption}> Category: </Text>
-       <Text style={styles.text}> {proposals[this.state.proposalsId].category} </Text>
+       <Text style={styles.text}> {this.props.proposals.proposals[this.state.proposalsId].category_name} </Text>
        </View>
        <View style={styles.rowPopUp}>
        <Text style={styles.caption}> Deadline: </Text>
-       <Text style={styles.text}> {proposals[this.state.proposalsId].monthText} {proposals[this.state.proposalsId].date}, {proposals[this.state.proposalsId].year}</Text>
+       <Text style={styles.text}> {this.props.proposals.proposals[this.state.proposalsId].deadline} </Text>
        </View>
        <View style={styles.rowPopUp}>
        <Text style={styles.caption}> Description: </Text>
-       <Text style={styles.text}>{proposals[this.state.proposalsId].description}</Text>
+       <Text style={styles.text}>{this.props.proposals.proposals[this.state.proposalsId].description}</Text>
        </View>
-*/}
       </ScrollView>
     )
   }
@@ -120,7 +120,7 @@ class ProposalFeed extends Component {
     return(
       <View style={styles.rowContainer}>
 
-      <TouchableOpacity style={styles.proposal} onPress={this.proposalClicked.bind(this, proposal, rowID)} onLongPress={this.onLongPress.bind(this,proposal)}>
+      <TouchableOpacity style={styles.proposal} onPress={this.proposalClicked.bind(this, proposal, rowID)} onLongPress={this.onLongPress.bind(this,proposal, rowID)}>
         <ProposalTitle fullName={proposal.user.first_name + " " + proposal.user.last_name}
         profilePic={proposal.user.profile_pic_url}
         text={proposal.title}
@@ -142,11 +142,10 @@ class ProposalFeed extends Component {
     TODO: change the proposal object with proposal id
   */
   proposalClicked = (proposal, rowID) => {
-    console.log();
     Actions.voting({type: ActionConst.REFRESH, proposalId: rowID})
   }
-  onLongPress = (proposal) => {
-    this.setState({proposalsId: proposal.id})
+  onLongPress = (proposal, rowID) => {
+    this.setState({proposalsId: rowID})
     this.popupDialog.show()
   }
 }
