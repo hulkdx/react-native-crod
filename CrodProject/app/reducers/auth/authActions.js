@@ -98,9 +98,13 @@ export function registerFailure (error) {
 export function saveToken (token) {
    return store.save('TOKEN_KEY', token)
 }
-export function getToken (token) {
+
+function getToken(){
+  return store.get('TOKEN_KEY')
+}
+export function redirect (token) {
   return dispatch => {
-    return store.get('TOKEN_KEY')
+    return getToken()
       .then((token) => {
         if (token) {
           //dispatch(sessionTokenRequestSuccess(token))

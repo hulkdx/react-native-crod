@@ -19,7 +19,7 @@ class Login extends Component {
   constructor(props) {
     super(props)
     // This function redirects to proper screen
-    this.props.getToken()
+    this.props.redirect()
   }
 
   render() {
