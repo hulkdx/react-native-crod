@@ -53,11 +53,6 @@ class Disscussion extends Component {
   }
 
   render() {
-
-    console.log(this._pressData)
-
-
-
     return (
       <View style={styles.container}>
         <ListView style={{flex:1,}}

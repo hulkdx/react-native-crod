@@ -57,9 +57,6 @@ class VotingAnimation extends Component {
     @return {boolean}: true => user voted, false => user didnt vote
   */
   isDropZone(gesture){
-    // console.log('gesture.moveX : ' + gesture.moveX);
-    // console.log('voteNo : ' + voteNo);
-    // console.log('voteYes : ' + voteYes);
     if (gesture.moveX < voteNo) {
       this.setState({isVoted   : true})
       this.onVoted(false)
@@ -90,7 +87,7 @@ class VotingAnimation extends Component {
   */
   onVoted(voted){
     /* TODO: 1. show statistics
-             2. Exception Error : Check for the right scene. (voting || votingNow)*/ 
+             2. Exception Error : Check for the right scene. (voting || votingNow)*/
     // Send the voted to @link:VotingScreen.js then to Body.js to refresh the elements (statistics)
     Actions.refresh({key: 'voting', voted:voted})
     /* TODO: 2. show total yes/no votes instead of the voting bar */
@@ -98,7 +95,6 @@ class VotingAnimation extends Component {
   }
 
   render() {
-    console.log(this.state.colorChange)
     return (
         <View style={styles.votingBar} >
           <View style={[styles.votingBarRed, this.state.colorChange == 'green' ? {backgroundColor: this.state.colorChange} : {backgroundColor: 'red'}]}/>

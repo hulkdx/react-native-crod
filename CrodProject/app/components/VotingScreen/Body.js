@@ -33,7 +33,6 @@ class Body extends Component {
       };
 
       _renderHeader = (props) => {
-        console.log(props)
         return <TabBar style={styles.tabs} {...props} />;
       };
 
@@ -53,7 +52,6 @@ class Body extends Component {
 
 
   render() {
-    console.log(this.state.routes);
     return (
 
        <View style={styles.container}>
