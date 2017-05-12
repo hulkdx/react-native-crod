@@ -99,7 +99,7 @@ export function saveToken (token) {
    return store.save('TOKEN_KEY', token)
 }
 
-function getToken(){
+export function getToken(){
   return store.get('TOKEN_KEY')
 }
 export function redirect (token) {

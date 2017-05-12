@@ -74,14 +74,14 @@ export default class Api {
       })
   }
 
-  async getProposals () {
+  async getProposals (token) {
     const ENDPOINT = 'api/proposal'
     return await fetch(API_BASE_URL+ENDPOINT, {
         method: 'GET',
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
-            'Authorization': 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwidXNlcl9pZCI6MSwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJleHAiOjE0OTk1MjM2MjZ9.RigTwRhgM8_BYP9eW6bfAgjbvIv1tZ05OkQInSj_ZMQ'
+            'Authorization': 'JWT ' + token
           }
       })
       .then((res) => {
@@ -89,7 +89,10 @@ export default class Api {
       .then((json) => {
           if (res.status === 200 || res.status === 201) {
             return json
-          } else {
+          } else if (res.status === 401) {
+            throw 'unauth'
+          }
+          else {
             throw (json)
           }
         })
