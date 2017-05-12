@@ -116,11 +116,11 @@ class ProposalFeed extends Component {
     TODO: get the user info and show history for only that user.
     @param proposal: the proposal elements from /data-manager/proposal.js
   */
-  _renderProposalRow = (proposal) => {
+  _renderProposalRow = (proposal, sectionID, rowID) => {
     return(
       <View style={styles.rowContainer}>
 
-      <TouchableOpacity style={styles.proposal} onPress={this.proposalClicked.bind(this, proposal)} onLongPress={this.onLongPress.bind(this,proposal)}>
+      <TouchableOpacity style={styles.proposal} onPress={this.proposalClicked.bind(this, proposal, rowID)} onLongPress={this.onLongPress.bind(this,proposal)}>
         <ProposalTitle fullName={proposal.user.first_name + " " + proposal.user.last_name}
         profilePic={proposal.user.profile_pic_url}
         text={proposal.title}
@@ -141,8 +141,9 @@ class ProposalFeed extends Component {
     @param proposal: the proposal elements from /data-manager/proposal.js
     TODO: change the proposal object with proposal id
   */
-  proposalClicked = (proposal) => {
-    Actions.voting({type: ActionConst.REFRESH, proposalId: proposal.id})
+  proposalClicked = (proposal, rowID) => {
+    console.log();
+    Actions.voting({type: ActionConst.REFRESH, proposalId: rowID})
   }
   onLongPress = (proposal) => {
     this.setState({proposalsId: proposal.id})

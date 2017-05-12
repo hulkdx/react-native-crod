@@ -1,20 +1,18 @@
 import React, { Component } from 'react';
 import {StyleSheet,Text,Image,Dimensions} from 'react-native';
-// import { bindActionCreators } from 'redux'
-// import { connect } from 'react-redux'
-// import * as proposalsActions from '../../reducers/proposals/proposalsActions'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import * as proposalsActions from '../../reducers/proposals/proposalsActions'
 
-import proposals from '../../data-manager/proposals'
 const backgroundImage = require("../../../img/backgroundvotingup.jpg")
 
 class Proposal extends Component {
 
   render() {
-  // console.log(this.props.colorChange)
     return (
       <Image style={styles.container} source={backgroundImage}>
         <Text style={styles.title}>
-          TEST
+          {this.props.proposals.proposals[this.props.proposalId].title}
         </Text>
 
       </Image>
@@ -38,4 +36,13 @@ const styles = StyleSheet.create({
   },
 });
 
-module.exports = Proposal
+// Redux boilerplate
+function mapStateToProps (state) {
+  return {
+    proposals: state.proposals,
+  }
+}
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(proposalsActions, dispatch)
+}
+export default connect(mapStateToProps , mapDispatchToProps)(Proposal);
