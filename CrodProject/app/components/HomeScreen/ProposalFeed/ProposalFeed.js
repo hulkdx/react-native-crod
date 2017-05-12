@@ -51,31 +51,31 @@ class ProposalFeed extends Component {
         <View style={styles.angleRightRoot}>
         <Icon name={!this.props.changeArrow ? 'angle-right' : 'angle-left'} style={styles.angleRight} size={40} />
       </View>
+      {this.props.proposals.isFetching &&
+        <ActivityIndicator style={styles.loadingsIndicator} size="large" />
+     }
       <ListView
         dataSource={this.state.dataSource}
         renderRow={this._renderProposalRow}/>
-        {/*Pop up called when the onLongPress on any proposal is triggered.
-           For it to work run: npm install --save react-native-popup-dialog   */}
 
-           <PopupDialog
-
-             ref={(popupDialog) => { this.popupDialog = popupDialog }}
-             dialogAnimation = { new SlideAnimation({ slideFrom: 'bottom' }) }
-             dialogTitle={<DialogTitle title="Proposal Details" />}
-             dialogStyle={2}
-             height={400}
-             actions={[
-                 <DialogButton
-                   text="Done"
-                   textStyle={{color: 'green'}}
-                   onPress={() => {
-                     this.popupDialog.dismiss();
-                   }}
-                   key="button-1"
-                 />,
-               ]}>
-               {this._PopupDialogContent()}
-            </PopupDialog>
+     <PopupDialog
+       ref={(popupDialog) => { this.popupDialog = popupDialog }}
+       dialogAnimation = { new SlideAnimation({ slideFrom: 'bottom' }) }
+       dialogTitle={<DialogTitle title="Proposal Details" />}
+       dialogStyle={2}
+       height={400}
+       actions={[
+           <DialogButton
+             text="Done"
+             textStyle={{color: 'green'}}
+             onPress={() => {
+               this.popupDialog.dismiss();
+             }}
+             key="button-1"
+           />,
+         ]}>
+         {this._PopupDialogContent()}
+      </PopupDialog>
 
 
       </View>
@@ -118,7 +118,6 @@ class ProposalFeed extends Component {
     @param proposal: the proposal elements from /data-manager/proposal.js
   */
   _renderProposalRow = (proposal) => {
-    console.log(proposal);
     return(
       <View style={styles.rowContainer}>
 
@@ -206,7 +205,9 @@ const styles = StyleSheet.create({
     paddingTop: 5,
     fontSize: 18,
     textAlign: 'left'
-
+  },
+  loadingsIndicator:{
+    flex:10
   }
 });
 
