@@ -146,7 +146,6 @@ class ProposalFeed extends Component {
     Actions.voting({type: ActionConst.REFRESH, proposalId: proposal.id})
   }
   onLongPress = (proposal) => {
-    console.log(proposal.id);
     this.setState({proposalsId: proposal.id})
     this.popupDialog.show()
   }

@@ -34,7 +34,6 @@ class ProposalTitle extends Component {
   }
 
   render() {
-    console.log(this.state.dateLeft);
     return (
       <View style={styles.titleRoot}>
 
