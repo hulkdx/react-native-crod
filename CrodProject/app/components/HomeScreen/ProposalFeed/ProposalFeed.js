@@ -15,7 +15,6 @@ import _ from 'underscore'
 import * as proposalsActions from '../../../reducers/proposals/proposalsActions'
 
 import ProposalTitle from './ProposalTitle'
-import ProposalDeadline from './ProposalDeadline'
 
 
 class ProposalFeed extends Component {
