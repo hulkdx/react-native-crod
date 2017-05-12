@@ -164,7 +164,8 @@ const styles = StyleSheet.create({
   rowContainer:{
     flex:1,
     flexDirection: 'row',
-    margin: 5,
+    marginTop: 5,
+    marginBottom: 5,
     alignItems: 'center'
   },
   proposal:{

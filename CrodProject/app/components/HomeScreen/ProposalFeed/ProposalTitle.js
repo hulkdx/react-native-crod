@@ -14,7 +14,7 @@ class ProposalTitle extends Component {
     super();
     this.state = {
       dateLeft: 0,
-      date: '',
+      date: ''
     };
   }
 
@@ -34,6 +34,7 @@ class ProposalTitle extends Component {
   }
 
   render() {
+    let dateLeftStyle = this.state.dateLeft < 5 ? styles.highPrtyDaysLeft : this.state.dateLeft < 10 ? styles.mediumPrtyDaysLeft : styles.lowPrtyDaysLeft
     return (
       <View style={styles.titleRoot}>
 
@@ -46,8 +47,8 @@ class ProposalTitle extends Component {
        <Text style={styles.fullName}> {this.props.fullName} </Text>
 
        <View style={styles.deadlineContainer}>
-           <Text style={styles.daysLeft}>{this.state.dateLeft} days left</Text>
-           <Text style={styles.date}>{this.state.date}</Text>
+           <Text style={dateLeftStyle}>{this.state.dateLeft} Days left</Text>
+           <Text style={styles.date}> {this.state.date}</Text>
        </View>
 
       </View>
@@ -159,16 +160,23 @@ const styles = StyleSheet.create({
     fontSize: 20
   },
   deadlineContainer:{
-    marginRight: 5,
-  },
-  daysLeft: {
-    color: '#DC143C',
-    textAlign: 'center'
+    marginRight: 17,
+    marginBottom: 14
   },
   date: {
     color: '#5d95c4',
-    textAlign: 'center',
-  }
+    fontSize: 12,
+    // textAlign: 'center',
+  },
+  highPrtyDaysLeft:{
+    color: '#DC143C',
+  },
+  mediumPrtyDaysLeft: {
+    color: '#ffeb3b',
+  },
+  lowPrtyDaysLeft: {
+    color: '#5d95c4',
+  },
 });
 
 module.exports = ProposalTitle
