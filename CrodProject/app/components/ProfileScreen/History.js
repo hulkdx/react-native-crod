@@ -9,7 +9,6 @@ import {StyleSheet,TouchableOpacity,View,ListView} from 'react-native';
 import {Actions, ActionConst} from 'react-native-router-flux';
 
 import ProposalTitle from '../HomeScreen/ProposalFeed/ProposalTitle.js'
-import ProposalDeadline from '../HomeScreen/ProposalFeed/ProposalDeadline.js'
 const voteNoSource = require("../../../img/dislike.png")
 const voteYesSource = require("../../../img/like.png")
 
@@ -53,8 +52,7 @@ class ProfileHistory extends Component {
       <TouchableOpacity style={styles.rowProposalRoot} onPress={this.proposalClicked.bind(this,proposal)}>
         <ProposalTitle fullName={proposal.fullName} profilePic={proposal.profilePic} text={proposal.title} category={categorySource} />
       </TouchableOpacity>
-
-      <ProposalDeadline style={styles.deadline} day={proposal.day} date={proposal.date} month={proposal.monthText} />
+      
       </View>
     )
   }

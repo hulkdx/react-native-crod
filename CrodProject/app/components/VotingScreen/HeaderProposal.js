@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import {StyleSheet,Text,Image,Dimensions} from 'react-native';
+// import { bindActionCreators } from 'redux'
+// import { connect } from 'react-redux'
+// import * as proposalsActions from '../../reducers/proposals/proposalsActions'
 
 import proposals from '../../data-manager/proposals'
 const backgroundImage = require("../../../img/backgroundvotingup.jpg")
@@ -11,7 +14,7 @@ class Proposal extends Component {
     return (
       <Image style={styles.container} source={backgroundImage}>
         <Text style={styles.title}>
-          {proposals[this.props.proposalId].title}
+          TEST
         </Text>
 
       </Image>
