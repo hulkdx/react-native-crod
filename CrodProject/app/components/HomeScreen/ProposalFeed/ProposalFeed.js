@@ -37,7 +37,7 @@ class ProposalFeed extends Component {
   // Recive the proposals when components mounted
   componentDidMount() {
     this.props.getProposals();
-    this.props.getCategory();
+    this.props.getCategories();
   }
 
   componentWillReceiveProps(nextProps){

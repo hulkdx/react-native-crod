@@ -14,27 +14,27 @@ const {
 } = require('../../lib/constants').default
 
 /*############## Get category Section ##############*/
-export function getCategory () {
+export function getCategories () {
   return dispatch => {
     dispatch(categoryRequest ())
-    // return getToken()
-    // .then((token) => {
-    //   return api.getCategory(token)
-    //   .then(function (json) {
-    //     dispatch(categorySuccess(json))
-    //   })
-    //   .catch((error) => {
-    //     if (error === 'unauth') {
-    //       // TODO LOG OUT, REMOVE TOKEN
-    //       Actions.login({type: ActionConst.REFRESH})
-    //     }
-    //     dispatch(categoryFailure(error))
-    //   })
-    // })
-    // .catch((error) => {
-    //   dispatch(categoryFailure(error))
-    //   Actions.login({type: ActionConst.REFRESH})
-    // })
+    return getToken()
+    .then((token) => {
+      return api.getCategories(token)
+      .then(function (json) {
+        dispatch(categorySuccess(json))
+      })
+      .catch((error) => {
+        if (error === 'unauth') {
+          // TODO LOG OUT, REMOVE TOKEN
+          // Actions.login({type: ActionConst.REFRESH})
+        }
+        dispatch(categoryFailure(error))
+      })
+    })
+    .catch((error) => {
+      dispatch(categoryFailure(error))
+      // Actions.login({type: ActionConst.REFRESH})
+    })
 
   }
 }

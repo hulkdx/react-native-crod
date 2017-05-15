@@ -27,7 +27,7 @@ export default function categoryReducer (state = initialState, action) {
 
     case GET_CATEGORY_SUCCESS:
      return state.set('isFetching', false)
-     .set('proposals', action.payload)
+     .set('category', action.payload)
 
     case GET_CATEGORY_FAILURE:
      return state.set('isFetching', false)

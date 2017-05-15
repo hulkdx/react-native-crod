@@ -33,7 +33,8 @@ class Header extends Component {
   state = {
     isTabOpen: false,
     textInputValue: '',
-    date: ''
+    date: '',
+    categorySelected: -1,
   };
 
   render() {
@@ -94,7 +95,6 @@ class Header extends Component {
 /* Render RadioButtons Options that is image of the categories */
   renderCategoryOption(option, selected, onSelect, index){
     const style = selected ? styles.categorySelectedImage : styles.categoryImage;
-
     return (
       <TouchableOpacity onPress={onSelect} style={styles.categoryDropDown} key={index}>
       <Image key={index} source={categories[index].image}
@@ -102,11 +102,15 @@ class Header extends Component {
       </TouchableOpacity>
     );
   }
+
+  // TODO
+  setSelectedOption(selectedOption){
+    console.log(selectedOption);
+  }
 /* render each steps of create proposal
    @param id: id of the step */
   _renderSteps(id){
     var views = [];
-
     switch (id) {
       // Categories
       case 1:
@@ -114,10 +118,12 @@ class Header extends Component {
         <View>
           <Text style={styles.stepsText}>Pick a Category</Text>
           {/* Render category Images (When create proposal is open) is uses RadioButtons
-             (from: https://github.com/ArnaudRinquin/react-native-radio-buttons)*/}
+          from: @link https://github.com/ArnaudRinquin/react-native-radio-buttons */}
           <RadioButtons
             options={ categories }
             renderOption={ this.renderCategoryOption }
+            onSelection={ this.setSelectedOption.bind(this) }
+            selectedOption={ this.state.categorySelected }
             renderContainer={ RadioButtons.renderHorizontalContainer }
           />
         </View>
@@ -246,6 +252,7 @@ class Header extends Component {
   onClickDone = () => {
     // TODO: Check for it TextInput is empty
     this.props.createProposal();
+    console.log(this.state.categorySelected);
     // TODO: Add new proposal
     this.setState((state) => ({ isTabOpen: false}))
   }

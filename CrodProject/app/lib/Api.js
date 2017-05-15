@@ -101,6 +101,34 @@ export default class Api {
         throw (error)
       })
   }
+
+  async getCategories (token) {
+    const ENDPOINT = 'api/category'
+    return await fetch(API_BASE_URL+ENDPOINT, {
+        method: 'GET',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': 'JWT ' + token
+          }
+      })
+      .then((res) => {
+        return res.json()
+      .then((json) => {
+          if (res.status === 200 || res.status === 201) {
+            return json
+          } else if (res.status === 401) {
+            throw 'unauth'
+          }
+          else {
+            throw (json)
+          }
+        })
+      })
+      .catch((error) => {
+        throw (error)
+      })
+  }
 }
 // The singleton variable
 export let api = new Api()
