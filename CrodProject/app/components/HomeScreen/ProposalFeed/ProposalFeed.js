@@ -13,6 +13,7 @@ import PopupDialog, { DialogButton, DialogTitle, SlideAnimation } from 'react-na
 import Icon from 'react-native-vector-icons/FontAwesome';
 import _ from 'underscore'
 import * as proposalsActions from '../../../reducers/proposals/proposalsActions'
+import * as categoryActions from '../../../reducers/categories/categoryActions'
 
 import ProposalTitle from './ProposalTitle'
 
@@ -36,6 +37,7 @@ class ProposalFeed extends Component {
   // Recive the proposals when components mounted
   componentDidMount() {
     this.props.getProposals();
+    this.props.getCategory();
   }
 
   componentWillReceiveProps(nextProps){
@@ -216,6 +218,6 @@ function mapStateToProps (state) {
   }
 }
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators(proposalsActions, dispatch)
+  return bindActionCreators({ ...proposalsActions, ...categoryActions}, dispatch)
 }
 export default connect(mapStateToProps , mapDispatchToProps)(ProposalFeed);

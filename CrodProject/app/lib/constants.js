@@ -26,4 +26,8 @@ export default keyMirror({
   CREATE_PROPOSAL_SUCCESS: null,
   CREATE_PROPOSAL_FAILURE: null,
 
+  GET_CATEGORY_REQUEST: null,
+  GET_CATEGORY_SUCCESS: null,
+  GET_CATEGORY_FAILURE: null,
+
 })

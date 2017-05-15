@@ -8,6 +8,7 @@
 import { combineReducers } from 'redux'
 import auth from './auth/authReducer'
 import proposals from './proposals/proposalsReducer'
+import category from './categories/categoryReducer'
 
 /**
  * ## CombineReducers
@@ -17,7 +18,8 @@ import proposals from './proposals/proposalsReducer'
  */
 const rootReducer = combineReducers({
   auth,
-  proposals
+  proposals,
+  category
 })
 
 export default rootReducer
