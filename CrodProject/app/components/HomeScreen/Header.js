@@ -359,9 +359,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   categoryImage:{
+    width: 50,
+    height: 50,
+    tintColor: '#bacedf',
     resizeMode: 'center',
   },
   categorySelectedImage: {
+    width: 50,
+    height: 50,
     tintColor: '#5d95c4',
     resizeMode: 'center',
   },
