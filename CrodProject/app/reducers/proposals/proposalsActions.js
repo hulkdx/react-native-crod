@@ -12,9 +12,12 @@ const {
   PROPOSAL_REQUEST,
   PROPOSAL_SUCCESS,
   PROPOSAL_FAILURE,
+  CREATE_PROPOSAL_REQUEST,
+  CREATE_PROPOSAL_SUCCESS,
+  CREATE_PROPOSAL_FAILURE,
 } = require('../../lib/constants').default
 
-/*############## Proposals Section ##############*/
+/*############## Get Proposals Section ##############*/
 export function getProposals () {
   return dispatch => {
     dispatch(proposalsRequest ())
@@ -56,6 +59,33 @@ export function proposalsSuccess (json) {
 export function proposalsFailure (error) {
   return {
     type: PROPOSAL_FAILURE,
+    payload: error
+  }
+}
+
+/*############## Create Proposal Section ##############*/
+export function createProposal () {
+  return dispatch => {
+    dispatch(createProposalRequest())
+  }
+}
+
+export function createProposalRequest() {
+  return {
+    type: CREATE_PROPOSAL_REQUEST
+  }
+}
+
+export function createProposalSuccess (json) {
+  return {
+    type: CREATE_PROPOSAL_SUCCESS,
+    payload: json
+  }
+}
+
+export function createProposalFailure (error) {
+  return {
+    type: CREATE_PROPOSAL_FAILURE,
     payload: error
   }
 }

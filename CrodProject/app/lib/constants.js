@@ -22,4 +22,8 @@ export default keyMirror({
   PROPOSAL_SUCCESS: null,
   PROPOSAL_FAILURE: null,
 
+  CREATE_PROPOSAL_REQUEST: null,
+  CREATE_PROPOSAL_SUCCESS: null,
+  CREATE_PROPOSAL_FAILURE: null,
+
 })

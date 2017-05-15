@@ -87,7 +87,7 @@ class ProposalFeed extends Component {
   TODO: Update this information with back-end
 */
   _PopupDialogContent(){
-    console.log(this.state.proposalsId);
+    // console.log(this.state.proposalsId);
     if (this.props.proposals.proposals.length > 0)
     return(
       <ScrollView style={styles.customizePopUp}>

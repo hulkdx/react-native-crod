@@ -7,12 +7,14 @@
 'use strict'
 import React, { Component } from 'react';
 import {StyleSheet,TextInput,TouchableOpacity,Image,Text,View,Dimensions,ScrollView} from 'react-native';
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 import { RadioButtons } from 'react-native-radio-buttons'
 import {Actions, ActionConst} from 'react-native-router-flux'
 import AutoExpandingTextInput from 'react-native-auto-expanding-textinput'
-import Moment from 'moment';
+import * as proposalsActions from '../../reducers/proposals/proposalsActions'
 
-import CategoryHeader from './CategoryHeader.js'
+// TODO: change this with categories picture of website
 import categories from '../../data-manager/categories.js'
 import DatePicker from './DateTimePicker/DatePicker.js'
 
@@ -27,52 +29,42 @@ var width = Dimensions.get('window').width; //full width
 var height = Dimensions.get('window').height; //full height
 
 class Header extends Component {
+  // isTabOpen is used for create proposal
   state = {
     isTabOpen: false,
     textInputValue: '',
     date: ''
   };
 
-
-
   render() {
-
-    /* createProposalViews: is the view of the proposal create when its clicked */
-    const createProposalViews = this._renderCreateProposalViews();
-
     return (
       <View>
-      <ScrollView>
-         {/* CategoryHeader: Shows the Category (image) when SideMenu clicked
-          The id of the category received as a prop from the HomeScreen.js
-          to then be passed as a prop to the HomeScreen/CategoryHeader.js */}
+        <View style={styles.headerContainer}>
+          <TouchableOpacity style={styles.profile} onPress={()=> {Actions.profile({type: ActionConst.REFRESH}) }}>
+          <Image source={profilePhoto} style={styles.profilePhoto}/>
+            </TouchableOpacity>
+          <TouchableOpacity style={styles.search}>
 
-{/* Create Proposal Button */}
-        <View style={styles.topBarRoot}>
-        <TouchableOpacity style={styles.profile} onPress={()=> {Actions.profile({type: ActionConst.REFRESH}) }}>
-        <Image source={profilePhoto} style={styles.profilePhoto}/>
+           <View style={styles.searchBtnContainer}>
+           <Image style={styles.searchBtn} source={searchIcon}/>
+           </View>
+
+           <TextInput
+                editable = {!this.state.isTabOpen}
+                placeholder = "enter proposal title"
+                placeholderTextColor = "#5d95c4"
+                underlineColorAndroid='transparent'
+                style={styles.searchText}/>
           </TouchableOpacity>
-        <TouchableOpacity style={styles.search}>
-
-         <View style={styles.searchBtnContainer}>
-         <Image style={styles.searchBtn} source={searchIcon}/>
+          {/* Create Proposal Button */}
+           <TouchableOpacity onPress={this.state.isTabOpen == false ? this.onClickCreateProposal : this.onCloseTab}
+                             style={styles.proposal}>
+            { this.state.isTabOpen == false ? <Image style={styles.proposalBtn} source={proposalIcon}/> : <Image style={styles.proposalBtn} source={closeIcon}/> }
+           </TouchableOpacity>
          </View>
+         <ScrollView>
 
-         <TextInput
-              editable = {!this.state.isTabOpen}
-              placeholder = "enter proposal title"
-              placeholderTextColor = "#5d95c4"
-              underlineColorAndroid='transparent'
-              style={styles.searchText}/>
-              </TouchableOpacity>
-         <TouchableOpacity onPress={this.state.isTabOpen == false ? this.onClickCreateProposal : this.onClickDone}
-                           style={styles.proposal}>
-          { this.state.isTabOpen == false ? <Image style={styles.proposalBtn} source={proposalIcon}/> : <Image style={styles.proposalBtn} source={closeIcon}/> }
-         </TouchableOpacity>
-         </View>
-         <CategoryHeader categoryId={this.props.categoryId} />
-{/* Create Proposal Button When its clicked it shows these views */}
-        { this.state.isTabOpen && createProposalViews }
+         { this.state.isTabOpen && this._renderCreateProposalViews() }
       </ScrollView>
       </View>
     )
@@ -92,23 +84,11 @@ class Header extends Component {
 
         {this._renderSteps(5)}
 
-        <TouchableOpacity style={styles.createProposalBtnContainer}
-        onPress={this.onClickDone}>
+        <TouchableOpacity style={styles.createProposalBtnContainer} onPress={this.onClickDone}>
           <Text style={styles.createProposalBtn}>Create Proposal</Text>
         </TouchableOpacity>
         <View style={styles.divider} />
     </View>
-    )
-  }
-/* Render category Images (When create proposal is open) is uses RadioButtons
-   (from: https://github.com/ArnaudRinquin/react-native-radio-buttons)*/
-  _renderCategoryImages(){
-    return (
-      <RadioButtons
-        options={ categories }
-        renderOption={ this.renderCategoryOption }
-        renderContainer={ RadioButtons.renderHorizontalContainer }
-      />
     )
   }
 /* Render RadioButtons Options that is image of the categories */
@@ -132,10 +112,14 @@ class Header extends Component {
       case 1:
         views =
         <View>
-        <Text style={styles.stepsText}>Pick a Category</Text>
-
-        {this._renderCategoryImages()}
-
+          <Text style={styles.stepsText}>Pick a Category</Text>
+          {/* Render category Images (When create proposal is open) is uses RadioButtons
+             (from: https://github.com/ArnaudRinquin/react-native-radio-buttons)*/}
+          <RadioButtons
+            options={ categories }
+            renderOption={ this.renderCategoryOption }
+            renderContainer={ RadioButtons.renderHorizontalContainer }
+          />
         </View>
 
         break;
@@ -255,14 +239,18 @@ class Header extends Component {
   }
 
   _onChangeHeight(before, after) {
-   console.log('before: ' + before + ' after: ' + after);
+   //console.log('before: ' + before + ' after: ' + after);
  }
 
 /* on done clicked (When create proposal is open), set isTabOpen */
   onClickDone = () => {
     // TODO: Check for it TextInput is empty
-    if (!true) return;
+    this.props.createProposal();
     // TODO: Add new proposal
+    this.setState((state) => ({ isTabOpen: false}))
+  }
+
+  onCloseTab = () => {
     this.setState((state) => ({ isTabOpen: false}))
   }
 }
@@ -275,8 +263,7 @@ const styles = StyleSheet.create({
   expandTab: {
     backgroundColor: '#FFF',
   },
-  topBarRoot:{
-    flex: 1,
+  headerContainer:{
     flexDirection: 'row',
     backgroundColor: 'white',
     borderBottomWidth: 0.5,
@@ -362,13 +349,13 @@ const styles = StyleSheet.create({
     width: 50,
     height: 50,
     tintColor: '#bacedf',
-    resizeMode: 'center',
+    resizeMode: 'contain',
   },
   categorySelectedImage: {
     width: 50,
     height: 50,
     tintColor: '#5d95c4',
-    resizeMode: 'center',
+    resizeMode: 'contain',
   },
   divider: {
     height: 1,
@@ -402,7 +389,8 @@ const styles = StyleSheet.create({
   createProposalBtnContainer: {
     paddingTop: 10,
     paddingBottom: 10,
-    alignItems:'center'
+    alignItems:'center',
+    marginBottom: 50,
   },
   attachMore: {
     height: 40,
@@ -418,4 +406,13 @@ const styles = StyleSheet.create({
 
 });
 
-module.exports = Header
+// Redux boilerplate
+function mapStateToProps (state) {
+  return {
+    proposals: state.proposals,
+  }
+}
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(proposalsActions, dispatch)
+}
+export default connect(mapStateToProps , mapDispatchToProps)(Header);
