@@ -3,8 +3,7 @@
 
   Reducers
 */
-'use strict'
-import _ from 'underscore'
+'use strict';
 
 const {
   PROPOSAL_REQUEST,
@@ -13,46 +12,50 @@ const {
   CREATE_PROPOSAL_REQUEST,
   CREATE_PROPOSAL_SUCCESS,
   CREATE_PROPOSAL_FAILURE,
-} = require('../../lib/constants').default
+} = require('../../lib/constants').default;
 
 // Get the initial state
-const InitialState = require('./initialState').default
-const initialState = new InitialState()
+const InitialState = require('./initialState').default;
 
-export default function proposalsReducer (state = initialState, action) {
-  if (!(state instanceof InitialState)) return initialState.mergeDeep(state)
+const initialState = new InitialState();
+
+export default function proposalsReducer(state = initialState, action) {
+  if (!(state instanceof InitialState)) return initialState.mergeDeep(state);
 
   switch (action.type) {
     case PROPOSAL_REQUEST: {
      return state.set('isFetching', true)
      .set('proposalsUpdated', false)
-     .set('error', null)
+     .set('error', null);
     }
 
 
     case PROPOSAL_SUCCESS:
      return state.set('isFetching', false)
      .set('proposals', action.payload)
-     .set('proposalsUpdated', true)
+     .set('proposalsUpdated', true);
 
 
     case CREATE_PROPOSAL_FAILURE:
     case PROPOSAL_FAILURE:
      return state.set('isFetching', false)
-     .set('error', "error")
+     .set('error', 'error');
 
 
     case CREATE_PROPOSAL_REQUEST:
      return state.set('isFetching', true)
      .set('isCreated', false)
-     .set('error', null)
+     .set('error', null);
 
     case CREATE_PROPOSAL_SUCCESS:
      return state.set('isFetching', false)
      .set('isCreated', true)
-     .set('proposals', [action.payload, ...state.get('proposals')])
+     .set('proposals', [action.payload, ...state.get('proposals')]);
+
+    default:
+      break;
   }
 
   // Default State
-  return state
+  return state;
 }
