@@ -17,9 +17,8 @@ class HomeScreen extends Component {
   render() {
     return (
       <ViewContainer>
-      {/*The id of the category icon coming from HomeScreen/CategoryMenu.js is passed as a prop in the HomeScreen/Header.js  */}
-      <Header categoryId = {this.props.categoryId} />
-      <Body />
+        <Header createProposal = {this.props.createProposal} />
+        <Body createProposal = {this.props.createProposal} />
       </ViewContainer>
 
     )

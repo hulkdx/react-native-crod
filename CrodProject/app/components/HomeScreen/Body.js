@@ -10,6 +10,7 @@ import React, { Component } from 'react';
 import {StyleSheet,View} from 'react-native';
 import CategoryMenu from "./CategoryMenu.js"
 import ProposalFeed from "./ProposalFeed/ProposalFeed.js"
+import CreateProposal from "./CreateProposal.js"
 
 import LeftSideMenu from "./SideMenu.js";
 
@@ -27,14 +28,15 @@ class Body extends Component {
 
     return (
       <View style={styles.leftMenu}>
-      <LeftSideMenu
-                menu={menu}
-                openMenuOffset = {90}
-                isOpen={this.state.isOpen}
-                onChange={(isOpen) => this.updateMenuState(isOpen)}
-                style={styles.leftSideMenu} >
-      <ProposalFeed changeArrow={this.state.isOpen}/>
-      </LeftSideMenu>
+        {this.props.createProposal ? <CreateProposal />
+      : <LeftSideMenu
+                  menu={menu}
+                  openMenuOffset = {90}
+                  isOpen={this.state.isOpen}
+                  onChange={(isOpen) => this.updateMenuState(isOpen)}
+                  style={styles.leftSideMenu} >
+          <ProposalFeed changeArrow={this.state.isOpen}/>
+        </LeftSideMenu>}
       </View>
 
     );

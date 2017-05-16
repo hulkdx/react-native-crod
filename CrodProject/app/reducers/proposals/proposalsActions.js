@@ -64,9 +64,26 @@ export function proposalsFailure (error) {
 }
 
 /*############## Create Proposal Section ##############*/
-export function createProposal () {
+export function createProposal (categoryId, title, desc, deadline) {
   return dispatch => {
     dispatch(createProposalRequest())
+    return getToken()
+    .then((token) => {
+      return api.createProposals(token, categoryId, title, desc, deadline)
+      .then(function (json) {
+        dispatch(createProposalSuccess(json))
+      })
+      .catch((error) => {
+        if (error === 'unauth') {
+          // TODO LOG OUT, REMOVE TOKEN
+          Actions.login({type: ActionConst.REFRESH})
+        }
+        dispatch(proposalsFailure(error))
+      })
+    })
+    .catch((error) => {
+      dispatch(createProposalFailure(error))
+    })
   }
 }
 

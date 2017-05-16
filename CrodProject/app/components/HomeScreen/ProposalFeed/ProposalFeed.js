@@ -25,6 +25,7 @@ class ProposalFeed extends Component {
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
       dataSource: ds,
+      dataSourceUpdated: false,
       proposalsId: 0
     };
   }
@@ -36,14 +37,24 @@ class ProposalFeed extends Component {
 
   // Recive the proposals when components mounted
   componentDidMount() {
+    if (this.props.proposals.proposalsUpdated) {
+      this.setState({dataSource: this.state.dataSource.cloneWithRows(this.props.proposals.proposals),})
+      return;
+    }
     this.props.getProposals();
     this.props.getCategories();
   }
 
   componentWillReceiveProps(nextProps){
-    // TODO update data source with this.props.proposals somehow
+    // update data source with this.props.proposals
+    if (this.props.proposals.proposalsUpdated) {
+      //console.log('updated');
+      return;
+    }
     if (nextProps.proposals.proposals.length === 0) return;
-    this.setState({dataSource: this.state.dataSource.cloneWithRows(nextProps.proposals.proposals)})
+      //console.log('not updated');
+      this.setState({dataSource: this.state.dataSource.cloneWithRows(nextProps.proposals.proposals),
+                     dataSourceUpdated: true})
   }
 
   render() {
@@ -89,7 +100,6 @@ class ProposalFeed extends Component {
   TODO: Update this information with back-end
 */
   _PopupDialogContent(){
-    // console.log(this.state.proposalsId);
     if (this.props.proposals.proposals.length > 0)
     return(
       <ScrollView style={styles.customizePopUp}>

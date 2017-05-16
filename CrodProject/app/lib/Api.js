@@ -102,6 +102,40 @@ export default class Api {
       })
   }
 
+  async createProposals (token, categoryId, title, desc, deadline) {
+    const ENDPOINT = 'api/proposal/create'
+    return await fetch(API_BASE_URL+ENDPOINT, {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': 'JWT ' + token
+          },
+        body: JSON.stringify({
+          category: categoryId,
+          title: title,
+          description: desc,
+          deadline: deadline
+        })
+      })
+      .then((res) => {
+        return res.json()
+      .then((json) => {
+          if (res.status === 200 || res.status === 201) {
+            return json
+          } else if (res.status === 401) {
+            throw 'unauth'
+          }
+          else {
+            throw (json)
+          }
+        })
+      })
+      .catch((error) => {
+        throw (error)
+      })
+  }
+
   async getCategories (token) {
     const ENDPOINT = 'api/category'
     return await fetch(API_BASE_URL+ENDPOINT, {
