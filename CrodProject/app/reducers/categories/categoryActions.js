@@ -11,6 +11,7 @@ const {
   GET_CATEGORY_REQUEST,
   GET_CATEGORY_SUCCESS,
   GET_CATEGORY_FAILURE,
+  CHANGE_SELECT_CATEGORY
 } = require('../../lib/constants').default;
 
 /*############## Get category Section ##############*/
@@ -55,6 +56,13 @@ export function categoryFailure(error) {
   return {
     type: GET_CATEGORY_FAILURE,
     payload: error
+  };
+}
+
+export function changeSelectedCategory(id) {
+  return {
+    type: CHANGE_SELECT_CATEGORY,
+    payload: id
   };
 }
 

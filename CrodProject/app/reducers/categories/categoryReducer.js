@@ -9,6 +9,7 @@ const {
   GET_CATEGORY_REQUEST,
   GET_CATEGORY_SUCCESS,
   GET_CATEGORY_FAILURE,
+  CHANGE_SELECT_CATEGORY,
 } = require('../../lib/constants').default;
 // Get the initial state
 const InitialState = require('./initialState').default;
@@ -25,12 +26,22 @@ export default function categoryReducer(state = initialState, action) {
     }
 
     case GET_CATEGORY_SUCCESS:
+
      return state.set('isFetching', false)
-     .set('category', action.payload);
+     .set('category', action.payload.map((row) => {
+       return {
+         ...row,
+         selected: false
+       };
+     }));
 
     case GET_CATEGORY_FAILURE:
      return state.set('isFetching', false)
      .set('error', 'error');
+
+    case CHANGE_SELECT_CATEGORY:
+     state.getIn(['category'])[action.payload].selected = !state.getIn(['category'])[action.payload].selected;
+     return state;
 
     default:
       break;

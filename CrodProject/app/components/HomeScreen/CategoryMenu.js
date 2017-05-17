@@ -8,19 +8,12 @@ import React, { Component } from 'react';
 import { ScrollView, StyleSheet, TouchableOpacity, Image, Text, View } from 'react-native';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import categories from '../../data-manager/categories.js';
 import * as categoryActions from '../../reducers/categories/categoryActions';
 
 class CategoryMenu extends Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-    //Initialy, isSelected contains an array of false values.
-    isSelected: Array(categories.length).fill(false) };
-  }
-
   render() {
+    console.log('yes');
     return (
       <ScrollView scrollsToTop={false} style={styles.categories}>
       {this.renderCategoryImages()}
@@ -30,14 +23,14 @@ class CategoryMenu extends Component {
 
   renderCategoryImages() {
     const rows = [];
-    for (let i = 0; i < categories.length; i++) {
+    for (let i = 0; i < this.props.category.length; i++) {
       rows.push(
-        <TouchableOpacity key={i} onPress={this._onClickCategoryImage.bind(this, i)} style={[styles.categoryDropDown, { borderRightWidth: this.state.isSelected[i] ? 2 : 0 }]}>
-          {this.state.isSelected[i] ?
-            <Image source={categories[i].imageFill} style={styles.categoriesLeftSide} /> :
-            <Image source={categories[i].image} style={styles.categoriesLeftSide} />
+        <TouchableOpacity key={i} onPress={this._onClickCategoryImage.bind(this, i)} style={[styles.categoryDropDown, { borderRightWidth: this.props.category[i].selected ? 2 : 0 }]}>
+          {this.props.category[i].selected ?
+            <Image source={{ uri: this.props.category[i].source_fill }} style={styles.categoriesLeftSide} /> :
+            <Image source={{ uri: this.props.category[i].source }} style={styles.categoriesLeftSide} />
           }
-            <Text style={styles.categoryNameTxt}> {categories[i].name} </Text>
+            <Text style={styles.categoryNameTxt}> {this.props.category[i].name} </Text>
         </TouchableOpacity>
       );
     }
@@ -50,7 +43,8 @@ class CategoryMenu extends Component {
 
   _onClickCategoryImage = (id) => {
     //Toggle property: when clicked from false => true && true => false
-    this.state.isSelected[id] = !this.state.isSelected[id];
+    this.props.changeSelectedCategory(id);
+    this.forceUpdate();
   }
 
 }
@@ -90,7 +84,7 @@ const styles = StyleSheet.create({
 // Redux boilerplate
 function mapStateToProps(state) {
   return {
-    category: state.category,
+    category: state.category.category,
   };
 }
 function mapDispatchToProps(dispatch) {

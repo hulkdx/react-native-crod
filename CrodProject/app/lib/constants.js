@@ -1,4 +1,4 @@
-import keyMirror from 'key-mirror'
+import keyMirror from 'key-mirror';
 
 export default keyMirror({
   TOKEN_REQUEST: null,
@@ -29,5 +29,5 @@ export default keyMirror({
   GET_CATEGORY_REQUEST: null,
   GET_CATEGORY_SUCCESS: null,
   GET_CATEGORY_FAILURE: null,
-
-})
+  CHANGE_SELECT_CATEGORY: null,
+});
