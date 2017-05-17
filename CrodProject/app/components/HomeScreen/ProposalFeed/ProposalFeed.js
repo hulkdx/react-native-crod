@@ -3,26 +3,26 @@
 
   A shared component representing the ProposalFeed
 */
-'use strict'
+'use strict';
 import React, { Component } from 'react';
-import { ActivityIndicator, ScrollView, StyleSheet,TouchableOpacity,Text,View,ListView} from 'react-native';
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
-import {Actions, ActionConst} from 'react-native-router-flux'
-import PopupDialog, { DialogButton, DialogTitle, SlideAnimation } from 'react-native-popup-dialog'
+import { ActivityIndicator, ScrollView, StyleSheet, TouchableOpacity, Text, View, ListView } from 'react-native';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { Actions, ActionConst } from 'react-native-router-flux';
+import PopupDialog, { DialogButton, DialogTitle, SlideAnimation } from 'react-native-popup-dialog';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import _ from 'underscore'
-import * as proposalsActions from '../../../reducers/proposals/proposalsActions'
-import * as categoryActions from '../../../reducers/categories/categoryActions'
+import _ from 'underscore';
+import * as proposalsActions from '../../../reducers/proposals/proposalsActions';
+import * as categoryActions from '../../../reducers/categories/categoryActions';
 
-import ProposalTitle from './ProposalTitle'
+import ProposalTitle from './ProposalTitle';
 
 
 class ProposalFeed extends Component {
 
   constructor() {
     super();
-    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+    const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
     this.state = {
       dataSource: ds,
       dataSourceUpdated: false,
@@ -30,22 +30,22 @@ class ProposalFeed extends Component {
     };
   }
 
-  componentDidUpdate(){
+  componentDidUpdate() {
     // it will dismiss the popupDialog if the user goes to another screen while it is open.
-    if (!_.isUndefined(this.popupDialog)) {this.popupDialog.dismiss();}
+    if (!_.isUndefined(this.popupDialog)) { this.popupDialog.dismiss(); }
   }
 
   // Recive the proposals when components mounted
   componentDidMount() {
     if (this.props.proposals.proposalsUpdated) {
-      this.setState({dataSource: this.state.dataSource.cloneWithRows(this.props.proposals.proposals),})
+      this.setState({ dataSource: this.state.dataSource.cloneWithRows(this.props.proposals.proposals), });
       return;
     }
     this.props.getProposals();
     this.props.getCategories();
   }
 
-  componentWillReceiveProps(nextProps){
+  componentWillReceiveProps(nextProps) {
     // update data source with this.props.proposals
     if (this.props.proposals.proposalsUpdated) {
       //console.log('updated');
@@ -53,8 +53,8 @@ class ProposalFeed extends Component {
     }
     if (nextProps.proposals.proposals.length === 0) return;
       //console.log('not updated');
-      this.setState({dataSource: this.state.dataSource.cloneWithRows(nextProps.proposals.proposals),
-                     dataSourceUpdated: true})
+      this.setState({ dataSource: this.state.dataSource.cloneWithRows(nextProps.proposals.proposals),
+                     dataSourceUpdated: true });
   }
 
   render() {
@@ -68,30 +68,22 @@ class ProposalFeed extends Component {
      }
       <ListView
         dataSource={this.state.dataSource}
-        renderRow={this._renderProposalRow}/>
+        renderRow={this._renderProposalRow}
+      />
 
      <PopupDialog
-       ref={(popupDialog) => { this.popupDialog = popupDialog }}
-       dialogAnimation = { new SlideAnimation({ slideFrom: 'bottom' }) }
+       ref={(popupDialog) => { this.popupDialog = popupDialog; }}
+       dialogAnimation={new SlideAnimation({ slideFrom: 'bottom' })}
        dialogTitle={<DialogTitle title="Proposal Details" />}
        dialogStyle={2}
        height={400}
-       actions={[
-           <DialogButton
-             text="Done"
-             textStyle={{color: 'green'}}
-             onPress={() => {
-               this.popupDialog.dismiss();
-             }}
-             key="button-1"
-           />,
-         ]}>
-         {this._PopupDialogContent()}
-      </PopupDialog>
-
+       actions={[<DialogButton text="Done" textStyle={{ color: 'green' }} onPress={() => { this.popupDialog.dismiss(); }} key="button-1" />]}
+     >
+    {this._PopupDialogContent()}
+     </PopupDialog>
 
       </View>
-    )
+    );
   }
 
 /*
@@ -99,9 +91,9 @@ class ProposalFeed extends Component {
   This will show when users long click on proposals
   TODO: Update this information with back-end
 */
-  _PopupDialogContent(){
-    if (this.props.proposals.proposals.length > 0)
-    return(
+  _PopupDialogContent() {
+    if (this.props.proposals.proposals.length > 0);
+    return (
       <ScrollView style={styles.customizePopUp}>
        <View style={styles.rowPopUp}>
        <Text style={styles.caption}> Title: </Text>
@@ -120,7 +112,7 @@ class ProposalFeed extends Component {
        <Text style={styles.text}>{this.props.proposals.proposals[this.state.proposalsId].description}</Text>
        </View>
       </ScrollView>
-    )
+    );
   }
 
   /*
@@ -129,23 +121,21 @@ class ProposalFeed extends Component {
     @param proposal: the proposal elements from /data-manager/proposal.js
   */
   _renderProposalRow = (proposal, sectionID, rowID) => {
-    return(
+    return (
       <View style={styles.rowContainer}>
 
-      <TouchableOpacity style={styles.proposal} onPress={this.proposalClicked.bind(this, proposal, rowID)} onLongPress={this.onLongPress.bind(this,proposal, rowID)}>
-        <ProposalTitle fullName={proposal.user.first_name + " " + proposal.user.last_name}
-        profilePic={proposal.user.profile_pic_url}
-        text={proposal.title}
-        articles={proposal.articles}
-        discussions={proposal.discussions}
-        categoryIcon={proposal.category_source_fill}
-        deadline={proposal.deadline} />
+      <TouchableOpacity style={styles.proposal} onPress={this.proposalClicked.bind(this, proposal, rowID)} onLongPress={this.onLongPress.bind(this, proposal, rowID)}>
+        <ProposalTitle fullName={'${proposal.user.first_name} ${proposal.user.last_name}'}
+                       profilePic={proposal.user.profile_pic_url}
+                       text={proposal.title}
+                       articles={proposal.articles}
+                       discussions={proposal.discussions}
+                       categoryIcon={proposal.category_source_fill}
+                       deadline={proposal.deadline}
+        />
       </TouchableOpacity>
       </View>
-
-
-
-    )
+    );
   }
 
   /*
@@ -154,11 +144,11 @@ class ProposalFeed extends Component {
     TODO: change the proposal object with proposal id
   */
   proposalClicked = (proposal, rowID) => {
-    Actions.voting({type: ActionConst.REFRESH, proposalId: rowID})
+    Actions.voting({ type: ActionConst.REFRESH, proposalId: rowID });
   }
   onLongPress = (proposal, rowID) => {
-    this.setState({proposalsId: rowID})
-    this.popupDialog.show()
+    this.setState({ proposalsId: rowID });
+    this.popupDialog.show();
   }
 }
 
@@ -168,20 +158,20 @@ const styles = StyleSheet.create({
     marginTop: 15,
     marginBottom: 30,
   },
-  proposalFeed:{
+  proposalFeed: {
     flexDirection: 'row',
-    flex:8,
+    flex: 8,
     backgroundColor: '#E9EBEE'
   },
-  rowContainer:{
-    flex:1,
+  rowContainer: {
+    flex: 1,
     flexDirection: 'row',
     marginTop: 5,
     marginBottom: 5,
     alignItems: 'center'
   },
-  proposal:{
-    flex:3,
+  proposal: {
+    flex: 3,
     flexDirection: 'row',
   },
   categoryIcon: {
@@ -197,14 +187,14 @@ const styles = StyleSheet.create({
     color: '#5d95c4',
   },
   customizePopUp: {
-    flex:1,
+    flex: 1,
     marginRight: 10,
     marginLeft: 10,
 
   },
   rowPopUp: {
     paddingTop: 10,
-    alignItems:'flex-start',
+    alignItems: 'flex-start',
     justifyContent: 'flex-start'
   },
   caption: {
@@ -216,18 +206,18 @@ const styles = StyleSheet.create({
     fontSize: 18,
     textAlign: 'left'
   },
-  loadingsIndicator:{
-    flex:10
+  loadingsIndicator: {
+    flex: 10
   }
 });
 
 // Redux boilerplate
-function mapStateToProps (state) {
+function mapStateToProps(state) {
   return {
     proposals: state.proposals,
-  }
+  };
 }
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ ...proposalsActions, ...categoryActions}, dispatch)
+  return bindActionCreators({ ...proposalsActions, ...categoryActions }, dispatch);
 }
-export default connect(mapStateToProps , mapDispatchToProps)(ProposalFeed);
+export default connect(mapStateToProps, mapDispatchToProps)(ProposalFeed);
