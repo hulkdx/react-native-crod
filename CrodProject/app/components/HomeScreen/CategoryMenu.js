@@ -13,7 +13,6 @@ import * as categoryActions from '../../reducers/categories/categoryActions';
 class CategoryMenu extends Component {
 
   render() {
-    console.log('yes');
     return (
       <ScrollView scrollsToTop={false} style={styles.categories}>
       {this.renderCategoryImages()}
