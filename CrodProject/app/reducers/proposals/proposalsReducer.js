@@ -12,6 +12,7 @@ const {
   CREATE_PROPOSAL_REQUEST,
   CREATE_PROPOSAL_SUCCESS,
   CREATE_PROPOSAL_FAILURE,
+  FILTER_PROPOSAL,
 } = require('../../lib/constants').default;
 
 // Get the initial state
@@ -52,10 +53,35 @@ export default function proposalsReducer(state = initialState, action) {
      .set('isCreated', true)
      .set('proposals', [action.payload, ...state.get('proposals')]);
 
+    case FILTER_PROPOSAL:
+     return state.set('filteredProposals', filterProposal(state.get('proposals'), action.payload));
+
     default:
       break;
   }
 
   // Default State
   return state;
+}
+
+/* This function take list of proposals, and return the filterone based on the
+   category selected.
+   @param proposals: list of proposals
+   @param selectedList: list of categories selected (@link categories/InitialState selected)
+   @return filterProposal: list of filtered proposals
+*/
+function filterProposal(proposals, selectedList) {
+  const filteredProposal = [];
+
+  for (let i = 0, len = selectedList.length; i < len; i++) {
+    if (selectedList[i].selected) {
+      // search for the category in @param proposals
+      for (let j = 0, len1 = proposals.length; j < len1; j++) {
+        if (selectedList[i].id === proposals[j].category_id) {
+          filteredProposal.push(proposals[j]);
+        }
+      }
+    }
+  }
+  return filteredProposal;
 }

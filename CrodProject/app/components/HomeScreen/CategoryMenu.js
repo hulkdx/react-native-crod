@@ -9,6 +9,7 @@ import { ScrollView, StyleSheet, TouchableOpacity, Image, Text, View } from 'rea
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as categoryActions from '../../reducers/categories/categoryActions';
+import * as proposalsActions from '../../reducers/proposals/proposalsActions';
 
 class CategoryMenu extends Component {
 
@@ -43,6 +44,7 @@ class CategoryMenu extends Component {
   _onClickCategoryImage = (i) => {
     //Toggle property: when clicked from false => true && true => false
     this.props.changeSelectedCategory(i);
+    this.props.filterProposals(this.props.category.selected);
     this.forceUpdate();
   }
 
@@ -84,10 +86,11 @@ const styles = StyleSheet.create({
 function mapStateToProps(state) {
   return {
     category: state.category,
+    proposals: state.proposals,
   };
 }
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators(categoryActions, dispatch);
+  return bindActionCreators({ ...proposalsActions, ...categoryActions }, dispatch);
 }
 export default connect(mapStateToProps, mapDispatchToProps)(CategoryMenu);
 // module.exports = CategoryMenu

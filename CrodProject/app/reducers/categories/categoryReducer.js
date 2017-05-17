@@ -4,7 +4,6 @@
   Reducers
 */
 'use strict';
-// import { getToken } from '../proposals/proposalsActions';
 
 const {
   GET_CATEGORY_REQUEST,

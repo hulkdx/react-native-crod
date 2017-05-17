@@ -31,15 +31,20 @@ class ProposalFeed extends Component {
   }
 
   componentDidUpdate() {
-    console.log('yes');
     // it will dismiss the popupDialog if the user goes to another screen while it is open.
     if (!_.isUndefined(this.popupDialog)) { this.popupDialog.dismiss(); }
   }
 
   // Recive the proposals when components mounted
   componentDidMount() {
+    // Proposals updated successfully from api
     if (this.props.proposals.proposalsUpdated) {
-      this.setState({ dataSource: this.state.dataSource.cloneWithRows(this.props.proposals.proposals), });
+      // check for filter proposal (based on category)
+      if (this.props.proposals.filteredProposals.length > 0) {
+        this.setState({ dataSource: this.state.dataSource.cloneWithRows(this.props.proposals.filteredProposals), });
+      } else {
+        this.setState({ dataSource: this.state.dataSource.cloneWithRows(this.props.proposals.proposals), });
+      }
       return;
     }
     this.props.getProposals();
@@ -49,7 +54,12 @@ class ProposalFeed extends Component {
   componentWillReceiveProps(nextProps) {
     // update data source with this.props.proposals
     if (this.props.proposals.proposalsUpdated) {
-      //console.log('updated');
+      // if (_.isUndefined(nextProps.filteredProposals)) return;
+      if (nextProps.proposals.filteredProposals.length > 0) {
+        this.setState({ dataSource: this.state.dataSource.cloneWithRows(nextProps.proposals.filteredProposals), });
+      } else {
+        this.setState({ dataSource: this.state.dataSource.cloneWithRows(this.props.proposals.proposals), });
+      }
       return;
     }
     if (nextProps.proposals.proposals.length === 0) return;

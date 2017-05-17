@@ -29,5 +29,7 @@ export default keyMirror({
   GET_CATEGORY_REQUEST: null,
   GET_CATEGORY_SUCCESS: null,
   GET_CATEGORY_FAILURE: null,
+
   CHANGE_SELECT_CATEGORY: null,
+  FILTER_PROPOSAL: null,
 });

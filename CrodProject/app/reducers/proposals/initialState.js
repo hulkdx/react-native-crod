@@ -12,7 +12,8 @@ const InitialState = Record({
   isFetching: false,
   isCreated: false,
   proposalsUpdated: false,
-  proposals: []
+  proposals: [],
+  filteredProposals: [],
 });
 
 export default InitialState;

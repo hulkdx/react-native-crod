@@ -15,6 +15,7 @@ const {
   CREATE_PROPOSAL_REQUEST,
   CREATE_PROPOSAL_SUCCESS,
   CREATE_PROPOSAL_FAILURE,
+  FILTER_PROPOSAL,
 } = require('../../lib/constants').default;
 
 /*############## Get Proposals Section ##############*/
@@ -103,5 +104,13 @@ export function createProposalFailure(error) {
   return {
     type: CREATE_PROPOSAL_FAILURE,
     payload: error
+  };
+}
+
+/*############## Filter Proposal Section ##############*/
+export function filterProposals(selected) {
+  return {
+    type: FILTER_PROPOSAL,
+    payload: selected
   };
 }
