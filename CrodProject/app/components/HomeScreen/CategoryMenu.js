@@ -22,14 +22,14 @@ class CategoryMenu extends Component {
 
   renderCategoryImages() {
     const rows = [];
-    for (let i = 0; i < this.props.category.length; i++) {
+    for (let i = 0; i < this.props.category.category.length; i++) {
       rows.push(
-        <TouchableOpacity key={i} onPress={this._onClickCategoryImage.bind(this, i)} style={[styles.categoryDropDown, { borderRightWidth: this.props.category[i].selected ? 2 : 0 }]}>
-          {this.props.category[i].selected ?
-            <Image source={{ uri: this.props.category[i].source_fill }} style={styles.categoriesLeftSide} /> :
-            <Image source={{ uri: this.props.category[i].source }} style={styles.categoriesLeftSide} />
+        <TouchableOpacity key={i} onPress={this._onClickCategoryImage.bind(this, i)} style={[styles.categoryDropDown, { borderRightWidth: this.props.category.selected[i].selected ? 2 : 0 }]}>
+          {this.props.category.selected[i].selected ?
+            <Image source={{ uri: this.props.category.category[i].source_fill }} style={styles.categoriesLeftSide} /> :
+            <Image source={{ uri: this.props.category.category[i].source }} style={styles.categoriesLeftSide} />
           }
-            <Text style={styles.categoryNameTxt}> {this.props.category[i].name} </Text>
+            <Text style={styles.categoryNameTxt}> {this.props.category.category[i].name} </Text>
         </TouchableOpacity>
       );
     }
@@ -39,10 +39,10 @@ class CategoryMenu extends Component {
       </View>
     );
   }
-
-  _onClickCategoryImage = (id) => {
+// @param i is the row of the category selected and it is not the id of category
+  _onClickCategoryImage = (i) => {
     //Toggle property: when clicked from false => true && true => false
-    this.props.changeSelectedCategory(id);
+    this.props.changeSelectedCategory(i);
     this.forceUpdate();
   }
 
@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
 // Redux boilerplate
 function mapStateToProps(state) {
   return {
-    category: state.category.category,
+    category: state.category,
   };
 }
 function mapDispatchToProps(dispatch) {

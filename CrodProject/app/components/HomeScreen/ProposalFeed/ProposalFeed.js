@@ -31,6 +31,7 @@ class ProposalFeed extends Component {
   }
 
   componentDidUpdate() {
+    console.log('yes');
     // it will dismiss the popupDialog if the user goes to another screen while it is open.
     if (!_.isUndefined(this.popupDialog)) { this.popupDialog.dismiss(); }
   }
@@ -92,7 +93,7 @@ class ProposalFeed extends Component {
   TODO: Update this information with back-end
 */
   _PopupDialogContent() {
-    if (this.props.proposals.proposals.length > 0);
+    if (this.props.proposals.proposals.length === 0) return;
     return (
       <ScrollView style={styles.customizePopUp}>
        <View style={styles.rowPopUp}>
@@ -125,7 +126,7 @@ class ProposalFeed extends Component {
       <View style={styles.rowContainer}>
 
       <TouchableOpacity style={styles.proposal} onPress={this.proposalClicked.bind(this, proposal, rowID)} onLongPress={this.onLongPress.bind(this, proposal, rowID)}>
-        <ProposalTitle fullName={'${proposal.user.first_name} ${proposal.user.last_name}'}
+        <ProposalTitle fullName={`${proposal.user.first_name} ${proposal.user.last_name}`}
                        profilePic={proposal.user.profile_pic_url}
                        text={proposal.title}
                        articles={proposal.articles}
@@ -215,6 +216,7 @@ const styles = StyleSheet.create({
 function mapStateToProps(state) {
   return {
     proposals: state.proposals,
+    category: state.category.category,
   };
 }
 function mapDispatchToProps(dispatch) {

@@ -10,7 +10,8 @@ const { Record } = require('immutable');
 const InitialState = Record({
   error: null,
   isFetching: false,
-  category: []
+  category: [],
+  selected: []
 });
 
 export default InitialState;

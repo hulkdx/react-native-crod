@@ -4,6 +4,7 @@
   Reducers
 */
 'use strict';
+// import { getToken } from '../proposals/proposalsActions';
 
 const {
   GET_CATEGORY_REQUEST,
@@ -26,21 +27,21 @@ export default function categoryReducer(state = initialState, action) {
     }
 
     case GET_CATEGORY_SUCCESS:
-
      return state.set('isFetching', false)
-     .set('category', action.payload.map((row) => {
+     .set('selected', action.payload.map((row) => {
        return {
-         ...row,
+         id: row.id,
          selected: false
        };
-     }));
+     }))
+     .set('category', action.payload);
 
     case GET_CATEGORY_FAILURE:
      return state.set('isFetching', false)
      .set('error', 'error');
 
     case CHANGE_SELECT_CATEGORY:
-     state.getIn(['category'])[action.payload].selected = !state.getIn(['category'])[action.payload].selected;
+     state.getIn(['selected'])[action.payload].selected = !state.getIn(['selected'])[action.payload].selected;
      return state;
 
     default:
