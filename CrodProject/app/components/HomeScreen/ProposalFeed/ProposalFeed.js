@@ -152,10 +152,9 @@ class ProposalFeed extends Component {
   /*
     When the row of proposal clicked
     @param proposal: the proposal elements from /data-manager/proposal.js
-    TODO: change the proposal object with proposal id
   */
-  proposalClicked = (proposal, rowID) => {
-    Actions.voting({ type: ActionConst.REFRESH, proposalId: rowID });
+  proposalClicked = (proposal) => {
+    Actions.voting({ type: ActionConst.REFRESH, proposalId: proposal.id });
   }
   onLongPress = (proposal, rowID) => {
     this.setState({ proposalsId: rowID });
