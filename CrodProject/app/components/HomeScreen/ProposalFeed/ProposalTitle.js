@@ -3,10 +3,13 @@
 
   A shared component representing the Proposal Title
 */
-'use strict'
+'use strict';
 import React, { Component } from 'react';
-import {StyleSheet,Image,Text,View} from 'react-native';
+import { StyleSheet, Image, Text, View } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+
+const HIGH_PRIORITY_DEADLINE = 5;
+const MEDIUM_PRIORITY_DEADLINE = 10;
 
 class ProposalTitle extends Component {
 
@@ -20,34 +23,31 @@ class ProposalTitle extends Component {
 
   // TODO: change this to componentWillReceiveProps to update the proposals
   componentDidMount() {
-    var deadlineDate = new Date(this.props.deadline);
-    var currentDate = new Date();
-    var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
-      "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    const deadlineDate = new Date(this.props.deadline);
+    const currentDate = new Date();
+    const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
      // convert milisecond to day
-    var dateLeft = Math.round((deadlineDate - currentDate) / 86400000);
+    const dateLeft = Math.round((deadlineDate - currentDate) / 86400000);
     this.setState({
-      dateLeft: dateLeft,
-      date: monthNames[deadlineDate.getMonth()] + ' ' + deadlineDate.getDate()
+      dateLeft,
+      date: `${monthNames[deadlineDate.getMonth()]} ${deadlineDate.getDate()}`
     });
-
   }
 
   render() {
-    let dateLeftStyle = this.state.dateLeft < 5 ? styles.highPrtyDaysLeft : this.state.dateLeft < 10 ? styles.mediumPrtyDaysLeft : styles.lowPrtyDaysLeft
     return (
       <View style={styles.titleRoot}>
 
       {this.props.fullName &&
       <View style={styles.proposalHeader} >
-      {this.props.profilePic !== "" ?
-        <Image style={styles.profilePic} source={{uri: this.props.profilePic}} />
+      {this.props.profilePic !== '' ?
+        <Image style={styles.profilePic} source={{ uri: this.props.profilePic }} />
       : <Text> No Image</Text>
       }
        <Text style={styles.fullName}> {this.props.fullName} </Text>
 
        <View style={styles.deadlineContainer}>
-           <Text style={dateLeftStyle}>{this.state.dateLeft} Days left</Text>
+           <Text style={this.calculatePriorityStyle()}>{this.state.dateLeft} Days left</Text>
            <Text style={styles.date}> {this.state.date}</Text>
        </View>
 
@@ -63,24 +63,30 @@ class ProposalTitle extends Component {
 
         {this.props.emoji &&
         <View>
-          <Icon name='hand-o-up' size={22} color="#7FE57F"/>
-          <Icon name='hand-o-down' size={22} color="#ff7f7f"/>
+          <Icon name='hand-o-up' size={22} color="#7FE57F" />
+          <Icon name='hand-o-down' size={22} color="#ff7f7f" />
         </View>
         }
           <View style={styles.categoryContainer}>
-          <Image style={styles.category} source={{uri: this.props.categoryIcon}}/>
+          <Image style={styles.category} source={{ uri: this.props.categoryIcon }} />
           </View>
 
         <View style={styles.extraIcons}>
           <Text style={styles.ar_dis_statistics}>{this.props.articles}</Text>
-          <Icon name='paperclip' size={22} color="#5d95c4"/>
+          <Icon name='paperclip' size={22} color="#5d95c4" />
           <Text style={styles.ar_dis_statistics}>{this.props.discussions}</Text>
-          <Icon name='comments-o' size={22} color="#5d95c4"/>
+          <Icon name='comments-o' size={22} color="#5d95c4" />
         </View>
 
         </View>
       </View>
-    )
+    );
+  }
+
+  calculatePriorityStyle() {
+    if (this.state.dateLeft < HIGH_PRIORITY_DEADLINE) return styles.highPrtyDaysLeft;
+    else if (this.state.dateLeft < MEDIUM_PRIORITY_DEADLINE) return styles.mediumPrtyDaysLeft;
+    return styles.lowPrtyDaysLeft;
   }
 }
 
@@ -90,9 +96,9 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderRadius: 10,
   },
-  titleContainer:{
-    flex:1,
-    justifyContent:'flex-start',
+  titleContainer: {
+    flex: 1,
+    justifyContent: 'flex-start',
     paddingLeft: 12,
     paddingRight: 10
   },
@@ -152,14 +158,14 @@ const styles = StyleSheet.create({
     resizeMode: 'center',
     height: 45,
     width: 45,
-    margin:3,
+    margin: 3,
     marginLeft: 9,
   },
   fullName: {
     flex: 3,
     fontSize: 20
   },
-  deadlineContainer:{
+  deadlineContainer: {
     marginRight: 17,
     marginBottom: 14
   },
@@ -168,7 +174,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
     // textAlign: 'center',
   },
-  highPrtyDaysLeft:{
+  highPrtyDaysLeft: {
     color: '#DC143C',
   },
   mediumPrtyDaysLeft: {
@@ -179,4 +185,4 @@ const styles = StyleSheet.create({
   },
 });
 
-module.exports = ProposalTitle
+module.exports = ProposalTitle;

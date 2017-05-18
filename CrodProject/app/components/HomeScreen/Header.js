@@ -3,65 +3,64 @@
 
   Header
 */
-'use strict'
+'use strict';
 import React, { Component } from 'react';
-import { View, StyleSheet,TextInput,TouchableOpacity,Image} from 'react-native';
+import { View, StyleSheet, TextInput, TouchableOpacity, Image } from 'react-native';
 import { Actions, ActionConst } from 'react-native-router-flux';
 
-const proposalIcon = require("../../../img/proposal-icon.png")
-const searchIcon = require("../../../img/search-icon1.png")
-const profilePhoto = require("../../../img/notification/man1.png")
-const closeIcon = require("../../../img/close-icon.png")
-
-const PADDING = 16;
+const proposalIcon = require('../../../img/proposal-icon.png');
+const searchIcon = require('../../../img/search-icon1.png');
+const profilePhoto = require('../../../img/notification/man1.png');
+const closeIcon = require('../../../img/close-icon.png');
 
 class Header extends Component {
 
   render() {
     return (
       <View style={styles.headerContainer}>
-        <TouchableOpacity style={styles.profile} onPress={()=> {Actions.profile({type: ActionConst.REFRESH}) }}>
-          <Image source={profilePhoto} style={styles.profilePhoto}/>
+        <TouchableOpacity style={styles.profile} onPress={() => { Actions.profile({ type: ActionConst.REFRESH }); }}>
+          <Image source={profilePhoto} style={styles.profilePhoto} />
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.search}>
 
         <View style={styles.searchBtnContainer}>
-          <Image style={styles.searchBtn} source={searchIcon}/>
+          <Image style={styles.searchBtn} source={searchIcon} />
         </View>
 
          <TextInput
-              editable = {!this.props.createProposal}
-              placeholder = "search"
-              placeholderTextColor = "#5d95c4"
+              editable={!this.props.createProposal}
+              placeholder="search"
+              placeholderTextColor="#5d95c4"
               underlineColorAndroid='transparent'
-              style={styles.searchText}/>
+              style={styles.searchText}
+         />
         </TouchableOpacity>
         {/* Create Proposal Button */}
          <TouchableOpacity onPress={!this.props.createProposal ? this.onClickCreateProposal : this.onCloseTab} style={styles.proposal}>
-          { !this.props.createProposal ? <Image style={styles.proposalBtn} source={proposalIcon}/>
-                                 : <Image style={styles.proposalBtn} source={closeIcon}/> }
+          { !this.props.createProposal ? <Image style={styles.proposalBtn} source={proposalIcon} />
+                                 : <Image style={styles.proposalBtn} source={closeIcon} /> }
          </TouchableOpacity>
        </View>
-    )
+    );
   }
 
 /* When create proposal clicked */
   onClickCreateProposal = () => {
-    Actions.refresh({createProposal: true})
+    Actions.refresh({ createProposal: true });
   }
 
   onCloseTab = () => {
-    Actions.refresh({createProposal: false})
+    Actions.refresh({ createProposal: false });
   }
 }
 
 const styles = StyleSheet.create({
-  headerContainer:{
+  headerContainer: {
     flexDirection: 'row',
     backgroundColor: 'white',
     borderBottomWidth: 0.5,
-    borderBottomColor: "#5d95c4",
+    borderBottomColor: '#5d95c4',
     height: 60,
     alignItems: 'center',
     justifyContent: 'center',
@@ -116,4 +115,4 @@ const styles = StyleSheet.create({
   },
 });
 
-module.exports = Header
+module.exports = Header;

@@ -4,42 +4,39 @@
   Decide if it goes to LoginScreen or HomeScreen
 */
 
-'use strict'
+'use strict';
 
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import { View } from 'react-native';
 
 // Actions
-import * as authActions from '../reducers/auth/authActions'
+import * as authActions from '../reducers/auth/authActions';
 
 
 class Login extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     // This function redirects to proper screen
-    this.props.redirect()
+    this.props.redirect();
   }
 
   render() {
-    // TODO show Loading Screen here
     return (
-      <View>
-
-      </View>
-    )
+      <View />
+    );
   }
 
 }
 
 // Redux boilerplate
-function mapStateToProps (state) {
+function mapStateToProps(state) {
   return {
     auth: state.auth,
-  }
+  };
 }
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators(authActions, dispatch)
+  return bindActionCreators(authActions, dispatch);
 }
-export default connect(mapStateToProps , mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

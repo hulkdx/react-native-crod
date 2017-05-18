@@ -3,25 +3,22 @@
 
   Proposal tab
 */
-'use strict'
+'use strict';
 import React, { Component } from 'react';
-import {StyleSheet,TouchableOpacity,View,ListView} from 'react-native';
-import {Actions, ActionConst} from 'react-native-router-flux';
-
-import ProposalTitle from '../HomeScreen/ProposalFeed/ProposalTitle.js'
-const voteNoSource = require("../../../img/dislike.png")
-const voteYesSource = require("../../../img/like.png")
+import { StyleSheet, TouchableOpacity, View, ListView } from 'react-native';
+import { Actions, ActionConst } from 'react-native-router-flux';
+import ProposalTitle from '../HomeScreen/ProposalFeed/ProposalTitle.js';
+import userProposal from '../../data-manager/userProposal';
 
 // TODO: change this from category data-manager
-const categorySource = require("../../../img/categories/science.png")
-import userProposal from '../../data-manager/userProposal'
+const categorySource = require('../../../img/categories/science.png');
 
 class ProfileProposal extends Component {
 
 
   constructor(props) {
     super(props);
-    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+    const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
     this.state = {
       dataSource: ds.cloneWithRows(userProposal),
     };
@@ -32,11 +29,10 @@ class ProfileProposal extends Component {
       <View style={styles.container}>
       <ListView
       dataSource={this.state.dataSource}
-      renderRow={(proposal) => {return this._renderProposalRow(proposal)} }
+      renderRow={(proposal) => { return this._renderProposalRow(proposal); }}
       />
-
       </View>
-    )
+    );
   }
 
   /*
@@ -44,17 +40,15 @@ class ProfileProposal extends Component {
     TODO: get the user info and show history for only that user.
     @param proposal: the proposal elements from /data-manager/proposal.js
   */
-  _renderProposalRow(proposal){
+  _renderProposalRow(proposal) {
     console.log(proposal);
-    return(
+    return (
       <View style={styles.rowContainer}>
-
-      <TouchableOpacity style={styles.rowProposalRoot} onPress={this.proposalClicked.bind(this,proposal)}>
+      <TouchableOpacity style={styles.rowProposalRoot} onPress={this.proposalClicked.bind(this, proposal)}>
         <ProposalTitle text={proposal.title} category={categorySource} />
       </TouchableOpacity>
-
       </View>
-    )
+    );
   }
 
   /*
@@ -63,28 +57,28 @@ class ProfileProposal extends Component {
     TODO: change the proposal object with proposal id
   */
   proposalClicked = (proposal) => {
-    Actions.voting({type: ActionConst.REFRESH, proposalId: proposal.id})
+    Actions.voting({ type: ActionConst.REFRESH, proposalId: proposal.id });
   }
 }
 
 const styles = StyleSheet.create({
-  container:{
-    flex:8,
+  container: {
+    flex: 8,
     backgroundColor: '#E9EBEE',
     // borderWidth: 2,
     paddingTop: 5,
   },
   rowContainer: {
     flexDirection: 'row',
-    flex:1,
+    flex: 1,
     margin: 5,
 
   },
-  rowProposalRoot:{
-    flex:3,
+  rowProposalRoot: {
+    flex: 3,
     flexDirection: 'row',
   },
 });
 
 
-module.exports = ProfileProposal
+module.exports = ProfileProposal;

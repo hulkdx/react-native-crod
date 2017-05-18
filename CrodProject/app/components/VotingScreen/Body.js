@@ -4,17 +4,17 @@
   Body of VotingScreen, contains 3 tabs (Articles, Disscussion, Statistics) 4
   and VotingAnimation
 */
-'use strict'
+'use strict';
 // Android element elevation defined for middle voting image
 import React, { Component } from 'react';
-import {StyleSheet,Text,View,Dimensions} from 'react-native';
-import _ from 'underscore'
+import { StyleSheet, Text, View, Dimensions } from 'react-native';
+import _ from 'underscore';
 import { TabViewAnimated, TabBar } from 'react-native-tab-view';
 import Tabs from 'react-native-tabs';
-import Articles from './Articles.js'
-import Statistics from './Statistics.js'
-import Disscussion from './Disscussion.js'
-import VotingAnimation from './VotingAnimation.js'
+import Articles from './Articles.js';
+import Statistics from './Statistics.js';
+import Disscussion from './Disscussion.js';
+import VotingAnimation from './VotingAnimation.js';
 
 
 class Body extends Component {
@@ -24,7 +24,7 @@ class Body extends Component {
           routes: [
             { key: '1', title: 'Discussion' },
             { key: '2', title: 'Articles' },
-            { key: '3', title: 'Statistics'}
+            { key: '3', title: 'Statistics' }
           ],
         };
 
@@ -65,77 +65,79 @@ class Body extends Component {
         onRequestChangeTab={this._handleChangeTab}
       />
       </View>
-
-
-
-    )
+    );
   }
 
-  _renderTabContent(){
+  _renderTabContent() {
     switch (this.state.page) {
       case 'articles':
-        return(
+        return (
           <Articles />
-        )
+        );
       case 'disscussion':
-      return(
-        <Disscussion />
-      )
+        return (
+          <Disscussion />
+        );
       case 'statistics':
-      return(
-        <Statistics />
-      )
+        return (
+          <Statistics />
+        );
       default:
-
+        break;
     }
   }
 
-  _renderTabs(){
+  _renderTabs() {
     // without statistics
     return (
       <Tabs selected={this.state.page}
-          onSelect={el=>this.onSelectedTab(el)}
-          style={styles.tabs}>
+          onSelect={el => this.onSelectedTab(el)}
+          style={styles.tabs}
+      >
           <Text name="articles" style={styles.textStyle}
                 selectedStyle={styles.tabsSelected}
-                selectedIconStyle={styles.tabsIconSelected}>Articles</Text>
+                selectedIconStyle={styles.tabsIconSelected}
+          >Articles</Text>
           <Text name="disscussion" style={styles.textStyle}
                 selectedStyle={styles.tabsSelected}
-                selectedIconStyle={styles.tabsIconSelected}>Disscussion</Text>
+                selectedIconStyle={styles.tabsIconSelected}
+          >Disscussion</Text>
 
           {!_.isUndefined(this.props.voted) &&
           <Text name="statistics" style={styles.textStyle}
                 selectedStyle={styles.tabsSelected}
-                selectedIconStyle={styles.tabsIconSelected}>Statistics</Text>
+                selectedIconStyle={styles.tabsIconSelected}
+          >Statistics</Text>
           }
       </Tabs>
-    )
+    );
   }
 
-  onSelectedTab(el){
-    this.setState({page:el.props.name})
+  onSelectedTab(el) {
+    this.setState({ page: el.props.name });
   }
 
 }
 
 const styles = StyleSheet.create({
-  container:{
+  container: {
     flex: 5,
-    width: null, height: null,
+    width: null,
+    height: null,
   },
-  bodyContainer:{
+  bodyContainer: {
     flex: 10,
     backgroundColor: 'white',
   },
-  tabContainer:{
+  tabContainer: {
     height: Dimensions.get('window').height / 14,
     backgroundColor: 'white'
   },
-  tabs:{
+  tabs: {
   //  backgroundColor: 'rgba(26, 105, 178, 0.49)',
   backgroundColor: '#5d95c4',
   },
-  textStyle:{
+  textStyle: {
     fontSize: 23,
     color: '#c4c6c9'
   },
@@ -150,4 +152,4 @@ const styles = StyleSheet.create({
   }
 });
 
-module.exports = Body
+module.exports = Body;

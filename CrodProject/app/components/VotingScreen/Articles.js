@@ -3,17 +3,17 @@
 
   Articles tab bar
 */
-'use strict'
+'use strict';
 import React, { Component } from 'react';
-import {StyleSheet,Text,Image,View,ListView} from 'react-native';
+import { StyleSheet, Text, Image, View, ListView } from 'react-native';
+import articleData from '../../data-manager/articles';
 
-import articleData from '../../data-manager/articles'
-const dividerImage = require("../../../img/dividerblue.jpg")
+const dividerImage = require('../../../img/dividerblue.jpg');
 
 class Articles extends Component {
   constructor() {
     super();
-    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+    const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
     this.state = {
       dataSource: ds.cloneWithRows(articleData),
     };
@@ -24,36 +24,36 @@ class Articles extends Component {
       <View style={styles.container}>
         <ListView
         dataSource={this.state.dataSource}
-        renderRow={(article) => {return this._renderArticleRow(article)} }
+        renderRow={(article) => { return this._renderArticleRow(article); }}
         />
       </View>
-    )
+    );
   }
 
-  _renderArticleRow(article){
-    return(
+  _renderArticleRow(article) {
+    return (
       <View style={styles.articleTitleContainer}>
         <Text style={styles.articleTitleText}>
           {article.title}
         </Text>
-        <Image style={{height: 2}} source={dividerImage}/>
+        <Image style={{ height: 2 }} source={dividerImage} />
       </View>
-    )
+    );
   }
 }
 
 const styles = StyleSheet.create({
-  container:{
+  container: {
     flex: 1,
   },
-  articleTitleContainer:{
-    alignItems:'center',
+  articleTitleContainer: {
+    alignItems: 'center',
   },
-  articleTitleText:{
+  articleTitleText: {
     paddingTop: 20,
     paddingBottom: 20,
     fontSize: 20
   }
 });
 
-module.exports = Articles
+module.exports = Articles;

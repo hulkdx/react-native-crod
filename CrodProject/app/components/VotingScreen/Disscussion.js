@@ -3,108 +3,98 @@
 
   Disscussion tab bar
 */
-'use strict'
+'use strict';
 
 import React, { Component } from 'react';
-import {StyleSheet,Text, Image,View,ListView,TouchableOpacity,TextInput, Animated, Easing} from 'react-native';
-import {Actions, ActionConst} from 'react-native-router-flux';
-import AutoExpandingTextInput from 'react-native-auto-expanding-textinput'
+import { StyleSheet, Text, Image, View, ListView, TouchableOpacity, Animated, Easing } from 'react-native';
+import { Actions, ActionConst } from 'react-native-router-flux';
+import AutoExpandingTextInput from 'react-native-auto-expanding-textinput';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Kohana from './TextInputAnimation/Kohana.js';
 import ProposalVotes from './ProposalVotes';
-import proposals from '../../data-manager/proposals'
-const numberOfRepliesIcon = require("../../../img/replies-icon.png")
-const replyIcon = require("../../../img/reply-icon.png")
-const profilePhoto = require("../../../img/notification/man1.png")
 
-const disscussion = [
-  {profileImage: require("../../../img/notification/man3.png"),
+const profilePhoto = require('../../../img/notification/man1.png');
+const profile3Photo = require('../../../img/notification/man3.png');
+const profile2Photo = require('../../../img/notification/woman1.png');
+
+let disscussion = [
+  { profileImage: profile3Photo,
    comment: "Yes, Facebook is totally awesome! It's so cool, you can connect with peepz all over your State and even all the way down to Oklahoma. I have more than 1000 friendz by now, duh!",
    fullName: 'Saba Saba',
    upvoted: 5,
    downvoted: 1,
-   isUpvoted: null,},
-  {profileImage: require("../../../img/notification/woman1.png"),
+   isUpvoted: null, },
+  { profileImage: profile2Photo,
    comment: "I believe there's many sides to this story and it's hard to depict the entire picture. It may look like are spending more time interacting through Facebook than in real life, but the time Americans spend behind their computers is significant anyway. I applaud Facebook for giving us the means to connect to people easily from a long distance and the ease of gathering people from an area. Also, it gives us a break whenever we're vegetating behind our office desks!",
    fullName: 'Coby Babani',
    upvoted: 10,
    downvoted: 2,
-   isUpvoted: null,},
-
-]
+   isUpvoted: null, },
+];
 
 
 class Disscussion extends Component {
   constructor() {
     super();
-    this.spinValue = new Animated.Value(0)
-    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => true});
+    this.spinValue = new Animated.Value(0);
+    const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
     this.state = {
       dataSource: ds.cloneWithRows(disscussion),
     };
-
-
-
   }
 
   _pressData = ({}: {[key: number]: boolean})
   componentDidMount() {
-     this.spin()
+     this.spin();
   }
 
   render() {
     return (
       <View style={styles.container}>
-        <ListView style={{flex:1,}}
-        dataSource={ this.state.dataSource}
-        renderRow={(disscussion, sectionID, rowID) => {return this._renderDisscussionRow(disscussion, sectionID, rowID)} }
+        <ListView style={{ flex: 1, }}
+        dataSource={this.state.dataSource}
+        renderRow={(discussion, sectionID, rowID) => { return this._renderDisscussionRow(discussion, sectionID, rowID); }}
         />
 
         <View style={styles.createDiscussion}>
-        <TouchableOpacity style={styles.profileContainer} onPress={()=> {Actions.profile({type: ActionConst.REFRESH}) }}>
-        <Image source={profilePhoto} style={styles.profilePhoto}/>
+        <TouchableOpacity style={styles.profileContainer} onPress={() => { Actions.profile({ type: ActionConst.REFRESH }); }}>
+        <Image source={profilePhoto} style={styles.profilePhoto} />
         </TouchableOpacity>
         <AutoExpandingTextInput
           style={styles.shareText}
           underlineColorAndroid={'transparent'}
-          enablesReturnKeyAutomatically={true}
+          enablesReturnKeyAutomatically
           returnKeyType="done"
           minHeight={40}
           maxHeight={1000}
           placeholder="open a discussion ..."
-          placeholderTextColor= '#bcbcbb'
-          onChangeHeight={this._onChangeHeight}
+          placeholderTextColor='#bcbcbb'
+          onChangeHeight={() => {}}
         />
         <TouchableOpacity style={styles.shareButton} onPress={this.shareClicked}>
           <Icon name='send-o' size={25} color={'#5d95c4'} />
         </TouchableOpacity>
         </View>
       </View>
-
-    )
+    );
   }
 
-  _renderDisscussionRow(rowData, sectionID, rowID){
-    const spin = this.spinValue.interpolate({
-    inputRange: [0, 1],
-    outputRange: ['0deg', '360deg']
-  })
-    return(
+  _renderDisscussionRow(rowData, sectionID, rowID) {
+    return (
       <View style={[styles.disscussionContainer]}>
 
         <View style={styles.disscussionContainerTop}>
 
                 <View style={styles.topBarContainer}>
                     <View style={styles.discussionImageContainer}>
-                    <Image style={styles.profileImage} source={rowData.profileImage}/>
-                    <ProposalVotes isClickable={true}
+                    <Image style={styles.profileImage} source={rowData.profileImage} />
+                    <ProposalVotes isClickable
                                    votedYes={rowData.upvoted}
                                    style={styles.votes}
                                    votedNo={rowData.downvoted}
-                                   votedClicked={this.votedClicked}/>
+                                   votedClicked={this.votedClicked}
+                    />
                     </View>
-
-
 
                 <View style={styles.commentContainer}>
 
@@ -120,28 +110,25 @@ class Disscussion extends Component {
             <View style={styles.leftSideBottomBar}>
               <TouchableOpacity style={styles.replyTextContainer}>
                 <Text style={styles.replyText}>10</Text>
-                <Icon name={'comments-o'} size={22.5} color={'#5d95c4'} style={styles.arrowIcon}/>
+                <Icon name={'comments-o'} size={22.5} color={'#5d95c4'} style={styles.arrowIcon} />
               </TouchableOpacity>
               <TouchableOpacity style={styles.replyTextContainer} onPress={this.replyClicked.bind(this, rowID)}>
                 <Text style={styles.replyText}>Reply</Text>
               {/*  <Animated.Image style={[styles.animatedReply, {transform: [{rotate: spin}]}]} source={replyIcon} /> */}
-               <Icon name={'angle-double-down'} size ={25} color={'#5d95c4'} style={styles.arrowIcon} />
+               <Icon name={'angle-double-down'} size={25} color={'#5d95c4'} style={styles.arrowIcon} />
               </TouchableOpacity>
               </View>
               <View style={styles.rightSideBottomBar}>
               <TouchableOpacity style={styles.voteUpDown} onPress={this.upVoteClicked.bind(this, rowID)}>
-                <Text style={{color: disscussion[rowID].isUpvoted ? '#228b22' : '#bcbcbb'}}> Up </Text>
-                <Icon name={'hand-o-up'} size={20} color = {disscussion[rowID].isUpvoted ? '#228b22' : '#bcbcbb'}/>
+                <Text style={{ color: disscussion[rowID].isUpvoted ? '#228b22' : '#bcbcbb' }}> Up </Text>
+                <Icon name={'hand-o-up'} size={20} color={disscussion[rowID].isUpvoted ? '#228b22' : '#bcbcbb'} />
               </TouchableOpacity>
 
               <TouchableOpacity style={styles.voteUpDown} onPress={this.downVoteClicked.bind(this, rowID)}>
-                <Icon name={'hand-o-down'} size={20} color = {disscussion[rowID].isUpvoted === null ? '#bcbcbb' : disscussion[rowID].isUpvoted ?  '#bcbcbb' : '#DC143C'} />
-                <Text style={{color: disscussion[rowID].isUpvoted === null ? '#bcbcbb' : disscussion[rowID].isUpvoted ? '#bcbcbb' : '#DC143C'}}> Down </Text>
+                <Icon name={'hand-o-down'} size={20} color={(disscussion[rowID].isUpvoted === null) || disscussion[rowID].isUpvoted ? '#bcbcbb' : '#DC143C'} />
+                <Text style={{ color: (disscussion[rowID].isUpvoted === null) || disscussion[rowID].isUpvoted ? '#bcbcbb' : '#DC143C' }}> Down </Text>
               </TouchableOpacity>
               </View>
-
-
-
             </View>
 
         </View>
@@ -161,46 +148,42 @@ class Disscussion extends Component {
           />
 
           <TouchableOpacity style={styles.shareButton} onPress={this.repliedToComment}>
-            <Icon name={'paper-plane-o'} size={22.5} color={'#5d95c4'} style={styles.replyBtn}/>
+            <Icon name={'paper-plane-o'} size={22.5} color={'#5d95c4'} style={styles.replyBtn} />
           </TouchableOpacity>
           </View>
         }
 
       </View>
-    )
+    );
   }
 /*
 isUpdated changes according to @param toggleVoting
       null -> default value, in other words the user has not voted yet.
       true -> upVoteClicked(),
       false -> downVoteClicked()
-
-
 */
-  updateDiscussion(toggleVoting, rowID){
+  updateDiscussion(toggleVoting, rowID) {
     disscussion = disscussion.map((row, i) => {
       return {
         ...row,
-        isUpvoted: i == rowID ? toggleVoting : row.isUpvoted
-      }
+        isUpvoted: i === rowID ? toggleVoting : row.isUpvoted
+      };
     });
-    this.setState({dataSource: this.state.dataSource.cloneWithRows(disscussion)})
-
+    this.setState({ dataSource: this.state.dataSource.cloneWithRows(disscussion) });
   }
 
-  upVoteClicked  = (rowID) =>{
-      this.updateDiscussion(true, rowID)
+  upVoteClicked = (rowID) => {
+      this.updateDiscussion(true, rowID);
   }
-  downVoteClicked  = (rowID) =>{
-      this.updateDiscussion(false, rowID)
+  downVoteClicked = (rowID) => {
+      this.updateDiscussion(false, rowID);
   }
 
   /*
     @param vote: {bolean} true: voted yes, false: voted no
     TODO: Add votes
   */
-  votedClicked = (vote) =>{
-
+  votedClicked = () => {
   }
 
   /*
@@ -214,13 +197,11 @@ isUpdated changes according to @param toggleVoting
     disscussion = disscussion.map((row, i) => {
       return {
         ...row,
-        selected: i == rowID ? true : false
-      }
+        selected: i === rowID
+      };
     });
-    this.setState({dataSource: this.state.dataSource.cloneWithRows(disscussion)})
+    this.setState({ dataSource: this.state.dataSource.cloneWithRows(disscussion) });
   }
-
-
 
   /*
     When the user replied to a comment
@@ -231,26 +212,23 @@ isUpdated changes according to @param toggleVoting
   */
   repliedToComment = () => {
     // Hide reply
-    var clone = disscussion.map((disscussion, i) => {
+    const clone = disscussion.map((row) => {
       return {
-        ...disscussion,
+        ...row,
         selected: false
-      }
+      };
     });
-    this.setState({dataSource: this.state.dataSource.cloneWithRows(clone)})
-
+    this.setState({ dataSource: this.state.dataSource.cloneWithRows(clone) });
   }
-  _onChangeHeight(before, after) {
-   console.log('before: ' + before + ' after: ' + after);
- }
 
 
   shareClicked = () => {
     // TODO: If its not empty
     // TODO: Add Comments
   }
-  spin () {
-  this.spinValue.setValue(0)
+
+  spin() {
+  this.spinValue.setValue(0);
   Animated.timing(
     this.spinValue,
     {
@@ -258,17 +236,17 @@ isUpdated changes according to @param toggleVoting
       duration: 4000,
       easing: Easing.linear
     }
-  ).start(() => this.spin())
+  ).start(() => this.spin());
 }
 }
 
 const styles = StyleSheet.create({
-  container:{
+  container: {
     flex: 1,
     backgroundColor: '#E9EBEE',
   },
   disscussionContainer: {
-    flex:1,
+    flex: 1,
     margin: 8,
     backgroundColor: 'white',
     borderRadius: 10,
@@ -295,7 +273,7 @@ const styles = StyleSheet.create({
     width: 40,
     resizeMode: 'contain',
   },
-  replyContainer:{
+  replyContainer: {
     flexDirection: 'row',
     borderWidth: 1,
     borderRadius: 10,
@@ -303,10 +281,7 @@ const styles = StyleSheet.create({
     marginTop: 10
   },
   shareText: {
-    flex:1,
-    // borderWidth: 1,
-    // borderRadius: 10,
-    // borderColor: '#E9EBEE',
+    flex: 1,
     marginLeft: 15,
     marginRight: 10,
     paddingTop: 10,
@@ -318,32 +293,31 @@ const styles = StyleSheet.create({
     },
     zIndex: 1,
   },
-  shareButton:{
+  shareButton: {
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: 15,
   },
-  disscussionContainerTop:{
-    flex:1,
+  disscussionContainerTop: {
+    flex: 1,
     alignItems: 'center',
   },
   votes: {
-    justifyContent:'center',
+    justifyContent: 'center',
     alignItems: 'center',
     paddingTop: 20,
   },
   profileImage: {
-
-    width:70, height: 70,
+    width: 70,
+    height: 70,
     resizeMode: 'contain',
   },
   discussionImageContainer: {
-    flex:1,
+    flex: 1,
     alignItems: 'center'
-
   },
   topBarContainer: {
-    flex:1,
+    flex: 1,
     flexDirection: 'row',
   },
   commentContainer: {
@@ -360,7 +334,7 @@ const styles = StyleSheet.create({
     paddingTop: 15,
     fontFamily: 'Roboto'
   },
-  bottomBarCommentContainer : {
+  bottomBarCommentContainer: {
     flexDirection: 'row',
     marginTop: 20,
   },
@@ -374,23 +348,21 @@ const styles = StyleSheet.create({
     color: '#bcbcbb'
   },
   arrowIcon: {
-     marginLeft:3,
-    // height: 25, width: 25,
-    // resizeMode: 'contain',
-    // tintColor: '#88B3D9'
+     marginLeft: 3,
   },
   votesContainer: {
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
   },
-  votesImageContainer:{
-    flex:1,
+  votesImageContainer: {
+    flex: 1,
     marginRight: 10,
   },
-  votesImage:{
-    flex:1,
-    width: null, height: null,
+  votesImage: {
+    flex: 1,
+    width: null,
+    height: null,
     resizeMode: 'contain',
   },
   replyTextInput: {
@@ -419,4 +391,4 @@ const styles = StyleSheet.create({
   }
 });
 
-module.exports = Disscussion
+module.exports = Disscussion;

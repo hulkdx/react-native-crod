@@ -3,13 +3,11 @@
 
   ProfileScreen to show profile information
 */
-'use strict'
+'use strict';
 import React, { Component } from 'react';
-//import {StyleSheet} from 'react-native';
-
-import ViewContainer from '../components/ViewContainer.js'
-import Header from '../components/ProfileScreen/Header.js'
-import Body from '../components/ProfileScreen/Body.js'
+import ViewContainer from '../components/ViewContainer.js';
+import Header from '../components/ProfileScreen/Header.js';
+import Body from '../components/ProfileScreen/Body.js';
 
 class ProfileScreen extends Component {
 
@@ -19,14 +17,9 @@ class ProfileScreen extends Component {
         <Header />
         <Body />
       </ViewContainer>
-
-    )
+    );
   }
 
 }
 
-// const styles = StyleSheet.create({
-//
-// });
-
-module.exports = ProfileScreen
+module.exports = ProfileScreen;

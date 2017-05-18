@@ -4,22 +4,19 @@
   Initial Tab
   TODO: maybe contain app logo?
 */
-'use strict'
+'use strict';
 import React, { Component } from 'react';
-import {StyleSheet,Text,View} from 'react-native';
-import ViewContainer from '../ViewContainer.js'
-import CircleSwipe from '../CircleSwipe.js'
+import { StyleSheet, Text, View } from 'react-native';
+import ViewContainer from '../ViewContainer.js';
+import CircleSwipe from '../CircleSwipe.js';
 
 
 class Initial extends Component {
-  constructor(props) {
-    super(props)
-  }
 
   render() {
     return (
       <ViewContainer style={styles.container}>
-        <View style={{flex: 1, justifyContent: 'center'}}>
+        <View style={{ flex: 1, justifyContent: 'center' }}>
 
           <Text>
           LOGO
@@ -31,7 +28,7 @@ class Initial extends Component {
 
 
       </ViewContainer>
-    )
+    );
   }
 
 }
@@ -67,7 +64,7 @@ const styles = StyleSheet.create({
     width: 100,
     height: 40,
     marginBottom: 10,
-    alignSelf: "center"
+    alignSelf: 'center'
   },
   buttonText: {
     fontSize: 20,
@@ -76,8 +73,8 @@ const styles = StyleSheet.create({
   },
   loginText: {
     color: 'white',
-    alignSelf: "center"
+    alignSelf: 'center'
   },
 });
 
-module.exports = Initial
+module.exports = Initial;

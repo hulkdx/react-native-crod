@@ -4,16 +4,16 @@
   Login Screen
   TODO: Register Screen
 */
-'use strict'
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
+'use strict';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import { StyleSheet, Text, TextInput, TouchableOpacity } from 'react-native';
-import ViewContainer from '../components/ViewContainer.js'
 import { Actions, ActionConst } from 'react-native-router-flux';
+import ViewContainer from '../components/ViewContainer.js';
 
 // Actions
-import * as authActions from '../reducers/auth/authActions'
+import * as authActions from '../reducers/auth/authActions';
 
 class RegisterScreen extends Component {
   constructor(props) {
@@ -39,30 +39,34 @@ class RegisterScreen extends Component {
           placeholder="username"
           placeholderTextColor="rgba(255,255,255,0.7)"
           underlineColorAndroid="transparent"
-          onChangeText={(username) => this.setState({username})}
-          style={styles.input}/>
+          onChangeText={(username) => this.setState({ username })}
+          style={styles.input}
+        />
 
         <TextInput
           placeholder="email"
           placeholderTextColor="rgba(255,255,255,0.7)"
           underlineColorAndroid="transparent"
-          onChangeText={(email) => this.setState({email})}
-          style={styles.input}/>
+          onChangeText={(email) => this.setState({ email })}
+          style={styles.input}
+        />
 
         <TextInput
           placeholder="confirm email"
           placeholderTextColor="rgba(255,255,255,0.7)"
           underlineColorAndroid="transparent"
-          onChangeText={(email2) => this.setState({email2})}
-          style={styles.input}/>
+          onChangeText={(email2) => this.setState({ email2 })}
+          style={styles.input}
+        />
 
         <TextInput
           placeholder="password"
           placeholderTextColor="rgba(255,255,255,0.7)"
           underlineColorAndroid="transparent"
-          secureTextEntry={true}
-          onChangeText={(password) => this.setState({password})}
-          style={styles.password}/>
+          secureTextEntry
+          onChangeText={(password) => this.setState({ password })}
+          style={styles.password}
+        />
 
         <TouchableOpacity style={styles.buttonContainer} onPress={this._onPressRegister}>
           <Text style={styles.buttonText}>Register</Text>
@@ -72,12 +76,11 @@ class RegisterScreen extends Component {
           <Text style={styles.buttonText}>Back</Text>
         </TouchableOpacity>
       </ViewContainer>
-
-    )
+    );
   }
 
   _onPressBack = () => {
-    Actions.login({type: ActionConst.REFRESH})
+    Actions.login({ type: ActionConst.REFRESH });
   }
 
   _onPressRegister = () => {
@@ -117,7 +120,7 @@ const styles = StyleSheet.create({
     width: 100,
     height: 40,
     marginBottom: 10,
-    alignSelf: "center"
+    alignSelf: 'center'
   },
   buttonText: {
     fontSize: 20,
@@ -126,7 +129,7 @@ const styles = StyleSheet.create({
   },
   loginText: {
     color: 'white',
-    alignSelf: "center"
+    alignSelf: 'center'
   },
   errorHandle: {
     height: 25,
@@ -136,12 +139,12 @@ const styles = StyleSheet.create({
 });
 
 // Redux boilerplate
-function mapStateToProps (state) {
+function mapStateToProps(state) {
   return {
     auth: state.auth,
-  }
+  };
 }
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators(authActions, dispatch)
+  return bindActionCreators(authActions, dispatch);
 }
-export default connect(mapStateToProps , mapDispatchToProps)(RegisterScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(RegisterScreen);

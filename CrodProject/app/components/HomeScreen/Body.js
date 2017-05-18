@@ -5,14 +5,14 @@
   SideMenu) Check the SideMenu https://github.com/react-native-community/react-native-side-menu
   For more informatin of the instruction.
 */
-'use strict'
+'use strict';
 import React, { Component } from 'react';
-import {StyleSheet,View} from 'react-native';
-import CategoryMenu from "./CategoryMenu.js"
-import ProposalFeed from "./ProposalFeed/ProposalFeed.js"
-import CreateProposal from "./CreateProposal.js"
+import { StyleSheet, View } from 'react-native';
+import CategoryMenu from './CategoryMenu.js';
+import ProposalFeed from './ProposalFeed/ProposalFeed.js';
+import CreateProposal from './CreateProposal.js';
 
-import LeftSideMenu from "./SideMenu.js";
+import LeftSideMenu from '../../lib/SideMenu.js';
 
 class Body extends Component {
   state = {
@@ -31,12 +31,13 @@ class Body extends Component {
         {this.props.createProposal ? <CreateProposal />
       : <LeftSideMenu
                   menu={menu}
-                  openMenuOffset = {90}
+                  openMenuOffset={90}
                   isOpen={this.state.isOpen}
                   onChange={(isOpen) => this.updateMenuState(isOpen)}
-                  style={styles.leftSideMenu} >
-          <ProposalFeed changeArrow={this.state.isOpen}/>
-        </LeftSideMenu>}
+                  style={styles.leftSideMenu}
+      >
+        <ProposalFeed changeArrow={this.state.isOpen} />
+      </LeftSideMenu> }
       </View>
 
     );
@@ -44,9 +45,9 @@ class Body extends Component {
 }
 
 const styles = StyleSheet.create({
-  leftMenu:{
-    flex:8,
-    backgroundColor: "#5d95c4",
+  leftMenu: {
+    flex: 8,
+    backgroundColor: '#5d95c4',
   },
   leftSideMenu: {
     borderRightWidth: 1,
@@ -56,4 +57,4 @@ const styles = StyleSheet.create({
 });
 
 
-module.exports = Body
+module.exports = Body;

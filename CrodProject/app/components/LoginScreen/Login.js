@@ -3,24 +3,24 @@
 
   Login Screen
 */
-'use strict'
+'use strict';
 
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import React, { Component } from 'react';
-import {StyleSheet,Text,View,TouchableOpacity, TextInput} from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, TextInput } from 'react-native';
 import { Actions, ActionConst } from 'react-native-router-flux';
 
 // Actions
-import * as authActions from '../../reducers/auth/authActions'
+import * as authActions from '../../reducers/auth/authActions';
 
-import ViewContainer from '../ViewContainer.js'
-import CircleSwipe from '../CircleSwipe.js'
+import ViewContainer from '../ViewContainer.js';
+import CircleSwipe from '../CircleSwipe.js';
 
 
 class Login extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       username: '',
       password: '',
@@ -31,7 +31,7 @@ class Login extends Component {
   render() {
     return (
       <ViewContainer style={styles.container}>
-      <View style={{flex: 1, justifyContent: 'center'}}>
+      <View style={{ flex: 1, justifyContent: 'center' }}>
 
         <Text style={styles.errorHandle}>
           {this.props.auth.isFetching ? 'Loading...'
@@ -42,15 +42,17 @@ class Login extends Component {
           placeholder="username"
           placeholderTextColor="rgba(255,255,255,0.7)"
           underlineColorAndroid="transparent"
-          onChangeText={(username) => this.setState({username})}
-          style={styles.input}/>
+          onChangeText={(username) => this.setState({ username })}
+          style={styles.input}
+        />
         <TextInput
           placeholder="password"
           placeholderTextColor="rgba(255,255,255,0.7)"
           underlineColorAndroid="transparent"
-          secureTextEntry={true}
-          onChangeText={(password) => this.setState({password})}
-          style={styles.password}/>
+          secureTextEntry
+          onChangeText={(password) => this.setState({ password })}
+          style={styles.password}
+        />
 
         <TouchableOpacity style={styles.buttonContainer} onPress={this._onPressLogin}>
           <Text style={styles.buttonText}>Login</Text>
@@ -63,7 +65,7 @@ class Login extends Component {
 
       <CircleSwipe pageNumber={3} />
       </ViewContainer>
-    )
+    );
   }
 
   _onPressLogin = () => {
@@ -71,7 +73,7 @@ class Login extends Component {
   }
 
   _onPressRegister = () => {
-    Actions.register({type: ActionConst.REFRESH})
+    Actions.register({ type: ActionConst.REFRESH });
   }
 
 }
@@ -107,7 +109,7 @@ const styles = StyleSheet.create({
     width: 100,
     height: 40,
     marginBottom: 10,
-    alignSelf: "center"
+    alignSelf: 'center'
   },
   buttonText: {
     fontSize: 20,
@@ -116,7 +118,7 @@ const styles = StyleSheet.create({
   },
   loginText: {
     color: 'white',
-    alignSelf: "center"
+    alignSelf: 'center'
   },
   errorHandle: {
     height: 25,
@@ -126,12 +128,12 @@ const styles = StyleSheet.create({
 });
 
 // Redux boilerplate
-function mapStateToProps (state) {
+function mapStateToProps(state) {
   return {
     auth: state.auth,
-  }
+  };
 }
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators(authActions, dispatch)
+  return bindActionCreators(authActions, dispatch);
 }
-export default connect(mapStateToProps , mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

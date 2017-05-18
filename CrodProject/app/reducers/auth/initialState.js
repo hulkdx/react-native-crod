@@ -3,13 +3,13 @@
 
   InitialState
 */
-'use strict'
+'use strict';
 
-const {Record} = require('immutable')
+const { Record } = require('immutable');
 
-var InitialState = Record({
+const InitialState = Record({
   error: null,
   isFetching: false,
-})
+});
 
-export default InitialState
+export default InitialState;

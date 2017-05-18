@@ -3,21 +3,27 @@
 
   Create proposal screen
 */
-'use strict'
+'use strict';
 import React, { Component } from 'react';
-import { ActivityIndicator,StyleSheet,TextInput,TouchableOpacity,Image,Text,View,Dimensions,ScrollView } from 'react-native';
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
-import { RadioButtons } from 'react-native-radio-buttons'
-import {Actions, ActionConst} from 'react-native-router-flux'
-import _ from 'underscore'
-import AutoExpandingTextInput from 'react-native-auto-expanding-textinput'
-import * as categoryActions from '../../reducers/categories/categoryActions'
-import * as proposalsActions from '../../reducers/proposals/proposalsActions'
-import DatePicker from './DateTimePicker/DatePicker.js'
+import { ActivityIndicator, StyleSheet, TouchableOpacity, Image, Text, View, ScrollView } from 'react-native';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { RadioButtons } from 'react-native-radio-buttons';
+import { Actions } from 'react-native-router-flux';
+import _ from 'underscore';
+import AutoExpandingTextInput from 'react-native-auto-expanding-textinput';
+import * as categoryActions from '../../reducers/categories/categoryActions';
+import * as proposalsActions from '../../reducers/proposals/proposalsActions';
+import DatePicker from './DateTimePicker/DatePicker.js';
 
-const TITLE_MIN_LENGTH = 0, TITLE_MAX_LENGTH = 100;
-const DESC_MIN_LENGTH = 0, DESC_MAX_LENGTH = 400;
+const TITLE_MIN_LENGTH = 0;
+const TITLE_MAX_LENGTH = 100;
+const DESC_MIN_LENGTH = 0;
+const DESC_MAX_LENGTH = 400;
+
+const TimeIcon = require('../../../img/time-icon.png');
+const DeadlineIcon = require('../../../img/deadline-icon.png');
+const AddMoreIcon = require('../../../img/add-more-icon.png');
 
 class CreateProposal extends Component {
 
@@ -55,153 +61,146 @@ class CreateProposal extends Component {
           <Text style={styles.createProposalBtn}>Create Proposal</Text>
         </TouchableOpacity>
       </ScrollView>
-    )
+    );
   }
 
   /* render each steps of create proposal
      @param id: id of the step */
-  _renderSteps(id){
-    var views = [];
+  _renderSteps(id) {
     switch (id) {
+      default:
+        break;
       // Categories
       case 1:
-        views =
-        <View>
-          <Text style={styles.stepsText}>Pick a Category</Text>
-          {/* Render category Images (When create proposal is open) is uses RadioButtons
-          from: @link https://github.com/ArnaudRinquin/react-native-radio-buttons */}
-          <RadioButtons
-            options={ this.props.category.category }
-            onSelection={ this.setSelectedOption.bind(this) }
-            renderOption={ this.renderCategoryOption.bind(this) }
-            selectedOption={ this.state.selectedOption }
-            renderContainer={ RadioButtons.renderHorizontalContainer }
-          />
-        </View>
-
-        break;
+        return (
+          <View>
+            <Text style={styles.stepsText}>Pick a Category</Text>
+            {/* Render category Images (When create proposal is open) is uses RadioButtons
+            from: @link https://github.com/ArnaudRinquin/react-native-radio-buttons */}
+            <RadioButtons
+              options={this.props.category.category}
+              onSelection={this.setSelectedOption.bind(this)}
+              renderOption={this.renderCategoryOption.bind(this)}
+              selectedOption={this.state.selectedOption}
+              renderContainer={RadioButtons.renderHorizontalContainer}
+            />
+          </View>
+        );
       // Title
       case 2:
-        views =
-        <View>
-        <Text style={styles.stepsText}>Choose a Title</Text>
-        <AutoExpandingTextInput
-          style={styles.textInput}
-          underlineColorAndroid={'transparent'}
-          enablesReturnKeyAutomatically={true}
-          returnKeyType="done"
-          placeholder={"the title must be "+ TITLE_MIN_LENGTH +"-"+ TITLE_MAX_LENGTH + " characters long."}
-          placeholderTextColor="#d7dade"
-          minHeight={70}
-          maxHeight={1000}
-          maxLength={200}
-          onChangeText={(text) => this.setState({title: text})}
-          onChangeHeight={this._onChangeHeight}
-        />
-        </View>
-        break;
+        return (
+          <View>
+          <Text style={styles.stepsText}>Choose a Title</Text>
+          <AutoExpandingTextInput
+            style={styles.textInput}
+            underlineColorAndroid={'transparent'}
+            enablesReturnKeyAutomatically
+            returnKeyType="done"
+            placeholder={`the title must be ${TITLE_MIN_LENGTH}-${TITLE_MAX_LENGTH} characters long.`}
+            placeholderTextColor="#d7dade"
+            minHeight={70}
+            maxHeight={1000}
+            maxLength={200}
+            onChangeText={(text) => this.setState({ title: text })}
+            onChangeHeight={() => {}}
+          />
+          </View>
+        );
       // Description
       case 3:
-        views =
-        <View>
-        <Text style={styles.stepsText}>Description</Text>
-        <AutoExpandingTextInput
-          style={styles.textInput}
-          underlineColorAndroid={'transparent'}
-          enablesReturnKeyAutomatically={true}
-          returnKeyType="done"
-          minHeight={70}
-          maxHeight={1000}
-          maxLength={500}
-          placeholder={"the description must be "+DESC_MIN_LENGTH+"-"+DESC_MAX_LENGTH+" characters long."}
-          placeholderTextColor="#d7dade"
-          onChangeHeight={this._onChangeHeight}
-          onChangeText={(text) => this.setState({desc: text})}
-        />
-
-        </View>
-        break;
+        return (
+          <View>
+          <Text style={styles.stepsText}>Description</Text>
+          <AutoExpandingTextInput
+            style={styles.textInput}
+            underlineColorAndroid={'transparent'}
+            enablesReturnKeyAutomatically
+            returnKeyType="done"
+            minHeight={70}
+            maxHeight={1000}
+            maxLength={500}
+            placeholder={`the description must be ${DESC_MIN_LENGTH}-${DESC_MAX_LENGTH} characters long.`}
+            placeholderTextColor="#d7dade"
+            onChangeText={(text) => this.setState({ desc: text })}
+            onChangeHeight={() => {}}
+          />
+          </View>
+        );
       // Deadline
       case 4:
-        views =
-        <View style={styles.deadlineContainer}>
-        <Text style={styles.stepsText}>Deadline</Text>
-        <DatePicker
-          style={styles.deadlineTextInput}
-          date={this.state.deadlineDay}
-          mode="date"
-          format="YYYY-MM-DD"
-          confirmBtnText="Confirm"
-          cancelBtnText="Cancel"
-          iconSource={require('../../../img/deadline-icon.png')}
-          customStyles={{
-            dateIcon: {
-              position: 'absolute',
-              left: 0,
-              top: 4,
-              marginLeft: 0
-            },
-            dateInput: {
-              marginLeft: 36
-            }
-          }}
-          minuteInterval={10}
-          onDateChange={(datetime) => {this.setState({deadlineDay: datetime});}}
-        />
-        <DatePicker
-          style={styles.deadlineTextInput}
-          date={this.state.deadlineTime}
-          mode="time"
-          format="HH:mm"
-          confirmBtnText="Confirm"
-          cancelBtnText="Cancel"
-          iconSource={require('../../../img/time-icon.png')}
-          customStyles={{
-            dateIcon: {
-              position: 'absolute',
-              left: 0,
-              top: 4,
-              marginLeft: 3
-            },
-            dateInput: {
-              marginLeft: 36
-            }
-          }}
-          minuteInterval={10}
-          onDateChange={(time) => {this.setState({deadlineTime: time});}}
-        />
-        </View>
-        break;
+        return (
+          <View style={styles.deadlineContainer}>
+          <Text style={styles.stepsText}>Deadline</Text>
+          <DatePicker
+            style={styles.deadlineTextInput}
+            date={this.state.deadlineDay}
+            mode="date"
+            format="YYYY-MM-DD"
+            confirmBtnText="Confirm"
+            cancelBtnText="Cancel"
+            iconSource={DeadlineIcon}
+            customStyles={{
+              dateIcon: {
+                position: 'absolute',
+                left: 0,
+                top: 4,
+                marginLeft: 0
+              },
+              dateInput: {
+                marginLeft: 36
+              }
+            }}
+            minuteInterval={10}
+            onDateChange={(datetime) => { this.setState({ deadlineDay: datetime }); }}
+          />
+          <DatePicker
+            style={styles.deadlineTextInput}
+            date={this.state.deadlineTime}
+            mode="time"
+            format="HH:mm"
+            confirmBtnText="Confirm"
+            cancelBtnText="Cancel"
+            iconSource={TimeIcon}
+            customStyles={{
+              dateIcon: {
+                position: 'absolute',
+                left: 0,
+                top: 4,
+                marginLeft: 3
+              },
+              dateInput: {
+                marginLeft: 36
+              }
+            }}
+            minuteInterval={10}
+            onDateChange={(time) => { this.setState({ deadlineTime: time }); }}
+          />
+          </View>
+        );
       // Attachment
       case 5:
-        views =
-        <View style={styles.attachments}>
-        <Text style={styles.stepsText}>Attachments</Text>
-        <TouchableOpacity>
-          <Image style={styles.attachMore} source={require("../../../img/add-more-icon.png")}/>
-        </TouchableOpacity>
-        </View>
-        break;
+        return (
+          <View style={styles.attachments}>
+          <Text style={styles.stepsText}>Attachments</Text>
+          <TouchableOpacity>
+            <Image style={styles.attachMore} source={AddMoreIcon} />
+          </TouchableOpacity>
+          </View>
+        );
     }
-    return(
-      <View>
-        {views}
-      </View>
-    )
   }
 
   /* Render RadioButtons Options that is image of the categories */
-  renderCategoryOption(option, selected, onSelect, index){
+  renderCategoryOption(option, selected, onSelect, index) {
     const style = selected ? styles.categorySelectedImage : styles.categoryImage;
     return (
       <TouchableOpacity onPress={onSelect} style={styles.categoryDropDown} key={index}>
-        <Image key={index} source={{uri: this.props.category.category[index].source}} style={style}/>
-
+        <Image key={index} source={{ uri: this.props.category.category[index].source }} style={style} />
       </TouchableOpacity>
     );
   }
 
-  setSelectedOption(selectedOption){
+  setSelectedOption(selectedOption) {
     this.setState({
       selectedOption
     });
@@ -209,11 +208,10 @@ class CreateProposal extends Component {
 
   /* on done clicked (When create proposal is open), set isTabOpen */
   onClickDone = () => {
-
     // Validation
-    if (this.validateCreateProposal()) return
+    if (this.validateCreateProposal()) return;
     // Convert to ISO date time
-    const deadline = this.state.deadlineDay + 'T' + this.state.deadlineTime +':00Z';
+    const deadline = `${this.state.deadlineDay}T${this.state.deadlineTime}:00Z`;
     // Add new proposal
     this.props.createProposal(this.state.selectedOption.id, this.state.title,
                               this.state.desc, deadline);
@@ -221,63 +219,60 @@ class CreateProposal extends Component {
     // then it goes to componentWillReceiveProps and check if it was successful without error
   }
 
-  _onChangeHeight(before, after) {
- }
-
   validateCreateProposal() {
     if (_.isUndefined(this.state.selectedOption)) {
       this.setState({
         isValidCreateProposal: false,
         validationText: 'Category is not selected'
-      })
-      return true
+      });
+      return true;
     } else if (this.state.title === '') {
       this.setState({
         isValidCreateProposal: false,
         validationText: 'Title is empty'
-      })
-      return true
+      });
+      return true;
     } else if ((this.state.title.length < TITLE_MIN_LENGTH) ||
         (this.state.title.length > TITLE_MAX_LENGTH)) {
       this.setState({
         isValidCreateProposal: false,
-        validationText: 'Title is not between ' + TITLE_MIN_LENGTH + '-' + TITLE_MAX_LENGTH
-      })
-      return true
+        validationText: `Title is not between ${TITLE_MIN_LENGTH}-${TITLE_MAX_LENGTH}`
+      });
+      return true;
     } else if (this.state.desc === '') {
       this.setState({
         isValidCreateProposal: false,
         validationText: 'Description is empty'
-      })
-      return true
+      });
+      return true;
     } else if ((this.state.desc.length < DESC_MIN_LENGTH) ||
         (this.state.desc.length > DESC_MAX_LENGTH)) {
       this.setState({
         isValidCreateProposal: false,
-        validationText: 'Description is not between ' + DESC_MIN_LENGTH + '-' + DESC_MAX_LENGTH
-      })
-      return true
+        validationText: `Description is not between ${DESC_MIN_LENGTH}-${DESC_MAX_LENGTH}`
+      });
+      return true;
     } else if (this.state.deadlineTime === '' || this.state.deadlineDay === '') {
       this.setState({
         isValidCreateProposal: false,
         validationText: 'Deadline is empty'
-      })
-      return true
+      });
+      return true;
     }
-    return false
+    return false;
   }
 
-  componentWillReceiveProps (nextProps) {
+  componentWillReceiveProps(nextProps) {
     // // Close the tab when it is successful
     if (!nextProps.isProposalCreated) return;
-     Actions.refresh({createProposal: false})
+     Actions.refresh({ createProposal: false });
   }
 
 }
 
 const styles = StyleSheet.create({
-  container:{
-    flex:8,
+  container: {
+    flex: 8,
     backgroundColor: '#FFF',
   },
   textInput: {
@@ -296,12 +291,12 @@ const styles = StyleSheet.create({
     color: '#5d95c4',
     fontSize: 18,
   },
-  categoryDropDown:{
-    flex:1,
+  categoryDropDown: {
+    flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
   },
-  categoryImage:{
+  categoryImage: {
     width: 50,
     height: 50,
     tintColor: '#bacedf',
@@ -342,7 +337,7 @@ const styles = StyleSheet.create({
   createProposalBtnContainer: {
     paddingTop: 10,
     paddingBottom: 10,
-    alignItems:'center',
+    alignItems: 'center',
   },
   attachMore: {
     height: 40,
@@ -355,7 +350,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row'
   },
   validationText: {
-    flex:1,
+    flex: 1,
     color: 'red',
     alignSelf: 'center'
   },
@@ -365,14 +360,14 @@ const styles = StyleSheet.create({
 });
 
 // Redux boilerplate
-function mapStateToProps (state) {
+function mapStateToProps(state) {
   return {
     category: state.category,
     isProposalCreated: state.proposals.isCreated,
     isFetching: state.proposals.isFetching,
-  }
+  };
 }
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({...categoryActions, ...proposalsActions}, dispatch)
+  return bindActionCreators({ ...categoryActions, ...proposalsActions }, dispatch);
 }
-export default connect(mapStateToProps , mapDispatchToProps)(CreateProposal);
+export default connect(mapStateToProps, mapDispatchToProps)(CreateProposal);

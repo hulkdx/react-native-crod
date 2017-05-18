@@ -3,12 +3,12 @@
 
   Combine each reducers
 */
-'use strict'
+'use strict';
 
-import { combineReducers } from 'redux'
-import auth from './auth/authReducer'
-import proposals from './proposals/proposalsReducer'
-import category from './categories/categoryReducer'
+import { combineReducers } from 'redux';
+import auth from './auth/authReducer';
+import proposals from './proposals/proposalsReducer';
+import category from './categories/categoryReducer';
 
 /**
  * ## CombineReducers
@@ -20,6 +20,6 @@ const rootReducer = combineReducers({
   auth,
   proposals,
   category
-})
+});
 
-export default rootReducer
+export default rootReducer;

@@ -3,18 +3,18 @@
 
   Body
 */
-'use strict'
+'use strict';
 import React, { Component } from 'react';
-import {StyleSheet,TouchableOpacity,Image,Text,View,ListView} from 'react-native';
+import { StyleSheet, TouchableOpacity, Image, Text, View, ListView } from 'react-native';
+import notifications from '../../data-manager/notifications';
 
-import notifications from '../../data-manager/notifications'
-const dividerImage = require("../../../img/dividerblue.jpg")
+const dividerImage = require('../../../img/dividerblue.jpg');
 
 class NotificationBody extends Component {
 
   constructor() {
     super();
-    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+    const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
     this.state = {
       dataSource: ds.cloneWithRows(notifications),
     };
@@ -23,16 +23,14 @@ class NotificationBody extends Component {
   render() {
     return (
       <View style={styles.proposalFeed}>
-      <View style={styles.topBar}>
-
-      </View>
+      <View style={styles.topBar} />
       <ListView
       style={styles.notificationBar}
       dataSource={this.state.dataSource}
-      renderRow={(notification) => {return this._renderProposalRow(notification)} }
+      renderRow={(notification) => { return this._renderProposalRow(notification); }}
       />
       </View>
-    )
+    );
   }
 
   /*
@@ -41,14 +39,14 @@ class NotificationBody extends Component {
     @param proposal: the proposal elements from /data-manager/proposal.js
     @param isProfileScreen: {boolean} representing if this is the profile screen to show.
   */
-  _renderProposalRow(notification){
+  _renderProposalRow(notification) {
     // console.log(proposal);
-    return(
+    return (
       <View>
 
       <TouchableOpacity style={styles.notification}>
         <View style={styles.leftPart}>
-        <Image style={styles.notificationImage} source={notification.profileImage}/>
+        <Image style={styles.notificationImage} source={notification.profileImage} />
         </View>
 
         <View style={styles.rightPart}>
@@ -62,9 +60,9 @@ class NotificationBody extends Component {
         </View>
 
       </TouchableOpacity>
-      <Image style={styles.notificationDivider} source={dividerImage}/>
+      <Image style={styles.notificationDivider} source={dividerImage} />
       </View>
-    )
+    );
   }
 
   /*
@@ -78,22 +76,20 @@ class NotificationBody extends Component {
 }
 
 const styles = StyleSheet.create({
-  proposalFeed:{
+  proposalFeed: {
     flexDirection: 'column',
-    flex:1
-
+    flex: 1
   },
-  topBar:{
+  topBar: {
     backgroundColor: '#88B3D9',
     height: 70
+  },
+  notificationBar: {
 
   },
-  notificationBar:{
-
-  },
-  notification:{
+  notification: {
     flexDirection: 'row',
-    flex:1,
+    flex: 1,
     alignItems: 'center',
     backgroundColor: '#fffcf7',
     paddingLeft: 15,
@@ -101,28 +97,28 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
 
   },
-  leftPart:{
-    flex:1,
+  leftPart: {
+    flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
 
   },
-  rightPart:{
+  rightPart: {
     flex: 5,
     alignItems: 'flex-start',
     justifyContent: 'center',
     paddingLeft: 10,
     paddingRight: 5
   },
-  notificationImage:{
+  notificationImage: {
      resizeMode: 'center',
      height: 60,
   },
-  notificationDivider:{
+  notificationDivider: {
     tintColor: '#88B3D9',
     height: 2,
   },
-  timeSent:{
+  timeSent: {
     fontStyle: 'italic',
     fontSize: 15
   },
@@ -133,4 +129,4 @@ const styles = StyleSheet.create({
 
 });
 
-module.exports = NotificationBody
+module.exports = NotificationBody;

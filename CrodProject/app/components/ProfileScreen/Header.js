@@ -3,12 +3,12 @@
 
   Header
 */
-'use strict'
+'use strict';
 import React, { Component } from 'react';
-import {StyleSheet,TouchableOpacity,Image,Text,Dimensions} from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome'
+import { StyleSheet, TouchableOpacity, Image, Text, Dimensions } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
-const profileImage = require("../../../img/brigelTestImage.png");
+const profileImage = require('../../../img/brigelTestImage.png');
 
 class ProfileHeader extends Component {
 
@@ -22,37 +22,36 @@ class ProfileHeader extends Component {
         <Text style={styles.profileText}>23 years old</Text>
         <Text style={styles.profileText}>from Milan</Text>
       </Image>
-
-
-    )
+    );
   }
 }
 
 const styles = StyleSheet.create({
-  container:{
-    flex:3.5,
-    width: null, height: null,
+  container: {
+    flex: 3.5,
+    width: null,
+    height: null,
     resizeMode: 'stretch',
     paddingBottom: 5,
     paddingTop: 20,
     justifyContent: 'flex-end',
     // backgroundColor: 'blue'
   },
-  profileText:{
+  profileText: {
     alignSelf: 'center',
     color: 'white',
   },
-  profileName:{
+  profileName: {
     fontSize: 25
   },
-  pencilContainer:{
+  pencilContainer: {
     position: 'absolute',
     left: Dimensions.get('window').width - 20,
     top: 10,
   },
-  pencilIcon:{
+  pencilIcon: {
     color: 'white'
   }
 });
 
-module.exports = ProfileHeader
+module.exports = ProfileHeader;
