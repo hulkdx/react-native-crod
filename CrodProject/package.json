@@ -27,6 +27,7 @@
     "react-native-tabs": "^1.0.9",
     "react-native-textinput-effects": "^0.3.0",
     "react-native-vector-icons": "^4.0.0",
+    "react-addons-pure-render-mixin": "15.5.2",
     "react-redux": "^5.0.4",
     "redux": "^3.6.0",
     "redux-logger": "^3.0.1",
