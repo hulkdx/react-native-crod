@@ -74,7 +74,6 @@ export default class Api {
 
   async getProposals(token) {
     const ENDPOINT = 'api/proposal';
-    console.log('first api' + new Date());
     return await fetch(API_BASE_URL + ENDPOINT, {
         method: 'GET',
         headers: {
@@ -84,11 +83,8 @@ export default class Api {
           }
       })
       .then((res) => {
-        console.log('api result' + new Date());
         return res.json()
       .then((json) => {
-        console.log('api result json' + new Date());
-
           if (res.status === 200 || res.status === 201) {
             return json;
           } else if (res.status === 401) {
