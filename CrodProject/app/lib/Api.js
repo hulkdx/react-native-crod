@@ -1,7 +1,7 @@
-'use strict'
+'use strict';
+// import _ from 'underscore';
 
-import _ from 'underscore'
-const API_BASE_URL = 'https://mysterious-cliffs-27258.herokuapp.com/'
+const API_BASE_URL = 'https://mysterious-cliffs-27258.herokuapp.com/';
 
 /**
  * Api Class uses in actions (eg. authActions)
@@ -16,153 +16,152 @@ export default class Api {
    * @returns
    * TODO
    */
-  async login (username, password) {
-    const ENDPOINT = 'api/login'
-    return await fetch(API_BASE_URL+ENDPOINT, {
+  async login(username, password) {
+    const ENDPOINT = 'api/login';
+    return await fetch(API_BASE_URL + ENDPOINT, {
         method: 'POST',
         headers: {
-            'Accept': 'application/json',
+            Accept: 'application/json',
             'Content-Type': 'application/json',
           },
         body: JSON.stringify({
-          username: username,
-          password: password
+          username,
+          password
         })
       })
       .then((res) => {
         return res.json()
       .then((json) => {
           if (res.status === 200 || res.status === 201) {
-            return json
-          } else {
-            throw (json)
+            return json;
           }
-        })
+          throw (json);
+        });
       })
       .catch((error) => {
-        throw (error)
-      })
+        throw (error);
+      });
   }
 
-  async register (username, email, email2, password) {
-    const ENDPOINT = 'api/register'
-    return await fetch(API_BASE_URL+ENDPOINT, {
+  async register(username, email, email2, password) {
+    const ENDPOINT = 'api/register';
+    return await fetch(API_BASE_URL + ENDPOINT, {
         method: 'POST',
         headers: {
-            'Accept': 'application/json',
+            Accept: 'application/json',
             'Content-Type': 'application/json',
           },
         body: JSON.stringify({
-          username: username,
-          email: email,
-          email2: email2,
-          password: password
+          username,
+          email,
+          email2,
+          password
         })
       })
       .then((res) => {
         return res.json()
       .then((json) => {
           if (res.status === 200 || res.status === 201) {
-            return json
-          } else {
-            throw (json)
+            return json;
           }
-        })
+            throw (json);
+        });
       })
       .catch((error) => {
-        throw (error)
-      })
+        throw (error);
+      });
   }
 
-  async getProposals (token) {
-    const ENDPOINT = 'api/proposal'
-    return await fetch(API_BASE_URL+ENDPOINT, {
+  async getProposals(token) {
+    const ENDPOINT = 'api/proposal';
+    console.log('first api' + new Date());
+    return await fetch(API_BASE_URL + ENDPOINT, {
         method: 'GET',
         headers: {
-            'Accept': 'application/json',
+            Accept: 'application/json',
             'Content-Type': 'application/json',
-            'Authorization': 'JWT ' + token
+            Authorization: `JWT ${token}`
           }
       })
       .then((res) => {
+        console.log('api result' + new Date());
         return res.json()
       .then((json) => {
+        console.log('api result json' + new Date());
+
           if (res.status === 200 || res.status === 201) {
-            return json
+            return json;
           } else if (res.status === 401) {
-            throw 'unauth'
+            return 'unauth';
           }
-          else {
-            throw (json)
-          }
-        })
+
+          throw (json);
+        });
       })
       .catch((error) => {
-        throw (error)
-      })
+        throw (error);
+      });
   }
 
-  async createProposals (token, categoryId, title, desc, deadline) {
-    const ENDPOINT = 'api/proposal/create'
-    return await fetch(API_BASE_URL+ENDPOINT, {
+  async createProposals(token, categoryId, title, desc, deadline) {
+    const ENDPOINT = 'api/proposal/create';
+    return await fetch(API_BASE_URL + ENDPOINT, {
         method: 'POST',
         headers: {
-            'Accept': 'application/json',
+            Accept: 'application/json',
             'Content-Type': 'application/json',
-            'Authorization': 'JWT ' + token
+            Authorization: `JWT ${token}`
           },
         body: JSON.stringify({
           category: categoryId,
-          title: title,
+          title,
           description: desc,
-          deadline: deadline
+          deadline
         })
       })
       .then((res) => {
         return res.json()
       .then((json) => {
           if (res.status === 200 || res.status === 201) {
-            return json
+            return json;
           } else if (res.status === 401) {
-            throw 'unauth'
+            return 'unauth';
           }
-          else {
-            throw (json)
-          }
-        })
+
+            throw (json);
+        });
       })
       .catch((error) => {
-        throw (error)
-      })
+        throw (error);
+      });
   }
 
-  async getCategories (token) {
-    const ENDPOINT = 'api/category'
-    return await fetch(API_BASE_URL+ENDPOINT, {
+  async getCategories(token) {
+    const ENDPOINT = 'api/category';
+    return await fetch(API_BASE_URL + ENDPOINT, {
         method: 'GET',
         headers: {
-            'Accept': 'application/json',
+            Accept: 'application/json',
             'Content-Type': 'application/json',
-            'Authorization': 'JWT ' + token
+            Authorization: `JWT ${token}`
           }
       })
       .then((res) => {
         return res.json()
       .then((json) => {
           if (res.status === 200 || res.status === 201) {
-            return json
+            return json;
           } else if (res.status === 401) {
-            throw 'unauth'
+            return 'unauth';
           }
-          else {
-            throw (json)
-          }
-        })
+
+            throw (json);
+        });
       })
       .catch((error) => {
-        throw (error)
-      })
+        throw (error);
+      });
   }
 }
 // The singleton variable
-export let api = new Api()
+export const api = new Api();
