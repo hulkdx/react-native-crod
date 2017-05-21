@@ -258,7 +258,7 @@ const styles = StyleSheet.create({
   createDiscussion: {
     flexDirection: 'row',
     backgroundColor: 'white',
-    borderTopWidth: 0.7,
+    borderTopWidth: 1,
     borderColor: '#5d95c4',
     paddingTop: 10,
     paddingBottom: 10

@@ -40,6 +40,7 @@ const styles = StyleSheet.create({
   profileText: {
     alignSelf: 'center',
     color: 'white',
+    backgroundColor: 'transparent',
   },
   profileName: {
     fontSize: 25
@@ -48,9 +49,11 @@ const styles = StyleSheet.create({
     position: 'absolute',
     left: Dimensions.get('window').width - 20,
     top: 10,
+    backgroundColor: 'transparent',
   },
   pencilIcon: {
-    color: 'white'
+    color: 'white',
+    backgroundColor: 'transparent',
   }
 });
 
