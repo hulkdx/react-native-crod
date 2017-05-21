@@ -97,11 +97,8 @@ class Disscussion extends Component {
                     </View>
 
                 <View style={styles.commentContainer}>
-
-                    <Text style={styles.fullNameText}>{rowData.fullName} </Text>
-                    <Text style={styles.commentText}>
-                    {rowData.comment}
-                    </Text>
+                    <Text style={styles.fullNameText}>{rowData.fullName}</Text>
+                    <Text style={styles.commentText}>{rowData.comment}</Text>
                 </View>
 
                 </View>
@@ -322,6 +319,7 @@ const styles = StyleSheet.create({
   },
   commentContainer: {
     flex: 4,
+    width: 0,
     paddingLeft: 10,
     paddingBottom: 10,
   },
