@@ -45,6 +45,7 @@ class Articles extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: 'rgb(237, 244, 252)',
   },
   articleTitleContainer: {
     alignItems: 'center',

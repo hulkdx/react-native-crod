@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
     color: 'rgba(37, 36, 51, 0.3)',
   },
   tabsIconSelected: {
-    backgroundColor: '#E9EBEE'
+    backgroundColor: 'rgb(237, 244, 252)'
   }
 
 });

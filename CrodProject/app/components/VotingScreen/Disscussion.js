@@ -240,7 +240,7 @@ isUpdated changes according to @param toggleVoting
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#E9EBEE',
+    backgroundColor: 'rgb(237, 244, 252)',
   },
   disscussionContainer: {
     flex: 1,
