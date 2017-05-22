@@ -1,35 +1,21 @@
 
-Libraries:
+# React Native Crod Project
 
-https://github.com/oblador/react-native-vector-icons
-npm install react-native-vector-icons --save
+## Application Description
+The mobile application of Crowdocracy is a solution for any organization that wants to include its staff into decision making and wants to know their opinions. Ever more organizations want to give their workers a part in making decisions about internal plans. However, the larger an organization is, the more difficult it is to ask everyone what they think. This app provides a central platform where users can vote on topics and proposals. The app contains categories of statements, so that users can turn on or off what kind of topics are shown to them. After the voting, user-friendly statistical data and graphics are produced to give an easily understandable overview of the results. 
+	Besides proposals and voting, the app provides the possibility to argue on the concerning topics and offer modifications on existing proposals. If a user thinks some proposal isn't formulated accurately or thinks it's a bad proposal, s/he has the possibility of commenting on this and offer a different proposal.
 
-https://github.com/leecade/react-native-swiper
-npm i react-native-swiper --save
+## How to run the application
+- Clone the code
+- Branch development contains the latest code.
+- Run npm install in CrodProject folder.
+- Run react-native start-android to start the application.
 
-https://github.com/aksonov/react-native-router-flux
-npm i react-native-router-flux --save
-
-http://underscorejs.org/
-npm i underscore --save
-
-https://github.com/react-native-community/react-native-side-menu
-npm install react-native-side-menu --save
-
-https://github.com/aksonov/react-native-tabs
-npm i react-native-tabs  --save
-
-https://github.com/ArnaudRinquin/react-native-radio-buttons
-npm i -S react-native-radio-buttons
-
-https://github.com/jacklam718/react-native-popup-dialog
-npm install --save react-native-popup-dialog
-
-https://github.com/xgfe/react-native-datepicker
-npm install react-native-datepicker --save
-
-Redux
-npm install --save redux
-npm install --save react-redux
-npm install --save redux-thunk
-npm install --save redux-logger
+## Hirearchy of the application
+- The codes are in the CrodProject/app folder
+- The main code is in index.android.js
+- Screens folder : codes of each of the screens
+- components folder : components of every screen (every screen is seprated with the screens name)
+- data-manager folder : temporary contains the information about data source, it needs to be removed and replaced with back-end implimentation
+- reducers folder : React-Native Redux files
+- lib folder : library files (such as api, constants, etc.)
