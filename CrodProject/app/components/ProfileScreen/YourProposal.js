@@ -64,7 +64,7 @@ class ProfileProposal extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 8,
-    backgroundColor: '#E9EBEE',
+    backgroundColor: 'rgb(237, 244, 252)',
     // borderWidth: 2,
     paddingTop: 5,
   },

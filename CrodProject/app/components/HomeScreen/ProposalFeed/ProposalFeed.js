@@ -171,7 +171,7 @@ const styles = StyleSheet.create({
   proposalFeed: {
     flexDirection: 'row',
     flex: 8,
-    backgroundColor: '#E9EBEE'
+    backgroundColor: 'rgb(237, 244, 252)'
   },
   rowContainer: {
     flex: 1,
@@ -190,7 +190,6 @@ const styles = StyleSheet.create({
   angleRightRoot: {
     paddingLeft: 5,
     paddingRight: 5,
-    backgroundColor: '#E9EBEE',
     justifyContent: 'center'
   },
   angleRight: {
