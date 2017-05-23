@@ -1,5 +1,8 @@
 
 # React Native Crod Project
+<p align="center">
+  <img src="http://i.imgur.com/agViZW1.png" width="200"/>
+</p>
 
 ## Application Description
 The mobile application of Crowdocracy is a solution for any organization that wants to include its staff into decision making and wants to know their opinions. Ever more organizations want to give their workers a part in making decisions about internal plans. However, the larger an organization is, the more difficult it is to ask everyone what they think. This app provides a central platform where users can vote on topics and proposals. The app contains categories of statements, so that users can turn on or off what kind of topics are shown to them. After the voting, user-friendly statistical data and graphics are produced to give an easily understandable overview of the results.
@@ -7,7 +10,6 @@ The mobile application of Crowdocracy is a solution for any organization that wa
 
 ## How to run the application
 - Clone the code
-- Branch development contains the latest code.
 - Run npm install in CrodProject folder.
 - Run react-native start-android to start the application.
 
