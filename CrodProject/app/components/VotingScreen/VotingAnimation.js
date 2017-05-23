@@ -8,6 +8,9 @@
 import React, { Component } from 'react';
 import { StyleSheet, Image, View, Animated, PanResponder, Dimensions } from 'react-native';
 import { Actions } from 'react-native-router-flux';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import * as proposalsActions from '../../reducers/proposals/proposalsActions';
 
 const WindowWidth = Dimensions.get('window').width;
 const WindowHeight = Dimensions.get('window').height;
@@ -22,33 +25,33 @@ const voteYes = WindowWidth - voteNo;
 class VotingAnimation extends Component {
 
   constructor(props) {
-      super(props);
-      this.state = {
-        isVoted: false,
-        pan: new Animated.ValueXY(),
-        colorChange: 'none'
-      };
+    super(props);
+    this.state = {
+      isVoted: false,
+      pan: new Animated.ValueXY(),
+      colorChange: 'none'
+    };
 
-      // panResponder for dragging votes
-      this.panResponder = PanResponder.create({
-        onStartShouldSetPanResponder: () => !this.state.isVoted,
-        onPanResponderMove: (event, gesture) => {
-          Animated.event([null, {
-          dx: this.state.pan.x,
-          }])(event, gesture);
-          this.changeColor(gesture);
-        },
-        onPanResponderRelease: (e, gesture) => {
-            if (this.isDropZone(gesture)) return;
-            // Show animation when user not clicked
-            Animated.spring(
-                this.state.pan,
-                { toValue: { x: 0, y: 0 } }
-            ).start();
-            //TODO: Create animation for color change.
-            this.setState({ colorChange: 'none' });
-        }
-      });
+    // panResponder for dragging votes
+    this.panResponder = PanResponder.create({
+      onStartShouldSetPanResponder: () => !this.state.isVoted,
+      onPanResponderMove: (event, gesture) => {
+        Animated.event([null, {
+        dx: this.state.pan.x,
+        }])(event, gesture);
+        this.changeColor(gesture);
+      },
+      onPanResponderRelease: (e, gesture) => {
+          if (this.isDropZone(gesture)) return;
+          // Show animation when user not clicked
+          Animated.spring(
+              this.state.pan,
+              { toValue: { x: 0, y: 0 } }
+          ).start();
+          //TODO: Create animation for color change.
+          this.setState({ colorChange: 'none' });
+      }
+    });
   }
 
   /*
@@ -69,15 +72,15 @@ class VotingAnimation extends Component {
   }
 
   changeColor(gesture) {
-  if (gesture.moveX > WindowWidth / 2) {
-    this.setState({ colorChange: 'green' });
-    return true;
-  } else if (gesture.moveX < WindowWidth / 2) {
-    this.setState({ colorChange: 'red' });
-    return true;
+    if (gesture.moveX > WindowWidth / 2) {
+      this.setState({ colorChange: 'green' });
+      return true;
+    } else if (gesture.moveX < WindowWidth / 2) {
+      this.setState({ colorChange: 'red' });
+      return true;
+    }
+    return false;
   }
-  return false;
-}
 
 
   /*
@@ -94,15 +97,15 @@ class VotingAnimation extends Component {
 
   render() {
     return (
-        <View style={styles.votingBar} >
-          <View style={[styles.votingBarRed, this.state.colorChange === 'green' ? { backgroundColor: this.state.colorChange } : { backgroundColor: 'red' }]} />
-          <View style={[styles.votingBarGreen, this.state.colorChange === 'red' ? { backgroundColor: this.state.colorChange } : { backgroundColor: 'green' }]} />
-          <View style={styles.votingBarMiddle} >
-            <Animated.View style={[this.state.pan.getLayout(), { flex: 1, elevation: 1 }]} {...this.panResponder.panHandlers}>
-              <Image source={backgroundImage} style={styles.middleImage} />
-            </Animated.View>
-          </View>
+      <View style={styles.votingBar} >
+        <View style={[styles.votingBarRed, this.state.colorChange === 'green' ? { backgroundColor: this.state.colorChange } : { backgroundColor: 'red' }]} />
+        <View style={[styles.votingBarGreen, this.state.colorChange === 'red' ? { backgroundColor: this.state.colorChange } : { backgroundColor: 'green' }]} />
+        <View style={styles.votingBarMiddle} >
+          <Animated.View style={[this.state.pan.getLayout(), { flex: 1, elevation: 1 }]} {...this.panResponder.panHandlers}>
+            <Image source={backgroundImage} style={styles.middleImage} />
+          </Animated.View>
         </View>
+      </View>
     );
   }
 
@@ -142,4 +145,13 @@ const styles = StyleSheet.create({
   },
 });
 
-module.exports = VotingAnimation;
+// Redux boilerplate
+function mapStateToProps(state) {
+  return {
+    proposals: state.proposals,
+  };
+}
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(proposalsActions, dispatch);
+}
+export default connect(mapStateToProps, mapDispatchToProps)(VotingAnimation);
