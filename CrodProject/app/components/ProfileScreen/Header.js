@@ -5,23 +5,22 @@
 */
 'use strict';
 import React, { Component } from 'react';
-import { StyleSheet, TouchableOpacity, Image, Text, Dimensions } from 'react-native';
+import { View, StyleSheet, TouchableOpacity, Image, Text, Dimensions } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-
-const profileImage = require('../../../img/brigelTestImage.png');
 
 class ProfileHeader extends Component {
 
   render() {
     return (
-      <Image style={styles.container} source={profileImage}>
+      <View style={styles.container}>
         <TouchableOpacity style={styles.pencilContainer}>
         <Icon name="pencil" style={styles.pencilIcon} />
         </TouchableOpacity>
+        <Image style={styles.profileImage} source={{ uri: 'http://i.imgur.com/flVj90L.png' }} />
         <Text style={[styles.profileText, styles.profileName]}>Michele Paoletti</Text>
         <Text style={styles.profileText}>23 years old</Text>
         <Text style={styles.profileText}>from Milan</Text>
-      </Image>
+      </View>
     );
   }
 }
@@ -29,13 +28,15 @@ class ProfileHeader extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 3.5,
-    width: null,
-    height: null,
-    resizeMode: 'stretch',
     paddingBottom: 5,
     paddingTop: 20,
     justifyContent: 'flex-end',
-    // backgroundColor: 'blue'
+    backgroundColor: 'rgb(44, 184, 214)'
+  },
+  profileImage: {
+    width: 50,
+    height: 50,
+    alignSelf: 'center',
   },
   profileText: {
     alignSelf: 'center',
