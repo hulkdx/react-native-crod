@@ -13,6 +13,7 @@ const {
   SIGNUP_REQUEST,
   SIGNUP_SUCCESS,
   SIGNUP_FAILURE,
+  UPDATE_PROFILE,
 } = require('../../lib/constants').default;
 
 // Get the initial state
@@ -40,6 +41,12 @@ export default function authReducer(state = initialState, action) {
     case SIGNUP_FAILURE:
      return state.set('isFetching', false)
       .set('error', validateLoginError(action.payload));
+
+    case UPDATE_PROFILE:
+      return state.set('firstName', action.payload.firstName)
+      .set('lastName', action.payload.lastName)
+      .set('email', action.payload.email)
+      .set('profilePicUrl', action.payload.profilePicUrl);
 
   }
 

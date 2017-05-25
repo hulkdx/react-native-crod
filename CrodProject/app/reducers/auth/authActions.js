@@ -18,6 +18,7 @@ const {
   LOGOUT_REQUEST,
   LOGOUT_SUCCESS,
   LOGOUT_FAILURE,
+  UPDATE_PROFILE,
 } = require('../../lib/constants').default;
 
 
@@ -28,7 +29,7 @@ export function login(username, password) {
     return api.login(username, password)
 
     .then((json) => {
-      return saveToken(json.token)
+      return saveToken(json.token, json.first_name, json.last_name, json.email, json.profile_pic_url)
         .then(() => {
           dispatch(loginSuccess(json));
           // navigate to Home
@@ -113,7 +114,7 @@ export function logout() {
         })
     // })
     .catch((error) => {
-      dispatch(loginFailure(error));
+      dispatch(logoutFailure(error));
     });
   };
 }
@@ -138,8 +139,21 @@ export function logoutFailure(error) {
   };
 }
 /*############## Token Section ##############*/
-export function saveToken(token) {
-   return store.save('TOKEN_KEY', token);
+export function saveToken(token, firstName, lastName, email, profilePicUrl) {
+  // Save information locally in chain way
+  return store.save('TOKEN_KEY', token)
+  .then(() => {
+    store.save('firstName', firstName)
+    .then(() => {
+      store.save('lastName', lastName)
+      .then(() => {
+        store.save('email', email)
+        .then(() => {
+          store.save('profilePicUrl', profilePicUrl);
+        });
+      });
+    });
+  });
 }
 
 export function getToken() {
@@ -148,6 +162,31 @@ export function getToken() {
 
 export function removeToken() {
   return store.delete('TOKEN_KEY');
+}
+
+export function updateProfile() {
+  return dispatch => {
+    return store.get('firstName')
+    .then((firstName) => {
+      store.get('lastName')
+      .then((lastName) => {
+        store.get('email')
+        .then((email) => {
+          store.get('profilePicUrl')
+          .then((profilePicUrl) => {
+            dispatch(requestUpdateProfile(firstName, lastName, email, profilePicUrl));
+          });
+        });
+      });
+    });
+  };
+}
+
+export function requestUpdateProfile(firstName, lastName, email, profilePicUrl) {
+  return {
+    type: UPDATE_PROFILE,
+    payload: { firstName, lastName, email, profilePicUrl }
+  };
 }
 
 export function redirect() {

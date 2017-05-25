@@ -13,6 +13,10 @@ import * as authActions from '../../reducers/auth/authActions';
 
 class ProfileHeader extends Component {
 
+  componentWillMount() {
+    this.props.updateProfile();
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -24,10 +28,9 @@ class ProfileHeader extends Component {
         <Text style={styles.profileText}>Logout</Text>
         </TouchableOpacity>
 
-        <Image style={styles.profileImage} source={{ uri: 'http://i.imgur.com/flVj90L.png' }} />
-        <Text style={[styles.profileText, styles.profileName]}>Michele Paoletti</Text>
-        <Text style={styles.profileText}>23 years old</Text>
-        <Text style={styles.profileText}>from Milan</Text>
+        <Image style={styles.profileImage} source={{ uri: this.props.auth.profilePicUrl }} />
+        <Text style={[styles.profileText, styles.profileName]}>{this.props.auth.firstName} {this.props.auth.lastName}</Text>
+        <Text style={styles.profileText}>{this.props.auth.email}</Text>
       </View>
     );
   }
