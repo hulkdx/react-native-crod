@@ -105,10 +105,10 @@ class Disscussion extends Component {
 
             <View style={styles.bottomBarCommentContainer}>
             <View style={styles.leftSideBottomBar}>
-              <TouchableOpacity style={styles.replyTextContainer}>
-                <Text style={styles.replyText}>10</Text>
+              <View style={styles.replyTextContainer}>
+                <Text style={styles.replyText}>0</Text>
                 <Icon name={'comments-o'} size={22.5} color={'#5d95c4'} style={styles.arrowIcon} />
-              </TouchableOpacity>
+              </View>
               <TouchableOpacity style={styles.replyTextContainer} onPress={this.replyClicked.bind(this, rowID)}>
                 <Text style={styles.replyText}>Reply</Text>
               {/*  <Animated.Image style={[styles.animatedReply, {transform: [{rotate: spin}]}]} source={replyIcon} /> */}
