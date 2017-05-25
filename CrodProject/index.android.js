@@ -53,7 +53,7 @@ class CrodProject extends Component {
       <Router getSceneStyle={getSceneStyle}>
         <Scene key='root' hideNavBar hideTabBar>
           <Scene key="footerTab" tabs hideNavBar tabBarStyle={styles.customizeFooter} >
-                 <Scene key="App">
+                 <Scene key="App" initial>
                         <Scene key='app' component={App} hideNavBar hideTabBar />
                  </Scene>
 
@@ -70,7 +70,7 @@ class CrodProject extends Component {
                         <Scene key='voteNow' component={VotingScreen} hideNavBar />
                  </Scene>
 
-                 <Scene key="profileTab" source={ProfileScreenIcon} icon={TabIcon} initial
+                 <Scene key="profileTab" source={ProfileScreenIcon} icon={TabIcon}
                         onPress={() => { Actions.profile({ type: ActionConst.REFRESH }); }}
                  >
                         <Scene key='profile' component={ProfileScreen} hideNavBar />

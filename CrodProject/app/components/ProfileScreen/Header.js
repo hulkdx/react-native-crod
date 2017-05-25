@@ -6,7 +6,10 @@
 'use strict';
 import React, { Component } from 'react';
 import { View, StyleSheet, TouchableOpacity, Image, Text, Dimensions } from 'react-native';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import * as authActions from '../../reducers/auth/authActions';
 
 class ProfileHeader extends Component {
 
@@ -30,6 +33,7 @@ class ProfileHeader extends Component {
   }
 
   _onClickLogout = () => {
+    this.props.logout();
   }
 }
 
@@ -71,5 +75,13 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
   }
 });
-
-module.exports = ProfileHeader;
+// Redux boilerplate
+function mapStateToProps(state) {
+  return {
+    auth: state.auth,
+  };
+}
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(authActions, dispatch);
+}
+export default connect(mapStateToProps, mapDispatchToProps)(ProfileHeader);

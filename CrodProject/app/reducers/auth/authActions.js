@@ -15,6 +15,9 @@ const {
   SIGNUP_REQUEST,
   SIGNUP_SUCCESS,
   SIGNUP_FAILURE,
+  LOGOUT_REQUEST,
+  LOGOUT_SUCCESS,
+  LOGOUT_FAILURE,
 } = require('../../lib/constants').default;
 
 
@@ -95,6 +98,45 @@ export function registerFailure(error) {
   };
 }
 
+/*############## Logout Section ##############*/
+export function logout() {
+  return dispatch => {
+    dispatch(logoutRequest());
+    // TODO call an api for logout
+    //return api.login(username, password)
+    // .then((json) => {
+      return removeToken()
+        .then(() => {
+          dispatch(logoutSuccess());
+          // navigate to Home
+          Actions.login({ type: ActionConst.REFRESH });
+        })
+    // })
+    .catch((error) => {
+      dispatch(loginFailure(error));
+    });
+  };
+}
+
+export function logoutRequest() {
+  return {
+    type: LOGOUT_REQUEST
+  };
+}
+
+export function logoutSuccess(json) {
+  return {
+    type: LOGOUT_SUCCESS,
+    payload: json
+  };
+}
+
+export function logoutFailure(error) {
+  return {
+    type: LOGOUT_FAILURE,
+    payload: error
+  };
+}
 /*############## Token Section ##############*/
 export function saveToken(token) {
    return store.save('TOKEN_KEY', token);
@@ -103,6 +145,11 @@ export function saveToken(token) {
 export function getToken() {
   return store.get('TOKEN_KEY');
 }
+
+export function removeToken() {
+  return store.delete('TOKEN_KEY');
+}
+
 export function redirect() {
   return () => {
     return getToken()
