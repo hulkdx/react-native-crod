@@ -12,7 +12,11 @@ const {
   CREATE_PROPOSAL_REQUEST,
   CREATE_PROPOSAL_SUCCESS,
   CREATE_PROPOSAL_FAILURE,
+  VOTE_REQUEST,
+  VOTE_SUCCESS,
+  VOTE_FAILURE,
   FILTER_PROPOSAL,
+  CHANGE_PROPOSAL_ID,
 } = require('../../lib/constants').default;
 
 // Get the initial state
@@ -24,6 +28,7 @@ export default function proposalsReducer(state = initialState, action) {
   if (!(state instanceof InitialState)) return initialState.mergeDeep(state);
 
   switch (action.type) {
+    case VOTE_REQUEST:
     case PROPOSAL_REQUEST: {
      return state.set('isFetching', true)
      .set('proposalsUpdated', false)
@@ -37,6 +42,7 @@ export default function proposalsReducer(state = initialState, action) {
      .set('proposalsUpdated', true);
 
 
+    case VOTE_FAILURE:
     case CREATE_PROPOSAL_FAILURE:
     case PROPOSAL_FAILURE:
      return state.set('isFetching', false)
@@ -55,6 +61,16 @@ export default function proposalsReducer(state = initialState, action) {
 
     case FILTER_PROPOSAL:
      return state.set('filteredProposals', filterProposal(state.get('proposals'), action.payload));
+
+    case VOTE_SUCCESS:
+    // for some reason it is not possilbe to set state of action.payload
+    console.log(action.payload);
+    console.log(state);
+      state.proposals[action.payload].are_you_voted = true;
+      return state.set('isFetching', false);
+
+    case CHANGE_PROPOSAL_ID:
+      return state.set('proposalId', action.payload);
 
     default:
       break;

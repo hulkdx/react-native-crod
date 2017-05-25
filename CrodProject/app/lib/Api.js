@@ -158,6 +158,38 @@ export default class Api {
         throw (error);
       });
   }
+
+  async votedProposal(token, id, voted) {
+    const ENDPOINT = 'api/vote';
+    return await fetch(API_BASE_URL + ENDPOINT, {
+        method: 'PUT',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            Authorization: `JWT ${token}`
+          },
+        body: JSON.stringify({
+          id,
+          vote_yes: voted,
+          vote_no: !voted
+        })
+      })
+      .then((res) => {
+        return res.json()
+      .then((json) => {
+          if (res.status === 200 || res.status === 201) {
+            return json;
+          } else if (res.status === 401) {
+            return 'unauth';
+          }
+
+            throw (json);
+        });
+      })
+      .catch((error) => {
+        throw (error);
+      });
+  }
 }
 // The singleton variable
 export const api = new Api();

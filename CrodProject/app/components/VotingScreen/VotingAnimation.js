@@ -7,7 +7,6 @@
 // Android element elevation defined for middle voting image
 import React, { Component } from 'react';
 import { StyleSheet, Image, View, Animated, PanResponder, Dimensions } from 'react-native';
-import { Actions } from 'react-native-router-flux';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as proposalsActions from '../../reducers/proposals/proposalsActions';
@@ -87,15 +86,26 @@ class VotingAnimation extends Component {
     @param voted {boolean}: true=>voted yes, false=>voted no
   */
   onVoted(voted) {
+    // TODO Next shit
+    // id = id of the proposal and is different than this.props.proposalId which
+    // is id of the row selected.
+    if (this.props.proposalId === -1) {
+      this.props.votedProposal(this.props.proposals.proposals[this.props.proposals.proposalId].id,
+                              voted, this.props.proposals.proposalId);
+    } else {
+      this.props.votedProposal(this.props.proposals.proposals[this.props.proposalId].id,
+                              voted, this.props.proposalId);
+    }
     /* TODO: 1. show statistics
-             2. Exception Error : Check for the right scene. (voting || votingNow)*/
-    // Send the voted to @link:VotingScreen.js then to Body.js to refresh the elements (statistics)
-    Actions.refresh({ key: 'voting', voted });
-    /* TODO: 2. show total yes/no votes instead of the voting bar */
-    /* TODO: 3. user cannot vote anymore for this topic */
+       TODO: 2. show total yes/no votes instead of the voting bar */
   }
 
   render() {
+    // user cannot vote anymore for this topic if user is voted
+    const isVoted = this.props.proposalId === -1
+    ? this.props.proposals.proposals[this.props.proposals.proposalId].are_you_voted
+    : this.props.proposals.proposals[this.props.proposalId].are_you_voted;
+    if (isVoted) return null;
     return (
       <View style={styles.votingBar} >
         <View style={[styles.votingBarRed, this.state.colorChange === 'green' ? { backgroundColor: this.state.colorChange } : { backgroundColor: 'red' }]} />

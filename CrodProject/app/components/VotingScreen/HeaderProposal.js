@@ -9,17 +9,10 @@ const backgroundImage = require('../../../img/backgroundvotingup.jpg');
 
 class Proposal extends Component {
 
-  constructor() {
-    super();
-    this.state = {
-      currentProposal: 0,
-    };
-  }
-
   render() {
     // Check if it is clicked on a proposal or it is clicked on a bottom bar votting
-    const title = this.props.proposalId === -1 ? this.props.proposals.proposals[this.state.currentProposal].title
-    : this.props.proposals.proposals.filter((x) => { return x.id === this.props.proposalId; })[0].title;
+    const title = this.props.proposalId === -1 ? this.props.proposals.proposals[this.props.proposals.proposalId].title
+    : this.props.proposals.proposals[this.props.proposalId].title;
     return (
       <Image style={styles.container} source={backgroundImage}>
       {this.props.proposalId === -1 &&
@@ -40,13 +33,12 @@ class Proposal extends Component {
   // @param cond: if left arrow left clicked = false; right arrow = true
   // decrease state.currentProposa upon cond=false and increase otherwise
   onArrowClicked = (cond) => {
-    console.log(this.props.proposals.proposals.length);
     if (cond) {
-      if (this.state.currentProposal === this.props.proposals.proposals.length - 1) return;
-      this.setState({ currentProposal: this.state.currentProposal + 1 });
+      if (this.props.proposals.proposalId === this.props.proposals.proposals.length - 1) return;
+      this.props.changeProposals(this.props.proposals.proposalId + 1);
     } else {
-      if (this.state.currentProposal === 0) return;
-      this.setState({ currentProposal: this.state.currentProposal - 1 });
+      if (this.props.proposals.proposalId === 0) return;
+      this.props.changeProposals(this.props.proposals.proposalId - 1);
     }
   }
 

@@ -56,7 +56,7 @@ class Body extends Component {
 
        <View style={styles.container}>
 
-      {_.isUndefined(this.props.voted) && <VotingAnimation />}
+      {_.isUndefined(this.props.voted) && <VotingAnimation proposalId={this.props.proposalId} />}
 
       <TabViewAnimated
         navigationState={this.state}

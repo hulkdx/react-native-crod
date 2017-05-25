@@ -15,7 +15,11 @@ const {
   CREATE_PROPOSAL_REQUEST,
   CREATE_PROPOSAL_SUCCESS,
   CREATE_PROPOSAL_FAILURE,
+  VOTE_REQUEST,
+  VOTE_SUCCESS,
+  VOTE_FAILURE,
   FILTER_PROPOSAL,
+  CHANGE_PROPOSAL_ID,
 } = require('../../lib/constants').default;
 
 /*############## Get Proposals Section ##############*/
@@ -112,5 +116,61 @@ export function filterProposals(selected) {
   return {
     type: FILTER_PROPOSAL,
     payload: selected
+  };
+}
+
+export function changeProposals(id) {
+  return {
+    type: CHANGE_PROPOSAL_ID,
+    payload: id
+  };
+}
+/*############## Vote Proposal Section ##############*/
+/* @param id = id of the proposal and is different
+   @param rowId = id of the row selected.
+*/
+export function votedProposal(id, voted, rowId) {
+  console.log(id);
+  console.log(voted);
+  return dispatch => {
+    dispatch(voteRequest());
+    dispatch(voteSuccess(rowId));
+
+    // return getToken()
+    // .then((token) => {
+    //   return api.votedProposal(token, id, voted)
+    //   .then(() => {
+    //     dispatch(voteSuccess(rowId));
+    //   })
+    //   .catch((error) => {
+    //     if (error === 'unauth') {
+    //       // TODO LOG OUT, REMOVE TOKEN
+    //       Actions.login({ type: ActionConst.REFRESH });
+    //     }
+    //     dispatch(voteFailure(error));
+    //   });
+    // })
+    // .catch((error) => {
+    //   dispatch(voteFailure(error));
+    // });
+  };
+}
+export function voteRequest() {
+  return {
+    type: VOTE_REQUEST
+  };
+}
+
+export function voteSuccess(rowId) {
+  return {
+    type: VOTE_SUCCESS,
+    payload: rowId
+  };
+}
+
+export function voteFailure(error) {
+  return {
+    type: VOTE_FAILURE,
+    payload: error
   };
 }

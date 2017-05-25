@@ -30,6 +30,11 @@ export default keyMirror({
   GET_CATEGORY_SUCCESS: null,
   GET_CATEGORY_FAILURE: null,
 
+  VOTE_REQUEST: null,
+  VOTE_SUCCESS: null,
+  VOTE_FAILURE: null,
+
   CHANGE_SELECT_CATEGORY: null,
   FILTER_PROPOSAL: null,
+  CHANGE_PROPOSAL_ID: null,
 });
