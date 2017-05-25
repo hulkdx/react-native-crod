@@ -163,7 +163,7 @@ isUpdated changes according to @param toggleVoting
     disscussion = disscussion.map((row, i) => {
       return {
         ...row,
-        isUpvoted: i === rowID ? toggleVoting : row.isUpvoted
+        isUpvoted: (i == rowID) ? toggleVoting : row.isUpvoted
       };
     });
     this.setState({ dataSource: this.state.dataSource.cloneWithRows(disscussion) });
@@ -194,7 +194,7 @@ isUpdated changes according to @param toggleVoting
     disscussion = disscussion.map((row, i) => {
       return {
         ...row,
-        selected: i === rowID
+        selected: i == rowID
       };
     });
     this.setState({ dataSource: this.state.dataSource.cloneWithRows(disscussion) });
