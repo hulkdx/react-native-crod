@@ -16,12 +16,20 @@ class ProfileHeader extends Component {
         <TouchableOpacity style={styles.pencilContainer}>
         <Icon name="pencil" style={styles.pencilIcon} />
         </TouchableOpacity>
+
+        <TouchableOpacity style={styles.logoutContainer} onPress={this._onClickLogout}>
+        <Text style={styles.profileText}>Logout</Text>
+        </TouchableOpacity>
+
         <Image style={styles.profileImage} source={{ uri: 'http://i.imgur.com/flVj90L.png' }} />
         <Text style={[styles.profileText, styles.profileName]}>Michele Paoletti</Text>
         <Text style={styles.profileText}>23 years old</Text>
         <Text style={styles.profileText}>from Milan</Text>
       </View>
     );
+  }
+
+  _onClickLogout = () => {
   }
 }
 
@@ -54,6 +62,12 @@ const styles = StyleSheet.create({
   },
   pencilIcon: {
     color: 'white',
+    backgroundColor: 'transparent',
+  },
+  logoutContainer: {
+    position: 'absolute',
+    left: 10,
+    top: 10,
     backgroundColor: 'transparent',
   }
 });
