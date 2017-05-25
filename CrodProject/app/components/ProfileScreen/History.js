@@ -34,7 +34,7 @@ class ProfileHistory extends Component {
     // console.log();
     this.setState({
       dataSource: this.state.dataSource.cloneWithRows(this.props.proposals.proposals.filter(
-        (proposal) => { return proposal.user.is_your_proposal === true; })),
+        (proposal) => { return proposal.are_you_voted === true; })),
       dataSourceUpdated: true });
 
   //   if (this.props.proposals.proposalsUpdated) {
