@@ -101,6 +101,7 @@ class Disscussion extends Component {
         <ListView style={{ flex: 1, }}
         dataSource={this.state.dataSource}
         renderRow={(discussion, sectionID, rowID) => { return this._renderDisscussionRow(discussion, sectionID, rowID); }}
+        enableEmptySections
         />
 
         <View style={styles.createDiscussion}>
@@ -168,8 +169,8 @@ class Disscussion extends Component {
               </TouchableOpacity>
 
               <TouchableOpacity style={styles.voteUpDown} onPress={this.downVoteClicked.bind(this, rowID)}>
-                {/*<Icon name={'hand-o-down'} size={20} color={(disscussion[rowID].isUpvoted === null) || disscussion[rowID].isUpvoted ? '#bcbcbb' : '#DC143C'} />*/}
-                {/*<Text style={{ color: (disscussion[rowID].isUpvoted === null) || disscussion[rowID].isUpvoted ? '#bcbcbb' : '#DC143C' }}> Down </Text>*/}
+                <Icon name={'hand-o-down'} size={20} color={'#bcbcbb' /*(rowData[rowID].isUpvoted === null) || disscussion[rowID].isUpvoted ? '#bcbcbb' : '#DC143C'*/} />
+                <Text style={{ color: '#bcbcbb' /* TODO rowData[rowID].isUpvoted ? '#228b22' : '#bcbcbb'*/ }}> Down </Text>
               </TouchableOpacity>
               </View>
             </View>
