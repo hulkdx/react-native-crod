@@ -190,6 +190,33 @@ export default class Api {
         throw (error);
       });
   }
+
+  async getDiscussions(token, proposalId) {
+    const ENDPOINT = `api/discussion/${proposalId}`;
+    return await fetch(API_BASE_URL + ENDPOINT, {
+        method: 'GET',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            Authorization: `JWT ${token}`
+          }
+      })
+      .then((res) => {
+        return res.json()
+      .then((json) => {
+          if (res.status === 200 || res.status === 201) {
+            return json;
+          } else if (res.status === 401) {
+            return 'unauth';
+          }
+
+            throw (json);
+        });
+      })
+      .catch((error) => {
+        throw (error);
+      });
+  }
 }
 // The singleton variable
 export const api = new Api();

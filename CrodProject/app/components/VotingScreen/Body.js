@@ -1,6 +1,5 @@
 /*
   Created by Mohammad Jafarzadeh Rezvan, Brigel Pineti
-
   Body of VotingScreen, contains 3 tabs (Articles, Disscussion, Statistics) 4
   and VotingAnimation
 */
@@ -9,7 +8,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, Dimensions } from 'react-native';
 import _ from 'underscore';
-import { TabViewAnimated, TabBar } from 'react-native-tab-view';
+
 import Tabs from 'react-native-tabs';
 import Articles from './Articles.js';
 import Statistics from './Statistics.js';
@@ -19,51 +18,27 @@ import VotingAnimation from './VotingAnimation.js';
 
 class Body extends Component {
 
-        state = {
-          index: 0,
-          routes: [
-            { key: '1', title: 'Discussion' },
-            { key: '2', title: 'Articles' },
-            { key: '3', title: 'Statistics' }
-          ],
-        };
-
-        _handleChangeTab = (index) => {
-        this.setState({ index });
+  constructor(props) {
+      super(props);
+      this.state = {
+        page: 'disscussion',
       };
-
-      _renderHeader = (props) => {
-        return <TabBar style={styles.tabs} {...props} />;
-      };
-
-      _renderSceneVoting = ({ route }) => {
-        switch (route.key) {
-        case '1':
-          return <Disscussion />;
-        case '2':
-          return <Articles />;
-        case '3':
-          return <Statistics />;
-
-        default:
-          return null;
-        }
-      };
-
+  }
 
   render() {
     return (
-
-       <View style={styles.container}>
-
+      <View style={styles.container}>
+      {/* Voting Section Appears when its not voted*/}
       {_.isUndefined(this.props.voted) && <VotingAnimation proposalId={this.props.proposalId} />}
+      {/* Articles / Disscussion Tab Section */}
+      <View style={styles.tabContainer}>
+        {this._renderTabs()}
+      </View>
+      {/* Articles / Comments / Statistics body Section */}
+      <View style={styles.bodyContainer}>
+        {this._renderTabContent()}
+      </View>
 
-      <TabViewAnimated
-        navigationState={this.state}
-        renderScene={this._renderSceneVoting}
-        renderHeader={this._renderHeader}
-        onRequestChangeTab={this._handleChangeTab}
-      />
       </View>
     );
   }
@@ -75,15 +50,15 @@ class Body extends Component {
           <Articles />
         );
       case 'disscussion':
-        return (
-          <Disscussion />
-        );
+      return (
+        <Disscussion proposalId={this.props.proposalId} />
+      );
       case 'statistics':
-        return (
-          <Statistics />
-        );
+      return (
+        <Statistics />
+      );
       default:
-        break;
+
     }
   }
 
@@ -122,8 +97,6 @@ class Body extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 5,
-    width: null,
-    height: null,
   },
   bodyContainer: {
     flex: 10,
@@ -134,21 +107,17 @@ const styles = StyleSheet.create({
     backgroundColor: 'white'
   },
   tabs: {
-  //  backgroundColor: 'rgba(26, 105, 178, 0.49)',
-  backgroundColor: '#5d95c4',
+    backgroundColor: 'rgba(26, 105, 178, 0.49)',
   },
   textStyle: {
     fontSize: 23,
-    color: '#c4c6c9'
+    color: '#D2EEFF'
   },
   tabsSelected: {
-    //color: 'rgba(37, 36, 51, 0.3)',
-    color: '#5d95c4'
+    color: 'rgba(37, 36, 51, 0.3)',
   },
   tabsIconSelected: {
-    borderBottomWidth: 2,
-    borderColor: '#5d95c4',
-    //backgroundColor: '#E9EBEE'
+    backgroundColor: 'rgb(237, 244, 252)'
   }
 });
 

@@ -6,46 +6,94 @@
 'use strict';
 
 import React, { Component } from 'react';
-import { StyleSheet, Text, Image, View, ListView, TouchableOpacity, Animated, Easing } from 'react-native';
+import { StyleSheet, Text, Image, View, ListView, TouchableOpacity } from 'react-native';
 import { Actions, ActionConst } from 'react-native-router-flux';
 import AutoExpandingTextInput from 'react-native-auto-expanding-textinput';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Kohana from './TextInputAnimation/Kohana.js';
+import * as discussionActions from '../../reducers/discussion/discussionActions';
+import * as proposalsActions from '../../reducers/proposals/proposalsActions';
 import ProposalVotes from './ProposalVotes';
 
-const profilePhoto = require('../../../img/notification/man1.png');
-const profile3Photo = require('../../../img/notification/man3.png');
-const profile2Photo = require('../../../img/notification/woman1.png');
 
-let disscussion = [
-  { profileImage: profile3Photo,
-   comment: "Yes, Facebook is totally awesome! It's so cool, you can connect with peepz all over your State and even all the way down to Oklahoma. I have more than 1000 friendz by now, duh!",
-   fullName: 'Saba Saba',
-   upvoted: 5,
-   downvoted: 1,
-   isUpvoted: null, },
-  { profileImage: profile2Photo,
-   comment: "I believe there's many sides to this story and it's hard to depict the entire picture. It may look like are spending more time interacting through Facebook than in real life, but the time Americans spend behind their computers is significant anyway. I applaud Facebook for giving us the means to connect to people easily from a long distance and the ease of gathering people from an area. Also, it gives us a break whenever we're vegetating behind our office desks!",
-   fullName: 'Coby Babani',
-   upvoted: 10,
-   downvoted: 2,
-   isUpvoted: null, },
-];
+// let disscussion = [
+//   {
+//    user: {
+//      profile_pic_url: 'http://i.imgur.com/flVj90L.png',
+//      first_name: 'Saba',
+//      last_name: 'J'
+//    },
+//    comment: "Yes, Facebook is totally awesome! It's so cool, you can connect with peepz all over your State and even all the way down to Oklahoma. I have more than 1000 friendz by now, duh!",
+//    upvoted: 5,
+//    downvoted: 1,
+//    isUpvoted: null, },
+//   {
+//    user: {
+//     profile_pic_url: 'http://i.imgur.com/flVj90L.png',
+//     first_name: 'Coby',
+//     last_name: 'Z'
+//    },
+//    comment: "I believe there's many sides to this story and it's hard to depict the entire picture. It may look like are spending more time interacting through Facebook than in real life, but the time Americans spend behind their computers is significant anyway. I applaud Facebook for giving us the means to connect to people easily from a long distance and the ease of gathering people from an area. Also, it gives us a break whenever we're vegetating behind our office desks!",
+//    upvoted: 10,
+//    downvoted: 2,
+//    isUpvoted: null, },
+// ];
 
 
 class Disscussion extends Component {
+
   constructor() {
     super();
-    this.spinValue = new Animated.Value(0);
     const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
     this.state = {
-      dataSource: ds.cloneWithRows(disscussion),
+      // dataSource: ds.cloneWithRows(disscussion),
+      dataSource: ds,
+      proposalId: -2,
     };
   }
 
-  _pressData = ({}: {[key: number]: boolean})
+  // initially update it with this
   componentDidMount() {
-     this.spin();
+    // if (this.props.discussion.updated) return;
+    const proposalId = this.props.proposalId === -1 ? this.props.proposals.proposals[this.props.proposals.proposalId].id : this.props.proposals.proposals[this.props.proposalId].id;
+    this.setState({ proposalId });
+    this.props.getDiscussions(proposalId);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    console.log('componentWillReceiveProps');
+    console.log('componentWillReceiveProps, proposalId = ' + nextProps.proposalId + 'this.props.discussion.updated=' + this.props.discussion.updated);
+    if (nextProps.proposalId) {
+      let proposalId;
+      if (nextProps.proposalId === -1) {
+        proposalId = nextProps.proposals.proposalId ? this.props.proposals.proposals[nextProps.proposals.proposalId].id : this.props.proposals.proposals[this.props.proposals.proposalId].id;
+      } else {
+        proposalId = this.props.proposals.proposals[nextProps.proposalId].id;
+      }
+      console.log('proposalId:'+proposalId);
+      if (proposalId !== this.state.proposalId) {
+        this.setState({
+          proposalId,
+          dataSource: new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 })
+         });
+        // Again fetch the data
+        console.log('fetch, proposalId:'+proposalId+'  this.state.proposalId:'+this.state.proposalId);
+        this.props.getDiscussions(proposalId);
+        return;
+      }
+      // console.log('updating');
+      if (this.state.dataSource.getRowCount() === 0 && nextProps.discussion) {
+        // console.log('updating nextProps');
+        this.setState({ dataSource: this.state.dataSource.cloneWithRows(nextProps.discussion.discussion), });
+      } else if (this.state.dataSource.getRowCount() === 0 && this.props.discussion) {
+        // console.log('updating props');
+        this.setState({ dataSource: this.state.dataSource.cloneWithRows(this.props.discussion.discussion), });
+      }
+    }
+    // update data source with this.props.proposals
+    if (this.props.discussion.updated) return;
   }
 
   render() {
@@ -58,7 +106,7 @@ class Disscussion extends Component {
 
         <View style={styles.createDiscussion}>
         <TouchableOpacity style={styles.profileContainer} onPress={() => { Actions.profile({ type: ActionConst.REFRESH }); }}>
-        <Image source={profilePhoto} style={styles.profilePhoto} />
+        {/* TODO<Image source={profilePhoto} style={styles.profilePhoto} /> */}
         </TouchableOpacity>
         <AutoExpandingTextInput
           style={styles.shareText}
@@ -87,7 +135,7 @@ class Disscussion extends Component {
 
                 <View style={styles.topBarContainer}>
                     <View style={styles.discussionImageContainer}>
-                    <Image style={styles.profileImage} source={rowData.profileImage} />
+                    <Image style={styles.profileImage} source={{ uri: rowData.user.profile_pic_url }} />
                     <ProposalVotes isClickable
                                    votedYes={rowData.upvoted}
                                    style={styles.votes}
@@ -97,7 +145,7 @@ class Disscussion extends Component {
                     </View>
 
                 <View style={styles.commentContainer}>
-                    <Text style={styles.fullNameText}>{rowData.fullName}</Text>
+                    <Text style={styles.fullNameText}>{rowData.user.first_name} {rowData.user.last_name}</Text>
                     <Text style={styles.commentText}>{rowData.comment}</Text>
                 </View>
 
@@ -111,19 +159,18 @@ class Disscussion extends Component {
               </View>
               <TouchableOpacity style={styles.replyTextContainer} onPress={this.replyClicked.bind(this, rowID)}>
                 <Text style={styles.replyText}>Reply</Text>
-              {/*  <Animated.Image style={[styles.animatedReply, {transform: [{rotate: spin}]}]} source={replyIcon} /> */}
-               <Icon name={'angle-double-down'} size={25} color={'#5d95c4'} style={styles.arrowIcon} />
+                <Icon name={'angle-double-down'} size={25} color={'#5d95c4'} style={styles.arrowIcon} />
               </TouchableOpacity>
               </View>
               <View style={styles.rightSideBottomBar}>
               <TouchableOpacity style={styles.voteUpDown} onPress={this.upVoteClicked.bind(this, rowID)}>
-                <Text style={{ color: disscussion[rowID].isUpvoted ? '#228b22' : '#bcbcbb' }}> Up </Text>
-                <Icon name={'hand-o-up'} size={20} color={disscussion[rowID].isUpvoted ? '#228b22' : '#bcbcbb'} />
+                <Text style={{ color: '#bcbcbb' /* TODO rowData[rowID].isUpvoted ? '#228b22' : '#bcbcbb'*/ }}> Up </Text>
+                <Icon name={'hand-o-up'} size={20} color={'#bcbcbb' /*rowData[rowID].isUpvoted ? '#228b22' : '#bcbcbb'*/} />
               </TouchableOpacity>
 
               <TouchableOpacity style={styles.voteUpDown} onPress={this.downVoteClicked.bind(this, rowID)}>
-                <Icon name={'hand-o-down'} size={20} color={(disscussion[rowID].isUpvoted === null) || disscussion[rowID].isUpvoted ? '#bcbcbb' : '#DC143C'} />
-                <Text style={{ color: (disscussion[rowID].isUpvoted === null) || disscussion[rowID].isUpvoted ? '#bcbcbb' : '#DC143C' }}> Down </Text>
+                {/*<Icon name={'hand-o-down'} size={20} color={(disscussion[rowID].isUpvoted === null) || disscussion[rowID].isUpvoted ? '#bcbcbb' : '#DC143C'} />*/}
+                {/*<Text style={{ color: (disscussion[rowID].isUpvoted === null) || disscussion[rowID].isUpvoted ? '#bcbcbb' : '#DC143C' }}> Down </Text>*/}
               </TouchableOpacity>
               </View>
             </View>
@@ -160,13 +207,13 @@ isUpdated changes according to @param toggleVoting
       false -> downVoteClicked()
 */
   updateDiscussion(toggleVoting, rowID) {
-    disscussion = disscussion.map((row, i) => {
-      return {
-        ...row,
-        isUpvoted: (i == rowID) ? toggleVoting : row.isUpvoted
-      };
-    });
-    this.setState({ dataSource: this.state.dataSource.cloneWithRows(disscussion) });
+    // disscussion = disscussion.map((row, i) => {
+    //   return {
+    //     ...row,
+    //     isUpvoted: (i == rowID) ? toggleVoting : row.isUpvoted
+    //   };
+    // });
+    // this.setState({ dataSource: this.state.dataSource.cloneWithRows(disscussion) });
   }
 
   upVoteClicked = (rowID) => {
@@ -191,13 +238,13 @@ isUpdated changes according to @param toggleVoting
     check other solutions. But I think its the only practice.
   */
   replyClicked = (rowID) => {
-    disscussion = disscussion.map((row, i) => {
-      return {
-        ...row,
-        selected: i == rowID
-      };
-    });
-    this.setState({ dataSource: this.state.dataSource.cloneWithRows(disscussion) });
+    // disscussion = disscussion.map((row, i) => {
+    //   return {
+    //     ...row,
+    //     selected: i == rowID
+    //   };
+    // });
+    // this.setState({ dataSource: this.state.dataSource.cloneWithRows(disscussion) });
   }
 
   /*
@@ -209,13 +256,13 @@ isUpdated changes according to @param toggleVoting
   */
   repliedToComment = () => {
     // Hide reply
-    const clone = disscussion.map((row) => {
-      return {
-        ...row,
-        selected: false
-      };
-    });
-    this.setState({ dataSource: this.state.dataSource.cloneWithRows(clone) });
+    // const clone = disscussion.map((row) => {
+    //   return {
+    //     ...row,
+    //     selected: false
+    //   };
+    // });
+    // this.setState({ dataSource: this.state.dataSource.cloneWithRows(clone) });
   }
 
 
@@ -223,18 +270,6 @@ isUpdated changes according to @param toggleVoting
     // TODO: If its not empty
     // TODO: Add Comments
   }
-
-  spin() {
-  this.spinValue.setValue(0);
-  Animated.timing(
-    this.spinValue,
-    {
-      toValue: 1,
-      duration: 4000,
-      easing: Easing.linear
-    }
-  ).start(() => this.spin());
-}
 }
 
 const styles = StyleSheet.create({
@@ -389,4 +424,14 @@ const styles = StyleSheet.create({
   }
 });
 
-module.exports = Disscussion;
+// Redux boilerplate
+function mapStateToProps(state) {
+  return {
+    discussion: state.discussion,
+    proposals: state.proposals,
+  };
+}
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ ...discussionActions, ...proposalsActions }, dispatch);
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Disscussion);
