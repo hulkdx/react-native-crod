@@ -11,6 +11,7 @@ import { Actions, ActionConst } from 'react-native-router-flux';
 import AutoExpandingTextInput from 'react-native-auto-expanding-textinput';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import _ from 'underscore';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Kohana from './TextInputAnimation/Kohana.js';
 import * as discussionActions from '../../reducers/discussion/discussionActions';
@@ -128,6 +129,8 @@ class Disscussion extends Component {
   }
 
   _renderDisscussionRow(rowData, sectionID, rowID) {
+    const upVotedColor = rowData.isUpvoted ? '#228b22' : '#bcbcbb';
+    const downVotedColor = _.isNull(rowData.isUpvoted) || rowData.isUpvoted ? '#bcbcbb' : '#DC143C';
     return (
       <View style={[styles.disscussionContainer]}>
 
@@ -164,13 +167,13 @@ class Disscussion extends Component {
               </View>
               <View style={styles.rightSideBottomBar}>
               <TouchableOpacity style={styles.voteUpDown} onPress={this.upVoteClicked.bind(this, rowID)}>
-                <Text style={{ color: '#bcbcbb' /* TODO rowData[rowID].isUpvoted ? '#228b22' : '#bcbcbb'*/ }}> Up </Text>
-                <Icon name={'hand-o-up'} size={20} color={'#bcbcbb' /*rowData[rowID].isUpvoted ? '#228b22' : '#bcbcbb'*/} />
+                <Text style={{ color: upVotedColor }}> Up </Text>
+                <Icon name={'hand-o-up'} size={20} color={upVotedColor} />
               </TouchableOpacity>
 
               <TouchableOpacity style={styles.voteUpDown} onPress={this.downVoteClicked.bind(this, rowID)}>
-                <Icon name={'hand-o-down'} size={20} color={'#bcbcbb' /*(rowData[rowID].isUpvoted === null) || disscussion[rowID].isUpvoted ? '#bcbcbb' : '#DC143C'*/} />
-                <Text style={{ color: '#bcbcbb' /* TODO rowData[rowID].isUpvoted ? '#228b22' : '#bcbcbb'*/ }}> Down </Text>
+                <Icon name={'hand-o-down'} size={20} color={downVotedColor} />
+                <Text style={{ color: downVotedColor }}> Down </Text>
               </TouchableOpacity>
               </View>
             </View>
@@ -200,20 +203,13 @@ class Disscussion extends Component {
       </View>
     );
   }
-/*
-isUpdated changes according to @param toggleVoting
+/* TODO impliment an action and post the api upvoted or downvoted
+  isUpdated changes according to @param toggleVoting
       null -> default value, in other words the user has not voted yet.
       true -> upVoteClicked(),
       false -> downVoteClicked()
 */
   updateDiscussion(toggleVoting, rowID) {
-    // disscussion = disscussion.map((row, i) => {
-    //   return {
-    //     ...row,
-    //     isUpvoted: (i == rowID) ? toggleVoting : row.isUpvoted
-    //   };
-    // });
-    // this.setState({ dataSource: this.state.dataSource.cloneWithRows(disscussion) });
   }
 
   upVoteClicked = (rowID) => {
