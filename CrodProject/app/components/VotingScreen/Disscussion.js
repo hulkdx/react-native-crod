@@ -63,8 +63,7 @@ class Disscussion extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log('componentWillReceiveProps');
-    console.log('componentWillReceiveProps, proposalId = ' + nextProps.proposalId + 'this.props.discussion.updated=' + this.props.discussion.updated);
+    // console.log('componentWillReceiveProps, proposalId = ' + nextProps.proposalId + 'this.props.discussion.updated=' + this.props.discussion.updated);
     if (nextProps.proposalId) {
       let proposalId;
       if (nextProps.proposalId === -1) {
@@ -72,14 +71,14 @@ class Disscussion extends Component {
       } else {
         proposalId = this.props.proposals.proposals[nextProps.proposalId].id;
       }
-      console.log('proposalId:'+proposalId);
+      // console.log('proposalId:'+proposalId);
       if (proposalId !== this.state.proposalId) {
         this.setState({
           proposalId,
           dataSource: new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 })
          });
         // Again fetch the data
-        console.log('fetch, proposalId:'+proposalId+'  this.state.proposalId:'+this.state.proposalId);
+        // console.log('fetch, proposalId:'+proposalId+'  this.state.proposalId:'+this.state.proposalId);
         this.props.getDiscussions(proposalId);
         return;
       }
