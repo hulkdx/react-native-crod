@@ -18,7 +18,8 @@ const {
   VOTE_REQUEST,
   VOTE_SUCCESS,
   VOTE_FAILURE,
-  FILTER_PROPOSAL,
+  FILTER_PROPOSAL_BY_CATEGORY,
+  FILTER_PROPOSAL_BY_SEARCH,
   CHANGE_PROPOSAL_ID,
 } = require('../../lib/constants').default;
 
@@ -68,7 +69,7 @@ export function proposalsFailure(error) {
 }
 
 /*############## Create Proposal Section ##############*/
-export function createProposal(categoryId, title, desc, deadline) {
+export function createProposalAction(categoryId, title, desc, deadline) {
   return dispatch => {
     dispatch(createProposalRequest());
     return getToken()
@@ -112,9 +113,17 @@ export function createProposalFailure(error) {
 }
 
 /*############## Filter Proposal Section ##############*/
-export function filterProposals(selected) {
+/* @param selected: is the list of categories selected */
+export function filterProposalsByCategory(selected) {
   return {
-    type: FILTER_PROPOSAL,
+    type: FILTER_PROPOSAL_BY_CATEGORY,
+    payload: selected
+  };
+}
+
+export function filterProposalsBySearch(selected) {
+  return {
+    type: FILTER_PROPOSAL_BY_SEARCH,
     payload: selected
   };
 }

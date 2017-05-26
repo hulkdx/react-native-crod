@@ -15,7 +15,8 @@ const {
   VOTE_REQUEST,
   VOTE_SUCCESS,
   VOTE_FAILURE,
-  FILTER_PROPOSAL,
+  FILTER_PROPOSAL_BY_CATEGORY,
+  FILTER_PROPOSAL_BY_SEARCH,
   CHANGE_PROPOSAL_ID,
 } = require('../../lib/constants').default;
 
@@ -59,13 +60,13 @@ export default function proposalsReducer(state = initialState, action) {
      .set('isCreated', true)
      .set('proposals', [action.payload, ...state.get('proposals')]);
 
-    case FILTER_PROPOSAL:
-     return state.set('filteredProposals', filterProposal(state.get('proposals'), action.payload));
+    case FILTER_PROPOSAL_BY_CATEGORY:
+     return state.set('filteredProposals', filterProposalByCategory(state.get('proposals'), action.payload));
+    case FILTER_PROPOSAL_BY_SEARCH:
+      return state.set('filteredProposals', filterProposalBySearch(state.get('proposals'), action.payload));
 
     case VOTE_SUCCESS:
     // for some reason it is not possilbe to set state of action.payload
-    console.log(action.payload);
-    console.log(state);
       state.proposals[action.payload].are_you_voted = true;
       return state.set('isFetching', false);
 
@@ -86,7 +87,7 @@ export default function proposalsReducer(state = initialState, action) {
    @param selectedList: list of categories selected (@link categories/InitialState selected)
    @return filterProposal: list of filtered proposals
 */
-function filterProposal(proposals, selectedList) {
+function filterProposalByCategory(proposals, selectedList) {
   const filteredProposal = [];
 
   for (let i = 0, len = selectedList.length; i < len; i++) {
@@ -99,5 +100,19 @@ function filterProposal(proposals, selectedList) {
       }
     }
   }
+  return filteredProposal;
+}
+
+/*
+   @param proposals: list of proposals
+   @param searchedText: the text user searched
+   @return list of filtered proposals
+   TODO if it is empty return search was not found.
+*/
+function filterProposalBySearch(proposals, searchedText) {
+  if (searchedText === '') return [];
+  const filteredProposal = proposals.filter((proposal) => { return proposal.title.includes(searchedText); });
+  //
+  // if (filteredProposal.length === 0) return [];
   return filteredProposal;
 }

@@ -213,7 +213,7 @@ class CreateProposal extends Component {
     // Convert to ISO date time
     const deadline = `${this.state.deadlineDay}T${this.state.deadlineTime}:00Z`;
     // Add new proposal
-    this.props.createProposal(this.state.selectedOption.id, this.state.title,
+    this.props.createProposalAction(this.state.selectedOption.id, this.state.title,
                               this.state.desc, deadline);
     // this.props.createProposal('3','test','test','2017-05-16T11:19:00Z');
     // then it goes to componentWillReceiveProps and check if it was successful without error

@@ -35,7 +35,8 @@ export default keyMirror({
   VOTE_FAILURE: null,
 
   CHANGE_SELECT_CATEGORY: null,
-  FILTER_PROPOSAL: null,
+  FILTER_PROPOSAL_BY_CATEGORY: null,
+  FILTER_PROPOSAL_BY_SEARCH: null,
   CHANGE_PROPOSAL_ID: null,
   UPDATE_PROFILE: null,
 });

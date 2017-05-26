@@ -44,7 +44,7 @@ class CategoryMenu extends Component {
   _onClickCategoryImage = (i) => {
     //Toggle property: when clicked from false => true && true => false
     this.props.changeSelectedCategory(i);
-    this.props.filterProposals(this.props.category.selected);
+    this.props.filterProposalsByCategory(this.props.category.selected);
     this.forceUpdate();
   }
 

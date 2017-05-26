@@ -7,6 +7,9 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, TextInput, TouchableOpacity, Image } from 'react-native';
 import { Actions, ActionConst } from 'react-native-router-flux';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import * as proposalsActions from '../../reducers/proposals/proposalsActions';
 
 const proposalIcon = require('../../../img/proposal-icon.png');
 const searchIcon = require('../../../img/search-icon1.png');
@@ -14,6 +17,12 @@ const profilePhoto = require('../../../img/notification/man1.png');
 const closeIcon = require('../../../img/close-icon.png');
 
 class Header extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      searchedText: '',
+     };
+  }
 
   render() {
     return (
@@ -21,27 +30,31 @@ class Header extends Component {
         <TouchableOpacity style={styles.profile} onPress={() => { Actions.profile({ type: ActionConst.REFRESH }); }}>
           <Image source={profilePhoto} style={styles.profilePhoto} />
         </TouchableOpacity>
-
-        <TouchableOpacity style={styles.search}>
-
-        <View style={styles.searchBtnContainer}>
-          <Image style={styles.searchBtn} source={searchIcon} />
-        </View>
-
-         <TextInput
-              editable={!this.props.createProposal}
-              placeholder="search"
-              placeholderTextColor="#5d95c4"
-              underlineColorAndroid='transparent'
-              style={styles.searchText}
-         />
+        {/* Search */}
+        <TouchableOpacity style={styles.search} onPress={this.onSearchClicked}>
+          <View style={styles.searchBtnContainer}>
+            <Image style={styles.searchBtn} source={searchIcon} />
+          </View>
+          <TextInput
+            editable={!this.props.createProposal}
+            placeholder="search"
+            placeholderTextColor="#5d95c4"
+            underlineColorAndroid='transparent'
+            onChangeText={(searchedText) => this.setState({ searchedText })}
+            style={styles.searchText}
+          />
         </TouchableOpacity>
         {/* Create Proposal Button */}
-         <TouchableOpacity onPress={!this.props.createProposal ? this.onClickCreateProposal : this.onCloseTab} style={styles.proposal}>
-          { !this.props.createProposal ? <Image style={styles.proposalBtn} source={proposalIcon} />
-                                 : <Image style={styles.proposalBtn} source={closeIcon} /> }
-         </TouchableOpacity>
-       </View>
+        <TouchableOpacity
+          onPress={!this.props.createProposal ? this.onClickCreateProposal : this.onCloseTab}
+          style={styles.proposal}
+        >
+        { !this.props.createProposal
+        ? <Image style={styles.proposalBtn} source={proposalIcon} />
+        : <Image style={styles.proposalBtn} source={closeIcon} />
+        }
+        </TouchableOpacity>
+      </View>
     );
   }
 
@@ -52,6 +65,10 @@ class Header extends Component {
 
   onCloseTab = () => {
     Actions.refresh({ createProposal: false });
+  }
+
+  onSearchClicked = () => {
+    this.props.filterProposalsBySearch(this.state.searchedText);
   }
 }
 
@@ -114,5 +131,13 @@ const styles = StyleSheet.create({
     tintColor: '#5d95c4'
   },
 });
-
-module.exports = Header;
+// Redux boilerplate
+function mapStateToProps(state) {
+  return {
+    proposals: state.proposals,
+  };
+}
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(proposalsActions, dispatch);
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Header);
